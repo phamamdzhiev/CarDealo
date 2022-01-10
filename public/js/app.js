@@ -22006,9 +22006,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       showExtraCategory: 1,
+      carColor: null,
+      carCategory: null,
       selectedExtras: [],
       extra1: [],
-      extra4: []
+      extra2: [],
+      extra3: [],
+      extra4: [],
+      extra5: [],
+      extra6: []
     };
   },
   computed: {
@@ -22017,6 +22023,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     getCarExtrasApi: function getCarExtrasApi() {
       return this.$store.getters['sellCar/getCarExtrasApi'];
+    },
+    toggleNextStepButton: function toggleNextStepButton() {
+      return !!(this.selectedExtras.length > 0 && this.carCategory && this.carColor);
     }
   },
   methods: {
@@ -22043,8 +22052,34 @@ __webpack_require__.r(__webpack_exports__);
         this.toggleActiveClassOnExtras(extra);
       }
     },
+    setCarColor: function setCarColor() {
+      var value = this.$refs.carColor.value;
+
+      if (!value || value === '') {
+        this.carColor = null;
+        return;
+      }
+
+      this.carColor = value;
+    },
+    setCarCategory: function setCarCategory() {
+      var value = this.$refs.carCategory.value;
+
+      if (!value || value === '') {
+        this.carCategory = null;
+        return;
+      }
+
+      this.carCategory = value;
+    },
     showStepSix: function showStepSix() {
+      if (!this.toggleNextStepButton) {
+        return;
+      }
+
       this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
+      this.$store.commit('sellCar/setCarColor', this.carColor);
+      this.$store.commit('sellCar/setCarCategory', this.carCategory);
       this.$store.commit('sellCar/setStepPlus');
     }
   }
@@ -22316,7 +22351,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters['sellCar/getAllData'];
     },
     toggleNextStepButton: function toggleNextStepButton() {
-      return this.dataStepFour.transmission && this.dataStepFour.fuel && this.dataStepFour.cm3 && this.dataStepFour.hp && this.dataStepFour.km && !this.errors.errorCm3 && !this.errors.errorHp && !this.errors.errorKm;
+      return !!(this.dataStepFour.transmission && this.dataStepFour.fuel && this.dataStepFour.cm3 && this.dataStepFour.hp && this.dataStepFour.km && !this.errors.errorCm3 && !this.errors.errorHp && !this.errors.errorKm);
     }
   },
   methods: {
@@ -23510,60 +23545,142 @@ var _hoisted_12 = {
   id: "car-extra-category-4"
 };
 var _hoisted_13 = ["data-extra-name", "onClick"];
+var _hoisted_14 = {
+  "class": "question-section mb-3"
+};
+var _hoisted_15 = {
+  "class": "form-floating"
+};
 
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "question-section mb-3"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "form-floating"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "class": "form-select form__input m-0",
-    id: "floatingSelectCarColor"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "",
     selected: ""
-  }, "Моля, изберете цвят"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Бял"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Черен"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Лилал"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Броз"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Металик")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingSelectCarColor"
-  }, "Цвят")])], -1
+  }, "Моля, изберете цвят", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "question-section"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "form-floating"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    id: "floatingSelectCarCategory",
-    "class": "form-select form__input m-0"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    selected: "",
-    "default": ""
-  }, "Моля, изберете категория"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Ван"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Джип"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Кабрио"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Купе"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Седан"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: ""
-  }, "Комби")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Бял"
+  }, "Бял", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Черен"
+  }, "Черен", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Лилав"
+  }, "Лилал", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Бронз"
+  }, "Броз", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Металик"
+  }, "Металик", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_22 = [_hoisted_16, _hoisted_17, _hoisted_18, _hoisted_19, _hoisted_20, _hoisted_21];
+
+var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "floatingSelectCarColor"
+  }, "Цвят", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_24 = {
+  "class": "question-section"
+};
+var _hoisted_25 = {
+  "class": "form-floating"
+};
+
+var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "",
+    selected: ""
+  }, "Моля, изберете категория", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Ван"
+  }, "Ван", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Джип"
+  }, "Джип", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Кабрио"
+  }, "Кабрио", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Купе"
+  }, "Купе", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Седан"
+  }, "Седан", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_32 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Комби"
+  }, "Комби", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_33 = [_hoisted_26, _hoisted_27, _hoisted_28, _hoisted_29, _hoisted_30, _hoisted_31, _hoisted_32];
+
+var _hoisted_34 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingSelectCarCategory"
-  }, "Категория")])], -1
+  }, "Категория", -1
   /* HOISTED */
   );
 });
@@ -23679,14 +23796,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* KEYED_FRAGMENT */
       ))], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showExtraCategory === 4]])])]), _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showExtraCategory === 4]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "class": "form-select form__input m-0",
+        ref: "carColor",
+        onChange: _cache[7] || (_cache[7] = function () {
+          return $options.setCarColor && $options.setCarColor.apply($options, arguments);
+        }),
+        id: "floatingSelectCarColor"
+      }, _hoisted_22, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), _hoisted_23])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        id: "floatingSelectCarCategory",
+        ref: "carCategory",
+        onChange: _cache[8] || (_cache[8] = function () {
+          return $options.setCarCategory && $options.setCarCategory.apply($options, arguments);
+        }),
+        "class": "form-select form__input m-0"
+      }, _hoisted_33, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), _hoisted_34])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "base-button",
-        onClick: _cache[7] || (_cache[7] = function () {
+        onClick: _cache[9] || (_cache[9] = function () {
           return $options.showStepSix && $options.showStepSix.apply($options, arguments);
         })
       }, " Следваща стъпка ", 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.selectedExtras.length > 0]])];
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.toggleNextStepButton]])];
     }),
     _: 1
     /* STABLE */
@@ -24745,19 +24880,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       //final offer
       car_offer: {
+        //step 1
         new_or_used: null,
         car_brand: null,
+        //step 2
         car_year: null,
+        //step 3
         car_model: null,
+        //step 4
         car_fuel: null,
         car_transmission: null,
         car_cm3: null,
         car_hp: null,
         car_km: null,
+        //step 5
         car_extras: null,
         //array
-        car_images: null,
-        //array
+        car_color: null,
+        car_category: null,
+        // SUV, Cabriolet, Sedan etc..
+        //step 6
         car_offer_title: null,
         car_offer_description: null,
         car_price: null,
@@ -24769,7 +24911,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           owner_company_eik: null,
           owner_company_address: null,
           owner_company_url: null
-        }
+        },
+        //step 7
+        car_images: null //array
+
       }
     };
   },
@@ -24809,6 +24954,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       state.car_offer.car_hp = payload.hp;
       state.car_offer.car_km = payload.km;
     },
+    //get all Car Extras from DB
     setCarExtrasApi: function setCarExtrasApi(state, payload) {
       payload.forEach(function (item) {
         if (item['extra_category'] === 1) {
@@ -24820,6 +24966,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setCarExtras: function setCarExtras(state, payload) {
       state.car_offer.car_extras = payload;
+    },
+    setCarColor: function setCarColor(state, payload) {
+      state.car_offer.car_color = payload;
+    },
+    setCarCategory: function setCarCategory(state, payload) {
+      state.car_offer.car_category = payload;
     },
     setCarImages: function setCarImages(state, payload) {
       state.car_offer.car_images = payload;

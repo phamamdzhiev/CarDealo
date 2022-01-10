@@ -19,17 +19,24 @@ export default {
             },
             //final offer
             car_offer: {
+                //step 1
                 new_or_used: null,
                 car_brand: null,
+                //step 2
                 car_year: null,
+                //step 3
                 car_model: null,
+                //step 4
                 car_fuel: null,
                 car_transmission: null,
-                car_cm3:null,
-                car_hp:null,
+                car_cm3: null,
+                car_hp: null,
                 car_km: null,
+                //step 5
                 car_extras: null, //array
-                car_images: null, //array
+                car_color: null,
+                car_category: null, // SUV, Cabriolet, Sedan etc..
+                //step 6
                 car_offer_title: null,
                 car_offer_description: null,
                 car_price: null,
@@ -41,7 +48,9 @@ export default {
                     owner_company_eik: null,
                     owner_company_address: null,
                     owner_company_url: null,
-                }
+                },
+                //step 7
+                car_images: null, //array
             }
         }
     },
@@ -81,6 +90,7 @@ export default {
             state.car_offer.car_hp = payload.hp;
             state.car_offer.car_km = payload.km;
         },
+        //get all Car Extras from DB
         setCarExtrasApi(state, payload) {
             payload.forEach((item) => {
                 if (item['extra_category'] === 1) {
@@ -93,8 +103,14 @@ export default {
         setCarExtras(state, payload) {
             state.car_offer.car_extras = payload;
         },
+        setCarColor(state, payload) {
+            state.car_offer.car_color = payload;
+        },
+        setCarCategory(state, payload) {
+            state.car_offer.car_category = payload;
+        },
         setCarImages(state, payload) {
-          state.car_offer.car_images = payload;
+            state.car_offer.car_images = payload;
         },
         setCarDetails(state, payload) {
             state.car_offer.car_offer_title = payload.offerTitle;
@@ -104,7 +120,7 @@ export default {
     },
     getters: {
         isLoading(state) {
-          return state.loading;
+            return state.loading;
         },
         getStep(state) {
             return state.step
@@ -131,7 +147,7 @@ export default {
                 context.state.loading = false;
                 context.commit('setAllCarMakes', carBrands.data['car_brands']);
             } catch (e) {
-                console.log('in setCarBrands',e)
+                console.log('in setCarBrands', e)
             }
         },
 
