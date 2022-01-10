@@ -65,32 +65,34 @@
             </div>
             <div class="question-section mb-3">
                 <div class="form-floating">
-                    <select class="form-select form__input m-0" id="floatingSelectCarColor">
-                        <option selected>Моля, изберете цвят</option>
-                        <option value="">Бял</option>
-                        <option value="">Черен</option>
-                        <option value="">Лилал</option>
-                        <option value="">Броз</option>
-                        <option value="">Металик</option>
+                    <select class="form-select form__input m-0" ref="carColor" @change="setCarColor"
+                            id="floatingSelectCarColor">
+                        <option value="" selected>Моля, изберете цвят</option>
+                        <option value="Бял">Бял</option>
+                        <option value="Черен">Черен</option>
+                        <option value="Лилав">Лилал</option>
+                        <option value="Бронз">Броз</option>
+                        <option value="Металик">Металик</option>
                     </select>
                     <label for="floatingSelectCarColor">Цвят</label>
                 </div>
             </div>
             <div class="question-section">
-               <div class="form-floating">
-                   <select id="floatingSelectCarCategory" class="form-select form__input m-0">
-                       <option selected default>Моля, изберете категория</option>
-                       <option value="">Ван</option>
-                       <option value="">Джип</option>
-                       <option value="">Кабрио</option>
-                       <option value="">Купе</option>
-                       <option value="">Седан</option>
-                       <option value="">Комби</option>
-                   </select>
-                   <label for="floatingSelectCarCategory">Категория</label>
-               </div>
+                <div class="form-floating">
+                    <select id="floatingSelectCarCategory" ref="carCategory" @change="setCarCategory"
+                            class="form-select form__input m-0">
+                        <option value="" selected>Моля, изберете категория</option>
+                        <option value="Ван">Ван</option>
+                        <option value="Джип">Джип</option>
+                        <option value="Кабрио">Кабрио</option>
+                        <option value="Купе">Купе</option>
+                        <option value="Седан">Седан</option>
+                        <option value="Комби">Комби</option>
+                    </select>
+                    <label for="floatingSelectCarCategory">Категория</label>
+                </div>
             </div>
-            <button class="base-button" @click="showStepSix" v-show="selectedExtras.length > 0">
+            <button class="base-button" @click="showStepSix" v-show="toggleNextStepButton">
                 Следваща стъпка
             </button>
         </base-card>
@@ -108,9 +110,15 @@ export default {
     data() {
         return {
             showExtraCategory: 1,
+            carColor: null,
+            carCategory: null,
             selectedExtras: [],
             extra1: [],
+            extra2: [],
+            extra3: [],
             extra4: [],
+            extra5: [],
+            extra6: [],
         }
     },
     computed: {
@@ -119,6 +127,9 @@ export default {
         },
         getCarExtrasApi() {
             return this.$store.getters['sellCar/getCarExtrasApi'];
+        },
+        toggleNextStepButton() {
+            return !!(this.selectedExtras.length > 0 && this.carCategory && this.carColor);
         },
     },
     methods: {
@@ -145,8 +156,31 @@ export default {
                 this.toggleActiveClassOnExtras(extra);
             }
         },
+
+        setCarColor() {
+            let value = this.$refs.carColor.value;
+            if (!value || value === '') {
+                this.carColor = null;
+                return;
+            }
+            this.carColor = value;
+        },
+        setCarCategory() {
+            let value = this.$refs.carCategory.value;
+            if (!value || value === '') {
+                this.carCategory = null;
+                return;
+            }
+            this.carCategory = value;
+        },
         showStepSix() {
+            if (!this.toggleNextStepButton) {
+                return;
+            }
+
             this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
+            this.$store.commit('sellCar/setCarColor', this.carColor);
+            this.$store.commit('sellCar/setCarCategory', this.carCategory);
             this.$store.commit('sellCar/setStepPlus');
         },
     },

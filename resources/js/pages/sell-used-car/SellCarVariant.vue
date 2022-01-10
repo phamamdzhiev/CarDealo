@@ -127,14 +127,14 @@ export default {
         },
 
         toggleNextStepButton() {
-            return this.dataStepFour.transmission &&
+            return !!(this.dataStepFour.transmission &&
                 this.dataStepFour.fuel &&
                 this.dataStepFour.cm3 &&
                 this.dataStepFour.hp &&
                 this.dataStepFour.km &&
                 !this.errors.errorCm3 &&
                 !this.errors.errorHp &&
-                !this.errors.errorKm
+                !this.errors.errorKm);
         }
     },
 
