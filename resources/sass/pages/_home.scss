@@ -1,0 +1,82 @@
+.base-button {
+    padding: 0.75rem 2rem;
+    margin-top: 1rem;
+    font-weight: 700;
+}
+.form__wrapper {
+    background-color: white;
+    border-radius: 6px;
+    padding: 1rem 2rem;
+    max-width: 425px;
+    /* height: 300px; */
+    box-shadow: 0 0 15px $secondary-color;
+    margin-top: 5rem;
+}
+
+.form__wrapper h3 {
+    text-align: left;
+    font-weight: 700;
+}
+.form__wrapper select {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.2rem;
+}
+ul#used__or__not {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+ul#used__or__not li {
+    flex: 0 0 49%;
+    padding: 0.5rem 1.5rem;
+    background-color: white;
+    color: $secondary-color;
+    font-weight: 700;
+    border-radius: 4px;
+    border: 1px solid  $secondary-color;
+    cursor: pointer;
+    &.active {
+        background-color: $secondary-color;
+        color: white;
+    }
+}
+
+ul#by__brand__by_budget {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 1rem;
+}
+
+ul#by__brand__by_budget li {
+    margin-left: 3rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+}
+
+ul#by__brand__by_budget li::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -25px;
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 2px solid  $secondary-color;
+}
+ul#by__brand__by_budget li.active::after {
+    content: "";
+    position: absolute;
+    background-color:  $main-color;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -21px;
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}

@@ -1,0 +1,161 @@
+<template>
+    <div class="sell-car">
+        <base-card>
+            <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 4)</i></span>
+            <div class="currently__chosen my-3">
+                <span>
+                    {{ getAllData['car_brand'] }}
+                </span>
+                <span>
+                    {{ getAllData['car_year'] }}
+                </span>
+                <span>
+                    {{ getAllData['car_model'] }}
+                </span>
+                <span>
+                    {{ getAllData['car_fuel'] }}
+                </span>
+                <span>
+                    {{ getAllData['car_transmission'] }} кутия
+                </span>
+                <span>
+                    {{ getAllData['car_hp'] }} к.с.
+                </span>
+                <span>
+                    {{ getAllData['car_km'] }} км.
+                </span>
+            </div>
+            <div class="question-section mb-3">
+                <h5 class="fw-bold">Избери какви екстри има твоята кола</h5>
+                <nav>
+                    <ul id="car-extras-categories">
+                        <li :class="{ active: showExtraCategory === 1 }" @click="toggleCategory(1)">Безопастност</li>
+                        <li :class="{ active: showExtraCategory === 2 }" @click="toggleCategory(2)">Комфорт</li>
+                        <li :class="{ active: showExtraCategory === 3 }" @click="toggleCategory(3)">Интериор</li>
+                        <li :class="{ active: showExtraCategory === 4 }" @click="toggleCategory(4)">Ектериор</li>
+                        <li :class="{ active: showExtraCategory === 5 }" @click="toggleCategory(5)">Защита</li>
+                        <li :class="{ active: showExtraCategory === 6 }" @click="toggleCategory(6)">Други</li>
+                    </ul>
+                </nav>
+                <ul id="extras">
+                    <div v-show="showExtraCategory === 1" id="car-extra-category-1">
+                        <li
+                            v-for="ex in getCarExtrasApi['car_extra_1']"
+                            :key="ex.id"
+                            ref="element"
+                            :data-extra-category="ex['extra_category']"
+                            :data-extra-name="ex['extra']"
+                            @click="addToCollection(ex)"
+                        >
+                            {{ ex.extra }}
+                        </li>
+                    </div>
+                    <div v-show="showExtraCategory === 4" id="car-extra-category-4">
+                        <li
+                            v-for="ex in getCarExtrasApi['car_extra_4']"
+                            :key="ex.id"
+                            :data-extra-name="ex.extra"
+                            ref="element"
+                            @click="addToCollection(ex)"
+                        >
+                            {{ ex.extra }}
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <div class="question-section mb-3">
+                <div class="form-floating">
+                    <select class="form-select form__input m-0" id="floatingSelectCarColor">
+                        <option selected>Моля, изберете цвят</option>
+                        <option value="">Бял</option>
+                        <option value="">Черен</option>
+                        <option value="">Лилал</option>
+                        <option value="">Броз</option>
+                        <option value="">Металик</option>
+                    </select>
+                    <label for="floatingSelectCarColor">Цвят</label>
+                </div>
+            </div>
+            <div class="question-section">
+               <div class="form-floating">
+                   <select id="floatingSelectCarCategory" class="form-select form__input m-0">
+                       <option selected default>Моля, изберете категория</option>
+                       <option value="">Ван</option>
+                       <option value="">Джип</option>
+                       <option value="">Кабрио</option>
+                       <option value="">Купе</option>
+                       <option value="">Седан</option>
+                       <option value="">Комби</option>
+                   </select>
+                   <label for="floatingSelectCarCategory">Категория</label>
+               </div>
+            </div>
+            <button class="base-button" @click="showStepSix" v-show="selectedExtras.length > 0">
+                Следваща стъпка
+            </button>
+        </base-card>
+    </div>
+</template>
+
+<script>
+import BaseCard from "../../components/ui/base/BaseCard.vue";
+
+export default {
+    name: "SellCarExtras",
+    components: {
+        BaseCard
+    },
+    data() {
+        return {
+            showExtraCategory: 1,
+            selectedExtras: [],
+            extra1: [],
+            extra4: [],
+        }
+    },
+    computed: {
+        getAllData() {
+            return this.$store.getters['sellCar/getAllData'];
+        },
+        getCarExtrasApi() {
+            return this.$store.getters['sellCar/getCarExtrasApi'];
+        },
+    },
+    methods: {
+        back() {
+            this.$store.commit('sellCar/setStepMinus');
+        },
+        toggleCategory(category) {
+            this.showExtraCategory = category;
+        },
+        toggleActiveClassOnExtras(extra) {
+            this.$refs.element.forEach((ref) => {
+                if (extra['extra'] === ref.getAttribute('data-extra-name')) {
+                    ref.classList.toggle('active');
+                }
+            });
+        },
+        addToCollection(extra) {
+            if (this.selectedExtras.indexOf(extra) === -1) {
+                this.selectedExtras.push(extra);
+                this.toggleActiveClassOnExtras(extra);
+            } else {
+                let pos = this.selectedExtras.indexOf(extra);
+                this.selectedExtras.splice(pos, 1);
+                this.toggleActiveClassOnExtras(extra);
+            }
+        },
+        showStepSix() {
+            this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
+            this.$store.commit('sellCar/setStepPlus');
+        },
+    },
+}
+</script>
+
+<style scoped>
+.sell-car {
+    max-width: 800px;
+}
+
+</style>

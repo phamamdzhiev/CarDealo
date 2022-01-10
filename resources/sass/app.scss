@@ -1,0 +1,35 @@
+@import 'abstracts/_abstracts';
+//layout
+@import "layout/base-button";
+@import "layout/base-card";
+@import "layout/header";
+//pages
+@import 'pages/_home';
+@import "pages/used-cars";
+@import "pages/sell-car/sell-car";
+
+
+
+
+body {
+    background: #1a202c;
+}
+
+a, p, h1, h2, h3, h4, h5, h6, li, button {
+    color: $secondary-color;
+}
+p {
+    font-size: 1.125rem;
+}
+
+a {
+    text-transform: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+        text-transform: none;
+
+    }
+}
+

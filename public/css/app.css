@@ -1,0 +1,486 @@
+.base-button {
+  background-color: #fd5750;
+  border-radius: 4px;
+  border: none;
+  padding: 0.4rem 1rem;
+  color: white;
+  width: 100%;
+}
+
+.base-button:hover,
+.base-button:active {
+  color: white;
+  background-color: #ff3b33;
+}
+
+.base-card {
+  box-shadow: 0 1px 3px rgba(36, 39, 44, 0.15);
+  border-radius: 3px;
+  background-color: white;
+  padding: 15px 20px 20px;
+  margin: 20px auto;
+}
+
+#the__header {
+  position: relative;
+  z-index: 40;
+}
+#the__header .sub__nav {
+  box-shadow: 0 3px 10px -10px #24272c;
+  border-top: 1px solid rgba(36, 39, 44, 0.1);
+}
+#the__header .sub__menu__wrapper {
+  position: relative;
+  margin-right: 2rem;
+}
+#the__header .sub__menu__wrapper > span {
+  display: block;
+  padding: 15px 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+#the__header .sub__menu__wrapper > span:hover {
+  border-top: 2px solid var(--main-color);
+}
+#the__header #the__header {
+  position: relative;
+  z-index: 40;
+}
+#the__header .sub__nav {
+  box-shadow: 0 3px 10px -10px #24272c;
+  border-top: 1px solid rgba(36, 39, 44, 0.1);
+}
+#the__header .inner__header {
+  padding: 1.125rem 0;
+}
+#the__header .sub__menu__wrapper {
+  position: relative;
+  margin-right: 2rem;
+}
+#the__header .sub__menu__wrapper > span {
+  display: block;
+  padding: 15px 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+#the__header .sub__menu__wrapper > span:hover {
+  border-top: 2px solid #fd5750;
+}
+
+.sub__menu__items {
+  position: absolute;
+  width: calc(100% + 75px);
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid rgba(36, 39, 44, 0.1);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 50;
+}
+
+.sub__menu__items a {
+  white-space: nowrap;
+  text-align: center;
+  padding: 0.7rem 0.2rem;
+  border-bottom: 1px solid rgba(36, 39, 44, 0.1);
+  font-weight: 500;
+}
+
+.sub__menu__items a:hover {
+  font-weight: 700;
+}
+
+.base-button {
+  padding: 0.75rem 2rem;
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.form__wrapper {
+  background-color: white;
+  border-radius: 6px;
+  padding: 1rem 2rem;
+  max-width: 425px;
+  /* height: 300px; */
+  box-shadow: 0 0 15px #24272c;
+  margin-top: 5rem;
+}
+
+.form__wrapper h3 {
+  text-align: left;
+  font-weight: 700;
+}
+
+.form__wrapper select {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.2rem;
+}
+
+ul#used__or__not {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+ul#used__or__not li {
+  flex: 0 0 49%;
+  padding: 0.5rem 1.5rem;
+  background-color: white;
+  color: #24272c;
+  font-weight: 700;
+  border-radius: 4px;
+  border: 1px solid #24272c;
+  cursor: pointer;
+}
+ul#used__or__not li.active {
+  background-color: #24272c;
+  color: white;
+}
+
+ul#by__brand__by_budget {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 1rem;
+}
+
+ul#by__brand__by_budget li {
+  margin-left: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+}
+
+ul#by__brand__by_budget li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -25px;
+  display: block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 2px solid #24272c;
+}
+
+ul#by__brand__by_budget li.active::after {
+  content: "";
+  position: absolute;
+  background-color: #fd5750;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -21px;
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.agile__nav-button {
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  height: 40px;
+  width: 40px;
+  box-shadow: 0 0 5px gray;
+  position: absolute;
+  top: 50%;
+}
+
+.agile__nav-button--next {
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.agile__nav-button--prev {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.showcase .item {
+  text-align: center;
+}
+
+.showcase .info {
+  border: 1px solid #24272c;
+}
+
+.sell-car {
+  max-width: 550px;
+  margin: auto;
+}
+.sell-car span.back__button {
+  font-weight: 700;
+}
+.sell-car span.back__button:hover {
+  cursor: pointer;
+  color: #fd5750;
+}
+.sell-car ul#new__or__used {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.sell-car ul#new__or__used li {
+  flex: 0 0 49%;
+  font-weight: 700;
+  background-color: white;
+  color: #24272c;
+  padding: 0.5rem 1.75rem;
+  border: 2px solid #24272c;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+.sell-car ul#new__or__used li.active {
+  border: 2px solid transparent;
+  background-color: #24272c;
+  color: white;
+}
+.sell-car div#brand {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.sell-car div#brand .item {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+  font-weight: 700;
+  height: 90px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(36, 39, 44, 0.1), 0 2px 2px 0 rgba(36, 39, 44, 0.1);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.sell-car div#brand .item.active {
+  border: 2px solid #fd5750;
+}
+.sell-car ul#year li,
+.sell-car ul#model li {
+  border-bottom: 1px solid rgba(36, 39, 44, 0.1);
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  padding: 0.875rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.sell-car ul#year li.active,
+.sell-car ul#model li.active {
+  font-weight: 700;
+  border: 2px solid #fd5750;
+}
+.sell-car ul#fuel,
+.sell-car ul#transmission {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.sell-car ul#fuel li,
+.sell-car ul#transmission li {
+  background-color: #f2f3f7;
+  padding: 0.375rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+.sell-car ul#fuel li.active,
+.sell-car ul#transmission li.active {
+  font-weight: 700;
+  border: 2px solid #fd5750;
+}
+.sell-car ul#car-extras-categories {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.sell-car ul#car-extras-categories li {
+  background-color: #f2f3f7;
+  padding: 0.375rem 1rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+  flex: 1;
+  border: 0;
+  border-bottom: 2px solid #fd5750;
+}
+.sell-car ul#car-extras-categories li.active {
+  font-weight: 700;
+  border: 2px solid #fd5750;
+  border-bottom: 0;
+}
+.sell-car ul#extras > div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  gap: 10px;
+}
+.sell-car ul#extras li {
+  background-color: #f2f3f7;
+  color: #24272c;
+  position: relative;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  padding: 5px 10px;
+}
+.sell-car ul#extras li.active {
+  border: 2px solid forestgreen;
+  font-weight: 700;
+}
+.sell-car #car-images-upload {
+  padding: 1rem 1rem 1.2rem 1rem;
+  width: 100%;
+  border: 1px dashed #24272c;
+  border-radius: 6px;
+  background-color: #f2f3f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.sell-car #car-images-upload i#info {
+  top: 5px;
+  left: 8px;
+  font-size: 1rem;
+  z-index: 20;
+}
+.sell-car #car-images-upload #imageInformationJumbotron {
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(36, 39, 44, 0.15);
+  left: -50px;
+  top: 20px;
+  height: 200px;
+  width: 200px;
+  background-color: #f2f3f7;
+  padding: 1rem;
+}
+.sell-car #car-images-upload label {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.sell-car #car-images-upload p {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-style: italic;
+  font-size: 14px;
+  margin: 0;
+}
+.sell-car #car-images-upload i {
+  font-size: 2.5rem;
+  color: #24272c;
+}
+.sell-car #car-image-gallery-preview {
+  margin-top: 1rem;
+}
+.sell-car #car-image-gallery-preview > div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.sell-car #car-image-gallery-preview > div .main-image {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fd5750;
+  color: #24272c;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  overflow: hidden;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.sell-car #car-image-gallery-preview img {
+  cursor: move;
+}
+.sell-car #car-image-gallery-preview .close-btn {
+  font-size: 2rem;
+  top: -10px;
+  left: 5px;
+  color: #fd5750;
+}
+.sell-car #car-image-gallery-preview li {
+  padding: 0.375rem 1rem;
+  border-radius: 6px;
+  height: 144px;
+  border: 2px solid #24272c;
+}
+.sell-car .form__input {
+  background-color: #f2f3f7;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.375rem 1rem;
+  margin-bottom: 1rem;
+  height: calc(3rem + 2px);
+}
+.sell-car .form__input:focus, .sell-car .form__input:active {
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+}
+.sell-car .form__input ~ label {
+  padding: 0.7rem 1rem;
+}
+.sell-car select.form__input {
+  padding-top: 1rem;
+}
+.sell-car textarea.form__input {
+  height: 150px;
+  resize: vertical;
+}
+.sell-car .currently__chosen {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.sell-car .currently__chosen span {
+  border-radius: 100em;
+  padding: 3px 15px;
+  box-shadow: 0 4px 8px 0 rgba(36, 39, 44, 0.1), 0 2px 2px 0 rgba(36, 39, 44, 0.1);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.sell-car .currently__chosen span:not(:last-child) {
+  margin-right: 5px;
+}
+
+body {
+  background: #1a202c;
+}
+
+a, p, h1, h2, h3, h4, h5, h6, li, button {
+  color: #24272c;
+}
+
+p {
+  font-size: 1.125rem;
+}
+
+a {
+  text-transform: none;
+}
+a:active, a:focus, a:hover {
+  text-transform: none;
+}

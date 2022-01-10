@@ -1,0 +1,28 @@
+.agile__nav-button {
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    box-shadow: 0 0 5px gray;
+    position: absolute;
+    top: 50%;
+}
+
+.agile__nav-button--next {
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.agile__nav-button--prev {
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.showcase .item {
+    text-align: center;
+}
+
+.showcase .info {
+    border: 1px solid $secondary-color;
+}
