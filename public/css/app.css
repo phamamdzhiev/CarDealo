@@ -1,3 +1,14 @@
+.input__error {
+  color: #ff3939;
+  font-weight: bold;
+}
+
+input[type=number] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
 .base-button {
   background-color: #fd5750;
   border-radius: 4px;

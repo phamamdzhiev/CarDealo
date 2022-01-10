@@ -22288,23 +22288,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/base/BaseCard.vue */ "./resources/js/components/ui/base/BaseCard.vue");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/base/BaseCard.vue */ "./resources/js/components/ui/base/BaseCard.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SellCarVariant",
   components: {
-    BaseCard: _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    BaseCard: _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
+      errors: {
+        errorCm3: false,
+        errorHp: false,
+        errorKm: false
+      },
       dataStepFour: {
         fuel: null,
         transmission: null,
@@ -22319,40 +22316,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.$store.getters['sellCar/getAllData'];
     },
     toggleNextStepButton: function toggleNextStepButton() {
-      return this.dataStepFour.transmission && this.dataStepFour.fuel;
+      return this.dataStepFour.transmission && this.dataStepFour.fuel && this.dataStepFour.cm3 && this.dataStepFour.hp && this.dataStepFour.km && !this.errors.errorCm3 && !this.errors.errorHp && !this.errors.errorKm;
     }
   },
   methods: {
     back: function back() {
       this.$store.commit('sellCar/setStepMinus');
     },
+    //some validation for inputs
+    formatInputCm3: function formatInputCm3() {
+      this.errors.errorCm3 = this.dataStepFour.cm3 >= 8000;
+    },
+    formatInputHp: function formatInputHp() {
+      this.errors.errorHp = this.dataStepFour.hp >= 1500;
+    },
+    formatInputKm: function formatInputKm() {
+      this.errors.errorKm = this.dataStepFour.km >= 1000000;
+    },
     showStepFive: function showStepFive() {
-      var _this = this;
+      if (!this.toggleNextStepButton) {
+        return;
+      }
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (_this.toggleNextStepButton) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt("return");
-
-              case 2:
-                _this.$store.commit('sellCar/setCarVariant', _this.dataStepFour);
-
-                _this.$store.commit('sellCar/setStepPlus');
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      this.$store.commit('sellCar/setCarVariant', this.dataStepFour);
+      this.$store.commit('sellCar/setStepPlus');
     }
   }
 });
@@ -24068,33 +24055,60 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_14 = {
   "class": "form-floating"
 };
-
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_15 = {
   "for": "cm3"
-}, "Кубатура", -1
-/* HOISTED */
-);
-
-var _hoisted_16 = {
-  "class": "form-floating"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "horsepower"
-}, "Мощност (к.с)", -1
-/* HOISTED */
-);
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Кубатура ");
 
-var _hoisted_18 = {
-  "class": "form-floating"
+var _hoisted_17 = {
+  key: 0,
+  "class": "input__error"
 };
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "horsepower"
-}, "Пробег (км.)", -1
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", null, "(Въведете реална кубатура)", -1
 /* HOISTED */
 );
 
+var _hoisted_19 = [_hoisted_18];
+var _hoisted_20 = {
+  "class": "form-floating"
+};
+var _hoisted_21 = {
+  "for": "horsepower"
+};
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Мощност (к.с) ");
+
+var _hoisted_23 = {
+  key: 0,
+  "class": "input__error"
+};
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", null, "(Въведете реали конски сили)", -1
+/* HOISTED */
+);
+
+var _hoisted_25 = [_hoisted_24];
+var _hoisted_26 = {
+  "class": "form-floating"
+};
+var _hoisted_27 = {
+  "for": "horsepower"
+};
+
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Пробег (км.) ");
+
+var _hoisted_29 = {
+  key: 0,
+  "class": "input__error"
+};
+
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", null, "(Въведете реален пробег)", -1
+/* HOISTED */
+);
+
+var _hoisted_31 = [_hoisted_30];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_base_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("base-card");
 
@@ -24176,39 +24190,51 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* CLASS */
       )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
-        min: "0",
         id: "cm3",
         "class": "form-control form__input",
         "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
           return $data.dataStepFour.cm3 = $event;
         }),
+        onChange: _cache[9] || (_cache[9] = function () {
+          return $options.formatInputCm3 && $options.formatInputCm3.apply($options, arguments);
+        }),
         placeholder: "Кубатура"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.cm3]]), _hoisted_15]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.cm3, void 0, {
+        number: true
+      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_15, [_hoisted_16, $data.errors.errorCm3 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_17, _hoisted_19)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
-        min: "0",
         id: "horsepower",
         "class": "form-control form__input",
-        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
           return $data.dataStepFour.hp = $event;
         }),
+        onChange: _cache[11] || (_cache[11] = function () {
+          return $options.formatInputHp && $options.formatInputHp.apply($options, arguments);
+        }),
         placeholder: "Мощност (к.с)"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.hp]]), _hoisted_17]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.hp, void 0, {
+        number: true
+      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_21, [_hoisted_22, $data.errors.errorHp ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_23, _hoisted_25)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
-        min: "0",
         id: "km",
         "class": "form-control form__input",
-        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+        "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
           return $data.dataStepFour.km = $event;
         }),
+        onChange: _cache[13] || (_cache[13] = function () {
+          return $options.formatInputKm && $options.formatInputKm.apply($options, arguments);
+        }),
         placeholder: "Пробег (км.)"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.km]]), _hoisted_19])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        onClick: _cache[11] || (_cache[11] = function () {
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.km, void 0, {
+        number: true
+      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_27, [_hoisted_28, $data.errors.errorKm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_29, _hoisted_31)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[14] || (_cache[14] = function () {
           return $options.showStepFive && $options.showStepFive.apply($options, arguments);
         }),
         "class": "base-button"

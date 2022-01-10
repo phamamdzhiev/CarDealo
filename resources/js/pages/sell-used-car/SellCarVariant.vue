@@ -51,20 +51,42 @@
             <div class="question-section">
                 <h5 class="fw-bold">Кубатура, мощност, пробег?</h5>
                 <div class="form-floating">
-                    <input type="number" min="0" id="cm3" class="form-control form__input" v-model="dataStepFour.cm3"
-                           placeholder="Кубатура">
-                    <label for="cm3">Кубатура</label>
+                    <input type="number" id="cm3" class="form-control form__input"
+                           v-model.number="dataStepFour.cm3"
+                           @change="formatInputCm3"
+                           placeholder="Кубатура"
+                    />
+                    <label for="cm3">Кубатура
+                        <small class='input__error' v-if="errors.errorCm3">
+                            <i>(Въведете реална кубатура)</i>
+                        </small>
+                    </label>
                 </div>
                 <div class="form-floating">
-                    <input type="number" min="0" id="horsepower" class="form-control form__input"
-                           v-model="dataStepFour.hp"
-                           placeholder="Мощност (к.с)">
-                    <label for="horsepower">Мощност (к.с)</label>
+                    <input type="number" id="horsepower" class="form-control form__input"
+                           v-model.number="dataStepFour.hp"
+                           @change="formatInputHp"
+                           placeholder="Мощност (к.с)"
+                    />
+                    <label for="horsepower">
+                        Мощност (к.с)
+                        <small class='input__error' v-if="errors.errorHp">
+                            <i>(Въведете реали конски сили)</i>
+                        </small>
+                    </label>
                 </div>
                 <div class="form-floating">
-                    <input type="number" min="0" id="km" class="form-control form__input" v-model="dataStepFour.km"
-                           placeholder="Пробег (км.)">
-                    <label for="horsepower">Пробег (км.)</label>
+                    <input type="number" id="km" class="form-control form__input"
+                           v-model.number="dataStepFour.km"
+                           @change="formatInputKm"
+                           placeholder="Пробег (км.)"
+                    />
+                    <label for="horsepower">
+                        Пробег (км.)
+                        <small class='input__error' v-if="errors.errorKm">
+                            <i>(Въведете реален пробег)</i>
+                        </small>
+                    </label>
                 </div>
             </div>
             <button @click="showStepFive" v-show="toggleNextStepButton" class="base-button">
@@ -85,6 +107,11 @@ export default {
     },
     data() {
         return {
+            errors: {
+                errorCm3: false,
+                errorHp: false,
+                errorKm: false,
+            },
             dataStepFour: {
                 fuel: null,
                 transmission: null,
@@ -98,8 +125,16 @@ export default {
         getAllData() {
             return this.$store.getters['sellCar/getAllData'];
         },
+
         toggleNextStepButton() {
-            return this.dataStepFour.transmission && this.dataStepFour.fuel;
+            return this.dataStepFour.transmission &&
+                this.dataStepFour.fuel &&
+                this.dataStepFour.cm3 &&
+                this.dataStepFour.hp &&
+                this.dataStepFour.km &&
+                !this.errors.errorCm3 &&
+                !this.errors.errorHp &&
+                !this.errors.errorKm
         }
     },
 
@@ -107,8 +142,18 @@ export default {
         back() {
             this.$store.commit('sellCar/setStepMinus');
         },
+        //some validation for inputs
+        formatInputCm3() {
+            this.errors.errorCm3 = this.dataStepFour.cm3 >= 8000;
+        },
+        formatInputHp() {
+            this.errors.errorHp = this.dataStepFour.hp >= 1500;
+        },
+        formatInputKm() {
+            this.errors.errorKm = this.dataStepFour.km >= 1000000;
+        },
 
-        async showStepFive() {
+        showStepFive() {
             if (!this.toggleNextStepButton) {
                 return
             }
@@ -119,3 +164,4 @@ export default {
     }
 }
 </script>
+
