@@ -2,18 +2,15 @@
     <div class="sell-car">
         <base-card>
             <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 2)</i></span>
-            <div class="currently__chosen my-3">
-               <span>
-                    {{ getAllData['car_brand'] }}
-                </span>
-                <span>
-                    {{ getAllData['car_year'] }}
-                </span>
-            </div>
-
+            <TopBar/>
             <div class="question-section">
                 <h5 class="fw-bold">Какъв модел {{ getAllData['car_brand'] }} продаваш?</h5>
-                <input type="text" id="search__model" class="form__input" :placeholder="setPlaceholder" v-model.trim="search"/>
+                <div class="form-group">
+                    <input type="text" id="search__model" class="form__input" :placeholder="setPlaceholder"
+                           v-model.trim="search"
+                    />
+                </div>
+
                 <ul id="model">
                     <li
                         v-for="model in filteredCarModelBySearchField"
@@ -36,9 +33,12 @@
 
 <script>
 import BaseCard from "../../components/ui/base/BaseCard";
+import TopBar from "./TopBar";
+
 export default {
     name: "SellCarModel",
     components: {
+        TopBar,
         BaseCard,
     },
     data() {

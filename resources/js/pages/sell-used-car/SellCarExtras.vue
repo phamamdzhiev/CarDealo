@@ -2,29 +2,7 @@
     <div class="sell-car">
         <base-card>
             <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 4)</i></span>
-            <div class="currently__chosen my-3">
-                <span>
-                    {{ getAllData['car_brand'] }}
-                </span>
-                <span>
-                    {{ getAllData['car_year'] }}
-                </span>
-                <span>
-                    {{ getAllData['car_model'] }}
-                </span>
-                <span>
-                    {{ getAllData['car_fuel'] }}
-                </span>
-                <span>
-                    {{ getAllData['car_transmission'] }} кутия
-                </span>
-                <span>
-                    {{ getAllData['car_hp'] }} к.с.
-                </span>
-                <span>
-                    {{ getAllData['car_km'] }} км.
-                </span>
-            </div>
+            <TopBar/>
             <div class="question-section mb-3">
                 <h5 class="fw-bold">Избери какви екстри има твоята кола</h5>
                 <nav>
@@ -101,10 +79,12 @@
 
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
+import TopBar from "./TopBar";
 
 export default {
     name: "SellCarExtras",
     components: {
+        TopBar,
         BaseCard
     },
     data() {

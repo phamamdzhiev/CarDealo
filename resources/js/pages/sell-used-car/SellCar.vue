@@ -32,8 +32,8 @@
                 </button>
             </base-card>
         </div>
-        <SellCarYear v-show="getStep === 2"></SellCarYear>
-        <SellCarModel v-show="getStep === 3"></SellCarModel>
+        <SellCarModel v-show="getStep === 2"></SellCarModel>
+        <SellCarYear v-show="getStep === 3"></SellCarYear>
         <SellCarVariant v-show="getStep === 4"></SellCarVariant>
         <SellCarExtras v-show="getStep === 5"></SellCarExtras>
         <OwnerDetails v-show="getStep === 6"></OwnerDetails>

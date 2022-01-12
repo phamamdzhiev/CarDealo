@@ -2,12 +2,7 @@
     <div class="sell-car">
         <base-card>
             <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 1)</i></span>
-            <div class="currently__chosen my-3">
-                <span>
-                    {{ getAllData['car_brand'] }}
-                </span>
-            </div>
-
+            <TopBar/>
             <div class="question-section">
                 <h5 class="fw-bold">Година на производство?</h5>
                 <ul id="year">
@@ -30,10 +25,12 @@
 
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
+import TopBar from "./TopBar";
 
 export default {
     name: "SellCarYear",
     components: {
+        TopBar,
         BaseCard
     },
     data() {

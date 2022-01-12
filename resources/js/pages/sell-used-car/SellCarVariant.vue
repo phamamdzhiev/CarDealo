@@ -2,18 +2,7 @@
     <div class="sell-car">
         <base-card>
             <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 3)</i></span>
-            <div class="currently__chosen my-3">
-                <span>
-                    {{ getAllData['car_brand'] }}
-                </span>
-                <span>
-                    {{ getAllData['car_year'] }}
-                </span>
-                <span>
-                    {{ getAllData['car_model'] }}
-                </span>
-            </div>
-
+            <TopBar/>
             <div class="question-section mb-4">
                 <h5 class="fw-bold">Гориво?</h5>
                 <ul id="fuel">
@@ -99,10 +88,12 @@
 
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
+import TopBar from "./TopBar";
 
 export default {
     name: "SellCarVariant",
     components: {
+        TopBar,
         BaseCard
     },
     data() {
@@ -154,9 +145,7 @@ export default {
         },
 
         showStepFive() {
-            if (!this.toggleNextStepButton) {
-                return
-            }
+            if (!this.toggleNextStepButton) return;
 
             this.$store.commit('sellCar/setCarVariant', this.dataStepFour);
             this.$store.commit('sellCar/setStepPlus');
