@@ -97,8 +97,12 @@ export default {
                     'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
                 }
             }
-            this.isLoading = true;
-            await axios.post('api/image/test', formImages, config);
+            this.isLoading = true
+            try {
+                await axios.post('api/image/test', formImages, config);
+            } catch (e) {
+                console.log(e)
+            }
             this.isLoading = false
         },
         async uploadOffer() {

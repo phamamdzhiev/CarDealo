@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OfferResource;
 use App\Models\Offer;
 use App\Models\CarBrand;
 use App\Models\CarExtra;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
+use ImageKit\ImageKit;
+use ImageKit\Utils\Response;
 
 class OfferController extends Controller
 {
@@ -17,11 +19,11 @@ class OfferController extends Controller
         $expire = Carbon::now()->addMinutes(10);
 
         $carBrands = Cache::remember('car_brands', $expire, function () {
-            return CarBrand::all();
+            return OfferResource::collection(CarBrand::all());
         });
 
         return response()->json([
-            'car_brands' => $carBrands,
+            'car_brands' => OfferResource::collection(CarBrand::all()),
         ]);
     }
 
@@ -36,7 +38,7 @@ class OfferController extends Controller
 
     public function getCarExtras(): \Illuminate\Http\JsonResponse
     {
-        $expire = Carbon::now()->addMinutes(10);
+        $expire = Carbon::now()->addCenturies(10);
 
         $carExtras = Cache::remember('car_extras', $expire, function () {
             return CarExtra::all();
@@ -52,12 +54,35 @@ class OfferController extends Controller
         if ($request->hasFile('files')) {
 
             foreach ($request->file('files') as $file) {
-                $filename = '/images/' . $file->getClientOriginalName();
-                $file->move(public_path('images'), $filename);
+                $folderNameAsMonth = date('Y-m');
+                $file->store($folderNameAsMonth);
             }
+
         }
-
-
-        return response()->json(['res' => 'Images added']);
+        return response()->json(['res' => 'Images uploaded']);
     }
 }
+
+
+//
+//            $uploadToKit = new ImageKit(
+//                env('IMAGE_KIT_PUBLIC'),
+//                env('IMAGE_KIT_PRIVATE'),
+//                env('IMAGE_KIT_URL')
+//            );
+
+//            $path = public_path('images');
+//                $filename = $file->getClientOriginalName();
+//
+//                $imagePath = $path . DIRECTORY_SEPARATOR . $filename;
+//
+//                /**
+//                 * @var $res Response
+//                 */
+//                $uploadToKit->upload([
+//                    'file' => fopen($imagePath, 'r'),
+//                    'fileName' => $filename,
+//                    'folder' => date('Y-m')
+//                ]);
+//
+//                unlink($imagePath);

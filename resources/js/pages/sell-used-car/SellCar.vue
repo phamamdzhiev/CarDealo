@@ -94,6 +94,7 @@ export default {
         filteredCarBrand() {
             if (this.search) {
                 this.current = null;
+                this.dataStepOne.selectedBrand = null;
                 this.search = this.search.toLowerCase();
                 return this.getCarBrands.filter((model) =>
                     model.name.toLowerCase().includes(this.search)
