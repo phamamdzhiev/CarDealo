@@ -12,10 +12,15 @@ $error-red: #ff3939;
 .input__error {
     color: $error-red;
     font-weight: bold;
+    padding-left: 0.15rem;
 }
 
 input[type='number'] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
 }
