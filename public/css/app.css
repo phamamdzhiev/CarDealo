@@ -1,12 +1,17 @@
 .input__error {
   color: #ff3939;
   font-weight: bold;
+  padding-left: 0.15rem;
 }
 
 input[type=number] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+.form-group {
+  margin-bottom: 1rem;
 }
 
 .base-button {
@@ -444,7 +449,6 @@ ul#by__brand__by_budget li.active::after {
   border: 0;
   border-radius: 8px;
   padding: 0.375rem 1rem;
-  margin-bottom: 1rem;
   height: calc(3rem + 2px);
 }
 .sell-car .form__input:focus, .sell-car .form__input:active {
@@ -454,6 +458,7 @@ ul#by__brand__by_budget li.active::after {
 }
 .sell-car .form__input ~ label {
   padding: 0.7rem 1rem;
+  height: auto;
 }
 .sell-car select.form__input {
   padding-top: 1rem;
@@ -468,10 +473,10 @@ ul#by__brand__by_budget li.active::after {
 }
 .sell-car .currently__chosen span {
   border-radius: 100em;
-  padding: 3px 15px;
+  padding: 3px 12px;
   box-shadow: 0 4px 8px 0 rgba(36, 39, 44, 0.1), 0 2px 2px 0 rgba(36, 39, 44, 0.1);
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 0.775rem;
 }
 .sell-car .currently__chosen span:not(:last-child) {
   margin-right: 5px;

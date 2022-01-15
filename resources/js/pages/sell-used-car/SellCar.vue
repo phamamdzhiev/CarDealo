@@ -16,12 +16,11 @@
                 <div class="question-section mb-3">
                     <h5 class="fw-bold">Каква марка е автомобила?</h5>
                     <div id="brand" v-if="getCarBrands">
-                        <div v-for="carMake in getCarBrands" :key="carMake['id']"
-                             :data-brand="carMake['name']"
+                        <div v-for="(brand, index) in getCarBrands" :key="brand.id"
                              class="item"
-                             ref="element"
-                             @click="selectBrand(carMake['name'], carMake['id'])">
-                            {{ carMake.name }}
+                             :class="{ active: index === current }"
+                             @click="selectBrand(brand.name, brand.id, index)">
+                            {{ brand.name }}
                         </div>
                     </div>
                     <div class="text-center mt-3" v-else>Зареждане...</div>
@@ -63,6 +62,7 @@ export default {
     },
     data() {
         return {
+            current: null,
             selectedBrandID: null,
             dataStepOne: {
                 selectedBrand: null,
@@ -93,15 +93,10 @@ export default {
             await this.$store.dispatch('sellCar/setCarBrandWithModels', this.selectedBrandID);
             this.$store.commit('sellCar/setStepPlus');
         },
-        selectBrand(brand, brandID) {
-            this.$refs.element.forEach((ref) => {
-                ref.classList.remove('active');
-                if (brand === ref.getAttribute('data-brand')) {
-                    ref.classList.add('active');
-                    this.selectedBrandID = brandID
-                    this.dataStepOne.selectedBrand = brand;
-                }
-            })
+        selectBrand(brand, brandID, index) {
+            this.current = index;
+            this.selectedBrandID = brandID;
+            this.dataStepOne.selectedBrand = brand;
         },
     },
     created() {
