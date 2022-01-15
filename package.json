@@ -22,7 +22,6 @@
     "dependencies": {
         "@vuelidate/core": "^2.0.0-alpha.33",
         "@vuelidate/validators": "^2.0.0-alpha.26",
-        "dropzone": "^6.0.0-beta.2",
         "firebase": "^9.6.1",
         "vue": "^3.2.26",
         "vue-agile": "^2.0.0",
