@@ -6,11 +6,10 @@
             <div class="question-section">
                 <h5 class="fw-bold">Година на производство?</h5>
                 <ul id="year">
-                    <li v-for="year in years"
+                    <li v-for="(year, index) in years"
                         :key="year"
-                        :data-year="year"
-                        ref="element"
-                        @click="chooseYear(year)"
+                        :class="{ active: index === current }"
+                        @click="chooseYear(year, index)"
                     >
                         {{ year }}
                     </li>
@@ -35,6 +34,7 @@ export default {
     },
     data() {
         return {
+            current: null,
             dataStepTwo: {
                 selectedYear: null,
             },
@@ -66,14 +66,9 @@ export default {
             this.$store.commit('sellCar/setStepPlus');
             this.$store.commit('sellCar/setCarYear', this.dataStepTwo.selectedYear);
         },
-        chooseYear(year) {
-            this.$refs.element.forEach((ref) => {
-                ref.classList.remove('active');
-                if (year === ref.getAttribute('data-year')) {
-                    ref.classList.add('active');
-                    this.dataStepTwo.selectedYear = year;
-                }
-            })
+        chooseYear(year, index) {
+            this.dataStepTwo.selectedYear = year;
+            this.current = index;
         }
     }
 }

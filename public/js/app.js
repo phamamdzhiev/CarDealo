@@ -22517,6 +22517,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      current: null,
       dataStepTwo: {
         selectedYear: null
       },
@@ -22543,17 +22544,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit('sellCar/setStepPlus');
       this.$store.commit('sellCar/setCarYear', this.dataStepTwo.selectedYear);
     },
-    chooseYear: function chooseYear(year) {
-      var _this = this;
-
-      this.$refs.element.forEach(function (ref) {
-        ref.classList.remove('active');
-
-        if (year === ref.getAttribute('data-year')) {
-          ref.classList.add('active');
-          _this.dataStepTwo.selectedYear = year;
-        }
-      });
+    chooseYear: function chooseYear(year, index) {
+      this.dataStepTwo.selectedYear = year;
+      this.current = index;
     }
   }
 });
@@ -23355,7 +23348,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_8, $setup.v$.offerDetails.offerTitle.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: "'Моля въвдете заглавие'"
+        message: "Моля въвдете заглавие"
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
         "class": "form__input form-control",
         placeholder: "Leave a comment here",
@@ -23369,7 +23362,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_10, $setup.v$.offerDetails.offerDescription.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: "'Моля въвдете информация'"
+        message: "Моля въвдете информация"
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
@@ -23384,7 +23377,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_12, $setup.v$.offerDetails.offerPrice.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: "'Моля въвдете цена'"
+        message: "Моля въвдете цена"
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         onClick: _cache[4] || (_cache[4] = function ($event) {
           return $data.toggleBusinessOfferDetails = !$data.toggleBusinessOfferDetails;
@@ -23418,7 +23411,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_19, $setup.v$.ownerDetails.ownerEmail.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: "'Моля въведете валиден имейл'"
+        message: "Моля въведете валиден имейл"
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
@@ -23433,7 +23426,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_21, $setup.v$.ownerDetails.ownerMobile.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: "'Моля валиден мобилен номер във формат 08хххххххх'"
+        message: "Моля валиден мобилен номер във формат 08хххххххх"
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         "class": "form__input form-select",
         id: "floatingSelectRegion",
@@ -23466,7 +23459,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_39, $setup.v$.ownerDetails.businessOffer.companyName.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: "'Моля въведете име на автокъщата'"
+        message: "Моля въведете име на автокъщата"
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
@@ -23481,10 +23474,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_41, $setup.v$.ownerDetails.businessOffer.companyEIK.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: 'Моля въведете име на автокъщата ownerDetails.businessOffer.companyName'
-      }, null, 8
-      /* PROPS */
-      , ["message"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        message: "Моля въведете ЕИК на автокъщата"
+      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
         id: "floatingInputAddress",
@@ -23498,10 +23489,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), _hoisted_43, $setup.v$.ownerDetails.businessOffer.companyAddress.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: 'Моля въведете адрес на ownerDetails.businessOffer.companyName'
-      }, null, 8
-      /* PROPS */
-      , ["message"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        message: "'Моля въведете адрес на автокъщата"
+      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
         id: "floatingInputDomain",
@@ -24591,7 +24580,7 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_7 = {
   id: "year"
 };
-var _hoisted_8 = ["data-year", "onClick"];
+var _hoisted_8 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_TopBar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TopBar");
 
@@ -24604,17 +24593,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $options.back && $options.back.apply($options, arguments);
         }),
         "class": "back__button"
-      }, _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TopBar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.years, function (year) {
+      }, _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TopBar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.years, function (year, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
           key: year,
-          "data-year": year,
-          ref_for: true,
-          ref: "element",
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+            active: index === $data.current
+          }),
           onClick: function onClick($event) {
-            return $options.chooseYear(year);
+            return $options.chooseYear(year, index);
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(year), 9
-        /* TEXT, PROPS */
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(year), 11
+        /* TEXT, CLASS, PROPS */
         , _hoisted_8);
       }), 128
       /* KEYED_FRAGMENT */

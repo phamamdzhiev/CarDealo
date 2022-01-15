@@ -10,21 +10,21 @@
                            placeholder="Залавие на обявата" v-model.trim="offerDetails.offerTitle">
                     <label for="floatingInputOfferTitle">Заглавие</label>
                     <FromInputValidationMessage v-if="v$.offerDetails.offerTitle.$error"
-                                                message="'Моля въвдете заглавие'"/>
+                                                message="Моля въвдете заглавие"/>
                 </div>
                 <div class="form-floating form-group">
                     <textarea class="form__input form-control" placeholder="Leave a comment here"
                               id="floatingTextarea" v-model.trim="offerDetails.offerDescription"></textarea>
                     <label for="floatingTextarea">Допълнителна информация</label>
                     <FromInputValidationMessage v-if="v$.offerDetails.offerDescription.$error"
-                                                message="'Моля въвдете информация'"/>
+                                                message="Моля въвдете информация"/>
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputPrice"
                            placeholder="Цена на автомобила" v-model.trim="offerDetails.offerPrice">
                     <label for="floatingInputPrice">Цена (BGN)</label>
                     <FromInputValidationMessage v-if="v$.offerDetails.offerPrice.$error"
-                                                message="'Моля въвдете цена'"/>
+                                                message="Моля въвдете цена"/>
                 </div>
             </div>
             <div>
@@ -47,14 +47,14 @@
                            placeholder="(ivan.ivano@email.bg)" v-model.trim="ownerDetails.ownerEmail">
                     <label for="floatingInputEmail">Имейл адрес</label>
                     <FromInputValidationMessage v-if="v$.ownerDetails.ownerEmail.$error"
-                                                message="'Моля въведете валиден имейл'"/>
+                                                message="Моля въведете валиден имейл"/>
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputMobile"
                            placeholder="(ivan.ivano@email.bg)" v-model.trim="ownerDetails.ownerMobile">
                     <label for="floatingInputMobile">Мобилен номер</label>
                     <FromInputValidationMessage v-if="v$.ownerDetails.ownerMobile.$error"
-                                                message="'Моля валиден мобилен номер във формат 08хххххххх'"/>
+                                                message="Моля валиден мобилен номер във формат 08хххххххх"/>
                 </div>
                 <div class="form-floating">
                     <select class="form__input form-select" id="floatingSelectRegion"
@@ -88,7 +88,7 @@
                                    placeholder="име на фирмата" v-model.trim="ownerDetails.businessOffer.companyName">
                             <label for="floatingInputCompany">Име на автокъщата</label>
                             <FromInputValidationMessage v-if="v$.ownerDetails.businessOffer.companyName.$error"
-                                                        message="'Моля въведете име на автокъщата'"/>
+                                                        message="Моля въведете име на автокъщата"/>
                         </div>
                         <div class="form-floating form-group">
                             <input type="text" class="form__input form-control" id="floatingInputBulstat"
@@ -96,7 +96,7 @@
                                    v-model.trim="ownerDetails.businessOffer.companyEIK">
                             <label for="floatingInputBulstat">Булстат/ЕИК</label>
                             <FromInputValidationMessage v-if="v$.ownerDetails.businessOffer.companyEIK.$error"
-                                                        :message="'Моля въведете име на автокъщата ownerDetails.businessOffer.companyName'"/>
+                                                        message="Моля въведете ЕИК на автокъщата"/>
                         </div>
                         <div class="form-floating form-group">
                             <input type="text" class="form__input form-control" id="floatingInputAddress"
@@ -104,7 +104,7 @@
                                    v-model.trim="ownerDetails.businessOffer.companyAddress">
                             <label for="floatingInputAddress">Адрес на автокъщата</label>
                             <FromInputValidationMessage v-if="v$.ownerDetails.businessOffer.companyAddress.$error"
-                                                        :message="'Моля въведете адрес на ownerDetails.businessOffer.companyName'"/>
+                                                        message="'Моля въведете адрес на автокъщата"/>
                         </div>
                         <div class="form-floating form-group">
                             <input type="text" class="form__input form-control" id="floatingInputDomain"
