@@ -39,7 +39,7 @@
             </div>
             <div class="question-section">
                 <h5 class="fw-bold">Кубатура, мощност, пробег?</h5>
-                <div class="form-floating">
+                <div class="form-floating form-group">
                     <input type="number" id="cm3" class="form-control form__input"
                            v-model.number="dataStepFour.cm3"
                            @change="formatInputCm3"
@@ -51,7 +51,7 @@
                         </small>
                     </label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating form-group">
                     <input type="number" id="horsepower" class="form-control form__input"
                            v-model.number="dataStepFour.hp"
                            @change="formatInputHp"
@@ -64,7 +64,7 @@
                         </small>
                     </label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating form-group">
                     <input type="number" id="km" class="form-control form__input"
                            v-model.number="dataStepFour.km"
                            @change="formatInputKm"

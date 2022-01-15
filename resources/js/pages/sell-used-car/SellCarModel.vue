@@ -2,7 +2,7 @@
   <div class="sell-car">
     <base-card>
       <span @click="back" class="back__button"
-        >Назад <i class="fw-light">(Стъпка 2)</i></span
+        >Назад <i class="fw-light">(Стъпка 1)</i></span
       >
       <TopBar />
       <div class="question-section">

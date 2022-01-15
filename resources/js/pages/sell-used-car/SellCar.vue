@@ -15,8 +15,17 @@
                 </div>
                 <div class="question-section mb-3">
                     <h5 class="fw-bold">Каква марка е автомобила?</h5>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            id="search__model"
+                            class="form__input"
+                            placeholder="Търси марка"
+                            v-model.trim="search"
+                        />
+                    </div>
                     <div id="brand" v-if="getCarBrands">
-                        <div v-for="(brand, index) in getCarBrands" :key="brand.id"
+                        <div v-for="(brand, index) in filteredCarBrand" :key="brand.id"
                              class="item"
                              :class="{ active: index === current }"
                              @click="selectBrand(brand.name, brand.id, index)">
@@ -63,6 +72,7 @@ export default {
     data() {
         return {
             current: null,
+            search: null,
             selectedBrandID: null,
             dataStepOne: {
                 selectedBrand: null,
@@ -80,7 +90,18 @@ export default {
         },
         isLoading() {
             return this.$store.getters['sellCar/isLoading'];
-        }
+        },
+        filteredCarBrand() {
+            if (this.search) {
+                this.current = null;
+                this.search = this.search.toLowerCase();
+                return this.getCarBrands.filter((model) =>
+                    model.name.toLowerCase().includes(this.search)
+                );
+            } else {
+                return this.getCarBrands;
+            }
+        },
     },
     methods: {
         async showStepTwo() {

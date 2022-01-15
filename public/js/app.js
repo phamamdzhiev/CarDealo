@@ -22019,6 +22019,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       current: null,
+      search: null,
       selectedBrandID: null,
       dataStepOne: {
         selectedBrand: null,
@@ -22036,18 +22037,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     isLoading: function isLoading() {
       return this.$store.getters['sellCar/isLoading'];
+    },
+    filteredCarBrand: function filteredCarBrand() {
+      var _this = this;
+
+      if (this.search) {
+        this.current = null;
+        this.search = this.search.toLowerCase();
+        return this.getCarBrands.filter(function (model) {
+          return model.name.toLowerCase().includes(_this.search);
+        });
+      } else {
+        return this.getCarBrands;
+      }
     }
   },
   methods: {
     showStepTwo: function showStepTwo() {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this.dataStepOne.selectedBrand) {
+                if (_this2.dataStepOne.selectedBrand) {
                   _context.next = 2;
                   break;
                 }
@@ -22056,15 +22070,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 //send data to Vuex
-                _this.$store.commit('sellCar/setNewOrUsed', _this.dataStepOne.oldOrNew);
+                _this2.$store.commit('sellCar/setNewOrUsed', _this2.dataStepOne.oldOrNew);
 
-                _this.$store.commit('sellCar/setCarMake', _this.dataStepOne.selectedBrand);
+                _this2.$store.commit('sellCar/setCarMake', _this2.dataStepOne.selectedBrand);
 
                 _context.next = 6;
-                return _this.$store.dispatch('sellCar/setCarBrandWithModels', _this.selectedBrandID);
+                return _this2.$store.dispatch('sellCar/setCarBrandWithModels', _this2.selectedBrandID);
 
               case 6:
-                _this.$store.commit('sellCar/setStepPlus');
+                _this2.$store.commit('sellCar/setStepPlus');
 
               case 7:
               case "end":
@@ -22197,7 +22211,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
       this.$store.commit('sellCar/setCarColor', this.carColor);
       this.$store.commit('sellCar/setCarCategory', this.carCategory);
-      this.$store.commit('sellCar/setStepPlus');
+      console.log(this.getAllData); // this.$store.commit('sellCar/setStepPlus');
     }
   }
 });
@@ -23559,15 +23573,28 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_7 = {
+  "class": "form-group"
+};
+var _hoisted_8 = {
   key: 0,
   id: "brand"
 };
-var _hoisted_8 = ["onClick"];
-var _hoisted_9 = {
+var _hoisted_9 = ["onClick"];
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  width: "35",
+  height: "35",
+  src: "https://ik.imagekit.io/gaicl5qj9hl/tr:w-35,h-35/default-image.jpg",
+  alt: "logo"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_11 = {
   key: 1,
   "class": "text-center mt-3"
 };
-var _hoisted_10 = {
+var _hoisted_12 = {
   key: 0
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23607,7 +23634,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, "Нов ", 2
       /* CLASS */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, $options.getCarBrands ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getCarBrands, function (brand, index) {
+      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "text",
+        id: "search__model",
+        "class": "form__input",
+        placeholder: "Търси марка",
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.search = $event;
+        })
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search, void 0, {
+        trim: true
+      }]])]), $options.getCarBrands ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.filteredCarBrand, function (brand, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: brand.id,
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["item", {
@@ -23616,17 +23655,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $options.selectBrand(brand.name, brand.id, index);
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(brand.name), 11
-        /* TEXT, CLASS, PROPS */
-        , _hoisted_8);
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(brand.name) + " ", 1
+        /* TEXT */
+        ), _hoisted_10], 10
+        /* CLASS, PROPS */
+        , _hoisted_9);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, "Зареждане..."))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        onClick: _cache[2] || (_cache[2] = function () {
+      ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, "Зареждане..."))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[3] || (_cache[3] = function () {
           return $options.showStepTwo && $options.showStepTwo.apply($options, arguments);
         }),
         "class": "base-button"
-      }, [!$options.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, "Следваща стъпка")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
+      }, [!$options.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, "Следваща стъпка")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
         key: 1
       }))], 512
       /* NEED_PATCH */
@@ -24199,7 +24240,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fw-light"
-  }, "(Стъпка 2)", -1
+  }, "(Стъпка 1)", -1
   /* HOISTED */
   );
 });
@@ -24339,7 +24380,7 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_13 = {
-  "class": "form-floating"
+  "class": "form-floating form-group"
 };
 var _hoisted_14 = {
   "for": "cm3"
@@ -24358,7 +24399,7 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_18 = [_hoisted_17];
 var _hoisted_19 = {
-  "class": "form-floating"
+  "class": "form-floating form-group"
 };
 var _hoisted_20 = {
   "for": "horsepower"
@@ -24377,7 +24418,7 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_24 = [_hoisted_23];
 var _hoisted_25 = {
-  "class": "form-floating"
+  "class": "form-floating form-group"
 };
 var _hoisted_26 = {
   "for": "horsepower"
@@ -24559,7 +24600,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fw-light"
-  }, "(Стъпка 1)", -1
+  }, "(Стъпка 2)", -1
   /* HOISTED */
   );
 });
