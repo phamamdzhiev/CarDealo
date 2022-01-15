@@ -23,7 +23,7 @@ class OfferController extends Controller
         });
 
         return response()->json([
-            'car_brands' => OfferResource::collection(CarBrand::all()),
+            'car_brands' => $carBrands
         ]);
     }
 
