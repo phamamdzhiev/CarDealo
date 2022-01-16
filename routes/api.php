@@ -25,4 +25,4 @@ Route::get('/get-all-car-extras', [\App\Http\Controllers\OfferController::class,
 Route::get('/get-all-images-from-cdn', [\App\Http\Controllers\ImageKitController::class, 'index']);
 
 //post
-Route::post('/image/test', [\App\Http\Controllers\OfferController::class, 'setDataApi']);
+Route::post('/image/test', [\App\Http\Controllers\ImageController::class, 'uploadImage']);

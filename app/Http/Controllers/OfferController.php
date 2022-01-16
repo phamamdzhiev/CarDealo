@@ -48,19 +48,6 @@ class OfferController extends Controller
             'car_extras' => $carExtras
         ]);
     }
-
-    public function setDataApi(\Illuminate\Http\Request $request): \Illuminate\Http\JsonResponse
-    {
-        if ($request->hasFile('files')) {
-
-            foreach ($request->file('files') as $file) {
-                $folderNameAsMonth = date('Y-m');
-                $file->store($folderNameAsMonth);
-            }
-
-        }
-        return response()->json(['res' => 'Images uploaded']);
-    }
 }
 
 

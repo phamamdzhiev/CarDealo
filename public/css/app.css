@@ -11297,6 +11297,11 @@ input[type=number] {
   margin-bottom: 1rem;
 }
 
+.bi-exclamation-circle,
+.bi-exclamation-circle-fill {
+  color: #ff3939;
+}
+
 .base-button {
   background-color: #fd5750;
   border-radius: 4px;

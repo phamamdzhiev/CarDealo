@@ -41,6 +41,7 @@ pos
                     </draggable>
                 </div>
             </div>
+            <error-display :errors="errors"></error-display>
             <button @click="uploadOffer" class="base-button" v-show="images.length > 4">
                 <span v-if="!isLoading">Публикувай обява</span>
                 <loading-dots v-else></loading-dots>
@@ -52,15 +53,18 @@ pos
 <script>
 import BaseCard from "../../components/ui/base/BaseCard";
 import draggable from 'vuedraggable';
+import ErrorDisplay from "../../components/ui/ErrorDisplay";
 
 export default {
     name: "SellCarImages",
     components: {
         BaseCard,
+        ErrorDisplay,
         draggable
     },
     data() {
         return {
+            errors: [],
             images: [],
             imageTmpUrl: [],
             showInfo: false,
@@ -74,12 +78,24 @@ export default {
         },
         remove(index) {
             this.imageTmpUrl.splice(index, 1)
+            this.images.splice(index, 1);
         },
         imageChange(e) {
             for (let i = 0; i < e.target.files.length; i++) {
-                let url = URL.createObjectURL(e.target.files[i]);
-                this.imageTmpUrl.push(url);
-                this.images.push(e.target.files[i]);
+                const ftype = e.target.files[i].type;
+                const fsize = e.target.files[i].size;
+                const file = Math.round((fsize / 1024));
+                if (file >= 4096) {
+                    this.errors = {'errors': ['Позволеният размер за 1 снимка е до 4MB']}
+                } else if (!ftype.includes('image')) {
+                    this.errors = {'errors': ['Позлените формати на файловете са .jpeg, .jpg и .png']}
+                } else {
+                    this.errors = [];
+                    let url = URL.createObjectURL(e.target.files[i]);
+                    this.imageTmpUrl.push(url);
+                    this.images.push(e.target.files[i]);
+                }
+
             }
         },
         async imageUpload() {
@@ -100,9 +116,16 @@ export default {
             this.isLoading = true
             try {
                 await axios.post('api/image/test', formImages, config);
-            } catch (e) {
-                console.log(e)
+            } catch (error) {
+                if (error.response) {
+                    this.errors = error.response.data['errors'];
+                    console.log(error.response.data['errors'])
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
             }
+
             this.isLoading = false
         },
         async uploadOffer() {
