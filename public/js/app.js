@@ -22548,7 +22548,7 @@ __webpack_require__.r(__webpack_exports__);
       dataStepTwo: {
         selectedYear: null
       },
-      years: ['2022', '2021', '2019', '2018', '2017']
+      years: ['2022', '2021', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008', '2007', '2006', '2005', '2004', '2003', '2002', '2001', '2000', '1999', '1998', '1997', '1996', '1995', '1994', '1993', '1992', '1991', '1990', '1989', '1988', '1987', '1986', '1985']
     };
   },
   computed: {
@@ -23194,7 +23194,7 @@ var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_22 = {
-  "class": "form-floating"
+  "class": "form-floating form-group"
 };
 
 var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
@@ -23241,7 +23241,7 @@ var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_29 = {
-  "class": "form-floating"
+  "class": "form-floating form-group"
 };
 
 var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
@@ -23639,7 +23639,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* CLASS */
       )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
-        id: "search__model",
+        id: "search__brand",
         "class": "form__input",
         placeholder: "Търси марка",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
@@ -25451,7 +25451,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-6ad67308] {\r\n    max-width: 800px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-6ad67308] {\n    max-width: 800px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25547,7 +25547,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-04f16d96] {\r\n    display: block;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-04f16d96] {\n    display: block;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

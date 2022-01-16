@@ -4,4 +4,9 @@
     background-color: white;
     padding: 15px 20px 20px;
     margin: 20px auto;
+    overflow: hidden;
+    @include media-breakpoint-down(sm) {
+        padding: 15px 10px 10px;
+        box-shadow: none;
+    }
 }

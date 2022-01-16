@@ -18,11 +18,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/latest-offers', [\App\Http\Controllers\OfferController::class, 'getLatestOfferWithLimit']);
+//get
 Route::get('/get-car-brands', [\App\Http\Controllers\OfferController::class, 'getCarBrands']);
 Route::get('/get-make-with-models/{id}', [\App\Http\Controllers\OfferController::class, 'getBrandWithModels']);
 Route::get('/get-all-car-extras', [\App\Http\Controllers\OfferController::class, 'getCarExtras']);
 Route::get('/get-all-images-from-cdn', [\App\Http\Controllers\ImageKitController::class, 'index']);
 
-
+//post
 Route::post('/image/test', [\App\Http\Controllers\OfferController::class, 'setDataApi']);

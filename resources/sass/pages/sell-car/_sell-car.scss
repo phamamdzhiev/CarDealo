@@ -1,3 +1,5 @@
+$ul-max-height: 300px;
+
 .sell-car {
     max-width: 550px;
     margin: auto;
@@ -7,14 +9,19 @@
 
         &:hover {
             cursor: pointer;
-            color: $main-color
+            color: $main-color;
         }
     }
 
     ul#new__or__used {
         width: 100%;
         display: flex;
+        flex-flow: row nowrap;
         justify-content: space-between;
+        @include media-breakpoint-down(sm) {
+            flex-flow: row wrap;
+            justify-content: center;
+        }
 
         li {
             flex: 0 0 49%;
@@ -26,6 +33,12 @@
             border-radius: $border-radius;
             text-align: center;
             cursor: pointer;
+            @include media-breakpoint-down(sm) {
+                flex: 0 0 100%;
+                &:first-child {
+                    margin-bottom: 0.5rem;
+                }
+            }
 
             &.active {
                 border: 2px solid transparent;
@@ -39,6 +52,10 @@
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 10px;
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr 1fr;
+            padding-right: 0.2rem;
+        }
 
         .item {
             display: flex;
@@ -64,10 +81,19 @@
     //step 2
     ul#year,
     ul#model {
+        max-height: $ul-max-height;
+        overflow: hidden auto;
+        padding-right: 0.2rem;
+        @include scrollbar;
+        @include media-breakpoint-down(sm) {
+            max-height: $ul-max-height + 100px;
+        }
+
         li {
             border-bottom: 1px solid $light-gray;
             border-left: 2px solid transparent;
             border-right: 2px solid transparent;
+            border-top: 2px solid transparent;
             padding: 0.875rem 1rem;
             border-radius: 4px;
             cursor: pointer;
@@ -83,7 +109,7 @@
     ul#fuel,
     ul#transmission {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
         align-items: center;
 
         li {
@@ -93,6 +119,10 @@
             border-radius: 4px;
             cursor: pointer;
             margin-right: 1rem;
+            @include media-breakpoint-down(sm) {
+                flex-basis: 100%;
+                margin-bottom: 0.5rem;
+            }
 
             &.active {
                 font-weight: 700;
@@ -252,15 +282,23 @@
         border-radius: 8px;
         padding: 0.375rem 1rem;
         height: calc(3rem + 2px);
+
         &:focus,
         &:active {
             outline: 0;
             border: 0;
             box-shadow: none;
         }
+
         & ~ label {
             padding: 0.7rem 1rem;
             height: auto;
+        }
+        &#search__brand,
+        &#search__model {
+            @include media-breakpoint-down(sm) {
+                width: 100%;
+            }
         }
     }
 
@@ -275,7 +313,7 @@
 
     .currently__chosen {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
 
         span {
             border-radius: 100em;
@@ -283,10 +321,8 @@
             box-shadow: $box-shadow-large;
             font-weight: 700;
             font-size: 0.775rem;
-
-            &:not(:last-child) {
-                margin-right: 5px;
-            }
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
     }
 }

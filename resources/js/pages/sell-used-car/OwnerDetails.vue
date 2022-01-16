@@ -56,7 +56,7 @@
                     <FromInputValidationMessage v-if="v$.ownerDetails.ownerMobile.$error"
                                                 message="Моля валиден мобилен номер във формат 08хххххххх"/>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating form-group">
                     <select class="form__input form-select" id="floatingSelectRegion"
                             ref="region"
                             @change="setRegion"
@@ -68,7 +68,7 @@
                     </select>
                     <label for="floatingSelectRegion">Област</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating form-group">
                     <select class="form__input form-select" id="floatingSelectCity"
                             ref="city"
                             @change="setCity"

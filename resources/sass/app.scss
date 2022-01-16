@@ -1,3 +1,8 @@
+//bs 5
+@import "bootstrap/scss/bootstrap.scss";
+
+@import "abstracts/variables";
+@import "abstracts/mixins";
 @import 'abstracts/_abstracts';
 //layout
 @import "layout/base-button";

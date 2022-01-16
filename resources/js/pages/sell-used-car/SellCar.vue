@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <input
                             type="text"
-                            id="search__model"
+                            id="search__brand"
                             class="form__input"
                             placeholder="Търси марка"
                             v-model.trim="search"
