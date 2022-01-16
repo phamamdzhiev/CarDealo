@@ -21,8 +21,14 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputPrice"
-                           placeholder="Цена на автомобила" v-model.trim="offerDetails.offerPrice">
+                           placeholder="Цена на автомобила" :disabled="price" v-model.trim="offerDetails.offerPrice">
                     <label for="floatingInputPrice">Цена (BGN)</label>
+                    <div class="mt-1 ms-1 negotiable-price">
+                        <label for="negotiable-price" :class="{ checked: price }">
+                            <input type="checkbox" id="negotiable-price" v-show="false" @change="togglePrice"/>
+                            По договаряне
+                        </label>
+                    </div>
                     <FromInputValidationMessage v-if="v$.offerDetails.offerPrice.$error"
                                                 message="Моля въвдете цена"/>
                 </div>
@@ -138,6 +144,7 @@ export default {
     data() {
         return {
             // v$: useVuelidate(),
+            price: false,
             toggleBusinessOfferDetails: false,
             offerDetails: {
                 offerTitle: null,
@@ -164,7 +171,7 @@ export default {
             offerDetails: {
                 offerTitle: {required},
                 offerDescription: {required},
-                offerPrice: {integer, required},
+                offerPrice: {integer, requiredIf: requiredIf(!this.price)},
             },
             ownerDetails: {
                 ownerNames: {required},
@@ -191,6 +198,10 @@ export default {
     methods: {
         back() {
             this.$store.commit('sellCar/setStepMinus');
+        },
+        togglePrice() {
+            this.offerDetails.offerPrice = null;
+            this.price = !this.price;
         },
         setCity() {
             let value = this.$refs.city.value;

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="sell-car" v-show="getStep === 1">
+        <div class="sell-car" v-show="getStep === 0">
             <base-card>
                 <div class="question-section mb-4">
                     <h5 class="fw-bold">Състояние на автомобила?</h5>
@@ -44,7 +44,7 @@
         <SellCarYear v-show="getStep === 3"></SellCarYear>
         <SellCarVariant v-show="getStep === 4"></SellCarVariant>
         <SellCarExtras v-show="getStep === 5"></SellCarExtras>
-        <OwnerDetails v-show="getStep === 6"></OwnerDetails>
+        <OwnerDetails v-show="getStep === 1"></OwnerDetails>
         <SellCarImages v-show="getStep === 7"></SellCarImages>
     </div>
 </template>

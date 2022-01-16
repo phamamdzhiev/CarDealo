@@ -225,6 +225,7 @@ $ul-max-height: 300px;
             font-style: italic;
             font-size: 14px;
             margin: 0;
+            white-space: nowrap;
         }
 
         i {
@@ -241,6 +242,9 @@ $ul-max-height: 300px;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 10px;
+            @include media-breakpoint-down(sm) {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
             .main-image {
                 bottom: 0;
@@ -275,6 +279,32 @@ $ul-max-height: 300px;
             border: 2px solid $secondary-color;
         }
     }
+    .negotiable-price {
+        label {
+            position: relative;
+            padding-left: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+            &.checked {
+                &::before {
+                    background: lighten($main-color, 10%);
+                }
+            }
+            &::before {
+                content: '';
+                display: block;
+                background: white;
+                border: 2px solid $secondary-color;
+                border-radius: $border-radius;
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translate(0, -50%);
+            }
+        }
+    }
 
     .form__input {
         background-color: #f2f3f7;
@@ -282,7 +312,13 @@ $ul-max-height: 300px;
         border-radius: 8px;
         padding: 0.375rem 1rem;
         height: calc(3rem + 2px);
-
+        &[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            ~ label {
+                opacity: 0.5;
+            }
+        }
         &:focus,
         &:active {
             outline: 0;
@@ -294,6 +330,7 @@ $ul-max-height: 300px;
             padding: 0.7rem 1rem;
             height: auto;
         }
+
         &#search__brand,
         &#search__model {
             @include media-breakpoint-down(sm) {
