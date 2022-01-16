@@ -7,7 +7,7 @@ pos
         <base-card>
             <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 6)</i></span>
             <div class="question-section mb-3">
-                <h5 class="fw-bold">Снимки?</h5>
+                <h5 class="fw-bold">Тук може да качите снимките на автомобила</h5>
                 <div id="car-images-upload">
                     <i
                         class="bi bi-info-circle-fill position-absolute"
@@ -34,7 +34,7 @@ pos
                                 <span style="z-index: 9999" @click="remove(index)" class="close-btn position-absolute">
                                 <i class="bi bi-bookmark-x-fill"></i>
                             </span>
-                                <img width="144" height="144" :src="element" alt="Car image"/>
+                                <img class="img-fluid" :src="element" alt="Car image"/>
                             </div>
 
                         </template>

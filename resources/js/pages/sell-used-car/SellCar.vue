@@ -44,8 +44,8 @@
         <SellCarYear v-show="getStep === 3"></SellCarYear>
         <SellCarVariant v-show="getStep === 4"></SellCarVariant>
         <SellCarExtras v-show="getStep === 5"></SellCarExtras>
-        <OwnerDetails v-show="getStep === 1"></OwnerDetails>
-        <SellCarImages v-show="getStep === 7"></SellCarImages>
+        <OwnerDetails v-show="getStep === 6"></OwnerDetails>
+        <SellCarImages v-show="getStep === 1"></SellCarImages>
     </div>
 </template>
 

@@ -23783,9 +23783,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 5]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OwnerDetails, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarImages, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 6]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarImages, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 7]])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 1]])]);
 }
 
 /***/ }),
@@ -24163,7 +24163,7 @@ var _hoisted_5 = {
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
     "class": "fw-bold"
-  }, "Снимки?", -1
+  }, "Тук може да качите снимките на автомобила", -1
   /* HOISTED */
   );
 });
@@ -24276,8 +24276,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, _hoisted_17, 8
           /* PROPS */
           , _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-            width: "144",
-            height: "144",
+            "class": "img-fluid",
             src: element,
             alt: "Car image"
           }, null, 8
