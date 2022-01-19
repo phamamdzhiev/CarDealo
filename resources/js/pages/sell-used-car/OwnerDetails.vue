@@ -63,10 +63,14 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="email" class="form-control form__input" id="floatingInputEmail"
-                           placeholder="(ivan.ivano@email.bg)" v-model.trim="ownerDetails.ownerEmail">
+                           placeholder="(ivan.ivano@email.bg)" @blur="v$.ownerDetails.ownerEmail.$touch"
+                           v-model.trim="ownerDetails.ownerEmail">
                     <label for="floatingInputEmail">Имейл адрес</label>
-                    <FromInputValidationMessage v-if="v$.ownerDetails.ownerEmail.$error"
-                                                message="Моля въведете валиден имейл"/>
+                    <FromInputValidationMessage v-if="v$.ownerDetails.ownerEmail.$error || userWithThisEmailExists"
+                                                :message="userWithThisEmailExists ?
+                                                          userWithThisEmailExists :
+                                                          'Моля въведете валиден имейл адрес'"
+                    />
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputMobile"
@@ -86,6 +90,8 @@
                         <option value="Варна">Варна</option>
                     </select>
                     <label for="floatingSelectRegion">Област</label>
+                    <FromInputValidationMessage v-if="v$.offerDetails.offerRegion.$error"
+                                                message="Mоля изберете област"/>
                 </div>
                 <div class="form-floating form-group">
                     <select class="form__input form-select" id="floatingSelectCity"
@@ -98,6 +104,9 @@
                         <option value="Three">Three</option>
                     </select>
                     <label for="floatingSelectCity">Населено място</label>
+                    <FromInputValidationMessage v-if="v$.offerDetails.offerCity.$error"
+                                                message="Mоля изберете град"/>
+
                 </div>
             </div>
             <div class="question-section" v-show="toggleBusinessOfferDetails">
@@ -132,14 +141,25 @@
                 </div>
             </div>
             <button @click="showLastStep" class="base-button">
-                Качване на снимки
+                <span v-if="!isLoading">Качване на снимки</span>
+                <loading-dots v-else></loading-dots>
             </button>
         </base-card>
+        <button @click="showModal = true">Open Modal</button>
+        <BaseModal v-if="showModal" @close-modal="showModal = false">
+            <div class="form-group">
+                <form @submit.prevent="">
+                    <input type="text" placeholder="Въведете кода от емайла, който поличихте">
+                    <button>Верифицирай</button>
+                </form>
+            </div>
+        </BaseModal>
     </div>
 </template>
 
 <script>
 import BaseCard from "../../components/ui/base/BaseCard";
+import BaseModal from "../../components/ui/base/BaseModal";
 import useVuelidate from '@vuelidate/core';
 import FromInputValidationMessage from "../../components/ui/FromInputValidationMessage";
 import {required, email, integer, maxLength, requiredIf} from '@vuelidate/validators'
@@ -150,11 +170,15 @@ export default {
     components: {
         TopBar,
         BaseCard,
+        BaseModal,
         FromInputValidationMessage
     },
     data() {
         return {
             // v$: useVuelidate(),
+            isLoading: false,
+            userWithThisEmailExists: null,
+            showModal: false,
             price: false,
             toggleBusinessOfferDetails: false,
             offerDetails: {
@@ -174,7 +198,8 @@ export default {
                     companyAddress: null,
                     companyURL: null,
                 }
-            }
+            },
+
         }
     },
     validations() {
@@ -183,6 +208,8 @@ export default {
                 offerTitle: {required},
                 offerDescription: {required},
                 offerPrice: {integer, requiredIf: requiredIf(!this.price)},
+                offerRegion: { required },
+                offerCity: { required }
             },
             ownerDetails: {
                 ownerNames: {required},
@@ -216,6 +243,7 @@ export default {
         },
         setCity() {
             let value = this.$refs.city.value;
+            this.v$.offerDetails.offerCity.$touch();
             if (!value || value === '') {
                 this.offerDetails.offerCity = null;
                 return;
@@ -224,6 +252,7 @@ export default {
         },
         setRegion() {
             let value = this.$refs.region.value;
+            this.v$.offerDetails.offerRegion.$touch();
             if (!value || value === '') {
                 this.offerDetails.offerRegion = null;
                 return;
@@ -235,8 +264,21 @@ export default {
 
             if (!isFormCorrect) return;
 
+            try {
+                this.isLoading = true;
+                const response = await axios.post('/api/generate-email-verification-code', this.ownerDetails);
+                this.isLoading = false;
+                if (response.data['user-exists']) {
+                    this.userWithThisEmailExists = response.data['user-exists'];
+                } else {
+                    this.userWithThisEmailExists = null;
+                }
+            } catch (e) {
+                console.log(e, 'Email generate code failed');
+            }
+
             this.$store.commit('sellCar/setCarDetails', this.offerDetails);
-            this.$store.commit('sellCar/setStepPlus');
+            // this.$store.commit('sellCar/setStepPlus');
         },
     }
 }

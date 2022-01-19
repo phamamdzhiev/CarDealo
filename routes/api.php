@@ -26,3 +26,4 @@ Route::get('/get-all-images-from-cdn', [\App\Http\Controllers\ImageKitController
 
 //post
 Route::post('/image/test', [\App\Http\Controllers\ImageController::class, 'uploadImage']);
+Route::post('/generate-email-verification-code', [\App\Http\Controllers\EmailController::class, 'sendEmailConfirmationCode']);

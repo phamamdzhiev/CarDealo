@@ -10,7 +10,6 @@ export default {
     name: "FromInputValidationMessage",
     props: {
         message: {
-            type: String,
             required: true,
             default: 'Моля въведете това поле'
         }
