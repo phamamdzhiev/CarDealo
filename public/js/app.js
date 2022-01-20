@@ -22054,11 +22054,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SellCarExtras__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SellCarExtras */ "./resources/js/pages/sell-used-car/SellCarExtras.vue");
 /* harmony import */ var _SellCarImages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SellCarImages */ "./resources/js/pages/sell-used-car/SellCarImages.vue");
 /* harmony import */ var _OwnerDetails__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./OwnerDetails */ "./resources/js/pages/sell-used-car/OwnerDetails.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -22080,32 +22088,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      current: null,
-      search: null,
-      selectedBrandID: null,
-      dataStepOne: {
-        selectedBrand: null,
-        oldOrNew: 'Употребяван'
-      }
+      search: null
     };
   },
-  computed: {
-    //get all brands
-    getCarBrands: function getCarBrands() {
-      return this.$store.getters['sellCar/getCarBrands'];
-    },
-    getStep: function getStep() {
-      return this.$store.getters['sellCar/getStep'];
-    },
-    isLoading: function isLoading() {
-      return this.$store.getters['sellCar/isLoading'];
-    },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapGetters)('sellCar', ['getAllData', 'getCarBrands', 'getStep', 'isLoading', 'getSelectedCarBrandID'])), {}, {
     filteredCarBrand: function filteredCarBrand() {
       var _this = this;
 
       if (this.search) {
-        this.current = null;
-        this.dataStepOne.selectedBrand = null;
+        this.setCarBrand(null);
         this.search = this.search.toLowerCase();
         return this.getCarBrands.filter(function (model) {
           return model.name.toLowerCase().includes(_this.search);
@@ -22114,8 +22105,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return this.getCarBrands;
       }
     }
-  },
-  methods: {
+  }),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapMutations)('sellCar', ['setNewOrUsed', 'setCarBrand', 'setSelectedCarBrandID', 'setStepPlus'])), (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapActions)('sellCar', ['setCarBrandWithModels'])), {}, {
     showStepTwo: function showStepTwo() {
       var _this2 = this;
 
@@ -22124,7 +22115,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this2.dataStepOne.selectedBrand) {
+                if (_this2.getAllData['car_brand']) {
                   _context.next = 2;
                   break;
                 }
@@ -22132,18 +22123,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return");
 
               case 2:
-                //send data to Vuex
-                _this2.$store.commit('sellCar/setNewOrUsed', _this2.dataStepOne.oldOrNew);
+                _context.next = 4;
+                return _this2.setCarBrandWithModels(_this2.getSelectedCarBrandID);
 
-                _this2.$store.commit('sellCar/setCarMake', _this2.dataStepOne.selectedBrand);
+              case 4:
+                _this2.setStepPlus();
 
-                _context.next = 6;
-                return _this2.$store.dispatch('sellCar/setCarBrandWithModels', _this2.selectedBrandID);
-
-              case 6:
-                _this2.$store.commit('sellCar/setStepPlus');
-
-              case 7:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -22151,27 +22137,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    selectBrand: function selectBrand(brand, brandID, index) {
-      this.current = index;
-      this.selectedBrandID = brandID;
-      this.dataStepOne.selectedBrand = brand;
+    selectBrand: function selectBrand(brandName, brandID) {
+      this.setSelectedCarBrandID(brandID);
+      this.setCarBrand(brandName);
     }
-  },
+  }),
   created: function created() {
     //set all brands and extras from API
     this.$store.dispatch('sellCar/setCarBrands');
     this.$store.dispatch('sellCar/setCarExtrasApi');
-  },
-  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
-    if (this.dataStepOne.selectedBrand) {
-      if (!window.confirm("Сигурен ли си?")) {
-        return;
-      }
-    }
+  } // beforeRouteLeave(to, from, next) {
+  //     if (this.dataStepOne.selectedBrand) {
+  //         if (!window.confirm("Сигурен ли си?")) {
+  //             return;
+  //         }
+  //     }
+  //     this.$store.commit('sellCar/setStepToOne');
+  //     next();
+  // },
 
-    this.$store.commit('sellCar/setStepToOne');
-    next();
-  }
 });
 
 /***/ }),
@@ -23953,19 +23937,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepOne.oldOrNew === 'Употребяван'
+          active: _ctx.getAllData['new_or_used'] === 1
         }),
         onClick: _cache[0] || (_cache[0] = function ($event) {
-          return $data.dataStepOne.oldOrNew = 'Употребяван';
+          return _ctx.setNewOrUsed(1);
         })
       }, "Употребяван ", 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepOne.oldOrNew === 'Нов'
+          active: _ctx.getAllData['new_or_used'] === 2
         }),
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return $data.dataStepOne.oldOrNew = 'Нов';
+          return _ctx.setNewOrUsed(2);
         })
       }, "Нов ", 2
       /* CLASS */
@@ -23981,14 +23965,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search, void 0, {
         trim: true
-      }]])]), $options.getCarBrands ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.filteredCarBrand, function (brand, index) {
+      }]])]), _ctx.getCarBrands ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.filteredCarBrand, function (brand, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: brand.id,
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["item", {
-            active: index === $data.current
+            active: brand.name === _ctx.getAllData['car_brand']
           }]),
           onClick: function onClick($event) {
-            return $options.selectBrand(brand.name, brand.id, index);
+            return $options.selectBrand(brand.name, brand.id);
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(brand.name), 11
         /* TEXT, CLASS, PROPS */
@@ -24000,30 +23984,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $options.showStepTwo && $options.showStepTwo.apply($options, arguments);
         }),
         "class": "base-button"
-      }, [!$options.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, "Следваща стъпка")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
+      }, [!_ctx.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, "Следваща стъпка")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
         key: 1
       }))], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.dataStepOne.selectedBrand]])];
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getAllData['car_brand']]])];
     }),
     _: 1
     /* STABLE */
 
   })], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarModel, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarModel, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 2]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarYear, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 2]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarYear, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 3]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarVariant, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 3]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarVariant, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 4]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarExtras, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 4]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarExtras, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 5]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OwnerDetails, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 5]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OwnerDetails, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 6]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarImages, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 6]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarImages, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 7]])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 7]])]);
 }
 
 /***/ }),
@@ -25411,7 +25395,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var sellCarState = (0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])({
   key: 'sellCar',
-  paths: ['sellCar.car_offer', 'sellCar.step'],
+  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models'],
   fetchBeforeUse: false,
   storage: window.sessionStorage
 });
@@ -25443,11 +25427,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash_fp_placeholder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/fp/placeholder */ "./node_modules/lodash/fp/placeholder.js");
+/* harmony import */ var lodash_fp_placeholder__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_fp_placeholder__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -25459,6 +25446,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       step: 1,
       car_brands: null,
       car_brand_with_models: null,
+      selected_brand_id: null,
       car_extras: {
         car_extra_1: [],
         car_extra_2: [],
@@ -25470,7 +25458,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //final offer
       car_offer: {
         //step 1
-        new_or_used: null,
+        new_or_used: 1,
         car_brand: null,
         //step 2
         car_year: null,
@@ -25530,8 +25518,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setCarModel: function setCarModel(state, payload) {
       state.car_offer.car_model = payload;
     },
-    setCarMake: function setCarMake(state, payload) {
+    setCarBrand: function setCarBrand(state, payload) {
       state.car_offer.car_brand = payload;
+    },
+    setSelectedCarBrandID: function setSelectedCarBrandID(state, payload) {
+      state.selected_brand_id = payload;
     },
     setCarYear: function setCarYear(state, payload) {
       state.car_offer.car_year = payload;
@@ -25577,6 +25568,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getStep: function getStep(state) {
       return state.step;
+    },
+    getSelectedCarBrandID: function getSelectedCarBrandID(state) {
+      return state.selected_brand_id;
     },
     getCarBrands: function getCarBrands(state) {
       return state.car_brands;
@@ -28942,6 +28936,22 @@ function toNumber(value) {
 }
 
 module.exports = throttle;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/fp/placeholder.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/fp/placeholder.js ***!
+  \***********************************************/
+/***/ ((module) => {
+
+/**
+ * The default argument placeholder value for methods.
+ *
+ * @type {Object}
+ */
+module.exports = {};
 
 
 /***/ }),

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import placeholder from "lodash/fp/placeholder";
 
 export default {
     namespaced: true,
@@ -9,6 +10,7 @@ export default {
             step: 1,
             car_brands: null,
             car_brand_with_models: null,
+            selected_brand_id: null,
             car_extras: {
                 car_extra_1: [],
                 car_extra_2: [],
@@ -20,7 +22,7 @@ export default {
             //final offer
             car_offer: {
                 //step 1
-                new_or_used: null,
+                new_or_used: 1,
                 car_brand: null,
                 //step 2
                 car_year: null,
@@ -77,8 +79,11 @@ export default {
         setCarModel(state, payload) {
             state.car_offer.car_model = payload;
         },
-        setCarMake(state, payload) {
+        setCarBrand(state, payload) {
             state.car_offer.car_brand = payload
+        },
+        setSelectedCarBrandID(state, payload) {
+            state.selected_brand_id = payload;
         },
         setCarYear(state, payload) {
             state.car_offer.car_year = payload;
@@ -124,6 +129,9 @@ export default {
         },
         getStep(state) {
             return state.step
+        },
+        getSelectedCarBrandID(state){
+            return state.selected_brand_id;
         },
         getCarBrands(state) {
             return state.car_brands;

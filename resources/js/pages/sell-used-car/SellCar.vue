@@ -5,11 +5,11 @@
                 <div class="question-section mb-4">
                     <h5 class="fw-bold">Състояние на автомобила?</h5>
                     <ul id="new__or__used">
-                        <li :class="{ active: dataStepOne.oldOrNew === 'Употребяван'}"
-                            @click="dataStepOne.oldOrNew = 'Употребяван'">Употребяван
+                        <li :class="{ active: getAllData['new_or_used'] === 1}"
+                            @click="setNewOrUsed(1)">Употребяван
                         </li>
-                        <li :class="{ active: dataStepOne.oldOrNew === 'Нов' }"
-                            @click="dataStepOne.oldOrNew = 'Нов'">Нов
+                        <li :class="{ active: getAllData['new_or_used'] === 2 }"
+                            @click="setNewOrUsed(2)">Нов
                         </li>
                     </ul>
                 </div>
@@ -27,14 +27,14 @@
                     <div id="brand" v-if="getCarBrands">
                         <div v-for="(brand, index) in filteredCarBrand" :key="brand.id"
                              class="item"
-                             :class="{ active: index === current }"
-                             @click="selectBrand(brand.name, brand.id, index)">
+                             :class="{ active: brand.name === getAllData['car_brand'] }"
+                             @click="selectBrand(brand.name, brand.id)">
                             {{ brand.name }}
                         </div>
                     </div>
                     <div class="text-center mt-3" v-else>Зареждане...</div>
                 </div>
-                <button @click="showStepTwo" class="base-button" v-show="dataStepOne.selectedBrand">
+                <button @click="showStepTwo" class="base-button" v-show="getAllData['car_brand']">
                     <span v-if="!isLoading">Следваща стъпка</span>
                     <loading-dots v-else></loading-dots>
                 </button>
@@ -57,6 +57,7 @@ import SellCarVariant from "./SellCarVariant";
 import SellCarExtras from "./SellCarExtras";
 import SellCarImages from "./SellCarImages";
 import OwnerDetails from "./OwnerDetails";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "SellCar",
@@ -71,30 +72,15 @@ export default {
     },
     data() {
         return {
-            current: null,
             search: null,
-            selectedBrandID: null,
-            dataStepOne: {
-                selectedBrand: null,
-                oldOrNew: 'Употребяван'
-            },
         }
     },
     computed: {
-        //get all brands
-        getCarBrands() {
-            return this.$store.getters['sellCar/getCarBrands'];
-        },
-        getStep() {
-            return this.$store.getters['sellCar/getStep'];
-        },
-        isLoading() {
-            return this.$store.getters['sellCar/isLoading'];
-        },
+        ...mapGetters('sellCar', ['getAllData', 'getCarBrands', 'getStep', 'isLoading', 'getSelectedCarBrandID']),
+
         filteredCarBrand() {
             if (this.search) {
-                this.current = null;
-                this.dataStepOne.selectedBrand = null;
+                this.setCarBrand(null);
                 this.search = this.search.toLowerCase();
                 return this.getCarBrands.filter((model) =>
                     model.name.toLowerCase().includes(this.search)
@@ -105,20 +91,20 @@ export default {
         },
     },
     methods: {
+        ...mapMutations('sellCar', ['setNewOrUsed', 'setCarBrand', 'setSelectedCarBrandID', 'setStepPlus']),
+        ...mapActions('sellCar', ['setCarBrandWithModels']),
+
         async showStepTwo() {
-            if (!this.dataStepOne.selectedBrand) {
+            if (!this.getAllData['car_brand']) {
                 return
             }
-            //send data to Vuex
-            this.$store.commit('sellCar/setNewOrUsed', this.dataStepOne.oldOrNew);
-            this.$store.commit('sellCar/setCarMake', this.dataStepOne.selectedBrand);
-            await this.$store.dispatch('sellCar/setCarBrandWithModels', this.selectedBrandID);
-            this.$store.commit('sellCar/setStepPlus');
+
+            await this.setCarBrandWithModels(this.getSelectedCarBrandID);
+            this.setStepPlus();
         },
-        selectBrand(brand, brandID, index) {
-            this.current = index;
-            this.selectedBrandID = brandID;
-            this.dataStepOne.selectedBrand = brand;
+        selectBrand(brandName, brandID) {
+            this.setSelectedCarBrandID(brandID);
+            this.setCarBrand(brandName);
         },
     },
     created() {
@@ -127,14 +113,14 @@ export default {
         this.$store.dispatch('sellCar/setCarExtrasApi');
     },
 
-    beforeRouteLeave(to, from, next) {
-        if (this.dataStepOne.selectedBrand) {
-            if (!window.confirm("Сигурен ли си?")) {
-                return;
-            }
-        }
-        this.$store.commit('sellCar/setStepToOne');
-        next();
-    },
+    // beforeRouteLeave(to, from, next) {
+    //     if (this.dataStepOne.selectedBrand) {
+    //         if (!window.confirm("Сигурен ли си?")) {
+    //             return;
+    //         }
+    //     }
+    //     this.$store.commit('sellCar/setStepToOne');
+    //     next();
+    // },
 }
 </script>
