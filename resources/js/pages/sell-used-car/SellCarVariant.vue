@@ -1,38 +1,38 @@
 <template>
     <div class="sell-car">
         <base-card>
-            <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 3)</i></span>
+            <span @click="setStepMinus" class="back__button">Назад <i class="fw-light">(Стъпка 3)</i></span>
             <TopBar/>
             <div class="question-section mb-4">
                 <h5 class="fw-bold">Гориво?</h5>
                 <ul id="fuel">
-                    <li :class="{ active: dataStepFour.fuel === 'Бензин'}"
-                        @click="dataStepFour.fuel = 'Бензин'">Бензин
+                    <li :class="{ active: getAllData['car_fuel'] === 'Бензин'}"
+                        @click="setCarFuel('Бензин')">Бензин
                     </li>
-                    <li :class="{ active: dataStepFour.fuel === 'Дизел'}"
-                        @click="dataStepFour.fuel = 'Дизел'">Дизел
+                    <li :class="{ active: getAllData['car_fuel'] === 'Дизел'}"
+                        @click="setCarFuel('Дизел')">Дизел
                     </li>
-                    <li :class="{ active: dataStepFour.fuel === 'Електрически'}"
-                        @click="dataStepFour.fuel = 'Електрически'">
+                    <li :class="{ active: getAllData['car_fuel'] === 'Електрически'}"
+                        @click="setCarFuel('Електрически')">
                         Електрически
                     </li>
-                    <li :class="{ active: dataStepFour.fuel === 'Хибрид'}"
-                        @click="dataStepFour.fuel = 'Хибрид'">Хибрид
+                    <li :class="{ active: getAllData['car_fuel'] === 'Хибрид'}"
+                        @click="setCarFuel('Хибрид')">Хибрид
                     </li>
                 </ul>
             </div>
             <div class="question-section mb-4">
                 <h5 class="fw-bold">Трансмисия?</h5>
                 <ul id="transmission">
-                    <li :class="{ active: dataStepFour.transmission === 'Ръчна'}"
-                        @click="dataStepFour.transmission = 'Ръчна'">
+                    <li :class="{ active: getAllData['car_transmission'] === 'Ръчна'}"
+                        @click="setCarTransmission('Ръчна')">
                         Ръчна
                     </li>
-                    <li :class="{ active: dataStepFour.transmission === 'Автоматична'}"
-                        @click="dataStepFour.transmission = 'Автоматична'">Автоматична
+                    <li :class="{ active: getAllData['car_transmission'] === 'Автоматична'}"
+                        @click="setCarTransmission('Автоматична')">Автоматична
                     </li>
-                    <li :class="{ active: dataStepFour.transmission === 'Полуавтоматична'}"
-                        @click="dataStepFour.transmission = 'Полуавтоматична'">
+                    <li :class="{ active: getAllData['car_transmission'] === 'Полуавтоматична'}"
+                        @click="setCarTransmission('Полуавтоматична')">
                         Полуавтоматична
                     </li>
                 </ul>
@@ -41,7 +41,7 @@
                 <h5 class="fw-bold">Кубатура, мощност, пробег?</h5>
                 <div class="form-floating form-group">
                     <input type="number" id="cm3" class="form-control form__input"
-                           v-model.number="dataStepFour.cm3"
+                           v-model.number.lazy="getAllData['car_cm3']"
                            @change="formatInputCm3"
                            placeholder="Кубатура"
                     />
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="horsepower" class="form-control form__input"
-                           v-model.number="dataStepFour.hp"
+                           v-model.number.lazy="getAllData['car_hp']"
                            @change="formatInputHp"
                            placeholder="Мощност (к.с)"
                     />
@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="km" class="form-control form__input"
-                           v-model.number="dataStepFour.km"
+                           v-model.number.lazy="getAllData['car_km']"
                            @change="formatInputKm"
                            placeholder="Пробег (км.)"
                     />
@@ -78,7 +78,7 @@
                     </label>
                 </div>
             </div>
-            <button @click="showStepFive" v-show="toggleNextStepButton" class="base-button">
+            <button @click="showStepFive" v-if="toggleNextStepButton" class="base-button">
                 Следваща стъпкa
             </button>
         </base-card>
@@ -89,6 +89,7 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import TopBar from "./TopBar";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "SellCarVariant",
@@ -102,27 +103,18 @@ export default {
                 errorCm3: false,
                 errorHp: false,
                 errorKm: false,
-            },
-            dataStepFour: {
-                fuel: null,
-                transmission: null,
-                cm3: null,
-                hp: null,
-                km: null,
             }
         }
     },
     computed: {
-        getAllData() {
-            return this.$store.getters['sellCar/getAllData'];
-        },
+        ...mapGetters('sellCar', ['getAllData']),
 
         toggleNextStepButton() {
-            return !!(this.dataStepFour.transmission &&
-                this.dataStepFour.fuel &&
-                this.dataStepFour.cm3 &&
-                this.dataStepFour.hp &&
-                this.dataStepFour.km &&
+            return !!(this.getAllData['car_transmission'] &&
+                this.getAllData['car_fuel'] &&
+                this.getAllData['car_cm3'] &&
+                this.getAllData['car_hp'] &&
+                this.getAllData['car_km'] &&
                 !this.errors.errorCm3 &&
                 !this.errors.errorHp &&
                 !this.errors.errorKm);
@@ -130,25 +122,31 @@ export default {
     },
 
     methods: {
-        back() {
-            this.$store.commit('sellCar/setStepMinus');
-        },
+        ...mapMutations('sellCar', [
+                'setStepMinus',
+                'setStepPlus',
+                'setCarFuel',
+                'setCarTransmission',
+                'setCarCm3',
+                'setCarHp',
+                'setCarKm'
+            ]
+        ),
+
         //some validation for inputs
         formatInputCm3() {
-            this.errors.errorCm3 = this.dataStepFour.cm3 >= 8000;
+            this.errors.errorCm3 = this.getAllData['car_cm3'] >= 8000;
         },
         formatInputHp() {
-            this.errors.errorHp = this.dataStepFour.hp >= 1500;
+            this.errors.errorHp = this.getAllData['car_hp'] >= 1500;
         },
         formatInputKm() {
-            this.errors.errorKm = this.dataStepFour.km >= 1000000;
+            this.errors.errorKm = this.getAllData['car_km'] >= 1000000;
         },
 
         showStepFive() {
             if (!this.toggleNextStepButton) return;
-
-            this.$store.commit('sellCar/setCarVariant', this.dataStepFour);
-            this.$store.commit('sellCar/setStepPlus');
+            this.setStepPlus();
         }
     }
 }

@@ -88,6 +88,21 @@ export default {
         setCarYear(state, payload) {
             state.car_offer.car_year = payload;
         },
+        setCarFuel(state, payload) {
+            state.car_offer.car_fuel = payload;
+        },
+        setCarTransmission(state, payload) {
+            state.car_offer.car_transmission = payload;
+        },
+        setCarCm3(state, payload) {
+            state.car_offer.car_cm3 = payload;
+        },
+        setCarHp(state, payload) {
+            state.car_offer.car_hp = payload;
+        },
+        setCarKm(state, payload) {
+            state.car_offer.car_km = payload;
+        },
         setCarVariant(state, payload) {
             state.car_offer.car_fuel = payload.fuel;
             state.car_offer.car_transmission = payload.transmission;
@@ -130,7 +145,7 @@ export default {
         getStep(state) {
             return state.step
         },
-        getSelectedCarBrandID(state){
+        getSelectedCarBrandID(state) {
             return state.selected_brand_id;
         },
         getCarBrands(state) {

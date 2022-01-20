@@ -22146,16 +22146,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //set all brands and extras from API
     this.$store.dispatch('sellCar/setCarBrands');
     this.$store.dispatch('sellCar/setCarExtrasApi');
-  } // beforeRouteLeave(to, from, next) {
-  //     if (this.dataStepOne.selectedBrand) {
-  //         if (!window.confirm("Сигурен ли си?")) {
-  //             return;
-  //         }
-  //     }
-  //     this.$store.commit('sellCar/setStepToOne');
-  //     next();
-  // },
+  },
+  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
+    if (this.getAllData['car_brand']) {
+      if (!window.confirm("Ако напуснете тази страница сега, възможно е да загубите информацията, която сте въвели!")) {
+        return;
+      }
+    }
 
+    this.$store.commit('sellCar/setStepToOne');
+    next();
+  }
 });
 
 /***/ }),
@@ -22527,6 +22528,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/base/BaseCard.vue */ "./resources/js/components/ui/base/BaseCard.vue");
 /* harmony import */ var _TopBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TopBar */ "./resources/js/pages/sell-used-car/TopBar.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -22541,44 +22550,30 @@ __webpack_require__.r(__webpack_exports__);
         errorCm3: false,
         errorHp: false,
         errorKm: false
-      },
-      dataStepFour: {
-        fuel: null,
-        transmission: null,
-        cm3: null,
-        hp: null,
-        km: null
       }
     };
   },
-  computed: {
-    getAllData: function getAllData() {
-      return this.$store.getters['sellCar/getAllData'];
-    },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('sellCar', ['getAllData'])), {}, {
     toggleNextStepButton: function toggleNextStepButton() {
-      return !!(this.dataStepFour.transmission && this.dataStepFour.fuel && this.dataStepFour.cm3 && this.dataStepFour.hp && this.dataStepFour.km && !this.errors.errorCm3 && !this.errors.errorHp && !this.errors.errorKm);
+      return !!(this.getAllData['car_transmission'] && this.getAllData['car_fuel'] && this.getAllData['car_cm3'] && this.getAllData['car_hp'] && this.getAllData['car_km'] && !this.errors.errorCm3 && !this.errors.errorHp && !this.errors.errorKm);
     }
-  },
-  methods: {
-    back: function back() {
-      this.$store.commit('sellCar/setStepMinus');
-    },
+  }),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('sellCar', ['setStepMinus', 'setStepPlus', 'setCarFuel', 'setCarTransmission', 'setCarCm3', 'setCarHp', 'setCarKm'])), {}, {
     //some validation for inputs
     formatInputCm3: function formatInputCm3() {
-      this.errors.errorCm3 = this.dataStepFour.cm3 >= 8000;
+      this.errors.errorCm3 = this.getAllData['car_cm3'] >= 8000;
     },
     formatInputHp: function formatInputHp() {
-      this.errors.errorHp = this.dataStepFour.hp >= 1500;
+      this.errors.errorHp = this.getAllData['car_hp'] >= 1500;
     },
     formatInputKm: function formatInputKm() {
-      this.errors.errorKm = this.dataStepFour.km >= 1000000;
+      this.errors.errorKm = this.getAllData['car_km'] >= 1000000;
     },
     showStepFive: function showStepFive() {
       if (!this.toggleNextStepButton) return;
-      this.$store.commit('sellCar/setCarVariant', this.dataStepFour);
-      this.$store.commit('sellCar/setStepPlus');
+      this.setStepPlus();
     }
-  }
+  })
 });
 
 /***/ }),
@@ -24742,69 +24737,69 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         onClick: _cache[0] || (_cache[0] = function () {
-          return $options.back && $options.back.apply($options, arguments);
+          return _ctx.setStepMinus && _ctx.setStepMinus.apply(_ctx, arguments);
         }),
         "class": "back__button"
       }, _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TopBar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepFour.fuel === 'Бензин'
+          active: _ctx.getAllData['car_fuel'] === 'Бензин'
         }),
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return $data.dataStepFour.fuel = 'Бензин';
+          return _ctx.setCarFuel('Бензин');
         })
       }, "Бензин ", 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepFour.fuel === 'Дизел'
+          active: _ctx.getAllData['car_fuel'] === 'Дизел'
         }),
         onClick: _cache[2] || (_cache[2] = function ($event) {
-          return $data.dataStepFour.fuel = 'Дизел';
+          return _ctx.setCarFuel('Дизел');
         })
       }, "Дизел ", 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepFour.fuel === 'Електрически'
+          active: _ctx.getAllData['car_fuel'] === 'Електрически'
         }),
         onClick: _cache[3] || (_cache[3] = function ($event) {
-          return $data.dataStepFour.fuel = 'Електрически';
+          return _ctx.setCarFuel('Електрически');
         })
       }, " Електрически ", 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepFour.fuel === 'Хибрид'
+          active: _ctx.getAllData['car_fuel'] === 'Хибрид'
         }),
         onClick: _cache[4] || (_cache[4] = function ($event) {
-          return $data.dataStepFour.fuel = 'Хибрид';
+          return _ctx.setCarFuel('Хибрид');
         })
       }, "Хибрид ", 2
       /* CLASS */
       )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepFour.transmission === 'Ръчна'
+          active: _ctx.getAllData['car_transmission'] === 'Ръчна'
         }),
         onClick: _cache[5] || (_cache[5] = function ($event) {
-          return $data.dataStepFour.transmission = 'Ръчна';
+          return _ctx.setCarTransmission('Ръчна');
         })
       }, " Ръчна ", 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepFour.transmission === 'Автоматична'
+          active: _ctx.getAllData['car_transmission'] === 'Автоматична'
         }),
         onClick: _cache[6] || (_cache[6] = function ($event) {
-          return $data.dataStepFour.transmission = 'Автоматична';
+          return _ctx.setCarTransmission('Автоматична');
         })
       }, "Автоматична ", 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          active: $data.dataStepFour.transmission === 'Полуавтоматична'
+          active: _ctx.getAllData['car_transmission'] === 'Полуавтоматична'
         }),
         onClick: _cache[7] || (_cache[7] = function ($event) {
-          return $data.dataStepFour.transmission = 'Полуавтоматична';
+          return _ctx.setCarTransmission('Полуавтоматична');
         })
       }, " Полуавтоматична ", 2
       /* CLASS */
@@ -24813,7 +24808,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "cm3",
         "class": "form-control form__input",
         "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-          return $data.dataStepFour.cm3 = $event;
+          return _ctx.getAllData['car_cm3'] = $event;
         }),
         onChange: _cache[9] || (_cache[9] = function () {
           return $options.formatInputCm3 && $options.formatInputCm3.apply($options, arguments);
@@ -24821,14 +24816,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Кубатура"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.cm3, void 0, {
-        number: true
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_cm3'], void 0, {
+        number: true,
+        lazy: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_14, [_hoisted_15, $data.errors.errorCm3 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_16, _hoisted_18)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         id: "horsepower",
         "class": "form-control form__input",
         "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-          return $data.dataStepFour.hp = $event;
+          return _ctx.getAllData['car_hp'] = $event;
         }),
         onChange: _cache[11] || (_cache[11] = function () {
           return $options.formatInputHp && $options.formatInputHp.apply($options, arguments);
@@ -24836,14 +24832,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Мощност (к.с)"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.hp, void 0, {
-        number: true
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_hp'], void 0, {
+        number: true,
+        lazy: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_20, [_hoisted_21, $data.errors.errorHp ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_22, _hoisted_24)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         id: "km",
         "class": "form-control form__input",
         "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-          return $data.dataStepFour.km = $event;
+          return _ctx.getAllData['car_km'] = $event;
         }),
         onChange: _cache[13] || (_cache[13] = function () {
           return $options.formatInputKm && $options.formatInputKm.apply($options, arguments);
@@ -24851,16 +24848,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Пробег (км.)"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.dataStepFour.km, void 0, {
-        number: true
-      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_26, [_hoisted_27, $data.errors.errorKm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_28, _hoisted_30)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_km'], void 0, {
+        number: true,
+        lazy: true
+      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_26, [_hoisted_27, $data.errors.errorKm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_28, _hoisted_30)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), $options.toggleNextStepButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+        key: 0,
         onClick: _cache[14] || (_cache[14] = function () {
           return $options.showStepFive && $options.showStepFive.apply($options, arguments);
         }),
         "class": "base-button"
-      }, " Следваща стъпкa ", 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.toggleNextStepButton]])];
+      }, " Следваща стъпкa ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
@@ -25501,6 +25498,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setCarYear: function setCarYear(state, payload) {
       state.car_offer.car_year = payload;
+    },
+    setCarFuel: function setCarFuel(state, payload) {
+      state.car_offer.car_fuel = payload;
+    },
+    setCarTransmission: function setCarTransmission(state, payload) {
+      state.car_offer.car_transmission = payload;
+    },
+    setCarCm3: function setCarCm3(state, payload) {
+      state.car_offer.car_cm3 = payload;
+    },
+    setCarHp: function setCarHp(state, payload) {
+      state.car_offer.car_hp = payload;
+    },
+    setCarKm: function setCarKm(state, payload) {
+      state.car_offer.car_km = payload;
     },
     setCarVariant: function setCarVariant(state, payload) {
       state.car_offer.car_fuel = payload.fuel;

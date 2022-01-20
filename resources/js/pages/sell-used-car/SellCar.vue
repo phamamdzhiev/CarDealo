@@ -113,14 +113,14 @@ export default {
         this.$store.dispatch('sellCar/setCarExtrasApi');
     },
 
-    // beforeRouteLeave(to, from, next) {
-    //     if (this.dataStepOne.selectedBrand) {
-    //         if (!window.confirm("Сигурен ли си?")) {
-    //             return;
-    //         }
-    //     }
-    //     this.$store.commit('sellCar/setStepToOne');
-    //     next();
-    // },
+    beforeRouteLeave(to, from, next) {
+        if (this.getAllData['car_brand']) {
+            if (!window.confirm("Ако напуснете тази страница сега, възможно е да загубите информацията, която сте въвели!")) {
+                return;
+            }
+        }
+        this.$store.commit('sellCar/setStepToOne');
+        next();
+    },
 }
 </script>
