@@ -33,7 +33,7 @@
 
             <button
                 @click="showStepFour"
-                v-show="getAllData['car_model']"
+                v-if="getAllData['car_model']"
                 class="base-button"
             >
                 Следваща стъпка

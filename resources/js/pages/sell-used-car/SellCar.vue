@@ -34,7 +34,7 @@
                     </div>
                     <div class="text-center mt-3" v-else>Зареждане...</div>
                 </div>
-                <button @click="showStepTwo" class="base-button" v-show="getAllData['car_brand']">
+                <button @click="showStepTwo" class="base-button" v-if="getAllData['car_brand']">
                     <span v-if="!isLoading">Следваща стъпка</span>
                     <loading-dots v-else></loading-dots>
                 </button>

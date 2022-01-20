@@ -1,21 +1,21 @@
 <template>
     <div class="sell-car">
         <base-card>
-            <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 2)</i></span>
+            <span @click="setStepMinus" class="back__button">Назад <i class="fw-light">(Стъпка 2)</i></span>
             <TopBar/>
             <div class="question-section">
                 <h5 class="fw-bold">Година на производство?</h5>
                 <ul id="year">
-                    <li v-for="(year, index) in years"
+                    <li v-for="year in years"
                         :key="year"
-                        :class="{ active: index === current }"
-                        @click="chooseYear(year, index)"
+                        :class="{ active: year === getAllData['car_year'] }"
+                        @click="chooseYear(year)"
                     >
                         {{ year }}
                     </li>
                 </ul>
             </div>
-            <button @click="showStepThree" class="base-button" v-if="dataStepTwo.selectedYear">
+            <button @click="showStepThree" class="base-button" v-if="getAllData['car_year']">
                 Следваща стъпкa
             </button>
         </base-card>
@@ -25,6 +25,7 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import TopBar from "./TopBar";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "SellCarYear",
@@ -34,10 +35,6 @@ export default {
     },
     data() {
         return {
-            current: null,
-            dataStepTwo: {
-                selectedYear: null,
-            },
             years: [
                 '2022',
                 '2021',
@@ -80,27 +77,17 @@ export default {
         }
     },
     computed: {
-        getAllData() {
-            return this.$store.getters['sellCar/getAllData'];
-        },
-        getStep() {
-            return this.$store.getters['sellCar/getStep'];
-        }
+        ...mapGetters('sellCar', ['getAllData']),
     },
     methods: {
-        back() {
-            this.$store.commit('sellCar/setStepMinus');
-        },
+        ...mapMutations('sellCar', ['setStepMinus', 'setStepPlus', 'setCarYear']),
+
         showStepThree() {
-            if (!this.dataStepTwo.selectedYear) {
-                return
-            }
-            this.$store.commit('sellCar/setStepPlus');
-            this.$store.commit('sellCar/setCarYear', this.dataStepTwo.selectedYear);
+            if (!this.getAllData['car_year']) return;
+            this.setStepPlus();
         },
-        chooseYear(year, index) {
-            this.dataStepTwo.selectedYear = year;
-            this.current = index;
+        chooseYear(year) {
+            this.setCarYear(year);
         }
     }
 }
