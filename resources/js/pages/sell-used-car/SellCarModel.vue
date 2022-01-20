@@ -1,7 +1,7 @@
 <template>
     <div class="sell-car">
         <base-card>
-      <span @click="back" class="back__button"
+      <span @click="setStepMinus" class="back__button"
       >Назад <i class="fw-light">(Стъпка 1)</i></span
       >
             <TopBar/>
@@ -21,10 +21,10 @@
 
                 <ul id="model">
                     <li
-                        v-for="(model, index) in filteredCarModelBySearchField"
+                        v-for="model in filteredCarModelBySearchField"
                         :key="model.id"
-                        :class="{ active: index === current }"
-                        @click="chooseModel(model.name, index)"
+                        :class="{ active: model.name === getAllData['car_model'] }"
+                        @click="chooseModel(model.name)"
                     >
                         {{ model.name }}
                     </li>
@@ -33,7 +33,7 @@
 
             <button
                 @click="showStepFour"
-                v-show="dataStepThree.car_brand"
+                v-show="getAllData['car_model']"
                 class="base-button"
             >
                 Следваща стъпка
@@ -45,6 +45,7 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard";
 import TopBar from "./TopBar";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "SellCarModel",
@@ -54,50 +55,37 @@ export default {
     },
     data() {
         return {
-            search: "",
-            current: null,
-            dataStepThree: {
-                car_brand: null,
-            },
+            search: null,
         };
     },
     methods: {
-        back() {
-            this.$store.commit("sellCar/setStepMinus");
-        },
+        ...mapMutations('sellCar', ["setStepMinus", "setStepPlus", "setCarModel"]),
+
         showStepFour() {
-            if (!this.dataStepThree.car_brand) {
-                return;
-            }
-            this.$store.commit("sellCar/setCarModel", this.dataStepThree.car_brand);
-            this.$store.commit("sellCar/setStepPlus");
+            if (!this.getAllData['car_model']) return;
+            this.setStepPlus();
         },
-        chooseModel(modelName, index) {
-            this.current = index;
-            this.dataStepThree.car_brand = modelName;
+        chooseModel(modelName) {
+            this.setCarModel(modelName);
         },
     },
 
     computed: {
-        getAllData() {
-            return this.$store.getters["sellCar/getAllData"];
-        },
-        getCarMakeWithModels() {
-            return this.$store.getters["sellCar/getCarBrandWithModels"];
-        },
+        ...mapGetters('sellCar', ["getAllData", "getCarBrandWithModels"]),
+
         setPlaceholder() {
             return `Търси модел ${this.getAllData["car_brand"]}`;
         },
+
         filteredCarModelBySearchField() {
             if (this.search) {
-                this.current = null;
-                this.dataStepThree.car_brand = null;
+                this.setCarModel(null);
                 this.search = this.search.toLowerCase();
-                return this.getCarMakeWithModels.filter((model) =>
+                return this.getCarBrandWithModels.filter((model) =>
                     model.name.toLowerCase().includes(this.search)
                 );
             } else {
-                return this.getCarMakeWithModels;
+                return this.getCarBrandWithModels;
             }
         },
     },

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="sell-car" v-show="getStep === 1">
+        <div class="sell-car" v-if="getStep === 1">
             <base-card>
                 <div class="question-section mb-4">
                     <h5 class="fw-bold">Състояние на автомобила?</h5>
@@ -25,7 +25,7 @@
                         />
                     </div>
                     <div id="brand" v-if="getCarBrands">
-                        <div v-for="(brand, index) in filteredCarBrand" :key="brand.id"
+                        <div v-for="brand in filteredCarBrand" :key="brand.id"
                              class="item"
                              :class="{ active: brand.name === getAllData['car_brand'] }"
                              @click="selectBrand(brand.name, brand.id)">
@@ -40,9 +40,9 @@
                 </button>
             </base-card>
         </div>
-        <SellCarModel v-show="getStep === 2"></SellCarModel>
-        <SellCarYear v-show="getStep === 3"></SellCarYear>
-        <SellCarVariant v-show="getStep === 4"></SellCarVariant>
+        <SellCarModel v-if="getStep === 2"></SellCarModel>
+        <SellCarYear v-if="getStep === 3"></SellCarYear>
+        <SellCarVariant v-if="getStep === 4"></SellCarVariant>
         <SellCarExtras v-show="getStep === 5"></SellCarExtras>
         <OwnerDetails v-show="getStep === 6"></OwnerDetails>
         <SellCarImages v-show="getStep === 7"></SellCarImages>
