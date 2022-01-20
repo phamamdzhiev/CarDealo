@@ -66,10 +66,8 @@
                            placeholder="(ivan.ivano@email.bg)" @blur="v$.ownerDetails.ownerEmail.$touch"
                            v-model.trim="ownerDetails.ownerEmail">
                     <label for="floatingInputEmail">Имейл адрес</label>
-                    <FromInputValidationMessage v-if="v$.ownerDetails.ownerEmail.$error || userWithThisEmailExists"
-                                                :message="userWithThisEmailExists ?
-                                                          userWithThisEmailExists :
-                                                          'Моля въведете валиден имейл адрес'"
+                    <FromInputValidationMessage v-if="v$.ownerDetails.ownerEmail.$error"
+                                                message="Моля въведете валиден имейл адрес"
                     />
                 </div>
                 <div class="form-floating form-group">
@@ -177,7 +175,6 @@ export default {
         return {
             // v$: useVuelidate(),
             isLoading: false,
-            userWithThisEmailExists: null,
             showModal: false,
             price: false,
             toggleBusinessOfferDetails: false,
@@ -205,16 +202,16 @@ export default {
     validations() {
         return {
             offerDetails: {
-                offerTitle: {required},
-                offerDescription: {required},
+                offerTitle: {},
+                offerDescription: {},
                 offerPrice: {integer, requiredIf: requiredIf(!this.price)},
-                offerRegion: { required },
-                offerCity: { required }
+                offerRegion: {  },
+                offerCity: {  }
             },
             ownerDetails: {
-                ownerNames: {required},
+                ownerNames: {},
                 ownerEmail: {required, email},
-                ownerMobile: {required, integer, maxLength: maxLength(10)},
+                ownerMobile: {   integer, maxLength: maxLength(10)},
                 businessOffer: {
                     companyName: {requiredIf: requiredIf(this.toggleBusinessOfferDetails)},
                     companyEIK: {integer, requiredIf: requiredIf(this.toggleBusinessOfferDetails)},
@@ -259,7 +256,7 @@ export default {
             }
             this.offerDetails.offerRegion = value
         },
-        async showLastStep() {
+        async showLastStep(key, value) {
             const isFormCorrect = await this.v$.$validate();
 
             if (!isFormCorrect) return;
@@ -268,11 +265,6 @@ export default {
                 this.isLoading = true;
                 const response = await axios.post('/api/generate-email-verification-code', this.ownerDetails);
                 this.isLoading = false;
-                if (response.data['user-exists']) {
-                    this.userWithThisEmailExists = response.data['user-exists'];
-                } else {
-                    this.userWithThisEmailExists = null;
-                }
             } catch (e) {
                 console.log(e, 'Email generate code failed');
             }

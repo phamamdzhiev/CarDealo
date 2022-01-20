@@ -16,13 +16,14 @@ class EmailController extends Controller
         if (
             $request->isMethod('post') &&
             $request->has('ownerNames') &&
-            $request->has('ownerEmail')
+            $request->has('ownerEmail') &&
+            $request->has('ownerMobile')
         ) {
             $ownerNames = $request->ownerNames;
             $ownerEmail = $request->ownerEmail;
             $ownerMobile = $request->ownerMobile;
         } else {
-            return response()->json('Request is missing important data');
+            return response()->json('Request is missing important data', 404);
         }
 
         $userInstance = new User;
@@ -30,31 +31,28 @@ class EmailController extends Controller
 
         $getUser = User::select('email')->where('email', '=', $ownerEmail)->first();
 
-        if ($getUser === null) {
+
+        if (is_null($getUser)) {
             $userInstance->name = $ownerNames;
             $userInstance->email = $ownerEmail;
             $userInstance->mobile = $ownerMobile;
-
             $userInstance->save();
-        } else {
-            return response()->json(['user-exists' => 'Потребител с този имейл вече съществува!']);
-        }
 
-        $digits = 6;
-        $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1); //generate random 6-digits code
-        $userToBeVerifiedId = User::select('id')->where('email', '=', $ownerEmail)->first();
-
-        if ($userToBeVerifiedId !== null) {
+            $digits = 6;
+            $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1); //generate random 6-digits code
             $emailVerificationInstance->code = $code;
             $emailVerificationInstance->expires_at = Carbon::now()->addHour(); // code is valid for 1 hour
-            $emailVerificationInstance->user_id = (int)$userToBeVerifiedId->id;
+            $emailVerificationInstance->user_id = (int)$userInstance->id;
 
             $emailVerificationInstance->save();
+            //        Mail::to($ownerEmail)->send(new EmailVerificationCode($code));
+            return response()->json(['success' => 'Code send!', 'setStep' => 6]);
+        } else {
+            $isEmailVerified = User::select('email_verified_at')->where('id', $userInstance->id)->first();
+            if (is_null($isEmailVerified)) {
+                return response()->json(['warn' => 'User exists, but it is not verified', 'setStep' => 6]);
+            }
+            return response()->json(['success' => 'User is verified']);
         }
-
-
-//        Mail::to($ownerEmail)->send(new EmailVerificationCode($code));
-
-        return response()->json(['success' => 'Code send!']);
     }
 }

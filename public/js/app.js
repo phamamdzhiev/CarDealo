@@ -21878,7 +21878,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       // v$: useVuelidate(),
       isLoading: false,
-      userWithThisEmailExists: null,
       showModal: false,
       price: false,
       toggleBusinessOfferDetails: false,
@@ -21905,33 +21904,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   validations: function validations() {
     return {
       offerDetails: {
-        offerTitle: {
-          required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required
-        },
-        offerDescription: {
-          required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required
-        },
+        offerTitle: {},
+        offerDescription: {},
         offerPrice: {
           integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.integer,
           requiredIf: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(!this.price)
         },
-        offerRegion: {
-          required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required
-        },
-        offerCity: {
-          required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required
-        }
+        offerRegion: {},
+        offerCity: {}
       },
       ownerDetails: {
-        ownerNames: {
-          required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required
-        },
+        ownerNames: {},
         ownerEmail: {
           required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required,
           email: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.email
         },
         ownerMobile: {
-          required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required,
           integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.integer,
           maxLength: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.maxLength)(10)
         },
@@ -21990,7 +21978,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.offerDetails.offerRegion = value;
     },
-    showLastStep: function showLastStep() {
+    showLastStep: function showLastStep(key, value) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -22021,31 +22009,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 response = _context.sent;
                 _this.isLoading = false;
-
-                if (response.data['user-exists']) {
-                  _this.userWithThisEmailExists = response.data['user-exists'];
-                } else {
-                  _this.userWithThisEmailExists = null;
-                }
-
-                _context.next = 17;
+                _context.next = 16;
                 break;
 
-              case 14:
-                _context.prev = 14;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](5);
                 console.log(_context.t0, 'Email generate code failed');
 
-              case 17:
+              case 16:
                 _this.$store.commit('sellCar/setCarDetails', _this.offerDetails); // this.$store.commit('sellCar/setStepPlus');
 
 
-              case 18:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[5, 14]]);
+        }, _callee, null, [[5, 13]]);
       }))();
     }
   }
@@ -23759,12 +23740,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.ownerEmail, void 0, {
         trim: true
-      }]]), _hoisted_31, $setup.v$.ownerDetails.ownerEmail.$error || $data.userWithThisEmailExists ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
+      }]]), _hoisted_31, $setup.v$.ownerDetails.ownerEmail.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
-        message: $data.userWithThisEmailExists ? $data.userWithThisEmailExists : 'Моля въведете валиден имейл адрес'
-      }, null, 8
-      /* PROPS */
-      , ["message"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        message: "Моля въведете валиден имейл адрес"
+      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
         id: "floatingInputMobile",
@@ -24032,7 +24011,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 0]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarModel, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarModel, null, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 2]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarYear, null, null, 512
   /* NEED_PATCH */
@@ -24042,7 +24021,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 5]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OwnerDetails, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarImages, null, null, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 6]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarImages, null, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.getStep === 7]])]);
 }
@@ -25425,17 +25404,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sell-car/sell-car */ "./resources/js/store/sell-car/sell-car.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
+/* harmony import */ var _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sell-car/sell-car */ "./resources/js/store/sell-car/sell-car.js");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
+var sellCarState = (0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])({
+  key: 'sellCar',
+  paths: ['sellCar.car_offer', 'sellCar.step'],
+  fetchBeforeUse: false,
+  storage: window.sessionStorage
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
   state: {},
   mutations: {},
   actions: {},
   modules: {
-    sellCar: _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
+    sellCar: _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  plugins: [sellCarState]
 }));
 
 /***/ }),
@@ -25809,7 +25797,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modall[data-v-9e63cbc4] {\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    z-index: 5000;\n}\n.modal-mask[data-v-9e63cbc4] {\n    background: rgba(0, 0, 0, 0.3);\n    width: 100%;\n    height: 100%;\n}\n.modal-dialg[data-v-9e63cbc4] {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    z-index: 5001;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modall[data-v-9e63cbc4] {\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    position: fixed;\r\n    z-index: 5000;\n}\n.modal-mask[data-v-9e63cbc4] {\r\n    background: rgba(0, 0, 0, 0.3);\r\n    width: 100%;\r\n    height: 100%;\n}\n.modal-dialg[data-v-9e63cbc4] {\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    z-index: 5001;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25857,7 +25845,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-f3d1f708] {\n    max-width: 800px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-f3d1f708] {\r\n    max-width: 800px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25905,7 +25893,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-409f8020] {\n    display: block;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-409f8020] {\r\n    display: block;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25929,7 +25917,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-04f16d96] {\n    display: block;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-04f16d96] {\r\n    display: block;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62875,6 +62863,23 @@ module.exports = NATIVE_SYMBOL
 /******/ })["default"];
 });
 //# sourceMappingURL=vuedraggable.umd.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var r=function(r){return function(r){return!!r&&"object"==typeof r}(r)&&!function(r){var t=Object.prototype.toString.call(r);return"[object RegExp]"===t||"[object Date]"===t||function(r){return r.$$typeof===e}(r)}(r)},e="function"==typeof Symbol&&Symbol.for?Symbol.for("react.element"):60103;function t(r,e){return!1!==e.clone&&e.isMergeableObject(r)?u(Array.isArray(r)?[]:{},r,e):r}function n(r,e,n){return r.concat(e).map(function(r){return t(r,n)})}function o(r){return Object.keys(r).concat(function(r){return Object.getOwnPropertySymbols?Object.getOwnPropertySymbols(r).filter(function(e){return r.propertyIsEnumerable(e)}):[]}(r))}function c(r,e){try{return e in r}catch(r){return!1}}function u(e,i,a){(a=a||{}).arrayMerge=a.arrayMerge||n,a.isMergeableObject=a.isMergeableObject||r,a.cloneUnlessOtherwiseSpecified=t;var f=Array.isArray(i);return f===Array.isArray(e)?f?a.arrayMerge(e,i,a):function(r,e,n){var i={};return n.isMergeableObject(r)&&o(r).forEach(function(e){i[e]=t(r[e],n)}),o(e).forEach(function(o){(function(r,e){return c(r,e)&&!(Object.hasOwnProperty.call(r,e)&&Object.propertyIsEnumerable.call(r,e))})(r,o)||(i[o]=c(r,o)&&n.isMergeableObject(e[o])?function(r,e){if(!e.customMerge)return u;var t=e.customMerge(r);return"function"==typeof t?t:u}(o,n)(r[o],e[o],n):t(e[o],n))}),i}(e,i,a):t(i,a)}u.all=function(r,e){if(!Array.isArray(r))throw new Error("first argument should be an array");return r.reduce(function(r,t){return u(r,t,e)},{})};var i=u;function a(r){var e=(r=r||{}).storage||window&&window.localStorage,t=r.key||"vuex";function n(r,e){var t=e.getItem(r);try{return"string"==typeof t?JSON.parse(t):"object"==typeof t?t:void 0}catch(r){}}function o(){return!0}function c(r,e,t){return t.setItem(r,JSON.stringify(e))}function u(r,e){return Array.isArray(e)?e.reduce(function(e,t){return function(r,e,t,n){return!/^(__proto__|constructor|prototype)$/.test(e)&&((e=e.split?e.split("."):e.slice(0)).slice(0,-1).reduce(function(r,e){return r[e]=r[e]||{}},r)[e.pop()]=t),r}(e,t,(n=r,void 0===(n=((o=t).split?o.split("."):o).reduce(function(r,e){return r&&r[e]},n))?void 0:n));var n,o},{}):r}function a(r){return function(e){return r.subscribe(e)}}(r.assertStorage||function(){e.setItem("@@",1),e.removeItem("@@")})(e);var f,s=function(){return(r.getState||n)(t,e)};return r.fetchBeforeUse&&(f=s()),function(n){r.fetchBeforeUse||(f=s()),"object"==typeof f&&null!==f&&(n.replaceState(r.overwrite?f:i(n.state,f,{arrayMerge:r.arrayMerger||function(r,e){return e},clone:!1})),(r.rehydrated||function(){})(n)),(r.subscriber||a)(n)(function(n,i){(r.filter||o)(n)&&(r.setState||c)(t,(r.reducer||u)(i,r.paths),e)})}}/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (a);
+//# sourceMappingURL=vuex-persistedstate.es.js.map
+
 
 /***/ }),
 
