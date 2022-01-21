@@ -21,18 +21,15 @@
                             id="search__brand"
                             class="form__input"
                             placeholder="Търси марка"
-                            v-model.trim="search"
+                            autocomplete="off"
+                            v-model.trim="keyword"
                         />
                     </div>
-                    <div id="brand" v-if="getCarBrands">
-                        <div v-for="brand in filteredCarBrand" :key="brand.id"
-                             class="item"
-                             :class="{ active: brand.name === getAllData['car_brand'] }"
-                             @click="selectBrand(brand.name, brand.id)">
-                            {{ brand.name }}
-                        </div>
-                    </div>
-                    <div class="text-center mt-3" v-else>Зареждане...</div>
+                    <display-car-brands
+                        :car-brands="filterCarBrands.length === 0 ? getCarPopularBrands : filterCarBrands"
+                        @setCarBrandEmit="selectBrand">
+                        <h6 v-if="filterCarBrands.length === 0">Популярни марки автомобили</h6>
+                    </display-car-brands>
                 </div>
                 <button @click="showStepTwo" class="base-button" v-if="getAllData['car_brand']">
                     <span v-if="!isLoading">Следваща стъпка</span>
@@ -57,7 +54,9 @@ import SellCarVariant from "./SellCarVariant";
 import SellCarExtras from "./SellCarExtras";
 import SellCarImages from "./SellCarImages";
 import OwnerDetails from "./OwnerDetails";
+import DisplayCarBrands from "./partials/DisplayCarBrands";
 import {mapActions, mapGetters, mapMutations} from "vuex";
+import _ from "lodash";
 
 export default {
     name: "SellCar",
@@ -68,44 +67,57 @@ export default {
         SellCarVariant,
         SellCarExtras,
         SellCarImages,
-        OwnerDetails
+        OwnerDetails,
+        DisplayCarBrands
     },
     data() {
         return {
             search: null,
+            keyword: null,
+            filterCarBrands: []
+        }
+    },
+    watch: {
+        keyword() {
+            this.livesearchCarBrands()
         }
     },
     computed: {
-        ...mapGetters('sellCar', ['getAllData', 'getCarBrands', 'getStep', 'isLoading', 'getSelectedCarBrandID']),
-
-        filteredCarBrand() {
-            if (this.search) {
-                this.setCarBrand(null);
-                this.search = this.search.toLowerCase();
-                return this.getCarBrands.filter((model) =>
-                    model.name.toLowerCase().includes(this.search)
-                );
-            } else {
-                return this.getCarBrands;
-            }
-        },
+        ...mapGetters('sellCar', ['getAllData', 'getCarPopularBrands', 'getStep', 'isLoading', 'getSelectedCarBrandID']),
     },
     methods: {
         ...mapMutations('sellCar', [
-            'setNewOrUsed',
-            'setCarBrand',
-            'setSelectedCarBrandID',
-            'setStepPlus',
-            'setCarYear',
-            'setCarModel',
-            'setCarFuel',
-            'setCarTransmission',
-            'setCarKm',
-            'setCarCm3',
-            'setCarHp'
+                'setNewOrUsed',
+                'setPopularCarBrands',
+                'setSelectedCarBrandID',
+                'setCarBrand',
+                'setStepPlus',
+                'setCarYear',
+                'setCarModel',
+                'setCarFuel',
+                'setCarTransmission',
+                'setCarKm',
+                'setCarCm3',
+                'setCarHp'
             ]
         ),
         ...mapActions('sellCar', ['setCarBrandWithModels']),
+
+        async livesearchCarBrands() {
+
+            if (this.keyword.length <= 2) {
+                this.filterCarBrands = [];
+                return;
+            }
+
+            try {
+                const res = await axios.get('api/livesearch/car-brands', {params: {keyword: this.keyword}});
+                this.filterCarBrands = res.data.success;
+                console.log(res.data.success)
+            } catch (e) {
+                console.log('Live Search Error', e);
+            }
+        },
 
         async showStepTwo() {
             if (!this.getAllData['car_brand']) {
@@ -124,9 +136,9 @@ export default {
             this.setCarHp(null);
             this.setCarKm(null);
         },
-        selectBrand(brandName, brandID) {
+        selectBrand({brandName, brandID}) {
             if (this.getAllData['car_brand'] !== brandName) {
-               this.resetPreSelectedCarOptions()
+                this.resetPreSelectedCarOptions()
             }
 
             this.setSelectedCarBrandID(brandID);
@@ -135,7 +147,7 @@ export default {
     },
     created() {
         //set all brands and extras from API
-        this.$store.dispatch('sellCar/setCarBrands');
+        this.$store.dispatch('sellCar/setCarPopularBrands');
         this.$store.dispatch('sellCar/setCarExtrasApi');
     },
 

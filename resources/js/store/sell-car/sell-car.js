@@ -8,7 +8,7 @@ export default {
             //helper data
             loading: false,
             step: 1,
-            car_brands: null,
+            car_popular_brands: null,
             car_brand_with_models: null,
             selected_brand_id: null,
             car_extras: {
@@ -67,8 +67,8 @@ export default {
         setStepToOne(state) {
             state.step = 1
         },
-        setAllCarMakes(state, payload) {
-            state.car_brands = payload;
+        setPopularCarBrands(state, payload) {
+            state.car_popular_brands = payload;
         },
         setCarMakeWithModels(state, payload) {
             state.car_brand_with_models = payload;
@@ -143,13 +143,13 @@ export default {
             return state.loading;
         },
         getStep(state) {
-            return state.step
+            return state.step;
         },
         getSelectedCarBrandID(state) {
             return state.selected_brand_id;
         },
-        getCarBrands(state) {
-            return state.car_brands;
+        getCarPopularBrands(state) {
+            return state.car_popular_brands;
         },
         getCarBrandWithModels(state) {
             return state.car_brand_with_models;
@@ -163,14 +163,14 @@ export default {
         },
     },
     actions: {
-        async setCarBrands(context) {
+        async setCarPopularBrands(context) {
             try {
                 context.state.loading = true;
-                const carBrands = await axios.get('api/get-car-brands');
+                const carPopularBrands = await axios.get('api/get-popular-car-brands');
                 context.state.loading = false;
-                context.commit('setAllCarMakes', carBrands.data['car_brands']);
+                context.commit('setPopularCarBrands', carPopularBrands.data['popularCarBrands']);
             } catch (e) {
-                console.log('in setCarBrands', e)
+                console.log('in popularCarBrands', e)
             }
         },
 

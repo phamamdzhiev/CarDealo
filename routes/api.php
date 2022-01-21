@@ -19,10 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //get
+Route::get('/get-popular-car-brands', [\App\Http\Controllers\OfferController::class, 'getPopularCarBrandsWithLimit']);
 Route::get('/get-car-brands', [\App\Http\Controllers\OfferController::class, 'getCarBrands']);
 Route::get('/get-make-with-models/{id}', [\App\Http\Controllers\OfferController::class, 'getBrandWithModels']);
 Route::get('/get-all-car-extras', [\App\Http\Controllers\OfferController::class, 'getCarExtras']);
 Route::get('/get-all-images-from-cdn', [\App\Http\Controllers\ImageKitController::class, 'index']);
+Route::get('/livesearch/car-brands', [\App\Http\Controllers\OfferController::class, 'searchCarBrands']);
 
 //post
 Route::post('/image/test', [\App\Http\Controllers\ImageController::class, 'uploadImage']);
