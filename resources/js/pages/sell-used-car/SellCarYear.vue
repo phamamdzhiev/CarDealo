@@ -9,7 +9,7 @@
                     <li v-for="year in years"
                         :key="year"
                         :class="{ active: year === getAllData['car_year'] }"
-                        @click="chooseYear(year)"
+                        @click="setCarYear(year)"
                     >
                         {{ year }}
                     </li>
@@ -86,9 +86,6 @@ export default {
             if (!this.getAllData['car_year']) return;
             this.setStepPlus();
         },
-        chooseYear(year) {
-            this.setCarYear(year);
-        }
     }
 }
 </script>

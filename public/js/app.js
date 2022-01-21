@@ -22208,23 +22208,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('sellCar', ['setStepMinus', 'setCarColor', 'setCarCategory', 'setStepPlus'])), {}, {
-    toggleActiveClassOnExtras: function toggleActiveClassOnExtras(extra) {
-      this.$refs.element.forEach(function (ref) {
-        if (extra['extra'] === ref.getAttribute('data-extra-name')) {
-          ref.classList.toggle('active');
-        }
-      });
-    },
-    addToCollection: function addToCollection(extra) {
-      if (this.selectedExtras.indexOf(extra) === -1) {
-        this.selectedExtras.push(extra);
-        this.toggleActiveClassOnExtras(extra);
-      } else {
-        var pos = this.selectedExtras.indexOf(extra);
-        this.selectedExtras.splice(pos, 1);
-        this.toggleActiveClassOnExtras(extra);
-      }
-    },
     showStepSix: function showStepSix() {
       if (!this.toggleNextStepButton) return;
       this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
@@ -22586,9 +22569,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     showStepThree: function showStepThree() {
       if (!this.getAllData['car_year']) return;
       this.setStepPlus();
-    },
-    chooseYear: function chooseYear(year) {
-      this.setCarYear(year);
     }
   })
 });
@@ -24152,7 +24132,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[1] || (_cache[1] = function ($event) {
           return $data.showExtraCategory = 1;
         })
-      }, "Безопастност", 2
+      }, "Безопастност ", 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -24199,18 +24179,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, "Други", 2
       /* CLASS */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.getCarExtrasApi['car_extra_1'], function (ex) {
+      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<ul>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<li v-for=\"item in items\" :class=\"{highlight:selected2.includes(item.id)}\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    @click=\"selected2.includes(item.id) ? selected2.splice(selected2.indexOf(item.id), 1) : selected2.push(item.id)\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    {{ item.id }}"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("</li>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("</ul>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.getCarExtrasApi['car_extra_1'], function (item) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
-          key: ex.id,
+          key: item.id,
           ref_for: true,
           ref: "element",
-          "data-extra-category": ex['extra_category'],
-          "data-extra-name": ex['extra'],
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+            active: $data.selectedExtras.includes(item)
+          }),
+          "data-extra-category": item['extra_category'],
+          "data-extra-name": item['extra'],
           onClick: function onClick($event) {
-            return $options.addToCollection(ex);
+            return $data.selectedExtras.includes(item) ? $data.selectedExtras.splice($data.selectedExtras.indexOf(item), 1) : $data.selectedExtras.push(item);
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(ex.extra), 9
-        /* TEXT, PROPS */
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.extra), 11
+        /* TEXT, CLASS, PROPS */
         , _hoisted_10);
       }), 128
       /* KEYED_FRAGMENT */
@@ -24223,7 +24206,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           ref_for: true,
           ref: "element",
           onClick: function onClick($event) {
-            return $options.addToCollection(ex);
+            return _ctx.addToCollection(ex);
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(ex.extra), 9
         /* TEXT, PROPS */
@@ -24884,7 +24867,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             active: year === _ctx.getAllData['car_year']
           }),
           onClick: function onClick($event) {
-            return $options.chooseYear(year);
+            return _ctx.setCarYear(year);
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(year), 11
         /* TEXT, CLASS, PROPS */

@@ -7,7 +7,8 @@
                 <h5 class="fw-bold">Избери какви екстри има твоята кола</h5>
                 <nav>
                     <ul id="car-extras-categories">
-                        <li :class="{ active: showExtraCategory === 1 }" @click="showExtraCategory = 1">Безопастност</li>
+                        <li :class="{ active: showExtraCategory === 1 }" @click="showExtraCategory = 1">Безопастност
+                        </li>
                         <li :class="{ active: showExtraCategory === 2 }" @click="showExtraCategory = 2">Комфорт</li>
                         <li :class="{ active: showExtraCategory === 3 }" @click="showExtraCategory = 3">Интериор</li>
                         <li :class="{ active: showExtraCategory === 4 }" @click="showExtraCategory = 4">Ектериор</li>
@@ -16,16 +17,26 @@
                     </ul>
                 </nav>
                 <ul id="extras">
+
+                    <!--<ul>-->
+                    <!--<li v-for="item in items" :class="{highlight:selected2.includes(item.id)}"-->
+                    <!--    @click="selected2.includes(item.id) ? selected2.splice(selected2.indexOf(item.id), 1) : selected2.push(item.id)">-->
+                    <!--    {{ item.id }}-->
+                    <!--</li>-->
+                    <!--</ul>-->
                     <div v-show="showExtraCategory === 1" id="car-extra-category-1">
                         <li
-                            v-for="ex in getCarExtrasApi['car_extra_1']"
-                            :key="ex.id"
+                            v-for="item in getCarExtrasApi['car_extra_1']"
+                            :key="item.id"
                             ref="element"
-                            :data-extra-category="ex['extra_category']"
-                            :data-extra-name="ex['extra']"
-                            @click="addToCollection(ex)"
-                        >
-                            {{ ex.extra }}
+                            :class="{ active: selectedExtras.includes(item) }"
+                            :data-extra-category="item['extra_category']"
+                            :data-extra-name="item['extra']"
+                            @click="selectedExtras.includes(item) ?
+                                    selectedExtras.splice(selectedExtras.indexOf(item), 1) :
+                                    selectedExtras.push(item)
+                                   ">
+                            {{ item.extra }}
                         </li>
                     </div>
                     <div v-show="showExtraCategory === 4" id="car-extra-category-4">
@@ -111,24 +122,6 @@ export default {
     methods: {
         ...mapMutations('sellCar', ['setStepMinus', 'setCarColor', 'setCarCategory', 'setStepPlus']),
 
-        toggleActiveClassOnExtras(extra) {
-            this.$refs.element.forEach((ref) => {
-                if (extra['extra'] === ref.getAttribute('data-extra-name')) {
-                    ref.classList.toggle('active');
-                }
-            });
-        },
-        addToCollection(extra) {
-            if (this.selectedExtras.indexOf(extra) === -1) {
-                this.selectedExtras.push(extra);
-                this.toggleActiveClassOnExtras(extra);
-            } else {
-                let pos = this.selectedExtras.indexOf(extra);
-                this.selectedExtras.splice(pos, 1);
-                this.toggleActiveClassOnExtras(extra);
-            }
-        },
-
         showStepSix() {
             if (!this.toggleNextStepButton) return;
 
@@ -145,3 +138,4 @@ export default {
 }
 
 </style>
+
