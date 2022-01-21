@@ -20883,6 +20883,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "OwnerDetails",
+  inject: ['window'],
   components: {
     TopBar: _TopBar__WEBPACK_IMPORTED_MODULE_5__["default"],
     BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -22583,15 +22584,9 @@ var _hoisted_53 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_54 = {
   "class": "form-floating form-group"
 };
-
-var _hoisted_55 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputDomain"
-  }, "Личен домейн в CarDealo", -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_55 = {
+  "for": "floatingInputDomain"
+};
 var _hoisted_56 = {
   key: 0
 };
@@ -22791,7 +22786,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyURL, void 0, {
         trim: true
-      }]]), _hoisted_55])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_55, "Личен домейн в " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.window.APP_NAME), 1
+      /* TEXT */
+      )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[15] || (_cache[15] = function () {
           return $options.showLastStep && $options.showLastStep.apply($options, arguments);
         }),
@@ -24268,6 +24265,7 @@ app.component('loading-dots', _components_ui_AjaxLoadingSpinner__WEBPACK_IMPORTE
 app.use(_store_index__WEBPACK_IMPORTED_MODULE_3__["default"]);
 app.use(_router__WEBPACK_IMPORTED_MODULE_4__["default"]);
 app.mount('#app');
+app.provide('window', window);
 
 /***/ }),
 

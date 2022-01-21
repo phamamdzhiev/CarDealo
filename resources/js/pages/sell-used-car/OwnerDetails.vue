@@ -141,7 +141,7 @@
                 <div class="form-floating form-group">
                     <input type="text" class="form__input form-control" id="floatingInputDomain"
                            placeholder="Личен домейн в CarDealo" v-model.trim="ownerCompanyURL">
-                    <label for="floatingInputDomain">Личен домейн в CarDealo</label>
+                    <label for="floatingInputDomain">Личен домейн в {{ window.APP_NAME }}</label>
                 </div>
             </div>
             <button @click="showLastStep" class="base-button">
@@ -172,6 +172,7 @@ import {mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "OwnerDetails",
+    inject: ['window'],
     components: {
         TopBar,
         BaseCard,

@@ -13,4 +13,5 @@ app.component('loading-dots', AjaxLoadingSpinner);
 app.use(store);
 app.use(router);
 app.mount('#app');
+app.provide('window', window);
 
