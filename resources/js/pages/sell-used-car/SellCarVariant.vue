@@ -41,7 +41,7 @@
                 <h5 class="fw-bold">Кубатура, мощност, пробег?</h5>
                 <div class="form-floating form-group">
                     <input type="number" id="cm3" class="form-control form__input"
-                           v-model.number.lazy="getAllData['car_cm3']"
+                           v-model.number="getAllData['car_cm3']"
                            @change="formatInputCm3"
                            placeholder="Кубатура"
                     />
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="horsepower" class="form-control form__input"
-                           v-model.number.lazy="getAllData['car_hp']"
+                           v-model.number="getAllData['car_hp']"
                            @change="formatInputHp"
                            placeholder="Мощност (к.с)"
                     />
@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="km" class="form-control form__input"
-                           v-model.number.lazy="getAllData['car_km']"
+                           v-model.number="getAllData['car_km']"
                            @change="formatInputKm"
                            placeholder="Пробег (км.)"
                     />

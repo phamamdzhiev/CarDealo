@@ -18451,998 +18451,6 @@ function useVuelidate(validations, state, globalConfig = {}) {
 
 /***/ }),
 
-/***/ "./node_modules/@vuelidate/validators/dist/index.esm.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@vuelidate/validators/dist/index.esm.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "alpha": () => (/* binding */ alpha),
-/* harmony export */   "alphaNum": () => (/* binding */ alphaNum),
-/* harmony export */   "and": () => (/* binding */ and),
-/* harmony export */   "between": () => (/* binding */ between),
-/* harmony export */   "createI18nMessage": () => (/* binding */ createI18nMessage),
-/* harmony export */   "decimal": () => (/* binding */ decimal),
-/* harmony export */   "email": () => (/* binding */ email),
-/* harmony export */   "helpers": () => (/* binding */ common),
-/* harmony export */   "integer": () => (/* binding */ integer),
-/* harmony export */   "ipAddress": () => (/* binding */ ipAddress),
-/* harmony export */   "macAddress": () => (/* binding */ macAddress),
-/* harmony export */   "maxLength": () => (/* binding */ maxLength),
-/* harmony export */   "maxValue": () => (/* binding */ maxValue),
-/* harmony export */   "minLength": () => (/* binding */ minLength),
-/* harmony export */   "minValue": () => (/* binding */ minValue),
-/* harmony export */   "not": () => (/* binding */ not),
-/* harmony export */   "numeric": () => (/* binding */ numeric),
-/* harmony export */   "or": () => (/* binding */ or),
-/* harmony export */   "required": () => (/* binding */ required),
-/* harmony export */   "requiredIf": () => (/* binding */ requiredIf),
-/* harmony export */   "requiredUnless": () => (/* binding */ requiredUnless),
-/* harmony export */   "sameAs": () => (/* binding */ sameAs),
-/* harmony export */   "url": () => (/* binding */ url)
-/* harmony export */ });
-/* harmony import */ var vue_demi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-demi */ "./node_modules/@vuelidate/validators/node_modules/vue-demi/lib/index.mjs");
-
-
-function isFunction(val) {
-  return typeof val === 'function';
-}
-function isObject(o) {
-  return o !== null && typeof o === 'object' && !Array.isArray(o);
-}
-/**
- * Returns a standard ValidatorObject
- * Wraps a plain function into a ValidatorObject
- * @param {NormalizedValidator|Function} validator
- * @return {NormalizedValidator}
- */
-
-function normalizeValidatorObject(validator) {
-  return isFunction(validator.$validator) ? Object.assign({}, validator) : {
-    $validator: validator
-  };
-}
-function isPromise(object) {
-  return isObject(object) && isFunction(object.then);
-}
-/**
- * Unwraps a ValidatorResponse object, into a boolean.
- * @param {ValidatorResponse} result
- * @return {boolean}
- */
-
-function unwrapValidatorResponse(result) {
-  if (typeof result === 'object') return result.$valid;
-  return result;
-}
-/**
- * Unwraps a `NormalizedValidator` object, returning its validator function.
- * @param {NormalizedValidator | Function} validator
- * @return {function}
- */
-
-function unwrapNormalizedValidator(validator) {
-  return validator.$validator || validator;
-}
-
-/**
- * Allows attaching parameters to a validator
- * @param {Object} $params
- * @param {NormalizedValidator|Function} $validator
- * @return {NormalizedValidator}
- */
-
-function withParams($params, $validator) {
-  if (!isObject($params)) throw new Error(`[@vuelidate/validators]: First parameter to "withParams" should be an object, provided ${typeof $params}`);
-  if (!isObject($validator) && !isFunction($validator)) throw new Error(`[@vuelidate/validators]: Validator must be a function or object with $validator parameter`);
-  const validatorObj = normalizeValidatorObject($validator);
-  validatorObj.$params = Object.assign({}, validatorObj.$params || {}, $params);
-  return validatorObj;
-}
-
-/**
- * @callback MessageCallback
- * @param {Object} params
- * @return String
- */
-
-/**
- * Attaches a message to a validator
- * @param {MessageCallback | String} $message
- * @param {NormalizedValidator|Function} $validator
- * @return {NormalizedValidator}
- */
-
-function withMessage($message, $validator) {
-  if (!isFunction($message) && typeof (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)($message) !== 'string') throw new Error(`[@vuelidate/validators]: First parameter to "withMessage" should be string or a function returning a string, provided ${typeof $message}`);
-  if (!isObject($validator) && !isFunction($validator)) throw new Error(`[@vuelidate/validators]: Validator must be a function or object with $validator parameter`);
-  const validatorObj = normalizeValidatorObject($validator);
-  validatorObj.$message = $message;
-  return validatorObj;
-}
-
-/**
- * @typedef {function(*): Promise<boolean|ValidatorResponse>} asyncValidator
- */
-
-/**
- * @typedef {Ref<*>[]|function(*): *} watchTargets
- */
-
-/**
- * Wraps validators that returns a Promise.
- * @param {asyncValidator} $validator
- * @param {watchTargets} $watchTargets
- * @return {{$async: boolean, $validator: asyncValidator, $watchTargets: watchTargets}}
- */
-
-function withAsync($validator, $watchTargets = []) {
-  const validatorObj = normalizeValidatorObject($validator);
-  return Object.assign({}, validatorObj, {
-    $async: true,
-    $watchTargets
-  });
-}
-
-function forEach(validators) {
-  return {
-    $validator(collection, ...others) {
-      // go over the collection. It can be a ref as well.
-      return (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(collection).reduce((previous, collectionItem) => {
-        // go over each property
-        const collectionEntryResult = Object.entries(collectionItem).reduce((all, [property, $model]) => {
-          // get the validators for this property
-          const innerValidators = validators[property] || {}; // go over each validator and run it
-
-          const propertyResult = Object.entries(innerValidators).reduce((all, [validatorName, currentValidator]) => {
-            // extract the validator. Supports simple and extended validators.
-            const validatorFunction = unwrapNormalizedValidator(currentValidator); // Call the validator, passing the VM as this, the value, current iterated object and the rest.
-
-            const $response = validatorFunction.call(this, $model, collectionItem, ...others); // extract the valid from the result
-
-            const $valid = unwrapValidatorResponse($response); // store the entire response for later
-
-            all.$data[validatorName] = $response;
-            all.$data.$invalid = !$valid || !!all.$data.$invalid;
-            all.$data.$error = all.$data.$invalid; // if not valid, get the $message
-
-            if (!$valid) {
-              let $message = currentValidator.$message || '';
-              const $params = currentValidator.$params || {}; // If $message is a function, we call it with the appropriate parameters
-
-              if (typeof $message === 'function') {
-                $message = $message({
-                  $pending: false,
-                  $invalid: !$valid,
-                  $params,
-                  $model,
-                  $response
-                });
-              } // save the error object
-
-
-              all.$errors.push({
-                $property: property,
-                $message,
-                $params,
-                $response,
-                $model,
-                $pending: false,
-                $validator: validatorName
-              });
-            }
-
-            return {
-              $valid: all.$valid && $valid,
-              $data: all.$data,
-              $errors: all.$errors
-            };
-          }, {
-            $valid: true,
-            $data: {},
-            $errors: []
-          });
-          all.$data[property] = propertyResult.$data;
-          all.$errors[property] = propertyResult.$errors;
-          return {
-            $valid: all.$valid && propertyResult.$valid,
-            $data: all.$data,
-            $errors: all.$errors
-          };
-        }, {
-          $valid: true,
-          $data: {},
-          $errors: {}
-        });
-        return {
-          $valid: previous.$valid && collectionEntryResult.$valid,
-          $data: previous.$data.concat(collectionEntryResult.$data),
-          $errors: previous.$errors.concat(collectionEntryResult.$errors)
-        };
-      }, {
-        $valid: true,
-        $data: [],
-        $errors: []
-      });
-    },
-
-    // collect all the validation errors into a 2 dimensional array, for each entry in the collection, you have an array of error messages.
-    $message: ({
-      $response
-    }) => $response ? $response.$errors.map(context => {
-      return Object.values(context).map(errors => errors.map(error => error.$message)).reduce((a, b) => a.concat(b), []);
-    }) : []
-  };
-}
-
-// "required" core, used in almost every validator to allow empty values
-const req = value => {
-  value = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(value);
-  if (Array.isArray(value)) return !!value.length;
-
-  if (value === undefined || value === null) {
-    return false;
-  }
-
-  if (value === false) {
-    return true;
-  }
-
-  if (value instanceof Date) {
-    // invalid date won't pass
-    return !isNaN(value.getTime());
-  }
-
-  if (typeof value === 'object') {
-    for (let _ in value) return true;
-
-    return false;
-  }
-
-  return !!String(value).length;
-};
-/**
- * Returns the length of an arbitrary value
- * @param {Array|Object|String} value
- * @return {number}
- */
-
-const len = value => {
-  value = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(value);
-  if (Array.isArray(value)) return value.length;
-
-  if (typeof value === 'object') {
-    return Object.keys(value).length;
-  }
-
-  return String(value).length;
-};
-/**
- * Regex based validator template
- * @param {RegExp} expr
- * @return {function(*=): boolean}
- */
-
-function regex(expr) {
-  return value => {
-    value = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(value);
-    return !req(value) || expr.test(value);
-  };
-}
-
-var common = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  withParams: withParams,
-  withMessage: withMessage,
-  withAsync: withAsync,
-  forEach: forEach,
-  req: req,
-  len: len,
-  regex: regex,
-  unwrap: vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref,
-  unwrapNormalizedValidator: unwrapNormalizedValidator,
-  unwrapValidatorResponse: unwrapValidatorResponse,
-  normalizeValidatorObject: normalizeValidatorObject
-});
-
-var alpha$1 = regex(/^[a-zA-Z]*$/);
-
-/**
- * Validate if value is alphabetical string.
- * @type {NormalizedValidator}
- */
-
-var alpha = {
-  $validator: alpha$1,
-  $message: 'The value is not alphabetical',
-  $params: {
-    type: 'alpha'
-  }
-};
-
-var alphaNum$1 = regex(/^[a-zA-Z0-9]*$/);
-
-/**
- * Validate if value is alpha-numeric string.
- * @type {NormalizedValidator}
- */
-
-var alphaNum = {
-  $validator: alphaNum$1,
-  $message: 'The value must be alpha-numeric',
-  $params: {
-    type: 'alphaNum'
-  }
-};
-
-var numeric$1 = regex(/^\d*(\.\d+)?$/);
-
-/**
- * Check whether a value is numeric.
- * @type NormalizedValidator
- */
-
-var numeric = {
-  $validator: numeric$1,
-  $message: 'Value must be numeric',
-  $params: {
-    type: 'numeric'
-  }
-};
-
-/**
- * Check if a numeric value is between two values.
- * @param {Ref<Number> | Number} min
- * @param {Ref<Number> | Number} max
- * @return {function(*=): boolean}
- */
-
-function between$1 (min, max) {
-  return value => !req(value) || (!/\s/.test(value) || value instanceof Date) && +(0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(min) <= +value && +(0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(max) >= +value;
-}
-
-/**
- * Checks if a value is between two values.
- * @param {Ref<Number> | Number} min
- * @param {Ref<Number> | Number} max
- * @return {NormalizedValidator}
- */
-
-function between (min, max) {
-  return {
-    $validator: between$1(min, max),
-    $message: ({
-      $params
-    }) => `The value must be between ${$params.min} and ${$params.max}`,
-    $params: {
-      min,
-      max,
-      type: 'between'
-    }
-  };
-}
-
-const emailRegex = /^(?:[A-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]{2,}(?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
-var email$1 = regex(emailRegex);
-
-/**
- * Validate if value is an email.
- * @type {NormalizedValidator}
- */
-
-var email = {
-  $validator: email$1,
-  $message: 'Value is not a valid email address',
-  $params: {
-    type: 'email'
-  }
-};
-
-/**
- * Check if a string is an IP Address
- * @param {String} value
- * @returns {boolean}
- */
-
-function ipAddress$1 (value) {
-  if (!req(value)) {
-    return true;
-  }
-
-  if (typeof value !== 'string') {
-    return false;
-  }
-
-  const nibbles = value.split('.');
-  return nibbles.length === 4 && nibbles.every(nibbleValid);
-}
-
-const nibbleValid = nibble => {
-  if (nibble.length > 3 || nibble.length === 0) {
-    return false;
-  }
-
-  if (nibble[0] === '0' && nibble !== '0') {
-    return false;
-  }
-
-  if (!nibble.match(/^\d+$/)) {
-    return false;
-  }
-
-  const numeric = +nibble | 0;
-  return numeric >= 0 && numeric <= 255;
-};
-
-/**
- * Validate if value is an ipAddress string.
- * @type {NormalizedValidator}
- */
-
-var ipAddress = {
-  $validator: ipAddress$1,
-  $message: 'The value is not a valid IP address',
-  $params: {
-    type: 'ipAddress'
-  }
-};
-
-/**
- * Check if value is a properly formatted Mac Address.
- * @param {String | Ref<String>} [separator]
- * @returns {function(*): boolean}
- */
-
-function macAddress$1 (separator = ':') {
-  return value => {
-    separator = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(separator);
-
-    if (!req(value)) {
-      return true;
-    }
-
-    if (typeof value !== 'string') {
-      return false;
-    }
-
-    const parts = typeof separator === 'string' && separator !== '' ? value.split(separator) : value.length === 12 || value.length === 16 ? value.match(/.{2}/g) : null;
-    return parts !== null && (parts.length === 6 || parts.length === 8) && parts.every(hexValid);
-  };
-}
-
-const hexValid = hex => hex.toLowerCase().match(/^[0-9a-f]{2}$/);
-
-/**
- * Validate if value is a valid Mac Address string.
- * @returns {NormalizedValidator}
- */
-
-function macAddress (separator) {
-  return {
-    $validator: macAddress$1(separator),
-    $message: 'The value is not a valid MAC Address',
-    $params: {
-      type: 'macAddress'
-    }
-  };
-}
-
-/**
- * Check if provided value has a maximum length
- * @param {Number | Ref<Number>} length
- * @returns {function(Array|Object|String): boolean}
- */
-
-function maxLength$1 (length) {
-  return value => !req(value) || len(value) <= (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(length);
-}
-
-/**
- * Validate the max length of a string.
- * @param {Number} max
- * @return {NormalizedValidator}
- */
-
-function maxLength (max) {
-  return {
-    $validator: maxLength$1(max),
-    $message: ({
-      $params
-    }) => `The maximum length allowed is ${$params.max}`,
-    $params: {
-      max,
-      type: 'maxLength'
-    }
-  };
-}
-
-/**
- * Check if value is above a threshold.
- * @param {Number | Ref<Number>} length
- * @returns {function(Array|Object|String): boolean}
- */
-
-function minLength$1 (length) {
-  return value => !req(value) || len(value) >= (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(length);
-}
-
-/**
- * Check if value is above a threshold.
- * @param {Number | Ref<Number>} min
- * @returns {NormalizedValidator}
- */
-
-function minLength (min) {
-  return {
-    $validator: minLength$1(min),
-    $message: ({
-      $params
-    }) => `This field should be at least ${$params.min} long`,
-    $params: {
-      min,
-      type: 'minLength'
-    }
-  };
-}
-
-/**
- * Validates if a value is empty.
- * @param {String | Array | Date | Object} value
- * @returns {boolean}
- */
-
-function required$1 (value) {
-  if (typeof value === 'string') {
-    value = value.trim();
-  }
-
-  return req(value);
-}
-
-/**
- * Check if a value is empty or not.
- * @type {NormalizedValidator}
- */
-
-var required = {
-  $validator: required$1,
-  $message: 'Value is required',
-  $params: {
-    type: 'required'
-  }
-};
-
-const validate$1 = (prop, val) => prop ? req(val) : true;
-/**
- * Returns required if the passed property is truthy
- * @param {Boolean | String | function(any): Boolean | Ref<string | boolean>} propOrFunction
- * @return {function(value: *, parentVM: object): Boolean}
- */
-
-
-function requiredIf$1(propOrFunction) {
-  return function (value, parentVM) {
-    if (typeof propOrFunction !== 'function') {
-      return validate$1((0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(propOrFunction), value);
-    }
-
-    const result = propOrFunction.call(this, value, parentVM);
-    return validate$1(result, value);
-  };
-}
-
-/**
- * Returns required if the passed property is truthy
- * @param {Boolean | String | function(): (Boolean | Promise<boolean>)} prop
- * @return {NormalizedValidator}
- */
-
-function requiredIf (prop) {
-  return {
-    $validator: requiredIf$1(prop),
-    $message: 'The value is required',
-    $params: {
-      type: 'requiredIf',
-      prop
-    }
-  };
-}
-
-const validate = (prop, val) => !prop ? req(val) : true;
-/**
- * Returns required if the passed property is falsy.
- * @param {Boolean | String | function(any): Boolean | Ref<string | boolean>} propOrFunction
- * @return {function(value: *, parentVM: object): Boolean}
- */
-
-
-function requiredUnless$1(propOrFunction) {
-  return function (value, parentVM) {
-    if (typeof propOrFunction !== 'function') {
-      return validate((0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(propOrFunction), value);
-    }
-
-    const result = propOrFunction.call(this, value, parentVM);
-    return validate(result, value);
-  };
-}
-
-/**
- * Returns required unless the passed property is truthy
- * @param {Boolean | String | function(): (Boolean | Promise<boolean>)} prop
- * @return {NormalizedValidator}
- */
-
-function requiredUnless (prop) {
-  return {
-    $validator: requiredUnless$1(prop),
-    $message: 'The value is required',
-    $params: {
-      type: 'requiredUnless',
-      prop
-    }
-  };
-}
-
-/**
- * Check if two values are identical.
- * @param {*} equalTo
- * @return {function(*=): boolean}
- */
-
-function sameAs$1 (equalTo) {
-  return value => (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(value) === (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(equalTo);
-}
-
-/**
- * Check if two values are identical
- * @param {*} equalTo
- * @param {String} [otherName]
- * @return {NormalizedValidator}
- */
-
-function sameAs (equalTo, otherName = 'other') {
-  return {
-    $validator: sameAs$1(equalTo),
-    $message: ({
-      $params
-    }) => `The value must be equal to the ${otherName} value`,
-    $params: {
-      equalTo,
-      otherName,
-      type: 'sameAs'
-    }
-  };
-}
-
-/**
- * Regex taken from {@link https://gist.github.com/dperini/729294}
- */
-
-const urlRegex = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
-var url$1 = regex(urlRegex);
-
-/**
- * Check if a value is a url
- * @type {NormalizedValidator}
- */
-
-var url = {
-  $validator: url$1,
-  $message: 'The value is not a valid URL address',
-  $params: {
-    type: 'url'
-  }
-};
-
-function _await$1(value, then, direct) {
-  if (direct) {
-    return then ? then(value) : value;
-  }
-
-  if (!value || !value.then) {
-    value = Promise.resolve(value);
-  }
-
-  return then ? value.then(then) : value;
-}
-
-function syncOr(validators) {
-  return function (...args) {
-    return validators.reduce((valid, fn) => {
-      if (unwrapValidatorResponse(valid)) return valid;
-      return unwrapNormalizedValidator(fn).apply(this, args);
-    }, false);
-  };
-}
-
-function asyncOr(validators) {
-  return function (...args) {
-    const _this = this;
-
-    return validators.reduce(function (valid, fn) {
-      return _await$1(valid, function (r) {
-        return unwrapValidatorResponse(r) ? r : unwrapNormalizedValidator(fn).apply(_this, args);
-      });
-    }, Promise.resolve(false));
-  };
-}
-/**
- * Returns true when one of the provided functions returns true.
- * @param {...(NormalizedValidator|Function)} validators
- * @return {{$validator: function(...[*]=): (boolean | Promise<boolean>), $async: boolean, $watchTargets: any[]}}
- */
-
-
-function or$1(...validators) {
-  const $async = validators.some(v => v.$async);
-  const $watchTargets = validators.reduce((all, v) => {
-    if (!v.$watchTargets) return all;
-    return all.concat(v.$watchTargets);
-  }, []);
-
-  let $validator = () => false;
-
-  if (validators.length) $validator = $async ? asyncOr(validators) : syncOr(validators);
-  return {
-    $async,
-    $validator,
-    $watchTargets
-  };
-}
-
-/**
- * Returns true when one of the provided functions returns true.
- * @param {...(NormalizedValidator|Function)} validators
- * @return {NormalizedValidator}
- */
-
-function or (...validators) {
-  return withParams({
-    type: 'or'
-  }, withMessage('The value does not match any of the provided validators', or$1(...validators)));
-}
-
-function _await(value, then, direct) {
-  if (direct) {
-    return then ? then(value) : value;
-  }
-
-  if (!value || !value.then) {
-    value = Promise.resolve(value);
-  }
-
-  return then ? value.then(then) : value;
-}
-/**
- *
- * @param validators
- * @return {function(...[*]=): Promise<boolean>}
- */
-
-
-function syncAnd(validators) {
-  return function (...args) {
-    return validators.reduce((valid, fn) => {
-      if (!unwrapValidatorResponse(valid)) return valid;
-      return unwrapNormalizedValidator(fn).apply(this, args);
-    }, true);
-  };
-}
-
-function asyncAnd(validators) {
-  return function (...args) {
-    const _this = this;
-
-    return validators.reduce(function (valid, fn) {
-      return _await(valid, function (r) {
-        return unwrapValidatorResponse(r) ? unwrapNormalizedValidator(fn).apply(_this, args) : r;
-      });
-    }, Promise.resolve(true));
-  };
-}
-/**
- * Returns true when all validators are truthy
- * @param {...(NormalizedValidator | Function)} validators
- * @return {{$validator: function(...[*]=): (boolean | Promise<boolean>), $async: boolean, $watchTargets: any[]}}
- */
-
-
-function and$1(...validators) {
-  const $async = validators.some(v => v.$async);
-  const $watchTargets = validators.reduce((all, v) => {
-    if (!v.$watchTargets) return all;
-    return all.concat(v.$watchTargets);
-  }, []);
-
-  let $validator = () => false;
-
-  if (validators.length) $validator = $async ? asyncAnd(validators) : syncAnd(validators);
-  return {
-    $async,
-    $validator,
-    $watchTargets
-  };
-}
-
-/**
- * Validate if all validators match.
- * @param {...*} validators
- * @returns {NormalizedValidator}
- */
-
-function and (...validators) {
-  return withParams({
-    type: 'and'
-  }, withMessage('The value does not match all of the provided validators', and$1(...validators)));
-}
-
-/**
- * Swaps the result of a value
- * @param {NormalizedValidator|Function} validator
- * @returns {function(*=, *=): boolean}
- */
-
-function not$1 (validator) {
-  return function (value, vm) {
-    if (!req(value)) return true;
-    const response = unwrapNormalizedValidator(validator).call(this, value, vm);
-    if (!isPromise(response)) return !unwrapValidatorResponse(response);
-    return response.then(r => !unwrapValidatorResponse(r));
-  };
-}
-
-/**
- * Swaps the result of a value
- * @param {NormalizedValidator|Function} validator
- * @returns {NormalizedValidator}
- */
-
-function not (validator) {
-  return {
-    $validator: not$1(validator),
-    $message: `The value does not match the provided validator`,
-    $params: {
-      type: 'not'
-    }
-  };
-}
-
-/**
- * Check if a value is above a threshold.
- * @param {String | Number | Ref<Number> | Ref<String>} min
- * @returns {function(*=): boolean}
- */
-
-function minValue$1 (min) {
-  return value => !req(value) || (!/\s/.test(value) || value instanceof Date) && +value >= +(0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(min);
-}
-
-/**
- * Check if a value is above a threshold.
- * @param {String | Number | Ref<Number> | Ref<String>} min
- * @returns {NormalizedValidator}
- */
-
-function minValue (min) {
-  return {
-    $validator: minValue$1(min),
-    $message: ({
-      $params
-    }) => `The minimum value allowed is ${$params.min}`,
-    $params: {
-      min,
-      type: 'minValue'
-    }
-  };
-}
-
-/**
- * Check if value is below a threshold.
- * @param {Number | Ref<Number> | Ref<String>} max
- * @returns {function(*=): boolean}
- */
-
-function maxValue$1 (max) {
-  return value => !req(value) || (!/\s/.test(value) || value instanceof Date) && +value <= +(0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.unref)(max);
-}
-
-/**
- * Check if value is below a threshold.
- * @param {Number | Ref<Number> | Ref<String>} max
- * @return {NormalizedValidator}
- */
-
-var maxValue = (max => ({
-  $validator: maxValue$1(max),
-  $message: ({
-    $params
-  }) => `The maximum value is ${$params.max}`,
-  $params: {
-    max,
-    type: 'maxValue'
-  }
-}));
-
-// ^-[0-9]+$ - only for negative integer (minus sign without at least 1 digit is not a number)
-
-var integer$1 = regex(/(^[0-9]*$)|(^-[0-9]+$)/);
-
-/**
- * Validate if value is integer.
- * @type {NormalizedValidator}
- */
-
-var integer = {
-  $validator: integer$1,
-  $message: 'Value is not an integer',
-  $params: {
-    type: 'integer'
-  }
-};
-
-var decimal$1 = regex(/^[-]?\d*(\.\d+)?$/);
-
-/**
- * Validate if value is decimal number.
- * @type {NormalizedValidator}
- */
-
-var decimal = {
-  $validator: decimal$1,
-  $message: 'Value must be decimal',
-  $params: {
-    type: 'decimal'
-  }
-};
-
-/**
- * Creates a translatable version of `withMessage` helper.
- * @param {function} t - the translation function of your choice
- * @param {function} [messagePath] - a function to generate the message path, passed to `t` for each message. By default it is `validations.${$validator}`
- * @param {function} [messageParams] - a function to augment the params, passed to `t` for each message.
- */
-
-function createI18nMessage({
-  t,
-  messagePath = ({
-    $validator
-  }) => `validations.${$validator}`,
-  messageParams = params => params
-}) {
-  return function withI18nMessage(validator, {
-    withArguments = false,
-    messagePath: localMessagePath = messagePath,
-    messageParams: localMessageParams = messageParams
-  } = {}) {
-    function message(props) {
-      return t(localMessagePath(props), localMessageParams(Object.assign({
-        model: props.$model,
-        property: props.$property,
-        pending: props.$pending,
-        invalid: props.$invalid,
-        response: props.$response,
-        validator: props.$validator,
-        propertyPath: props.$propertyPath
-      }, props.$params)));
-    }
-
-    if (withArguments && typeof validator === 'function') {
-      return (...args) => withMessage(message, validator(...args));
-    }
-
-    return withMessage(message, validator);
-  };
-}
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -21852,13 +20860,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_base_BaseModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ui/base/BaseModal */ "./resources/js/components/ui/base/BaseModal.vue");
 /* harmony import */ var _vuelidate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vuelidate/core */ "./node_modules/@vuelidate/core/dist/index.esm.js");
 /* harmony import */ var _components_ui_FromInputValidationMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ui/FromInputValidationMessage */ "./resources/js/components/ui/FromInputValidationMessage.vue");
-/* harmony import */ var _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @vuelidate/validators */ "./node_modules/@vuelidate/validators/dist/index.esm.js");
 /* harmony import */ var _TopBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TopBar */ "./resources/js/pages/sell-used-car/TopBar.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -21876,160 +20891,159 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      // v$: useVuelidate(),
       isLoading: false,
       showModal: false,
-      price: false,
-      toggleBusinessOfferDetails: false,
-      offerDetails: {
-        offerTitle: null,
-        offerDescription: null,
-        offerPrice: null,
-        offerRegion: null,
-        offerCity: null
-      },
-      ownerDetails: {
-        ownerNames: null,
-        ownerEmail: null,
-        ownerMobile: null,
-        businessOffer: {
-          companyName: null,
-          companyEIK: null,
-          companyAddress: null,
-          companyURL: null
-        }
-      }
+      hasPrice: false,
+      toggleBusinessOfferDetails: false
     };
   },
-  validations: function validations() {
-    return {
-      offerDetails: {
-        offerTitle: {},
-        offerDescription: {},
-        offerPrice: {
-          integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.integer,
-          requiredIf: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(!this.price)
-        },
-        offerRegion: {},
-        offerCity: {}
+  computed: _objectSpread({
+    offerTitle: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OFFER_TITLE'];
       },
-      ownerDetails: {
-        ownerNames: {},
-        ownerEmail: {
-          required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required,
-          email: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.email
-        },
-        ownerMobile: {
-          integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.integer,
-          maxLength: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.maxLength)(10)
-        },
-        businessOffer: {
-          companyName: {
-            requiredIf: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.toggleBusinessOfferDetails)
-          },
-          companyEIK: {
-            integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.integer,
-            requiredIf: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.toggleBusinessOfferDetails)
-          },
-          companyAddress: {
-            requiredIf: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.toggleBusinessOfferDetails)
-          }
-        }
+      set: function set(value) {
+        this.SET_OFFER_TITLE(value);
       }
-    };
-  },
-  computed: {
-    getAllData: function getAllData() {
-      return this.$store.getters['sellCar/getAllData'];
+    },
+    offerDesc: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OFFER_DESC'];
+      },
+      set: function set(value) {
+        this.SET_OFFER_DESC(value);
+      }
+    },
+    offerPrice: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_CAR_PRICE'];
+      },
+      set: function set(value) {
+        this.SET_CAR_PRICE(value);
+      }
+    },
+    ownerNames: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OWNER_NAMES'];
+      },
+      set: function set(value) {
+        this.SET_OWNER_NAME(value);
+      }
+    },
+    ownerEmail: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OWNER_EMAIL'];
+      },
+      set: function set(value) {
+        this.SET_OWNER_EMAIL(value);
+      }
+    },
+    ownerMobile: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OWNER_MOBILE'];
+      },
+      set: function set(value) {
+        this.SET_OWNER_MOBILE(value);
+      }
+    },
+    offerCity: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_CAR_OFFER_CITY'];
+      },
+      set: function set(value) {
+        this.SET_OFFER_CITY(value);
+      }
+    },
+    offerRegion: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_CAR_OFFER_REGION'];
+      },
+      set: function set(value) {
+        this.SET_OFFER_REGION(value);
+      }
+    },
+    ownerCompanyName: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OWNER_COMPANY_NAME'];
+      },
+      set: function set(value) {
+        this.SET_OWNER_COMPANY_NAME(value);
+      }
+    },
+    ownerCompanyAddress: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OWNER_COMPANY_ADDRESS'];
+      },
+      set: function set(value) {
+        this.SET_OWNER_COMPANY_ADDRESS(value);
+      }
+    },
+    ownerCompanyEik: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OWNER_COMPANY_EIK'];
+      },
+      set: function set(value) {
+        this.SET_OWNER_COMPANY_EIK(value);
+      }
+    },
+    ownerCompanyURL: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_OWNER_COMPANY_URL'];
+      },
+      set: function set(value) {
+        this.SET_OWNER_COMPANY_URL(value);
+      }
     }
-  },
-  setup: function setup() {
-    return {
-      v$: (0,_vuelidate_core__WEBPACK_IMPORTED_MODULE_3__["default"])()
-    };
-  },
-  methods: {
-    back: function back() {
-      this.$store.commit('sellCar/setStepMinus');
-    },
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('sellCar', ['getAllData', 'GET_CAR_HAS_PRICE', 'IS_OWNER_BUSINESS'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('sellCar', ['setStepMinus', 'setStepPlus', 'SET_OFFER_TITLE', 'SET_OFFER_DESC', 'SET_CAR_PRICE', 'SET_OFFER_CITY', 'SET_OFFER_REGION', 'SET_CAR_HAS_PRICE', 'SET_OWNER_NAME', 'SET_OWNER_EMAIL', 'SET_OWNER_MOBILE', 'SET_OWNER_STATUTE', 'SET_OWNER_COMPANY_NAME', 'SET_OWNER_COMPANY_ADDRESS', 'SET_OWNER_COMPANY_EIK', 'SET_OWNER_COMPANY_URL'])), {}, {
     togglePrice: function togglePrice() {
-      this.offerDetails.offerPrice = null;
-      this.price = !this.price;
+      this.SET_CAR_PRICE(null);
+      this.SET_CAR_HAS_PRICE(!this.GET_CAR_HAS_PRICE);
     },
-    setCity: function setCity() {
-      var value = this.$refs.city.value;
-      this.v$.offerDetails.offerCity.$touch();
-
-      if (!value || value === '') {
-        this.offerDetails.offerCity = null;
-        return;
+    toggleBusinessOffer: function toggleBusinessOffer() {
+      if (!this.IS_OWNER_BUSINESS) {
+        this.SET_OWNER_COMPANY_NAME(null);
+        this.SET_OWNER_COMPANY_ADDRESS(null);
+        this.SET_OWNER_COMPANY_EIK(null);
+        this.SET_OWNER_COMPANY_URL(null);
       }
 
-      this.offerDetails.offerCity = value;
-    },
-    setRegion: function setRegion() {
-      var value = this.$refs.region.value;
-      this.v$.offerDetails.offerRegion.$touch();
-
-      if (!value || value === '') {
-        this.offerDetails.offerRegion = null;
-        return;
-      }
-
-      this.offerDetails.offerRegion = value;
+      this.SET_OWNER_STATUTE(!this.IS_OWNER_BUSINESS);
     },
     showLastStep: function showLastStep(key, value) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var isFormCorrect, response;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _this.v$.$validate();
-
-              case 2:
-                isFormCorrect = _context.sent;
-
-                if (isFormCorrect) {
-                  _context.next = 5;
-                  break;
-                }
-
-                return _context.abrupt("return");
-
-              case 5:
-                _context.prev = 5;
+                _context.prev = 0;
                 _this.isLoading = true;
-                _context.next = 9;
+                _context.next = 4;
                 return axios.post('/api/generate-email-verification-code', _this.ownerDetails);
 
-              case 9:
+              case 4:
                 response = _context.sent;
                 _this.isLoading = false;
-                _context.next = 16;
+                _context.next = 11;
                 break;
 
-              case 13:
-                _context.prev = 13;
-                _context.t0 = _context["catch"](5);
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
                 console.log(_context.t0, 'Email generate code failed');
 
-              case 16:
-                _this.$store.commit('sellCar/setCarDetails', _this.offerDetails); // this.$store.commit('sellCar/setStepPlus');
-
-
-              case 17:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[5, 13]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
-  }
+  })
 });
 
 /***/ }),
@@ -23300,7 +22314,7 @@ var _hoisted_7 = {
 var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingInputOfferTitle"
-  }, "Заглавие", -1
+  }, "Заглавие на обявата", -1
   /* HOISTED */
   );
 });
@@ -23320,9 +22334,85 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_11 = {
   "class": "form-floating form-group"
 };
-var _hoisted_12 = ["disabled"];
+
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "София"
+  }, "София", -1
+  /* HOISTED */
+  );
+});
 
 var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Пловдив"
+  }, "Пловдив", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Варна"
+  }, "Варна", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_15 = [_hoisted_12, _hoisted_13, _hoisted_14];
+
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "floatingSelectRegion"
+  }, "Моля изберете област", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_17 = {
+  "class": "form-floating form-group"
+};
+
+var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "One"
+  }, "One", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Two"
+  }, "Two", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: "Three"
+  }, "Three", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_21 = [_hoisted_18, _hoisted_19, _hoisted_20];
+
+var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "floatingSelectCity"
+  }, "Моля изберете населено място", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_23 = {
+  "class": "form-floating form-group"
+};
+var _hoisted_24 = ["disabled"];
+
+var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingInputPrice"
   }, "Цена (BGN)", -1
@@ -23330,18 +22420,18 @@ var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_14 = {
+var _hoisted_26 = {
   "class": "mt-1 ms-1 negotiable-price"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" По договаряне? ");
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" По договаряне? ");
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Публикува Бизнес Обява? ");
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Публикува Бизнес Обява? ");
 
-var _hoisted_17 = {
+var _hoisted_29 = {
   "class": "ms-2"
 };
-var _hoisted_18 = {
+var _hoisted_30 = {
   xmlns: "http://www.w3.org/2000/svg",
   width: "28",
   height: "28",
@@ -23350,7 +22440,7 @@ var _hoisted_18 = {
   viewBox: "0 0 16 16"
 };
 
-var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
     d: "M9 11c.628-.836 1-1.874 1-3a4.978 4.978 0 0 0-1-3h4a3 3 0 1 1 0 6H9z"
   }, null, -1
@@ -23358,7 +22448,7 @@ var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_32 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
     d: "M5 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1A5 5 0 1 0 5 3a5 5 0 0 0 0 10z"
   }, null, -1
@@ -23366,8 +22456,8 @@ var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_21 = [_hoisted_19, _hoisted_20];
-var _hoisted_22 = {
+var _hoisted_33 = [_hoisted_31, _hoisted_32];
+var _hoisted_34 = {
   xmlns: "http://www.w3.org/2000/svg",
   width: "28",
   height: "28",
@@ -23376,7 +22466,7 @@ var _hoisted_22 = {
   viewBox: "0 0 16 16"
 };
 
-var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_35 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
     d: "M7 5H3a3 3 0 0 0 0 6h4a4.995 4.995 0 0 1-.584-1H3a2 2 0 1 1 0-4h3.416c.156-.357.352-.692.584-1z"
   }, null, -1
@@ -23384,7 +22474,7 @@ var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_36 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
     d: "M16 8A5 5 0 1 1 6 8a5 5 0 0 1 10 0z"
   }, null, -1
@@ -23392,12 +22482,12 @@ var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_25 = [_hoisted_23, _hoisted_24];
-var _hoisted_26 = {
+var _hoisted_37 = [_hoisted_35, _hoisted_36];
+var _hoisted_38 = {
   "class": "question-section mb-3"
 };
 
-var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_39 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
     "class": "fw-bold"
   }, "Вашите детайли?", -1
@@ -23405,11 +22495,11 @@ var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_28 = {
+var _hoisted_40 = {
   "class": "form-floating form-group"
 };
 
-var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_41 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingInputNames"
   }, "Име и фамилия", -1
@@ -23417,11 +22507,11 @@ var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_30 = {
+var _hoisted_42 = {
   "class": "form-floating form-group"
 };
 
-var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_43 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingInputEmail"
   }, "Имейл адрес", -1
@@ -23429,11 +22519,11 @@ var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_32 = {
+var _hoisted_44 = {
   "class": "form-floating form-group"
 };
 
-var _hoisted_33 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_45 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingInputMobile"
   }, "Мобилен номер", -1
@@ -23441,108 +22531,27 @@ var _hoisted_33 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_34 = {
-  "class": "form-floating form-group"
+var _hoisted_46 = {
+  key: 0,
+  "class": "question-section"
 };
-
-var _hoisted_35 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "",
-    selected: ""
-  }, "Моля изберете област", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_36 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "София"
-  }, "София", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_37 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "Пловдив"
-  }, "Пловдив", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_38 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "Варна"
-  }, "Варна", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_39 = [_hoisted_35, _hoisted_36, _hoisted_37, _hoisted_38];
-
-var _hoisted_40 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingSelectRegion"
-  }, "Област", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_41 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_42 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "",
-    selected: ""
-  }, "Моля изберете населено място", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_43 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "One"
-  }, "One", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_44 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "Two"
-  }, "Two", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_45 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "Three"
-  }, "Three", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_46 = [_hoisted_42, _hoisted_43, _hoisted_44, _hoisted_45];
 
 var _hoisted_47 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingSelectCity"
-  }, "Населено място", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+    "class": "fw-bold"
+  }, "Детайли за фирмата?", -1
   /* HOISTED */
   );
 });
 
 var _hoisted_48 = {
-  "class": "question-section"
+  "class": "form-floating form-group"
 };
 
 var _hoisted_49 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-    "class": "fw-bold"
-  }, "Детайли за фирмата?", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "floatingInputCompany"
+  }, "Име на автокъщата", -1
   /* HOISTED */
   );
 });
@@ -23553,8 +22562,8 @@ var _hoisted_50 = {
 
 var _hoisted_51 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputCompany"
-  }, "Име на автокъщата", -1
+    "for": "floatingInputBulstat"
+  }, "Булстат/ЕИК", -1
   /* HOISTED */
   );
 });
@@ -23565,8 +22574,8 @@ var _hoisted_52 = {
 
 var _hoisted_53 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputBulstat"
-  }, "Булстат/ЕИК", -1
+    "for": "floatingInputAddress"
+  }, "Адрес на автокъщата", -1
   /* HOISTED */
   );
 });
@@ -23577,32 +22586,20 @@ var _hoisted_54 = {
 
 var _hoisted_55 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputAddress"
-  }, "Адрес на автокъщата", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_56 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_57 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingInputDomain"
   }, "Личен домейн в CarDealo", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_58 = {
+var _hoisted_56 = {
   key: 0
 };
-var _hoisted_59 = {
+var _hoisted_57 = {
   "class": "form-group"
 };
 
-var _hoisted_60 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_58 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     placeholder: "Въведете кода от емайла, който поличихте"
@@ -23611,13 +22608,13 @@ var _hoisted_60 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_61 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_59 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", null, "Верифицирай", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_62 = [_hoisted_60, _hoisted_61];
+var _hoisted_60 = [_hoisted_58, _hoisted_59];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_TopBar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TopBar");
 
@@ -23633,223 +22630,173 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         onClick: _cache[0] || (_cache[0] = function () {
-          return $options.back && $options.back.apply($options, arguments);
+          return _ctx.setStepMinus && _ctx.setStepMinus.apply(_ctx, arguments);
         }),
         "class": "back__button"
       }, _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TopBar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
+        placeholder: "Заглавие на обявата",
         id: "floatingInputOfferTitle",
-        placeholder: "Залавие на обявата",
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return $data.offerDetails.offerTitle = $event;
+          return $options.offerTitle = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.offerDetails.offerTitle, void 0, {
-        trim: true
-      }]]), _hoisted_8, $setup.v$.offerDetails.offerTitle.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете заглавие"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.offerTitle]]), _hoisted_8,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
         "class": "form__input form-control",
-        placeholder: "Leave a comment here",
+        placeholder: "Допълнителна информация",
         id: "floatingTextarea",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return $data.offerDetails.offerDescription = $event;
+          return $options.offerDesc = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.offerDetails.offerDescription, void 0, {
-        trim: true
-      }]]), _hoisted_10, $setup.v$.offerDetails.offerDescription.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете информация"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.offerDesc]]), _hoisted_10,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "class": "form__input form-select",
+        id: "floatingSelectRegion",
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return $options.offerRegion = $event;
+        })
+      }, _hoisted_15, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $options.offerRegion]]), _hoisted_16,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "class": "form__input form-select",
+        id: "floatingSelectCity",
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $options.offerCity = $event;
+        })
+      }, _hoisted_21, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $options.offerCity]]), _hoisted_22,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "number",
         "class": "form-control form__input",
         id: "floatingInputPrice",
-        placeholder: "Цена на автомобила",
-        disabled: $data.price,
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return $data.offerDetails.offerPrice = $event;
+        placeholder: "Цена (BGN)",
+        disabled: _ctx.GET_CAR_HAS_PRICE,
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+          return $options.offerPrice = $event;
         })
       }, null, 8
       /* PROPS */
-      , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.offerDetails.offerPrice, void 0, {
-        trim: true
-      }]]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+      , _hoisted_24), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.offerPrice]]), _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
         "for": "negotiable-price",
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          checked: $data.price
+          checked: _ctx.GET_CAR_HAS_PRICE
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "checkbox",
         id: "negotiable-price",
-        onChange: _cache[4] || (_cache[4] = function () {
+        onChange: _cache[6] || (_cache[6] = function () {
           return $options.togglePrice && $options.togglePrice.apply($options, arguments);
         })
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, false]]), _hoisted_15], 2
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, false]]), _hoisted_27], 2
       /* CLASS */
-      )]), $setup.v$.offerDetails.offerPrice.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете цена"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)([$data.toggleBusinessOfferDetails ? 'font-weight: bold' : 'font-weight: normal', {
+      )]),  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)([_ctx.IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal', {
           "cursor": "pointer",
           "user-select": "none"
         }]),
         "class": "d-flex justify-content-end align-items-center",
-        onClick: _cache[5] || (_cache[5] = function ($event) {
-          return $data.toggleBusinessOfferDetails = !$data.toggleBusinessOfferDetails;
+        onClick: _cache[7] || (_cache[7] = function () {
+          return $options.toggleBusinessOffer && $options.toggleBusinessOffer.apply($options, arguments);
         })
-      }, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_18, _hoisted_21, 512
+      }, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_30, _hoisted_33, 512
       /* NEED_PATCH */
-      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.toggleBusinessOfferDetails]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_22, _hoisted_25, 512
+      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !_ctx.IS_OWNER_BUSINESS]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_34, _hoisted_37, 512
       /* NEED_PATCH */
-      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.toggleBusinessOfferDetails]])])], 4
+      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.IS_OWNER_BUSINESS]])])], 4
       /* STYLE */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
         id: "floatingInputNames",
-        placeholder: "(Иван Иванов)",
-        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-          return $data.ownerDetails.ownerNames = $event;
+        placeholder: "Име и фамилия",
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+          return $options.ownerNames = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.ownerNames, void 0, {
-        trim: true
-      }]]), _hoisted_29, $setup.v$.ownerDetails.ownerNames.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете имена"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerNames]]), _hoisted_41,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "email",
         "class": "form-control form__input",
         id: "floatingInputEmail",
-        placeholder: "(ivan.ivano@email.bg)",
-        onBlur: _cache[7] || (_cache[7] = function () {
-          var _$setup$v$$ownerDetai;
-
-          return $setup.v$.ownerDetails.ownerEmail.$touch && (_$setup$v$$ownerDetai = $setup.v$.ownerDetails.ownerEmail).$touch.apply(_$setup$v$$ownerDetai, arguments);
-        }),
-        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-          return $data.ownerDetails.ownerEmail = $event;
+        placeholder: "Имейл адрес",
+        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+          return $options.ownerEmail = $event;
         })
-      }, null, 544
-      /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.ownerEmail, void 0, {
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerEmail, void 0, {
         trim: true
-      }]]), _hoisted_31, $setup.v$.ownerDetails.ownerEmail.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете валиден имейл адрес"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), _hoisted_43,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
         id: "floatingInputMobile",
-        placeholder: "(ivan.ivano@email.bg)",
-        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-          return $data.ownerDetails.ownerMobile = $event;
+        placeholder: "Мобилен номер",
+        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+          return $options.ownerMobile = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.ownerMobile, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerMobile, void 0, {
         trim: true
-      }]]), _hoisted_33, $setup.v$.ownerDetails.ownerMobile.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете валиден мобилен номер във формат 08хххххххх"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-        "class": "form__input form-select",
-        id: "floatingSelectRegion",
-        ref: "region",
-        onChange: _cache[10] || (_cache[10] = function () {
-          return $options.setRegion && $options.setRegion.apply($options, arguments);
-        })
-      }, _hoisted_39, 544
-      /* HYDRATE_EVENTS, NEED_PATCH */
-      ), _hoisted_40, $setup.v$.offerDetails.offerRegion.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Mоля изберете област"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-        "class": "form__input form-select",
-        id: "floatingSelectCity",
-        ref: "city",
-        onChange: _cache[11] || (_cache[11] = function () {
-          return $options.setCity && $options.setCity.apply($options, arguments);
-        })
-      }, _hoisted_46, 544
-      /* HYDRATE_EVENTS, NEED_PATCH */
-      ), _hoisted_47, $setup.v$.offerDetails.offerCity.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Mоля изберете град"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [_hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), _hoisted_45,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), _ctx.IS_OWNER_BUSINESS ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_46, [_hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
         id: "floatingInputCompany",
-        placeholder: "име на фирмата",
-        "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-          return $data.ownerDetails.businessOffer.companyName = $event;
+        placeholder: "Име на автокъщата",
+        "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
+          return $options.ownerCompanyName = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.businessOffer.companyName, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyName, void 0, {
         trim: true
-      }]]), _hoisted_51, $setup.v$.ownerDetails.businessOffer.companyName.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете име на автокъщата"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), _hoisted_49,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
         id: "floatingInputBulstat",
-        placeholder: "булстат на фирмата",
-        "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-          return $data.ownerDetails.businessOffer.companyEIK = $event;
+        placeholder: "Булстат/ЕИК",
+        "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+          return $options.ownerCompanyEik = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.businessOffer.companyEIK, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyEik, void 0, {
         trim: true
-      }]]), _hoisted_53, $setup.v$.ownerDetails.businessOffer.companyEIK.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "Моля въведете ЕИК на автокъщата"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), _hoisted_51,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
         id: "floatingInputAddress",
-        placeholder: "адрес на автокъщата",
-        "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-          return $data.ownerDetails.businessOffer.companyAddress = $event;
+        placeholder: "Адрес на автокъщата",
+        "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+          return $options.ownerCompanyAddress = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.businessOffer.companyAddress, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyAddress, void 0, {
         trim: true
-      }]]), _hoisted_55, $setup.v$.ownerDetails.businessOffer.companyAddress.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        message: "'Моля въведете адрес на автокъщата"
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), _hoisted_53,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
         id: "floatingInputDomain",
-        placeholder: "домейн в Cardealo",
-        "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
-          return $data.ownerDetails.businessOffer.companyURL = $event;
+        placeholder: "Личен домейн в CarDealo",
+        "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+          return $options.ownerCompanyURL = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.ownerDetails.businessOffer.companyURL, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyURL, void 0, {
         trim: true
-      }]]), _hoisted_57])], 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.toggleBusinessOfferDetails]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        onClick: _cache[16] || (_cache[16] = function () {
+      }]]), _hoisted_55])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        onClick: _cache[15] || (_cache[15] = function () {
           return $options.showLastStep && $options.showLastStep.apply($options, arguments);
         }),
         "class": "base-button"
-      }, [!$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_58, "Качване на снимки")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
+      }, [!$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_56, "Качване на снимки")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
         key: 1
       }))])];
     }),
@@ -23857,19 +22804,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[17] || (_cache[17] = function ($event) {
+    onClick: _cache[16] || (_cache[16] = function ($event) {
       return $data.showModal = true;
     })
   }, "Open Modal"), $data.showModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BaseModal, {
     key: 0,
-    onCloseModal: _cache[19] || (_cache[19] = function ($event) {
+    onCloseModal: _cache[18] || (_cache[18] = function ($event) {
       return $data.showModal = false;
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: _cache[18] || (_cache[18] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
-      }, _hoisted_62, 32
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        onSubmit: _cache[17] || (_cache[17] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+      }, _hoisted_60, 32
       /* HYDRATE_EVENTS */
       )])];
     }),
@@ -24841,8 +23788,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_cm3'], void 0, {
-        number: true,
-        lazy: true
+        number: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_14, [_hoisted_15, $data.errors.errorCm3 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_16, _hoisted_18)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         id: "horsepower",
@@ -24857,8 +23803,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_hp'], void 0, {
-        number: true,
-        lazy: true
+        number: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_20, [_hoisted_21, $data.errors.errorHp ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_22, _hoisted_24)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         id: "km",
@@ -24873,8 +23818,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_km'], void 0, {
-        number: true,
-        lazy: true
+        number: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_26, [_hoisted_27, $data.errors.errorKm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_28, _hoisted_30)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), $options.toggleNextStepButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
         key: 0,
         onClick: _cache[14] || (_cache[14] = function () {
@@ -25460,14 +24404,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash_fp_placeholder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/fp/placeholder */ "./node_modules/lodash/fp/placeholder.js");
-/* harmony import */ var lodash_fp_placeholder__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_fp_placeholder__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -25513,7 +24454,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         car_offer_title: null,
         car_offer_description: null,
         car_price: null,
+        car_has_price: true,
+        car_offer_city: null,
+        car_offer_region: null,
         car_offer_owner: {
+          is_owner_business: false,
           owner_name: null,
           owner_email: null,
           owner_mobile: null,
@@ -25601,6 +24546,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setCarCategory: function setCarCategory(state, payload) {
       state.car_offer.car_category = payload;
     },
+    //offer title, desc, price
+    SET_OFFER_TITLE: function SET_OFFER_TITLE(state, payload) {
+      state.car_offer.car_offer_title = payload;
+    },
+    SET_OFFER_DESC: function SET_OFFER_DESC(state, payload) {
+      state.car_offer.car_offer_description = payload;
+    },
+    SET_CAR_PRICE: function SET_CAR_PRICE(state, payload) {
+      state.car_offer.car_price = payload;
+    },
+    SET_CAR_HAS_PRICE: function SET_CAR_HAS_PRICE(state, payload) {
+      state.car_offer.car_has_price = payload;
+    },
+    SET_OFFER_CITY: function SET_OFFER_CITY(state, payload) {
+      state.car_offer.car_offer_city = payload;
+    },
+    SET_OFFER_REGION: function SET_OFFER_REGION(state, payload) {
+      state.car_offer.car_offer_region = payload;
+    },
+    //Owner Details
+    SET_OWNER_NAME: function SET_OWNER_NAME(state, payload) {
+      state.car_offer.car_offer_owner.owner_name = payload;
+    },
+    SET_OWNER_EMAIL: function SET_OWNER_EMAIL(state, payload) {
+      state.car_offer.car_offer_owner.owner_email = payload;
+    },
+    SET_OWNER_MOBILE: function SET_OWNER_MOBILE(state, payload) {
+      state.car_offer.car_offer_owner.owner_mobile = payload;
+    },
+    SET_OWNER_STATUTE: function SET_OWNER_STATUTE(state, payload) {
+      state.car_offer.car_offer_owner.is_owner_business = payload;
+    },
+    SET_OWNER_COMPANY_NAME: function SET_OWNER_COMPANY_NAME(state, payload) {
+      state.car_offer.car_offer_owner.owner_company = payload;
+    },
+    SET_OWNER_COMPANY_ADDRESS: function SET_OWNER_COMPANY_ADDRESS(state, payload) {
+      state.car_offer.car_offer_owner.owner_company_address = payload;
+    },
+    SET_OWNER_COMPANY_EIK: function SET_OWNER_COMPANY_EIK(state, payload) {
+      state.car_offer.car_offer_owner.owner_company_eik = payload;
+    },
+    SET_OWNER_COMPANY_URL: function SET_OWNER_COMPANY_URL(state, payload) {
+      state.car_offer.car_offer_owner.owner_company_url = payload;
+    },
     setCarImages: function setCarImages(state, payload) {
       state.car_offer.car_images = payload;
     },
@@ -25628,6 +24617,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getCarExtrasApi: function getCarExtrasApi(state) {
       return state.car_extras;
+    },
+    //getters for offer details
+    GET_OFFER_TITLE: function GET_OFFER_TITLE(state) {
+      return state.car_offer.car_offer_title;
+    },
+    GET_OFFER_DESC: function GET_OFFER_DESC(state) {
+      return state.car_offer.car_offer_description;
+    },
+    GET_CAR_PRICE: function GET_CAR_PRICE(state) {
+      return state.car_offer.car_price;
+    },
+    GET_CAR_OFFER_CITY: function GET_CAR_OFFER_CITY(state) {
+      return state.car_offer.car_offer_city;
+    },
+    GET_CAR_OFFER_REGION: function GET_CAR_OFFER_REGION(state) {
+      return state.car_offer.car_offer_region;
+    },
+    GET_CAR_HAS_PRICE: function GET_CAR_HAS_PRICE(state) {
+      return state.car_offer.car_has_price;
+    },
+    //getters for owner details
+    IS_OWNER_BUSINESS: function IS_OWNER_BUSINESS(state) {
+      return state.car_offer.car_offer_owner.is_owner_business;
+    },
+    GET_OWNER_NAMES: function GET_OWNER_NAMES(state) {
+      return state.car_offer.car_offer_owner.owner_name;
+    },
+    GET_OWNER_EMAIL: function GET_OWNER_EMAIL(state) {
+      return state.car_offer.car_offer_owner.owner_email;
+    },
+    GET_OWNER_MOBILE: function GET_OWNER_MOBILE(state) {
+      return state.car_offer.car_offer_owner.owner_mobile;
+    },
+    GET_OWNER_COMPANY_NAME: function GET_OWNER_COMPANY_NAME(state) {
+      return state.car_offer.car_offer_owner.owner_company;
+    },
+    GET_OWNER_COMPANY_ADDRESS: function GET_OWNER_COMPANY_ADDRESS(state) {
+      return state.car_offer.car_offer_owner.owner_company_address;
+    },
+    GET_OWNER_COMPANY_EIK: function GET_OWNER_COMPANY_EIK(state) {
+      return state.car_offer.car_offer_owner.owner_company_eik;
+    },
+    GET_OWNER_COMPANY_URL: function GET_OWNER_COMPANY_URL(state) {
+      return state.car_offer.car_offer_owner.owner_company_url;
     },
     //get the final offer
     getAllData: function getAllData(state) {
@@ -28984,22 +28017,6 @@ function toNumber(value) {
 }
 
 module.exports = throttle;
-
-
-/***/ }),
-
-/***/ "./node_modules/lodash/fp/placeholder.js":
-/*!***********************************************!*\
-  !*** ./node_modules/lodash/fp/placeholder.js ***!
-  \***********************************************/
-/***/ ((module) => {
-
-/**
- * The default argument placeholder value for methods.
- *
- * @type {Object}
- */
-module.exports = {};
 
 
 /***/ }),
@@ -64494,200 +63511,6 @@ var index = {
 /*!**************************************************************************!*\
   !*** ./node_modules/@vuelidate/core/node_modules/vue-demi/lib/index.mjs ***!
   \**************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "set": () => (/* binding */ set),
-/* harmony export */   "del": () => (/* binding */ del),
-/* harmony export */   "BaseTransition": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.BaseTransition),
-/* harmony export */   "Comment": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Comment),
-/* harmony export */   "EffectScope": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.EffectScope),
-/* harmony export */   "Fragment": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Fragment),
-/* harmony export */   "KeepAlive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.KeepAlive),
-/* harmony export */   "ReactiveEffect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.ReactiveEffect),
-/* harmony export */   "Static": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Static),
-/* harmony export */   "Suspense": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Suspense),
-/* harmony export */   "Teleport": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Teleport),
-/* harmony export */   "Text": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Text),
-/* harmony export */   "Transition": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Transition),
-/* harmony export */   "TransitionGroup": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.TransitionGroup),
-/* harmony export */   "VueElement": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.VueElement),
-/* harmony export */   "callWithAsyncErrorHandling": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.callWithAsyncErrorHandling),
-/* harmony export */   "callWithErrorHandling": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.callWithErrorHandling),
-/* harmony export */   "camelize": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.camelize),
-/* harmony export */   "capitalize": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.capitalize),
-/* harmony export */   "cloneVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.cloneVNode),
-/* harmony export */   "compatUtils": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.compatUtils),
-/* harmony export */   "compile": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.compile),
-/* harmony export */   "computed": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.computed),
-/* harmony export */   "createApp": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createApp),
-/* harmony export */   "createBlock": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createBlock),
-/* harmony export */   "createCommentVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode),
-/* harmony export */   "createElementBlock": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock),
-/* harmony export */   "createElementVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode),
-/* harmony export */   "createHydrationRenderer": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createHydrationRenderer),
-/* harmony export */   "createPropsRestProxy": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createPropsRestProxy),
-/* harmony export */   "createRenderer": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createRenderer),
-/* harmony export */   "createSSRApp": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createSSRApp),
-/* harmony export */   "createSlots": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createSlots),
-/* harmony export */   "createStaticVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode),
-/* harmony export */   "createTextVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode),
-/* harmony export */   "createVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createVNode),
-/* harmony export */   "customRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.customRef),
-/* harmony export */   "defineAsyncComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent),
-/* harmony export */   "defineComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent),
-/* harmony export */   "defineCustomElement": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineCustomElement),
-/* harmony export */   "defineEmits": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineEmits),
-/* harmony export */   "defineExpose": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineExpose),
-/* harmony export */   "defineProps": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineProps),
-/* harmony export */   "defineSSRCustomElement": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineSSRCustomElement),
-/* harmony export */   "devtools": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.devtools),
-/* harmony export */   "effect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.effect),
-/* harmony export */   "effectScope": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.effectScope),
-/* harmony export */   "getCurrentInstance": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance),
-/* harmony export */   "getCurrentScope": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentScope),
-/* harmony export */   "getTransitionRawChildren": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.getTransitionRawChildren),
-/* harmony export */   "guardReactiveProps": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps),
-/* harmony export */   "h": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.h),
-/* harmony export */   "handleError": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.handleError),
-/* harmony export */   "hydrate": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.hydrate),
-/* harmony export */   "initCustomFormatter": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.initCustomFormatter),
-/* harmony export */   "initDirectivesForSSR": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.initDirectivesForSSR),
-/* harmony export */   "inject": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.inject),
-/* harmony export */   "isMemoSame": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isMemoSame),
-/* harmony export */   "isProxy": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isProxy),
-/* harmony export */   "isReactive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isReactive),
-/* harmony export */   "isReadonly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isReadonly),
-/* harmony export */   "isRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isRef),
-/* harmony export */   "isRuntimeOnly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isRuntimeOnly),
-/* harmony export */   "isVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isVNode),
-/* harmony export */   "markRaw": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.markRaw),
-/* harmony export */   "mergeDefaults": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.mergeDefaults),
-/* harmony export */   "mergeProps": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps),
-/* harmony export */   "nextTick": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.nextTick),
-/* harmony export */   "normalizeClass": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass),
-/* harmony export */   "normalizeProps": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps),
-/* harmony export */   "normalizeStyle": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle),
-/* harmony export */   "onActivated": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onActivated),
-/* harmony export */   "onBeforeMount": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount),
-/* harmony export */   "onBeforeUnmount": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUnmount),
-/* harmony export */   "onBeforeUpdate": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUpdate),
-/* harmony export */   "onDeactivated": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onDeactivated),
-/* harmony export */   "onErrorCaptured": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onErrorCaptured),
-/* harmony export */   "onMounted": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onMounted),
-/* harmony export */   "onRenderTracked": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onRenderTracked),
-/* harmony export */   "onRenderTriggered": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onRenderTriggered),
-/* harmony export */   "onScopeDispose": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onScopeDispose),
-/* harmony export */   "onServerPrefetch": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onServerPrefetch),
-/* harmony export */   "onUnmounted": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted),
-/* harmony export */   "onUpdated": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onUpdated),
-/* harmony export */   "openBlock": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.openBlock),
-/* harmony export */   "popScopeId": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId),
-/* harmony export */   "provide": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.provide),
-/* harmony export */   "proxyRefs": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.proxyRefs),
-/* harmony export */   "pushScopeId": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId),
-/* harmony export */   "queuePostFlushCb": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.queuePostFlushCb),
-/* harmony export */   "reactive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.reactive),
-/* harmony export */   "readonly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.readonly),
-/* harmony export */   "ref": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.ref),
-/* harmony export */   "registerRuntimeCompiler": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.registerRuntimeCompiler),
-/* harmony export */   "render": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "renderList": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.renderList),
-/* harmony export */   "renderSlot": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot),
-/* harmony export */   "resolveComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent),
-/* harmony export */   "resolveDirective": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective),
-/* harmony export */   "resolveDynamicComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent),
-/* harmony export */   "resolveFilter": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveFilter),
-/* harmony export */   "resolveTransitionHooks": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveTransitionHooks),
-/* harmony export */   "setBlockTracking": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.setBlockTracking),
-/* harmony export */   "setDevtoolsHook": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.setDevtoolsHook),
-/* harmony export */   "setTransitionHooks": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.setTransitionHooks),
-/* harmony export */   "shallowReactive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.shallowReactive),
-/* harmony export */   "shallowReadonly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.shallowReadonly),
-/* harmony export */   "shallowRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.shallowRef),
-/* harmony export */   "ssrContextKey": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.ssrContextKey),
-/* harmony export */   "ssrUtils": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.ssrUtils),
-/* harmony export */   "stop": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.stop),
-/* harmony export */   "toDisplayString": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString),
-/* harmony export */   "toHandlerKey": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toHandlerKey),
-/* harmony export */   "toHandlers": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers),
-/* harmony export */   "toRaw": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toRaw),
-/* harmony export */   "toRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toRef),
-/* harmony export */   "toRefs": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toRefs),
-/* harmony export */   "transformVNodeArgs": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.transformVNodeArgs),
-/* harmony export */   "triggerRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.triggerRef),
-/* harmony export */   "unref": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.unref),
-/* harmony export */   "useAttrs": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useAttrs),
-/* harmony export */   "useCssModule": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useCssModule),
-/* harmony export */   "useCssVars": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useCssVars),
-/* harmony export */   "useSSRContext": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useSSRContext),
-/* harmony export */   "useSlots": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useSlots),
-/* harmony export */   "useTransitionState": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useTransitionState),
-/* harmony export */   "vModelCheckbox": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox),
-/* harmony export */   "vModelDynamic": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic),
-/* harmony export */   "vModelRadio": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio),
-/* harmony export */   "vModelSelect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect),
-/* harmony export */   "vModelText": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelText),
-/* harmony export */   "vShow": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vShow),
-/* harmony export */   "version": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.version),
-/* harmony export */   "warn": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.warn),
-/* harmony export */   "watch": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.watch),
-/* harmony export */   "watchEffect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect),
-/* harmony export */   "watchPostEffect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.watchPostEffect),
-/* harmony export */   "watchSyncEffect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.watchSyncEffect),
-/* harmony export */   "withAsyncContext": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withAsyncContext),
-/* harmony export */   "withCtx": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withCtx),
-/* harmony export */   "withDefaults": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withDefaults),
-/* harmony export */   "withDirectives": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives),
-/* harmony export */   "withKeys": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withKeys),
-/* harmony export */   "withMemo": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withMemo),
-/* harmony export */   "withModifiers": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers),
-/* harmony export */   "withScopeId": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId),
-/* harmony export */   "Vue": () => (/* reexport module object */ vue__WEBPACK_IMPORTED_MODULE_0__),
-/* harmony export */   "Vue2": () => (/* binding */ Vue2),
-/* harmony export */   "isVue2": () => (/* binding */ isVue2),
-/* harmony export */   "isVue3": () => (/* binding */ isVue3),
-/* harmony export */   "install": () => (/* binding */ install)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
-
-var isVue2 = false
-var isVue3 = true
-var Vue2 = undefined
-
-function install() {}
-
-function set(target, key, val) {
-  if (Array.isArray(target)) {
-    target.length = Math.max(target.length, key)
-    target.splice(key, 1, val)
-    return val
-  }
-  target[key] = val
-  return val
-}
-
-function del(target, key) {
-  if (Array.isArray(target)) {
-    target.splice(key, 1)
-    return
-  }
-  delete target[key]
-}
-
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@vuelidate/validators/node_modules/vue-demi/lib/index.mjs":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@vuelidate/validators/node_modules/vue-demi/lib/index.mjs ***!
-  \********************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

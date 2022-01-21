@@ -1,5 +1,4 @@
 import axios from 'axios';
-import placeholder from "lodash/fp/placeholder";
 
 export default {
     namespaced: true,
@@ -42,7 +41,11 @@ export default {
                 car_offer_title: null,
                 car_offer_description: null,
                 car_price: null,
+                car_has_price: true,
+                car_offer_city: null,
+                car_offer_region:null,
                 car_offer_owner: {
+                    is_owner_business: false,
                     owner_name: null,
                     owner_email: null,
                     owner_mobile: null,
@@ -129,6 +132,51 @@ export default {
         setCarCategory(state, payload) {
             state.car_offer.car_category = payload;
         },
+
+        //offer title, desc, price
+        SET_OFFER_TITLE(state, payload) {
+            state.car_offer.car_offer_title = payload;
+        },
+        SET_OFFER_DESC(state, payload) {
+            state.car_offer.car_offer_description = payload;
+        },
+        SET_CAR_PRICE(state, payload) {
+            state.car_offer.car_price = payload;
+        },
+        SET_CAR_HAS_PRICE(state, payload) {
+          state.car_offer.car_has_price = payload;
+        },
+        SET_OFFER_CITY(state, payload) {
+            state.car_offer.car_offer_city = payload;
+        },
+        SET_OFFER_REGION(state, payload) {
+            state.car_offer.car_offer_region = payload;
+        },
+        //Owner Details
+        SET_OWNER_NAME(state, payload) {
+            state.car_offer.car_offer_owner.owner_name = payload;
+        },
+        SET_OWNER_EMAIL(state, payload) {
+            state.car_offer.car_offer_owner.owner_email = payload;
+        },
+        SET_OWNER_MOBILE(state, payload) {
+            state.car_offer.car_offer_owner.owner_mobile = payload;
+        },
+        SET_OWNER_STATUTE(state, payload) {
+            state.car_offer.car_offer_owner.is_owner_business = payload;
+        },
+        SET_OWNER_COMPANY_NAME(state, payload) {
+            state.car_offer.car_offer_owner.owner_company = payload;
+        },
+        SET_OWNER_COMPANY_ADDRESS(state, payload) {
+            state.car_offer.car_offer_owner.owner_company_address = payload;
+        },
+        SET_OWNER_COMPANY_EIK(state, payload) {
+            state.car_offer.car_offer_owner.owner_company_eik = payload;
+        },
+        SET_OWNER_COMPANY_URL(state, payload) {
+            state.car_offer.car_offer_owner.owner_company_url = payload;
+        },
         setCarImages(state, payload) {
             state.car_offer.car_images = payload;
         },
@@ -156,6 +204,50 @@ export default {
         },
         getCarExtrasApi(state) {
             return state.car_extras;
+        },
+        //getters for offer details
+        GET_OFFER_TITLE(state) {
+            return state.car_offer.car_offer_title;
+        },
+        GET_OFFER_DESC(state) {
+            return state.car_offer.car_offer_description;
+        },
+        GET_CAR_PRICE(state) {
+            return state.car_offer.car_price;
+        },
+        GET_CAR_OFFER_CITY(state) {
+            return state.car_offer.car_offer_city;
+        },
+        GET_CAR_OFFER_REGION(state) {
+            return state.car_offer.car_offer_region;
+        },
+        GET_CAR_HAS_PRICE(state) {
+          return state.car_offer.car_has_price;
+        },
+        //getters for owner details
+        IS_OWNER_BUSINESS(state) {
+            return state.car_offer.car_offer_owner.is_owner_business;
+        },
+        GET_OWNER_NAMES(state) {
+            return state.car_offer.car_offer_owner.owner_name;
+        },
+        GET_OWNER_EMAIL(state) {
+            return state.car_offer.car_offer_owner.owner_email;
+        },
+        GET_OWNER_MOBILE(state) {
+            return state.car_offer.car_offer_owner.owner_mobile;
+        },
+        GET_OWNER_COMPANY_NAME(state) {
+            return state.car_offer.car_offer_owner.owner_company;
+        },
+        GET_OWNER_COMPANY_ADDRESS(state) {
+            return state.car_offer.car_offer_owner.owner_company_address;
+        },
+        GET_OWNER_COMPANY_EIK(state) {
+            return state.car_offer.car_offer_owner.owner_company_eik;
+        },
+        GET_OWNER_COMPANY_URL(state) {
+            return state.car_offer.car_offer_owner.owner_company_url;
         },
         //get the final offer
         getAllData(state) {
