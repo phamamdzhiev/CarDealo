@@ -22174,6 +22174,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/base/BaseCard.vue */ "./resources/js/components/ui/base/BaseCard.vue");
 /* harmony import */ var _TopBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TopBar */ "./resources/js/pages/sell-used-car/TopBar.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -22185,8 +22193,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       showExtraCategory: 1,
-      carColor: null,
-      carCategory: null,
       selectedExtras: [],
       extra1: [],
       extra2: [],
@@ -22196,24 +22202,12 @@ __webpack_require__.r(__webpack_exports__);
       extra6: []
     };
   },
-  computed: {
-    getAllData: function getAllData() {
-      return this.$store.getters['sellCar/getAllData'];
-    },
-    getCarExtrasApi: function getCarExtrasApi() {
-      return this.$store.getters['sellCar/getCarExtrasApi'];
-    },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('sellCar', ['getAllData', 'getCarExtrasApi'])), {}, {
     toggleNextStepButton: function toggleNextStepButton() {
-      return !!(this.selectedExtras.length > 0 && this.carCategory && this.carColor);
+      return !!(this.selectedExtras.length > 0 && this.getAllData['car_category'] && this.getAllData['car_color']);
     }
-  },
-  methods: {
-    back: function back() {
-      this.$store.commit('sellCar/setStepMinus');
-    },
-    toggleCategory: function toggleCategory(category) {
-      this.showExtraCategory = category;
-    },
+  }),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('sellCar', ['setStepMinus', 'setCarColor', 'setCarCategory', 'setStepPlus'])), {}, {
     toggleActiveClassOnExtras: function toggleActiveClassOnExtras(extra) {
       this.$refs.element.forEach(function (ref) {
         if (extra['extra'] === ref.getAttribute('data-extra-name')) {
@@ -22231,37 +22225,12 @@ __webpack_require__.r(__webpack_exports__);
         this.toggleActiveClassOnExtras(extra);
       }
     },
-    setCarColor: function setCarColor() {
-      var value = this.$refs.carColor.value;
-
-      if (!value || value === '') {
-        this.carColor = null;
-        return;
-      }
-
-      this.carColor = value;
-    },
-    setCarCategory: function setCarCategory() {
-      var value = this.$refs.carCategory.value;
-
-      if (!value || value === '') {
-        this.carCategory = null;
-        return;
-      }
-
-      this.carCategory = value;
-    },
     showStepSix: function showStepSix() {
-      if (!this.toggleNextStepButton) {
-        return;
-      }
-
+      if (!this.toggleNextStepButton) return;
       this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
-      this.$store.commit('sellCar/setCarColor', this.carColor);
-      this.$store.commit('sellCar/setCarCategory', this.carCategory);
-      this.$store.commit('sellCar/setStepPlus');
+      this.setStepPlus();
     }
-  }
+  })
 });
 
 /***/ }),
@@ -24051,22 +24020,13 @@ var _hoisted_14 = {
 
 var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "",
-    selected: ""
-  }, "Моля, изберете цвят", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Бял"
   }, "Бял", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Черен"
   }, "Черен", -1
@@ -24074,7 +24034,7 @@ var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Лилав"
   }, "Лилал", -1
@@ -24082,7 +24042,7 @@ var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Бронз"
   }, "Броз", -1
@@ -24090,7 +24050,7 @@ var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Металик"
   }, "Металик", -1
@@ -24098,33 +24058,24 @@ var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_21 = [_hoisted_15, _hoisted_16, _hoisted_17, _hoisted_18, _hoisted_19, _hoisted_20];
+var _hoisted_20 = [_hoisted_15, _hoisted_16, _hoisted_17, _hoisted_18, _hoisted_19];
 
-var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingSelectCarColor"
-  }, "Цвят", -1
+  }, "Моля изберете цвят", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_23 = {
+var _hoisted_22 = {
   "class": "question-section"
 };
-var _hoisted_24 = {
+var _hoisted_23 = {
   "class": "form-floating"
 };
 
-var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "",
-    selected: ""
-  }, "Моля, изберете категория", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_24 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Ван"
   }, "Ван", -1
@@ -24132,7 +24083,7 @@ var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Джип"
   }, "Джип", -1
@@ -24140,7 +24091,7 @@ var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_26 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Кабрио"
   }, "Кабрио", -1
@@ -24148,7 +24099,7 @@ var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Купе"
   }, "Купе", -1
@@ -24156,7 +24107,7 @@ var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_28 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Седан"
   }, "Седан", -1
@@ -24164,7 +24115,7 @@ var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "Комби"
   }, "Комби", -1
@@ -24172,12 +24123,12 @@ var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_32 = [_hoisted_25, _hoisted_26, _hoisted_27, _hoisted_28, _hoisted_29, _hoisted_30, _hoisted_31];
+var _hoisted_30 = [_hoisted_24, _hoisted_25, _hoisted_26, _hoisted_27, _hoisted_28, _hoisted_29];
 
-var _hoisted_33 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingSelectCarCategory"
-  }, "Категория", -1
+  }, "Моля изберете категория", -1
   /* HOISTED */
   );
 });
@@ -24191,7 +24142,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         onClick: _cache[0] || (_cache[0] = function () {
-          return $options.back && $options.back.apply($options, arguments);
+          return _ctx.setStepMinus && _ctx.setStepMinus.apply(_ctx, arguments);
         }),
         "class": "back__button"
       }, _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TopBar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
@@ -24199,7 +24150,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           active: $data.showExtraCategory === 1
         }),
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return $options.toggleCategory(1);
+          return $data.showExtraCategory = 1;
         })
       }, "Безопастност", 2
       /* CLASS */
@@ -24208,7 +24159,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           active: $data.showExtraCategory === 2
         }),
         onClick: _cache[2] || (_cache[2] = function ($event) {
-          return $options.toggleCategory(2);
+          return $data.showExtraCategory = 2;
         })
       }, "Комфорт", 2
       /* CLASS */
@@ -24217,7 +24168,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           active: $data.showExtraCategory === 3
         }),
         onClick: _cache[3] || (_cache[3] = function ($event) {
-          return $options.toggleCategory(3);
+          return $data.showExtraCategory = 3;
         })
       }, "Интериор", 2
       /* CLASS */
@@ -24226,7 +24177,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           active: $data.showExtraCategory === 4
         }),
         onClick: _cache[4] || (_cache[4] = function ($event) {
-          return $options.toggleCategory(4);
+          return $data.showExtraCategory = 4;
         })
       }, "Ектериор", 2
       /* CLASS */
@@ -24235,7 +24186,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           active: $data.showExtraCategory === 5
         }),
         onClick: _cache[5] || (_cache[5] = function ($event) {
-          return $options.toggleCategory(5);
+          return $data.showExtraCategory = 5;
         })
       }, "Защита", 2
       /* CLASS */
@@ -24244,11 +24195,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           active: $data.showExtraCategory === 6
         }),
         onClick: _cache[6] || (_cache[6] = function ($event) {
-          return $options.toggleCategory(6);
+          return $data.showExtraCategory = 6;
         })
       }, "Други", 2
       /* CLASS */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getCarExtrasApi['car_extra_1'], function (ex) {
+      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.getCarExtrasApi['car_extra_1'], function (ex) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
           key: ex.id,
           ref_for: true,
@@ -24265,7 +24216,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* KEYED_FRAGMENT */
       ))], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showExtraCategory === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getCarExtrasApi['car_extra_4'], function (ex) {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showExtraCategory === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.getCarExtrasApi['car_extra_4'], function (ex) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
           key: ex.id,
           "data-extra-name": ex.extra,
@@ -24281,25 +24232,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* KEYED_FRAGMENT */
       ))], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showExtraCategory === 4]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showExtraCategory === 4]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         "class": "form-select form__input m-0",
-        ref: "carColor",
-        onChange: _cache[7] || (_cache[7] = function () {
-          return $options.setCarColor && $options.setCarColor.apply($options, arguments);
+        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+          return _ctx.getAllData['car_color'] = $event;
         }),
         id: "floatingSelectCarColor"
-      }, _hoisted_21, 544
-      /* HYDRATE_EVENTS, NEED_PATCH */
-      ), _hoisted_22])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      }, _hoisted_20, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.getAllData['car_color']]]), _hoisted_21])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         id: "floatingSelectCarCategory",
-        ref: "carCategory",
-        onChange: _cache[8] || (_cache[8] = function () {
-          return $options.setCarCategory && $options.setCarCategory.apply($options, arguments);
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+          return _ctx.getAllData['car_category'] = $event;
         }),
         "class": "form-select form__input m-0"
-      }, _hoisted_32, 544
-      /* HYDRATE_EVENTS, NEED_PATCH */
-      ), _hoisted_33])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, _hoisted_30, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.getAllData['car_category']]]), _hoisted_31])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "base-button",
         onClick: _cache[9] || (_cache[9] = function () {
           return $options.showStepSix && $options.showStepSix.apply($options, arguments);
@@ -25826,7 +25775,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-f3d1f708] {\r\n    max-width: 800px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-f3d1f708] {\n    max-width: 800px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

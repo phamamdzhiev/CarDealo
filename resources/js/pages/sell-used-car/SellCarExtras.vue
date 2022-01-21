@@ -1,18 +1,18 @@
 <template>
     <div class="sell-car">
         <base-card>
-            <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 4)</i></span>
+            <span @click="setStepMinus" class="back__button">Назад <i class="fw-light">(Стъпка 4)</i></span>
             <TopBar/>
             <div class="question-section mb-3">
                 <h5 class="fw-bold">Избери какви екстри има твоята кола</h5>
                 <nav>
                     <ul id="car-extras-categories">
-                        <li :class="{ active: showExtraCategory === 1 }" @click="toggleCategory(1)">Безопастност</li>
-                        <li :class="{ active: showExtraCategory === 2 }" @click="toggleCategory(2)">Комфорт</li>
-                        <li :class="{ active: showExtraCategory === 3 }" @click="toggleCategory(3)">Интериор</li>
-                        <li :class="{ active: showExtraCategory === 4 }" @click="toggleCategory(4)">Ектериор</li>
-                        <li :class="{ active: showExtraCategory === 5 }" @click="toggleCategory(5)">Защита</li>
-                        <li :class="{ active: showExtraCategory === 6 }" @click="toggleCategory(6)">Други</li>
+                        <li :class="{ active: showExtraCategory === 1 }" @click="showExtraCategory = 1">Безопастност</li>
+                        <li :class="{ active: showExtraCategory === 2 }" @click="showExtraCategory = 2">Комфорт</li>
+                        <li :class="{ active: showExtraCategory === 3 }" @click="showExtraCategory = 3">Интериор</li>
+                        <li :class="{ active: showExtraCategory === 4 }" @click="showExtraCategory = 4">Ектериор</li>
+                        <li :class="{ active: showExtraCategory === 5 }" @click="showExtraCategory = 5">Защита</li>
+                        <li :class="{ active: showExtraCategory === 6 }" @click="showExtraCategory = 6">Други</li>
                     </ul>
                 </nav>
                 <ul id="extras">
@@ -43,23 +43,21 @@
             </div>
             <div class="question-section mb-3">
                 <div class="form-floating">
-                    <select class="form-select form__input m-0" ref="carColor" @change="setCarColor"
+                    <select class="form-select form__input m-0" v-model="getAllData['car_color']"
                             id="floatingSelectCarColor">
-                        <option value="" selected>Моля, изберете цвят</option>
                         <option value="Бял">Бял</option>
                         <option value="Черен">Черен</option>
                         <option value="Лилав">Лилал</option>
                         <option value="Бронз">Броз</option>
                         <option value="Металик">Металик</option>
                     </select>
-                    <label for="floatingSelectCarColor">Цвят</label>
+                    <label for="floatingSelectCarColor">Моля изберете цвят</label>
                 </div>
             </div>
             <div class="question-section">
                 <div class="form-floating">
-                    <select id="floatingSelectCarCategory" ref="carCategory" @change="setCarCategory"
+                    <select id="floatingSelectCarCategory" v-model="getAllData['car_category']"
                             class="form-select form__input m-0">
-                        <option value="" selected>Моля, изберете категория</option>
                         <option value="Ван">Ван</option>
                         <option value="Джип">Джип</option>
                         <option value="Кабрио">Кабрио</option>
@@ -67,7 +65,7 @@
                         <option value="Седан">Седан</option>
                         <option value="Комби">Комби</option>
                     </select>
-                    <label for="floatingSelectCarCategory">Категория</label>
+                    <label for="floatingSelectCarCategory">Моля изберете категория</label>
                 </div>
             </div>
             <button class="base-button" @click="showStepSix" v-show="toggleNextStepButton">
@@ -80,6 +78,7 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import TopBar from "./TopBar";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "SellCarExtras",
@@ -90,8 +89,6 @@ export default {
     data() {
         return {
             showExtraCategory: 1,
-            carColor: null,
-            carCategory: null,
             selectedExtras: [],
             extra1: [],
             extra2: [],
@@ -102,23 +99,18 @@ export default {
         }
     },
     computed: {
-        getAllData() {
-            return this.$store.getters['sellCar/getAllData'];
-        },
-        getCarExtrasApi() {
-            return this.$store.getters['sellCar/getCarExtrasApi'];
-        },
+        ...mapGetters('sellCar', ['getAllData', 'getCarExtrasApi']),
+
         toggleNextStepButton() {
-            return !!(this.selectedExtras.length > 0 && this.carCategory && this.carColor);
+            return !!(this.selectedExtras.length > 0 &&
+                this.getAllData['car_category'] &&
+                this.getAllData['car_color']
+            );
         },
     },
     methods: {
-        back() {
-            this.$store.commit('sellCar/setStepMinus');
-        },
-        toggleCategory(category) {
-            this.showExtraCategory = category;
-        },
+        ...mapMutations('sellCar', ['setStepMinus', 'setCarColor', 'setCarCategory', 'setStepPlus']),
+
         toggleActiveClassOnExtras(extra) {
             this.$refs.element.forEach((ref) => {
                 if (extra['extra'] === ref.getAttribute('data-extra-name')) {
@@ -137,31 +129,11 @@ export default {
             }
         },
 
-        setCarColor() {
-            let value = this.$refs.carColor.value;
-            if (!value || value === '') {
-                this.carColor = null;
-                return;
-            }
-            this.carColor = value;
-        },
-        setCarCategory() {
-            let value = this.$refs.carCategory.value;
-            if (!value || value === '') {
-                this.carCategory = null;
-                return;
-            }
-            this.carCategory = value;
-        },
         showStepSix() {
-            if (!this.toggleNextStepButton) {
-                return;
-            }
+            if (!this.toggleNextStepButton) return;
 
             this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
-            this.$store.commit('sellCar/setCarColor', this.carColor);
-            this.$store.commit('sellCar/setCarCategory', this.carCategory);
-            this.$store.commit('sellCar/setStepPlus');
+            this.setStepPlus();
         },
     },
 }
