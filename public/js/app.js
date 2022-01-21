@@ -22106,7 +22106,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapMutations)('sellCar', ['setNewOrUsed', 'setCarBrand', 'setSelectedCarBrandID', 'setStepPlus'])), (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapActions)('sellCar', ['setCarBrandWithModels'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapMutations)('sellCar', ['setNewOrUsed', 'setCarBrand', 'setSelectedCarBrandID', 'setStepPlus', 'setCarYear', 'setCarModel', 'setCarFuel', 'setCarTransmission', 'setCarKm', 'setCarCm3', 'setCarHp'])), (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapActions)('sellCar', ['setCarBrandWithModels'])), {}, {
     showStepTwo: function showStepTwo() {
       var _this2 = this;
 
@@ -22137,7 +22137,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
+    resetPreSelectedCarOptions: function resetPreSelectedCarOptions() {
+      this.setCarModel(null);
+      this.setCarYear(null);
+      this.setCarFuel(null);
+      this.setCarTransmission(null);
+      this.setCarCm3(null);
+      this.setCarHp(null);
+      this.setCarKm(null);
+    },
     selectBrand: function selectBrand(brandName, brandID) {
+      if (this.getAllData['car_brand'] !== brandName) {
+        this.resetPreSelectedCarOptions();
+      }
+
       this.setSelectedCarBrandID(brandID);
       this.setCarBrand(brandName);
     }

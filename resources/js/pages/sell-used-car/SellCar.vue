@@ -91,7 +91,20 @@ export default {
         },
     },
     methods: {
-        ...mapMutations('sellCar', ['setNewOrUsed', 'setCarBrand', 'setSelectedCarBrandID', 'setStepPlus']),
+        ...mapMutations('sellCar', [
+            'setNewOrUsed',
+            'setCarBrand',
+            'setSelectedCarBrandID',
+            'setStepPlus',
+            'setCarYear',
+            'setCarModel',
+            'setCarFuel',
+            'setCarTransmission',
+            'setCarKm',
+            'setCarCm3',
+            'setCarHp'
+            ]
+        ),
         ...mapActions('sellCar', ['setCarBrandWithModels']),
 
         async showStepTwo() {
@@ -102,7 +115,20 @@ export default {
             await this.setCarBrandWithModels(this.getSelectedCarBrandID);
             this.setStepPlus();
         },
+        resetPreSelectedCarOptions() {
+            this.setCarModel(null);
+            this.setCarYear(null);
+            this.setCarFuel(null);
+            this.setCarTransmission(null);
+            this.setCarCm3(null);
+            this.setCarHp(null);
+            this.setCarKm(null);
+        },
         selectBrand(brandName, brandID) {
+            if (this.getAllData['car_brand'] !== brandName) {
+               this.resetPreSelectedCarOptions()
+            }
+
             this.setSelectedCarBrandID(brandID);
             this.setCarBrand(brandName);
         },
