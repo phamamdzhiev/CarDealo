@@ -20721,7 +20721,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     link: {
       type: String,
-      required: true,
       "default": "/"
     }
   },
@@ -21011,37 +21010,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.SET_OWNER_STATUTE(!this.IS_OWNER_BUSINESS);
     },
-    showLastStep: function showLastStep(key, value) {
+    showLastStep: function showLastStep() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _this.isLoading = true;
-                _context.next = 4;
-                return axios.post('/api/generate-email-verification-code', _this.ownerDetails);
+                // const emailVerificationData = {
+                //     ownerNames: this.ownerNames,
+                //     ownerEmail: this.ownerEmail,
+                //     ownerMobile: this.ownerMobile,
+                // }
+                //
+                // try {
+                //     this.isLoading = true;
+                //     const response = await axios.post('/api/generate-email-verification-code', emailVerificationData);
+                //     this.isLoading = false;
+                // } catch (e) {
+                //     console.log(e, 'Email generate code failed');
+                // }
+                _this.setStepPlus();
 
-              case 4:
-                response = _context.sent;
-                _this.isLoading = false;
-                _context.next = 11;
-                break;
-
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0, 'Email generate code failed');
-
-              case 11:
+              case 1:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee);
       }))();
     }
   })
@@ -21070,9 +21067,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SellCarImages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SellCarImages */ "./resources/js/pages/sell-used-car/SellCarImages.vue");
 /* harmony import */ var _OwnerDetails__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./OwnerDetails */ "./resources/js/pages/sell-used-car/OwnerDetails.vue");
 /* harmony import */ var _partials_DisplayCarBrands__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./partials/DisplayCarBrands */ "./resources/js/pages/sell-used-car/partials/DisplayCarBrands.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _SellCarFinal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SellCarFinal */ "./resources/js/pages/sell-used-car/SellCarFinal.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_10__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -21095,6 +21093,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SellCar",
   components: {
@@ -21105,12 +21104,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     SellCarExtras: _SellCarExtras__WEBPACK_IMPORTED_MODULE_5__["default"],
     SellCarImages: _SellCarImages__WEBPACK_IMPORTED_MODULE_6__["default"],
     OwnerDetails: _OwnerDetails__WEBPACK_IMPORTED_MODULE_7__["default"],
+    SellCarFinal: _SellCarFinal__WEBPACK_IMPORTED_MODULE_9__["default"],
     DisplayCarBrands: _partials_DisplayCarBrands__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
   data: function data() {
     return {
       search: null,
-      keyword: null,
       filterCarBrands: []
     };
   },
@@ -21119,8 +21118,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.livesearchCarBrands();
     }
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('sellCar', ['getAllData', 'getCarPopularBrands', 'getStep', 'isLoading', 'getSelectedCarBrandID'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('sellCar', ['setNewOrUsed', 'setPopularCarBrands', 'setSelectedCarBrandID', 'setCarBrand', 'setStepPlus', 'setCarYear', 'setCarModel', 'setCarFuel', 'setCarTransmission', 'setCarKm', 'setCarCm3', 'setCarHp'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapActions)('sellCar', ['setCarBrandWithModels'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('sellCar', ['getAllData', 'getCarPopularBrands', 'getStep', 'isLoading', 'getSelectedCarBrandID'])), {}, {
+    keyword: {
+      get: function get() {
+        return this.$store.getters['sellCar/GET_LIVESEARCH'];
+      },
+      set: function set(val) {
+        this.SET_LIVESEARCH(val);
+      }
+    }
+  }),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapMutations)('sellCar', ['SET_LIVESEARCH', 'setNewOrUsed', 'setPopularCarBrands', 'setSelectedCarBrandID', 'setCarBrand', 'setStepPlus', 'setCarYear', 'setCarModel', 'setCarFuel', 'setCarTransmission', 'setCarKm', 'setCarCm3', 'setCarHp'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapActions)('sellCar', ['setCarBrandWithModels'])), {}, {
     livesearchCarBrands: function livesearchCarBrands() {
       var _this = this;
 
@@ -21130,7 +21138,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.keyword.length <= 2)) {
+                if (!(_this.$store.getters['sellCar/GET_LIVESEARCH'].length <= 2)) {
                   _context.next = 3;
                   break;
                 }
@@ -21288,6 +21296,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (!this.toggleNextStepButton) return;
       this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
       this.setStepPlus();
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=script&lang=js":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=script&lang=js ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/base/BaseCard */ "./resources/js/components/ui/base/BaseCard.vue");
+/* harmony import */ var _components_ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/base/BaseButton */ "./resources/js/components/ui/base/BaseButton.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "SellCarFinal",
+  components: {
+    BaseButton: _components_ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('sellCar', ['setCarBrand'])), {}, {
+    navigateToHomepage: function navigateToHomepage() {
+      this.setCarBrand(null);
+      sessionStorage.removeItem('sellCar');
+      this.$router.replace('/');
     }
   })
 });
@@ -21460,12 +21508,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context2.abrupt("return");
 
               case 14:
-                _this2.$store.commit('sellCar/setCarImages', _this2.images);
+                _this2.$store.commit('sellCar/setCarImages', _this2.images); // await this.imageUpload();
 
-                _context2.next = 17;
-                return _this2.imageUpload();
 
-              case 17:
+                _this2.$store.commit('sellCar/setStepPlus');
+
+              case 16:
               case "end":
                 return _context2.stop();
             }
@@ -21619,7 +21667,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.errors.errorHp = this.getAllData['car_hp'] >= 1500;
     },
     formatInputKm: function formatInputKm() {
-      this.errors.errorKm = this.getAllData['car_km'] >= 1000000;
+      this.errors.errorKm = this.getAllData['car_km'] < 1000000;
     },
     showStepFive: function showStepFive() {
       if (!this.toggleNextStepButton) return;
@@ -22750,7 +22798,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerEmail, void 0, {
         trim: true
-      }]]), _hoisted_43,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), _hoisted_43,  false ? (0) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.ownerEmail) + " ", 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
         id: "floatingInputMobile",
@@ -22917,6 +22967,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_SellCarImages = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SellCarImages");
 
+  var _component_SellCarFinal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SellCarFinal");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_ctx.getStep === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_card, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
@@ -22944,11 +22996,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Търси марка",
         autocomplete: "off",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return $data.keyword = $event;
+          return $options.keyword = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keyword, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.keyword, void 0, {
         trim: true
       }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_display_car_brands, {
         "car-brands": $data.filterCarBrands.length === 0 ? _ctx.getCarPopularBrands : $data.filterCarBrands,
@@ -22987,7 +23039,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 6]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarImages, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 7]])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 7]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SellCarFinal, null, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.getStep === 8]])]);
 }
 
 /***/ }),
@@ -23299,6 +23353,58 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, " Следваща стъпка ", 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.toggleNextStepButton]])];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=template&id=64b75026":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=template&id=64b75026 ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "sell-car"
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Готови сте!", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Към начална страница");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_base_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("base-button");
+
+  var _component_base_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("base-card");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_card, null, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_button, {
+        onClick: $options.navigateToHomepage,
+        link: ""
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_3];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["onClick"])];
     }),
     _: 1
     /* STABLE */
@@ -24394,7 +24500,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var sellCarState = (0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])({
   key: 'sellCar',
-  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models'],
+  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models', 'livesearch'],
   fetchBeforeUse: false,
   storage: window.sessionStorage
 });
@@ -24440,6 +24546,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //helper data
       loading: false,
       step: 1,
+      liveseach: null,
       car_popular_brands: null,
       car_brand_with_models: null,
       selected_brand_id: null,
@@ -24496,7 +24603,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mutations: {
-    // maybe better to make on Function SetStep(param) ;)
+    SET_LIVESEARCH: function SET_LIVESEARCH(state, payload) {
+      state.liveseach = payload;
+    },
     setStepPlus: function setStepPlus(state) {
       state.step++;
     },
@@ -24622,6 +24731,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   getters: {
+    GET_LIVESEARCH: function GET_LIVESEARCH(state) {
+      return state.liveseach;
+    },
     isLoading: function isLoading(state) {
       return state.loading;
     },
@@ -24966,7 +25078,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-03848611] {\r\n    max-width: 800px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-03848611] {\n    max-width: 800px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51968,6 +52080,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/pages/sell-used-car/SellCarFinal.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/pages/sell-used-car/SellCarFinal.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SellCarFinal_vue_vue_type_template_id_64b75026__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SellCarFinal.vue?vue&type=template&id=64b75026 */ "./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=template&id=64b75026");
+/* harmony import */ var _SellCarFinal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SellCarFinal.vue?vue&type=script&lang=js */ "./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=script&lang=js");
+/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_SellCarFinal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SellCarFinal_vue_vue_type_template_id_64b75026__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/sell-used-car/SellCarFinal.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/pages/sell-used-car/SellCarImages.vue":
 /*!************************************************************!*\
   !*** ./resources/js/pages/sell-used-car/SellCarImages.vue ***!
@@ -52397,6 +52537,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=script&lang=js":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SellCarFinal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SellCarFinal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SellCarFinal.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/pages/sell-used-car/SellCarImages.vue?vue&type=script&lang=js":
 /*!************************************************************************************!*\
   !*** ./resources/js/pages/sell-used-car/SellCarImages.vue?vue&type=script&lang=js ***!
@@ -52729,6 +52885,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SellCarExtras_vue_vue_type_template_id_f3d1f708_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SellCarExtras_vue_vue_type_template_id_f3d1f708_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SellCarExtras.vue?vue&type=template&id=f3d1f708&scoped=true */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/sell-used-car/SellCarExtras.vue?vue&type=template&id=f3d1f708&scoped=true");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=template&id=64b75026":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=template&id=64b75026 ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SellCarFinal_vue_vue_type_template_id_64b75026__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SellCarFinal_vue_vue_type_template_id_64b75026__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SellCarFinal.vue?vue&type=template&id=64b75026 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/sell-used-car/SellCarFinal.vue?vue&type=template&id=64b75026");
 
 
 /***/ }),

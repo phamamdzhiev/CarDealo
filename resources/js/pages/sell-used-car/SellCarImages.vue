@@ -142,8 +142,8 @@ export default {
             }
 
             this.$store.commit('sellCar/setCarImages', this.images);
-            await this.imageUpload();
-            // this.$store.commit('sellCar/setStepPlus');
+            // await this.imageUpload();
+            this.$store.commit('sellCar/setStepPlus');
         }
     }
 }

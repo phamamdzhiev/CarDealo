@@ -43,6 +43,7 @@
         <SellCarExtras v-show="getStep === 5"></SellCarExtras>
         <OwnerDetails v-show="getStep === 6"></OwnerDetails>
         <SellCarImages v-show="getStep === 7"></SellCarImages>
+        <SellCarFinal v-show="getStep === 8"></SellCarFinal>
     </div>
 </template>
 
@@ -55,6 +56,7 @@ import SellCarExtras from "./SellCarExtras";
 import SellCarImages from "./SellCarImages";
 import OwnerDetails from "./OwnerDetails";
 import DisplayCarBrands from "./partials/DisplayCarBrands";
+import SellCarFinal from "./SellCarFinal";
 import {mapActions, mapGetters, mapMutations} from "vuex";
 import _ from "lodash";
 
@@ -68,12 +70,12 @@ export default {
         SellCarExtras,
         SellCarImages,
         OwnerDetails,
+        SellCarFinal,
         DisplayCarBrands
     },
     data() {
         return {
             search: null,
-            keyword: null,
             filterCarBrands: []
         }
     },
@@ -83,10 +85,25 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('sellCar', ['getAllData', 'getCarPopularBrands', 'getStep', 'isLoading', 'getSelectedCarBrandID']),
+        ...mapGetters('sellCar', [
+            'getAllData',
+            'getCarPopularBrands',
+            'getStep',
+            'isLoading',
+            'getSelectedCarBrandID',
+        ]),
+        keyword: {
+            get() {
+                return this.$store.getters['sellCar/GET_LIVESEARCH'];
+            },
+            set(val) {
+                this.SET_LIVESEARCH(val);
+            }
+        }
     },
     methods: {
         ...mapMutations('sellCar', [
+                'SET_LIVESEARCH',
                 'setNewOrUsed',
                 'setPopularCarBrands',
                 'setSelectedCarBrandID',
@@ -104,8 +121,7 @@ export default {
         ...mapActions('sellCar', ['setCarBrandWithModels']),
 
         async livesearchCarBrands() {
-
-            if (this.keyword.length <= 2) {
+            if (this.$store.getters['sellCar/GET_LIVESEARCH'].length <= 2) {
                 this.filterCarBrands = [];
                 return;
             }

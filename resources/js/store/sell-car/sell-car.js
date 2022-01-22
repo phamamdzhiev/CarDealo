@@ -7,6 +7,7 @@ export default {
             //helper data
             loading: false,
             step: 1,
+            liveseach: null,
             car_popular_brands: null,
             car_brand_with_models: null,
             selected_brand_id: null,
@@ -60,7 +61,9 @@ export default {
         }
     },
     mutations: {
-        // maybe better to make on Function SetStep(param) ;)
+        SET_LIVESEARCH(state, payload) {
+            state.liveseach = payload;
+        },
         setStepPlus(state) {
             state.step++
         },
@@ -187,6 +190,9 @@ export default {
         }
     },
     getters: {
+        GET_LIVESEARCH(state) {
+            return state.liveseach;
+        },
         isLoading(state) {
             return state.loading;
         },

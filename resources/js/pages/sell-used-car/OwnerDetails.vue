@@ -103,6 +103,7 @@
                                                 message="Моля въведете валиден имейл адрес"
                     />
                 </div>
+                {{ ownerEmail }}
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputMobile"
                            placeholder="Мобилен номер"
@@ -334,16 +335,22 @@ export default {
 
             this.SET_OWNER_STATUTE(!this.IS_OWNER_BUSINESS);
         },
-        async showLastStep(key, value) {
-            try {
-                this.isLoading = true;
-                const response = await axios.post('/api/generate-email-verification-code', this.ownerDetails);
-                this.isLoading = false;
-            } catch (e) {
-                console.log(e, 'Email generate code failed');
-            }
+        async showLastStep() {
+            // const emailVerificationData = {
+            //     ownerNames: this.ownerNames,
+            //     ownerEmail: this.ownerEmail,
+            //     ownerMobile: this.ownerMobile,
+            // }
+            //
+            // try {
+            //     this.isLoading = true;
+            //     const response = await axios.post('/api/generate-email-verification-code', emailVerificationData);
+            //     this.isLoading = false;
+            // } catch (e) {
+            //     console.log(e, 'Email generate code failed');
+            // }
 
-            // this.setStepPlus();
+            this.setStepPlus();
         },
     }
 }

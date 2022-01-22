@@ -3,7 +3,13 @@ import createPersistedState from "vuex-persistedstate";
 
 const sellCarState = createPersistedState({
     key: 'sellCar',
-    paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models'],
+    paths: [
+        'sellCar.car_offer',
+        'sellCar.step',
+        'sellCar.selected_brand_id',
+        'sellCar.car_brand_with_models',
+        'livesearch'
+    ],
     fetchBeforeUse: false,
     storage: window.sessionStorage
 })
