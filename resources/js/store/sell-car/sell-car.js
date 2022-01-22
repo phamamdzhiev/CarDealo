@@ -43,7 +43,7 @@ export default {
                 car_price: null,
                 car_has_price: true,
                 car_offer_city: null,
-                car_offer_region:null,
+                car_offer_region: null,
                 car_offer_owner: {
                     is_owner_business: false,
                     owner_name: null,
@@ -144,7 +144,7 @@ export default {
             state.car_offer.car_price = payload;
         },
         SET_CAR_HAS_PRICE(state, payload) {
-          state.car_offer.car_has_price = payload;
+            state.car_offer.car_has_price = payload;
         },
         SET_OFFER_CITY(state, payload) {
             state.car_offer.car_offer_city = payload;
@@ -222,7 +222,7 @@ export default {
             return state.car_offer.car_offer_region;
         },
         GET_CAR_HAS_PRICE(state) {
-          return state.car_offer.car_has_price;
+            return state.car_offer.car_has_price;
         },
         //getters for owner details
         IS_OWNER_BUSINESS(state) {

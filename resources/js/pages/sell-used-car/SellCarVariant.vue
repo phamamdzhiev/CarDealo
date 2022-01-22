@@ -1,4 +1,6 @@
 <template>
+
+
     <div class="sell-car">
         <base-card>
             <span @click="setStepMinus" class="back__button">Назад <i class="fw-light">(Стъпка 3)</i></span>
@@ -41,7 +43,7 @@
                 <h5 class="fw-bold">Кубатура, мощност, пробег?</h5>
                 <div class="form-floating form-group">
                     <input type="number" id="cm3" class="form-control form__input"
-                           v-model.number="getAllData['car_cm3']"
+                           v-model.number="carCm3"
                            @change="formatInputCm3"
                            placeholder="Кубатура"
                     />
@@ -53,7 +55,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="horsepower" class="form-control form__input"
-                           v-model.number="getAllData['car_hp']"
+                           v-model.number="carHp"
                            @change="formatInputHp"
                            placeholder="Мощност (к.с)"
                     />
@@ -66,7 +68,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="km" class="form-control form__input"
-                           v-model.number="getAllData['car_km']"
+                           v-model.number="carKm"
                            @change="formatInputKm"
                            placeholder="Пробег (км.)"
                     />
@@ -85,7 +87,7 @@
     </div>
 </template>
 
-
+<!-- get /set compute -->
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import TopBar from "./TopBar";
@@ -108,7 +110,30 @@ export default {
     },
     computed: {
         ...mapGetters('sellCar', ['getAllData']),
-
+        carHp: {
+            get() {
+                return this.getAllData['car_hp'];
+            },
+            set(val) {
+                this.setCarHp(val);
+            }
+        },
+        carCm3: {
+            get() {
+                return this.getAllData['car_cm3'];
+            },
+            set(val) {
+                this.setCarCm3(val);
+            }
+        },
+        carKm: {
+            get() {
+                return this.getAllData['car_km'];
+            },
+            set(val) {
+                this.setCarKm(val);
+            }
+        },
         toggleNextStepButton() {
             return !!(this.getAllData['car_transmission'] &&
                 this.getAllData['car_fuel'] &&

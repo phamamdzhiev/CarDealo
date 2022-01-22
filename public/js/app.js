@@ -21582,6 +21582,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('sellCar', ['getAllData'])), {}, {
+    carHp: {
+      get: function get() {
+        return this.getAllData['car_hp'];
+      },
+      set: function set(val) {
+        this.setCarHp(val);
+      }
+    },
+    carCm3: {
+      get: function get() {
+        return this.getAllData['car_cm3'];
+      },
+      set: function set(val) {
+        this.setCarCm3(val);
+      }
+    },
+    carKm: {
+      get: function get() {
+        return this.getAllData['car_km'];
+      },
+      set: function set(val) {
+        this.setCarKm(val);
+      }
+    },
     toggleNextStepButton: function toggleNextStepButton() {
       return !!(this.getAllData['car_transmission'] && this.getAllData['car_fuel'] && this.getAllData['car_cm3'] && this.getAllData['car_hp'] && this.getAllData['car_km'] && !this.errors.errorCm3 && !this.errors.errorHp && !this.errors.errorKm);
     }
@@ -23776,7 +23800,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "cm3",
         "class": "form-control form__input",
         "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-          return _ctx.getAllData['car_cm3'] = $event;
+          return $options.carCm3 = $event;
         }),
         onChange: _cache[9] || (_cache[9] = function () {
           return $options.formatInputCm3 && $options.formatInputCm3.apply($options, arguments);
@@ -23784,14 +23808,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Кубатура"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_cm3'], void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.carCm3, void 0, {
         number: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_14, [_hoisted_15, $data.errors.errorCm3 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_16, _hoisted_18)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         id: "horsepower",
         "class": "form-control form__input",
         "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-          return _ctx.getAllData['car_hp'] = $event;
+          return $options.carHp = $event;
         }),
         onChange: _cache[11] || (_cache[11] = function () {
           return $options.formatInputHp && $options.formatInputHp.apply($options, arguments);
@@ -23799,14 +23823,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Мощност (к.с)"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_hp'], void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.carHp, void 0, {
         number: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_20, [_hoisted_21, $data.errors.errorHp ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_22, _hoisted_24)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         id: "km",
         "class": "form-control form__input",
         "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-          return _ctx.getAllData['car_km'] = $event;
+          return $options.carKm = $event;
         }),
         onChange: _cache[13] || (_cache[13] = function () {
           return $options.formatInputKm && $options.formatInputKm.apply($options, arguments);
@@ -23814,7 +23838,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Пробег (км.)"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.getAllData['car_km'], void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.carKm, void 0, {
         number: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_26, [_hoisted_27, $data.errors.errorKm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_28, _hoisted_30)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), $options.toggleNextStepButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
         key: 0,
@@ -24918,7 +24942,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-f3d1f708] {\n    max-width: 800px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-f3d1f708] {\r\n    max-width: 800px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
