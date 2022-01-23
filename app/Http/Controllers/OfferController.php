@@ -2,59 +2,79 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\AuthException;
 use App\Http\Resources\OfferResource;
 use App\Models\CarBrand;
 use App\Models\CarExtra;
+use App\Models\Offer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response as Response;
 
 class OfferController extends Controller
 {
-    public function searchCarBrands(Request $request)
+    /**
+     * @throws AuthException
+     * @var Request $request
+     */
+    private function auth($request)
     {
-        if (!$request->has('keyword')) {
-            return response()->json('Bad Request', Response::HTTP_BAD_REQUEST);
+        try {
+            /** @var User $user */
+            $user = User::whereEmail($request->input('ownerEmail'))->first();
+//            dump($request->allData['car_offer_owner']['is_owner_business']); die;
+            if (empty($user)) {
+                $user = User::create([
+                    'name' => $request->input('ownerNames'),
+                    'mobile' => $request->input('ownerMobile'),
+                    'email' => $request->ownerEmail,
+                    'password' => Hash::make($request->ownerPassword),
+                    'is_business' => $request->allData['car_offer_owner']['is_owner_business']
+                ]);
+            }
+
+
+        } catch (AuthException $exception) {
+            throw $exception;
+        } catch (\Throwable $exception) {
+            throw new AuthException('Auth failed!');
         }
-
-        $data = CarBrand::where('name', 'LIKE', '%'. $request->keyword . '%')->get();
-        return \response()->json(['success' => $data]);
     }
 
-    public function getPopularCarBrandsWithLimit(): \Illuminate\Http\JsonResponse
+    public function createOffer(Request $request): \Illuminate\Http\JsonResponse
     {
-        $expire = Carbon::now()->addMinutes(10);
-
-        $popularCarBrands = Cache::remember('car_brands', $expire, function () {
-            return OfferResource::collection(CarBrand::where('is_popular', 1)->orderBy('id')->take(10)->get());
-        });
-
-        return response()->json([
-            'popularCarBrands' => $popularCarBrands
+        $request->validate([
+            'ownerNames' => 'required',
+            'ownerEmail' => 'required',
+            'ownerMobile' => 'required',
+            'ownerPassword' => 'required',
         ]);
-    }
-    public function getCarBrands(): \Illuminate\Http\JsonResponse
-    {
 
-        $expire = Carbon::now()->addMinutes(10);
-
-        $carBrands = Cache::remember('car_brands', $expire, function () {
-            return OfferResource::collection(CarBrand::all());
-        });
-
-        return response()->json([
-            'car_brands' => $carBrands
+        $this->auth($request);
+        $allOfferData = $request->allData;
+        Offer::create([
+            'is_new' => $allOfferData['new_or_used'],
+            'car_brands_id' => 1,
+            'car_models_id' => 4,
+            'title' => $allOfferData['car_offer_title'],
+            'description' => $allOfferData['car_offer_description'],
+            'price' => $allOfferData['car_price'],
+            'km' => $allOfferData['car_km'],
+            'hp' => $allOfferData['car_hp'],
+            'cm3' => $allOfferData['car_cm3'],
+            'year' => $allOfferData['car_year'],
+            'fuel' => 1,
+            'transmission' => 1,
+            'color' => 1,
+            'coupe_type' => 1,
+            'year_acquired' => 0,
         ]);
-    }
 
-    public function getBrandWithModels($id): \Illuminate\Http\JsonResponse
-    {
-        $carBrandWithModels = CarBrand::find($id)->carModels;
-
-        return response()->json([
-            'car_brand_with_models' => $carBrandWithModels
-        ]);
+        return \response()->json('ok');
     }
 
     public function getCarExtras(): \Illuminate\Http\JsonResponse
@@ -70,6 +90,18 @@ class OfferController extends Controller
         ]);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //

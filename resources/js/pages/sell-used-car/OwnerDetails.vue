@@ -64,6 +64,7 @@
                                                 message="Моля въведете валидна цена"/>
                 </div>
             </div>
+            {{ IS_OWNER_BUSINESS }}
             <div :style="IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal'"
                  class="d-flex justify-content-end align-items-center"
                  @click="toggleBusinessOffer"
@@ -84,7 +85,7 @@
                 </span>
             </div>
             <div class="question-section mb-3">
-                <h5 class="fw-bold">Вашите детайли?</h5>
+                <h5 class="fw-bold">Данни за контакт</h5>
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputNames"
                            placeholder="Име и фамилия"
@@ -95,6 +96,17 @@
                                                 message="Моля въведете имена"/>
                 </div>
                 <div class="form-floating form-group">
+                    <input type="text" class="form-control form__input" id="floatingInputMobile"
+                           placeholder="Мобилен номер"
+                           v-model.trim="ownerMobile">
+                    <label for="floatingInputMobile">Мобилен номер</label>
+                    <FromInputValidationMessage v-if="false"
+                                                message="Моля въведете валиден мобилен номер във формат 08хххххххх"/>
+                </div>
+            </div>
+            <div class="question-section mb-3" v-if="true">
+                <h5 class="fw-bold">Създай профил</h5>
+                <div class="form-floating form-group">
                     <input type="email" class="form-control form__input" id="floatingInputEmail"
                            placeholder="Имейл адрес"
                            v-model.trim="ownerEmail">
@@ -103,14 +115,14 @@
                                                 message="Моля въведете валиден имейл адрес"
                     />
                 </div>
-                {{ ownerEmail }}
                 <div class="form-floating form-group">
-                    <input type="text" class="form-control form__input" id="floatingInputMobile"
-                           placeholder="Мобилен номер"
-                           v-model.trim="ownerMobile">
-                    <label for="floatingInputMobile">Мобилен номер</label>
+                    <input type="password" class="form-control form__input" id="floatingInputPassword"
+                           placeholder="Парола"
+                           v-model.trim="ownerPassword">
+                    <label for="floatingInputEmail">Парола</label>
                     <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете валиден мобилен номер във формат 08хххххххх"/>
+                                                message="Моля въведете валидна парола"
+                    />
                 </div>
             </div>
             <div class="question-section" v-if="IS_OWNER_BUSINESS">
@@ -150,15 +162,15 @@
                 <loading-dots v-else></loading-dots>
             </button>
         </base-card>
-        <button @click="showModal = true">Open Modal</button>
-        <BaseModal v-if="showModal" @close-modal="showModal = false">
-            <div class="form-group">
-                <form @submit.prevent="">
-                    <input type="text" placeholder="Въведете кода от емайла, който поличихте">
-                    <button>Верифицирай</button>
-                </form>
-            </div>
-        </BaseModal>
+<!--        <button @click="showModal = true">Open Modal</button>-->
+<!--        <BaseModal v-if="showModal" @close-modal="showModal = false">-->
+<!--            <div class="form-group">-->
+<!--                <form @submit.prevent="">-->
+<!--                    <input type="text" placeholder="Въведете кода от емайла, който поличихте">-->
+<!--                    <button>Верифицирай</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </BaseModal>-->
     </div>
 </template>
 
@@ -182,6 +194,7 @@ export default {
     },
     data() {
         return {
+            pass: null,
             isLoading: false,
             showModal: false,
             hasPrice: false,
@@ -230,6 +243,15 @@ export default {
             },
             set(value) {
                 this.SET_OWNER_EMAIL(value);
+            }
+        },
+
+        ownerPassword: {
+            get() {
+                return this.$store.getters['sellCar/GET_OWNER_PASSWORD'];
+            },
+            set(value) {
+                this.SET_OWNER_PASSWORD(value);
             }
         },
 
@@ -312,6 +334,7 @@ export default {
             'SET_CAR_HAS_PRICE',
             'SET_OWNER_NAME',
             'SET_OWNER_EMAIL',
+            'SET_OWNER_PASSWORD',
             'SET_OWNER_MOBILE',
             'SET_OWNER_STATUTE',
             'SET_OWNER_COMPANY_NAME',
@@ -336,21 +359,27 @@ export default {
             this.SET_OWNER_STATUTE(!this.IS_OWNER_BUSINESS);
         },
         async showLastStep() {
-            // const emailVerificationData = {
-            //     ownerNames: this.ownerNames,
-            //     ownerEmail: this.ownerEmail,
-            //     ownerMobile: this.ownerMobile,
-            // }
-            //
-            // try {
-            //     this.isLoading = true;
-            //     const response = await axios.post('/api/generate-email-verification-code', emailVerificationData);
-            //     this.isLoading = false;
-            // } catch (e) {
-            //     console.log(e, 'Email generate code failed');
-            // }
+            const data = {
+                allData: this.getAllData,
+                ownerNames: this.ownerNames,
+                ownerEmail: this.ownerEmail,
+                ownerMobile: this.ownerMobile,
+                ownerPassword: this.ownerPassword,
+            }
 
-            this.setStepPlus();
+            try {
+                this.isLoading = true;
+                const response = await axios.post('/api/create/offer', data);
+                console.log(response.data);
+                if (response.data === 'ok') {
+                    this.setStepPlus();
+                }
+                this.isLoading = false;
+            } catch (e) {
+                console.error(e, 'in /api/create/offer');
+            }
+
+
         },
     }
 }

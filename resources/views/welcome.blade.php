@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
+
 <div id="app"></div>
 <script>
     const APP_VERSION = window.APP_VERSION = '{{ env('APP_VERSION') }}';

@@ -113,7 +113,7 @@ export default {
                 },
                 {
                     id: 2,
-                    link: "/pedal",
+                    link: "/my-listing",
                     linkText: "Моите обяви",
                 },
             ],

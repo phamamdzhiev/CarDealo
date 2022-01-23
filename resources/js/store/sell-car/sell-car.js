@@ -19,6 +19,8 @@ export default {
                 car_extra_5: [],
                 car_extra_6: [],
             },
+            owner_email: null,
+            owner_password: null,
             //final offer
             car_offer: {
                 //step 1
@@ -48,7 +50,6 @@ export default {
                 car_offer_owner: {
                     is_owner_business: false,
                     owner_name: null,
-                    owner_email: null,
                     owner_mobile: null,
                     owner_company: null,
                     owner_company_eik: null,
@@ -160,10 +161,13 @@ export default {
             state.car_offer.car_offer_owner.owner_name = payload;
         },
         SET_OWNER_EMAIL(state, payload) {
-            state.car_offer.car_offer_owner.owner_email = payload;
+            state.owner_email = payload;
         },
         SET_OWNER_MOBILE(state, payload) {
             state.car_offer.car_offer_owner.owner_mobile = payload;
+        },
+        SET_OWNER_PASSWORD(state, payload) {
+            state.owner_password= payload;
         },
         SET_OWNER_STATUTE(state, payload) {
             state.car_offer.car_offer_owner.is_owner_business = payload;
@@ -238,10 +242,13 @@ export default {
             return state.car_offer.car_offer_owner.owner_name;
         },
         GET_OWNER_EMAIL(state) {
-            return state.car_offer.car_offer_owner.owner_email;
+            return state.owner_email;
         },
         GET_OWNER_MOBILE(state) {
             return state.car_offer.car_offer_owner.owner_mobile;
+        },
+        GET_OWNER_PASSWORD(state) {
+            return state.owner_password;
         },
         GET_OWNER_COMPANY_NAME(state) {
             return state.car_offer.car_offer_owner.owner_company;

@@ -13,46 +13,37 @@ class EmailController extends Controller
 {
     public function sendEmailConfirmationCode(Request $request): \Illuminate\Http\JsonResponse
     {
-        if (
-            $request->isMethod('post') &&
-            $request->has('ownerNames') &&
-            $request->has('ownerEmail') &&
-            $request->has('ownerMobile')
-        ) {
-            $ownerNames = $request->ownerNames;
-            $ownerEmail = $request->ownerEmail;
-            $ownerMobile = $request->ownerMobile;
+        $digits = 6;
+        $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1); //generate random 6-digits code
+        $user = User::select('id')->where('email', $request->input('email'))->first();
+
+        EmailVerification::create([
+            'code' => $code,
+            'expires_at' => Carbon::now()->addHour(),
+            'user_id' => $user->value('id')
+        ]);
+
+//        Mail::to($request->email)->send(new EmailVerificationCode($code));
+
+        return response()->json(['success' => 'Code has been sent!']);
+    }
+
+
+    public function confirmEmail(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $user = User::whereEmail($request->input('email'))->first();
+
+        /** @var EmailVerification $codeFromDb */
+        $codeFromDb = EmailVerification::select('code')->where('user_id', $user->id)->first();
+
+        if ($codeFromDb->code === $request->input('code')) {
+            $updateUser = new User;
+            $updateUser->email_verified_at = Carbon::now();
+            $updateUser->save();
+
+            return response()->json('success');
         } else {
-            return response()->json('Request is missing important data', 404);
-        }
-
-        $userInstance = new User;
-        $emailVerificationInstance = new EmailVerification;
-
-        $getUser = User::select('email')->where('email', '=', $ownerEmail)->first();
-
-
-        if (is_null($getUser)) {
-            $userInstance->name = $ownerNames;
-            $userInstance->email = $ownerEmail;
-            $userInstance->mobile = $ownerMobile;
-            $userInstance->save();
-
-            $digits = 6;
-            $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1); //generate random 6-digits code
-            $emailVerificationInstance->code = $code;
-            $emailVerificationInstance->expires_at = Carbon::now()->addHour(); // code is valid for 1 hour
-            $emailVerificationInstance->user_id = (int)$userInstance->id;
-
-            $emailVerificationInstance->save();
-            //        Mail::to($ownerEmail)->send(new EmailVerificationCode($code));
-            return response()->json(['success' => 'Code send!', 'setStep' => 6]);
-        } else {
-            $isEmailVerified = User::select('email_verified_at')->where('id', $userInstance->id)->first();
-            if (is_null($isEmailVerified)) {
-                return response()->json(['warn' => 'User exists, but it is not verified', 'setStep' => 6]);
-            }
-            return response()->json(['success' => 'User is verified']);
+            return response()->json(['error' => 'Codes do not match!']);
         }
     }
 }
