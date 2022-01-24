@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response as Response;
 
 class OfferController extends Controller
@@ -21,7 +22,7 @@ class OfferController extends Controller
      * @throws AuthException
      * @var Request $request
      */
-    private function auth($request)
+    private function saveUser($request)
     {
         try {
             /** @var User $user */
@@ -36,8 +37,6 @@ class OfferController extends Controller
                     'is_business' => $request->allData['car_offer_owner']['is_owner_business']
                 ]);
             }
-
-
         } catch (AuthException $exception) {
             throw $exception;
         } catch (\Throwable $exception) {
@@ -45,6 +44,10 @@ class OfferController extends Controller
         }
     }
 
+    /**
+     * @throws AuthException
+     * @throws \Exception
+     */
     public function createOffer(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -54,25 +57,27 @@ class OfferController extends Controller
             'ownerPassword' => 'required',
         ]);
 
-        $this->auth($request);
-        $allOfferData = $request->allData;
-        Offer::create([
-            'is_new' => $allOfferData['new_or_used'],
-            'car_brands_id' => 1,
-            'car_models_id' => 4,
-            'title' => $allOfferData['car_offer_title'],
-            'description' => $allOfferData['car_offer_description'],
-            'price' => $allOfferData['car_price'],
-            'km' => $allOfferData['car_km'],
-            'hp' => $allOfferData['car_hp'],
-            'cm3' => $allOfferData['car_cm3'],
-            'year' => $allOfferData['car_year'],
-            'fuel' => 1,
-            'transmission' => 1,
-            'color' => 1,
-            'coupe_type' => 1,
-            'year_acquired' => 0,
-        ]);
+        $this->saveUser($request);
+        $allOfferData = $request->input('allData');
+
+            Offer::create([
+                'is_new' => $allOfferData['new_or_used'],
+                'car_brands_id' => 1,
+                'car_models_id' => 4,
+                'title' => $allOfferData['car_offer_title'],
+                'description' => $allOfferData['car_offer_description'],
+                'price' => $allOfferData['car_price'],
+                'km' => $allOfferData['car_km'],
+                'hp' => $allOfferData['car_hp'],
+                'cm3' => $allOfferData['car_cm3'],
+                'year' => $allOfferData['car_year'],
+                'fuel' => 1,
+                'transmission' => 1,
+                'color' => 1,
+                'coupe_type' => 1,
+                'year_acquired' => 0,
+            ]);
+
 
         return \response()->json('ok');
     }

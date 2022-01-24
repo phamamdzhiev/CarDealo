@@ -50,12 +50,12 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" class="form-control form__input" id="floatingInputPrice"
-                           placeholder="Цена (BGN)" :disabled="GET_CAR_HAS_PRICE"
+                           placeholder="Цена (BGN)" :disabled="!GET_CAR_HAS_PRICE"
                            v-model="offerPrice"
                     >
                     <label for="floatingInputPrice">Цена (BGN)</label>
                     <div class="mt-1 ms-1 negotiable-price">
-                        <label for="negotiable-price" :class="{ checked: GET_CAR_HAS_PRICE }">
+                        <label for="negotiable-price" :class="{ checked: !GET_CAR_HAS_PRICE }">
                             <input type="checkbox" id="negotiable-price" v-show="false" @change="togglePrice"/>
                             По договаряне?
                         </label>
@@ -376,7 +376,7 @@ export default {
                 }
                 this.isLoading = false;
             } catch (e) {
-                console.error(e, 'in /api/create/offer');
+                console.error(e,'Catch eror');
             }
 
 

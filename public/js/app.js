@@ -21108,7 +21108,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 11:
                 _context.prev = 11;
                 _context.t0 = _context["catch"](1);
-                console.error(_context.t0, 'in /api/create/offer');
+                console.error(_context.t0, 'Catch eror');
 
               case 14:
               case "end":
@@ -22959,7 +22959,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "form-control form__input",
         id: "floatingInputPrice",
         placeholder: "Цена (BGN)",
-        disabled: _ctx.GET_CAR_HAS_PRICE,
+        disabled: !_ctx.GET_CAR_HAS_PRICE,
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $options.offerPrice = $event;
         })
@@ -22968,7 +22968,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , _hoisted_24), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.offerPrice]]), _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
         "for": "negotiable-price",
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          checked: _ctx.GET_CAR_HAS_PRICE
+          checked: !_ctx.GET_CAR_HAS_PRICE
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "checkbox",
