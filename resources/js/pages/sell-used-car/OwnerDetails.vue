@@ -360,7 +360,7 @@ export default {
         },
         async showLastStep() {
             const data = {
-                allData: this.getAllData,
+                // allData: this.getAllData,
                 ownerNames: this.ownerNames,
                 ownerEmail: this.ownerEmail,
                 ownerMobile: this.ownerMobile,

@@ -28,4 +28,12 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
+
+    protected $table = 'images';
+    protected $fillable = ['image', 'is_main', 'offer_id'];
+
+    public function offer()
+    {
+        return $this->belongsTo(Offer::class);
+    }
 }

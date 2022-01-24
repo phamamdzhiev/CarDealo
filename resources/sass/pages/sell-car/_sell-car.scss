@@ -71,8 +71,13 @@ $ul-max-height: 300px;
             box-shadow: $box-shadow-large;
             cursor: pointer;
             font-size: 0.850rem;
+            user-select: none;
 
             &.active {
+                > span { // X
+                    cursor: pointer;
+                }
+                cursor: default;
                 border: 2px solid $main-color;
             }
         }

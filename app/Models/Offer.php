@@ -66,4 +66,22 @@ class Offer  extends Model
     {
         return $this->belongsToMany(CarExtra::class)->using(OfferExtras::class);
     }
+
+    public function images() {
+        return $this->hasMany(Image::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('is_approved', '=', 1);
+    }
+
+    public function scopeNotApproved($query)
+    {
+        return $query->where('is_approved', '=', 0);
+    }
 }

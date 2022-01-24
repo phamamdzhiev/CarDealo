@@ -11597,9 +11597,17 @@ ul#by__brand__by_budget li.active::after {
   box-shadow: 0 4px 8px 0 rgba(36, 39, 44, 0.1), 0 2px 2px 0 rgba(36, 39, 44, 0.1);
   cursor: pointer;
   font-size: 0.85rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .sell-car div#brand .item.active {
+  cursor: default;
   border: 2px solid #fd5750;
+}
+.sell-car div#brand .item.active > span {
+  cursor: pointer;
 }
 .sell-car ul#year,
 .sell-car ul#model {

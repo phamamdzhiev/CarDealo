@@ -166,7 +166,7 @@ export default {
             this.errors.errorHp = this.getAllData['car_hp'] >= 1500;
         },
         formatInputKm() {
-            this.errors.errorKm = this.getAllData['car_km'] < 1000000;
+            this.errors.errorKm = this.getAllData['car_km'] >= 1000000;
         },
 
         showStepFive() {

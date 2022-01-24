@@ -24,23 +24,17 @@ class OfferController extends Controller
      */
     private function saveUser($request)
     {
-        try {
-            /** @var User $user */
-            $user = User::whereEmail($request->input('ownerEmail'))->first();
-//            dump($request->allData['car_offer_owner']['is_owner_business']); die;
-            if (empty($user)) {
-                $user = User::create([
-                    'name' => $request->input('ownerNames'),
-                    'mobile' => $request->input('ownerMobile'),
-                    'email' => $request->ownerEmail,
-                    'password' => Hash::make($request->ownerPassword),
-                    'is_business' => $request->allData['car_offer_owner']['is_owner_business']
-                ]);
-            }
-        } catch (AuthException $exception) {
-            throw $exception;
-        } catch (\Throwable $exception) {
-            throw new AuthException('Auth failed!');
+        /** @var User $user */
+        $user = User::whereEmail($request->input('ownerEmail'))->first();
+
+        if (empty($user)) {
+            User::create([
+                'name' => $request->input('ownerNames'),
+                'mobile' => $request->input('ownerMobile'),
+                'email' => $request->ownerEmail,
+                'password' => Hash::make($request->ownerPassword),
+                'is_business' => 0
+            ]);
         }
     }
 
@@ -48,7 +42,7 @@ class OfferController extends Controller
      * @throws AuthException
      * @throws \Exception
      */
-    public function createOffer(Request $request): \Illuminate\Http\JsonResponse
+    public function createOffer(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
     {
         $request->validate([
             'ownerNames' => 'required',
@@ -58,28 +52,12 @@ class OfferController extends Controller
         ]);
 
         $this->saveUser($request);
-        $allOfferData = $request->input('allData');
-
-            Offer::create([
-                'is_new' => $allOfferData['new_or_used'],
-                'car_brands_id' => 1,
-                'car_models_id' => 4,
-                'title' => $allOfferData['car_offer_title'],
-                'description' => $allOfferData['car_offer_description'],
-                'price' => $allOfferData['car_price'],
-                'km' => $allOfferData['car_km'],
-                'hp' => $allOfferData['car_hp'],
-                'cm3' => $allOfferData['car_cm3'],
-                'year' => $allOfferData['car_year'],
-                'fuel' => 1,
-                'transmission' => 1,
-                'color' => 1,
-                'coupe_type' => 1,
-                'year_acquired' => 0,
-            ]);
+//        $allOfferData = $request->input('allData');
 
 
-        return \response()->json('ok');
+
+
+        return \response('ok', 200);
     }
 
     public function getCarExtras(): \Illuminate\Http\JsonResponse

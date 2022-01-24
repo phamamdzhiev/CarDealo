@@ -26,7 +26,7 @@ Route::get('/get-popular-car-brands', [\App\Http\Controllers\CarBrandController:
 Route::get('/get-car-brands', [\App\Http\Controllers\CarBrandController::class, 'getCarBrands']);
 Route::get('/get-make-with-models/{id}', [\App\Http\Controllers\CarBrandController::class, 'getBrandWithModels']);
 Route::get('/get-all-car-extras', [\App\Http\Controllers\OfferController::class, 'getCarExtras']);
-Route::get('/livesearch/car-brands', [\App\Http\Controllers\OfferController::class, 'searchCarBrands']);
+Route::get('/livesearch/car-brands', [\App\Http\Controllers\CarBrandController::class, 'searchCarBrands']);
 //Route::get('/get-all-images-from-cdn', [\App\Http\Controllers\ImageKitController::class, 'index']);
 
 //post

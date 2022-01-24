@@ -54,6 +54,7 @@ pos
 import BaseCard from "../../components/ui/base/BaseCard";
 import draggable from 'vuedraggable';
 import ErrorDisplay from "../../components/ui/ErrorDisplay";
+import {mapGetters} from "vuex";
 
 export default {
     name: "SellCarImages",
@@ -71,6 +72,9 @@ export default {
             formData: [],
             isLoading: false
         }
+    },
+    computed: {
+        ...mapGetters('sellCar', ['getAllData', 'GET_OWNER_EMAIL']),
     },
     methods: {
         back() {
@@ -108,12 +112,16 @@ export default {
                 formImages.append('files[' + i + ']', file);
             }
 
+            formImages.append('offer', JSON.stringify(self.getAllData));
+            formImages.append('userEmail', self.GET_OWNER_EMAIL);
+
             const config = {
                 headers: {
                     'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
                 }
             }
             this.isLoading = true
+
             try {
                 await axios.post('api/image/test', formImages, config);
             } catch (error) {
@@ -141,9 +149,9 @@ export default {
                 return;
             }
 
-            this.$store.commit('sellCar/setCarImages', this.images);
-            // await this.imageUpload();
-            this.$store.commit('sellCar/setStepPlus');
+            // this.$store.commit('sellCar/setCarImages', this.images);
+            await this.imageUpload();
+            // this.$store.commit('sellCar/setStepPlus');
         }
     }
 }

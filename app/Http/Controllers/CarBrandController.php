@@ -7,14 +7,13 @@ use App\Models\CarBrand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Symfony\Component\HttpFoundation\Response as Response;
 
 class CarBrandController extends Controller
 {
-    public function searchCarBrands(Request $request): \Illuminate\Http\JsonResponse
+    public function searchCarBrands(Request $request)
     {
         if (!$request->has('keyword')) {
-            return response()->json('Bad Request', Response::HTTP_BAD_REQUEST);
+            return response('Bad Request', 400);
         }
 
         $data = CarBrand::where('name', 'LIKE', '%' . $request->keyword . '%')->get();

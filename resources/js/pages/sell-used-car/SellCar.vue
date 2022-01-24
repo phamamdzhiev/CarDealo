@@ -25,10 +25,21 @@
                             v-model.trim="keyword"
                         />
                     </div>
+                    <div id="brand" v-if="getAllData['car_brand'] !== null">
+                        <div class="item active position-relative">
+                            <span
+                                @click="resetFilters"
+                                class="position-absolute top-0 start-100 translate-middle fw-bold">
+                                <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
+                            </span>
+                            {{ getAllData['car_brand'] }}
+                        </div>
+                    </div>
                     <display-car-brands
+                        v-else
                         :car-brands="filterCarBrands.length === 0 ? getCarPopularBrands : filterCarBrands"
                         @setCarBrandEmit="selectBrand">
-                        <h6 v-if="filterCarBrands.length === 0">Популярни марки автомобили</h6>
+                        <h6 v-show="filterCarBrands.length === 0">Популярни марки автомобили</h6>
                     </display-car-brands>
                 </div>
                 <button @click="showStepTwo" class="base-button" v-if="getAllData['car_brand']">
@@ -40,10 +51,10 @@
         <SellCarModel v-if="getStep === 2"></SellCarModel>
         <SellCarYear v-if="getStep === 3"></SellCarYear>
         <SellCarVariant v-if="getStep === 4"></SellCarVariant>
-        <SellCarExtras v-show="getStep === 5"></SellCarExtras>
-        <OwnerDetails v-show="getStep === 6"></OwnerDetails>
-        <SellCarImages v-show="getStep === 7"></SellCarImages>
-        <SellCarFinal v-show="getStep === 8"></SellCarFinal>
+        <SellCarExtras v-if="getStep === 5"></SellCarExtras>
+        <OwnerDetails v-if="getStep === 6"></OwnerDetails>
+        <SellCarImages v-if="getStep === 7"></SellCarImages>
+        <SellCarFinal v-if="getStep === 8"></SellCarFinal>
     </div>
 </template>
 
@@ -75,7 +86,7 @@ export default {
     },
     data() {
         return {
-            search: null,
+            keyword: null,
             filterCarBrands: []
         }
     },
@@ -91,19 +102,14 @@ export default {
             'getStep',
             'isLoading',
             'getSelectedCarBrandID',
-        ]),
-        keyword: {
-            get() {
-                return this.$store.getters['sellCar/GET_LIVESEARCH'];
-            },
-            set(val) {
-                this.SET_LIVESEARCH(val);
-            }
-        }
+        ])
     },
     methods: {
+        resetFilters() {
+            this.setCarBrand(null);
+            this.filterCarBrands = []
+        },
         ...mapMutations('sellCar', [
-                'SET_LIVESEARCH',
                 'setNewOrUsed',
                 'setPopularCarBrands',
                 'setSelectedCarBrandID',
@@ -115,21 +121,22 @@ export default {
                 'setCarTransmission',
                 'setCarKm',
                 'setCarCm3',
-                'setCarHp'
+                'setCarHp',
+                'setStepToOne'
             ]
         ),
         ...mapActions('sellCar', ['setCarBrandWithModels']),
 
         async livesearchCarBrands() {
-            if (this.$store.getters['sellCar/GET_LIVESEARCH'].length <= 2) {
+            if (this.keyword.length <= 2) {
                 this.filterCarBrands = [];
                 return;
             }
 
+            this.setCarBrand(null);
             try {
                 const res = await axios.get('api/livesearch/car-brands', {params: {keyword: this.keyword}});
                 this.filterCarBrands = res.data.success;
-                console.log(res.data.success)
             } catch (e) {
                 console.log('Live Search Error', e);
             }
@@ -161,10 +168,10 @@ export default {
             this.setCarBrand(brandName);
         },
     },
-    created() {
+    async created() {
         //set all brands and extras from API
-        this.$store.dispatch('sellCar/setCarPopularBrands');
-        this.$store.dispatch('sellCar/setCarExtrasApi');
+        await this.$store.dispatch('sellCar/setCarPopularBrands');
+        await this.$store.dispatch('sellCar/setCarExtrasApi');
     },
 
     beforeRouteLeave(to, from, next) {
@@ -173,7 +180,7 @@ export default {
                 return;
             }
         }
-        this.$store.commit('sellCar/setStepToOne');
+        this.setStepToOne();
         next();
     },
 }
