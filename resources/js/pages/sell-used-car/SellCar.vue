@@ -5,10 +5,10 @@
                 <div class="question-section mb-4">
                     <h5 class="fw-bold">Състояние на автомобила?</h5>
                     <ul id="new__or__used">
-                        <li :class="{ active: getAllData['new_or_used'] === 1}"
+                        <li class="ripple" :class="{ active: getAllData['new_or_used'] === 1}"
                             @click="setNewOrUsed(1)">Употребяван
                         </li>
-                        <li :class="{ active: getAllData['new_or_used'] === 2 }"
+                        <li class="ripple" :class="{ active: getAllData['new_or_used'] === 2 }"
                             @click="setNewOrUsed(2)">Нов
                         </li>
                     </ul>
@@ -39,7 +39,10 @@
                         v-else
                         :car-brands="filterCarBrands.length === 0 ? getCarPopularBrands : filterCarBrands"
                         @setCarBrandEmit="selectBrand">
-                        <h6 v-show="filterCarBrands.length === 0">Популярни марки автомобили</h6>
+                        <h6 v-show="filterCarBrands.length === 0">
+                            <i class="bi bi-star-fill text-base-color"></i>
+                            Популярни марки автомобили
+                        </h6>
                     </display-car-brands>
                 </div>
                 <button @click="showStepTwo" class="base-button" v-if="getAllData['car_brand']">

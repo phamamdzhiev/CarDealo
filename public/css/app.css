@@ -11302,6 +11302,10 @@ input[type=number] {
   color: #ff3939;
 }
 
+.text-base-color {
+  color: #fd5750;
+}
+
 .base-button {
   background-color: #fd5750;
   border-radius: 4px;
@@ -11313,6 +11317,18 @@ input[type=number] {
 .base-button:hover, .base-button:active, .base-button:focus, .base-button:active:hover, .base-button:active:focus {
   color: white;
   background-color: #ff3b33;
+}
+.base-button.ripple {
+  background-position: center;
+  transition: background 500ms ease-in-out;
+}
+.base-button.ripple:hover {
+  background: rgba(253, 87, 80, 0.9) radial-gradient(circle, transparent 1%, rgba(253, 87, 80, 0.9) 1%) center/15000%;
+}
+.base-button.ripple:active {
+  background-color: rgba(253, 87, 80, 0.7);
+  background-size: 100%;
+  transition: background 0s;
 }
 
 .base-card {

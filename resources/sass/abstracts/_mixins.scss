@@ -22,7 +22,6 @@
 }
 
 
-
 @mixin base-primary-button() {
     background-color: $main-color;
     border-radius: 4px;
@@ -37,5 +36,23 @@
     &:active:focus {
         color: white;
         background-color: $main-color-hover;
+    }
+}
+
+
+@mixin ripple($bgColor) {
+    &.ripple {
+        background-position: center;
+        transition: background 500ms ease-in-out;
+
+        &:hover {
+            background: rgba($bgColor, 90%) radial-gradient(circle, transparent 1%, rgba($bgColor, 90%) 1%) center/15000%;
+        }
+
+        &:active {
+            background-color: rgba($bgColor, 70%);
+            background-size: 100%;
+            transition: background 0s;
+        }
     }
 }
