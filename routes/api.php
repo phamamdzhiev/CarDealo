@@ -34,3 +34,4 @@ Route::post('/image/test', [\App\Http\Controllers\ImageController::class, 'uploa
 Route::post('/generate-email-verification-code', [\App\Http\Controllers\EmailController::class, 'sendEmailConfirmationCode']);
 Route::post('/verify-email', [\App\Http\Controllers\EmailController::class, 'confirmEmail']);
 Route::post('create/offer', [\App\Http\Controllers\OfferController::class, 'createOffer']);
+Route::post('create/user', [\App\Http\Controllers\UserController::class, 'store']);

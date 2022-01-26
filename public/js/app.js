@@ -21095,27 +21095,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 5:
                 response = _context.sent;
-                console.log(response.data);
-
-                if (response.data === 'ok') {
-                  _this.setStepPlus();
-                }
+                console.log('Res', response); // if (response.data === 'ok') {
+                //     this.setStepPlus();
+                // }
 
                 _this.isLoading = false;
-                _context.next = 14;
+                _context.next = 13;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 10:
+                _context.prev = 10;
                 _context.t0 = _context["catch"](1);
                 console.error(_context.t0, 'Catch eror');
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 11]]);
+        }, _callee, null, [[1, 10]]);
       }))();
     }
   })

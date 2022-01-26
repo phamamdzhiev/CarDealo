@@ -24,40 +24,49 @@ class OfferController extends Controller
      */
     private function saveUser($request)
     {
-        /** @var User $user */
-        $user = User::whereEmail($request->input('ownerEmail'))->first();
 
-        if (empty($user)) {
-            User::create([
-                'name' => $request->input('ownerNames'),
-                'mobile' => $request->input('ownerMobile'),
-                'email' => $request->ownerEmail,
-                'password' => Hash::make($request->ownerPassword),
-                'is_business' => 0
-            ]);
-        }
     }
 
     /**
      * @throws AuthException
      * @throws \Exception
      */
-    public function createOffer(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+    public function createOffer(Request $request)
     {
         $request->validate([
-            'ownerNames' => 'required',
             'ownerEmail' => 'required',
-            'ownerMobile' => 'required',
-            'ownerPassword' => 'required',
+            'ownerPassword' => 'required'
         ]);
 
-        $this->saveUser($request);
-//        $allOfferData = $request->input('allData');
+//        $user = User::whereEmail($request->ownerEmail)->first();
+//        dump(Hash::check($request->ownerPassword, $user->password)); die;
+//
+//        if (!$user || !Hash::check($request->ownerPassword, $user->password)) {
+//
+//            return response(['auth' => 'failed'], 401);
+//        }
 
+//        /** @var User $user */
+//        $user = User::whereEmail($request->input('ownerEmail'))->first();
+//
+//        if (empty($user)) {
+//            $user = User::create([
+//                'name' => $request->input('ownerNames'),
+//                'mobile' => $request->input('ownerMobile'),
+//                'email' => $request->ownerEmail,
+//                'password' => Hash::make($request->ownerPassword),
+//                'is_business' => 0
+//            ]);
+//        }
+//
+        $token = $user->createToken('myapitoken')->plainTextToken;
 
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
 
-
-        return \response('ok', 200);
+        return response($response, 201);
     }
 
     public function getCarExtras(): \Illuminate\Http\JsonResponse

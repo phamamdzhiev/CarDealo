@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import Home from "../pages/Home.vue";
 import UsedCars from "../pages/used-cars/UsedCars.vue";
 import SellCar from "../pages/sell-used-car/SellCar";
-import SellCarYear from "../pages/sell-used-car/SellCarYear";
 import MyListing from "../pages/admin/my-listing/MyListing";
 import Login from "../pages/Auth/Login";
+import NotFound from "../pages/404/NotFound";
 
 const routes = [
     {
@@ -33,11 +33,11 @@ const routes = [
         name: "login",
         component: Login,
     },
-    // {
-    //     path: "/sell-car/model",
-    //     name: "sell-car.model",
-    //     component: SellCarModel,
-    // },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFound
+    }
 ];
 
 const router = createRouter({

@@ -370,10 +370,10 @@ export default {
             try {
                 this.isLoading = true;
                 const response = await axios.post('/api/create/offer', data);
-                console.log(response.data);
-                if (response.data === 'ok') {
-                    this.setStepPlus();
-                }
+                console.log('Res', response);
+                // if (response.data === 'ok') {
+                //     this.setStepPlus();
+                // }
                 this.isLoading = false;
             } catch (e) {
                 console.error(e,'Catch eror');
