@@ -53,13 +53,7 @@ class User extends Authenticatable
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'name',
-        'email',
-        'mobile',
-        'password',
-        'is_business'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.

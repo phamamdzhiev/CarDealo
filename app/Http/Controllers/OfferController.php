@@ -69,18 +69,7 @@ class OfferController extends Controller
         return response($response, 201);
     }
 
-    public function getCarExtras(): \Illuminate\Http\JsonResponse
-    {
-        $expire = Carbon::now()->addCenturies(10);
 
-        $carExtras = Cache::remember('car_extras', $expire, function () {
-            return CarExtra::all();
-        });
-
-        return response()->json([
-            'car_extras' => $carExtras
-        ]);
-    }
 }
 
 

@@ -264,9 +264,9 @@ export default {
         async setCarPopularBrands(context) {
             try {
                 context.state.loading = true;
-                const carPopularBrands = await axios.get('api/get-popular-car-brands');
+                const carPopularBrands = await axios.get('vehicle/fetch/popular-brands');
                 context.state.loading = false;
-                context.commit('setPopularCarBrands', carPopularBrands.data['popularCarBrands']);
+                context.commit('setPopularCarBrands', carPopularBrands.data);
             } catch (e) {
                 console.log('in popularCarBrands', e)
             }
@@ -275,9 +275,9 @@ export default {
         async setCarBrandWithModels(context, id) {
             try {
                 context.state.loading = true;
-                const carBrandWithModels = await axios.get(`api/get-make-with-models/${id}`);
+                const carBrandWithModels = await axios.get(`vehicle/fetch/car-models/${id}`);
                 context.state.loading = false;
-                context.commit('setCarMakeWithModels', carBrandWithModels.data['car_brand_with_models']);
+                context.commit('setCarMakeWithModels', carBrandWithModels.data);
             } catch (e) {
                 console.log('in carBrandsWithModels', e)
             }
@@ -286,9 +286,9 @@ export default {
         async setCarExtrasApi(context) {
             try {
                 context.state.loading = true;
-                const carExtras = await axios.get('api/get-all-car-extras');
+                const carExtras = await axios.get('vehicle/fetch/extras');
                 context.state.loading = false;
-                context.commit('setCarExtrasApi', carExtras.data['car_extras']);
+                context.commit('setCarExtrasApi', carExtras.data);
             } catch (e) {
                 console.log('in setCarExtras', e);
             }
