@@ -3,16 +3,17 @@
 use Illuminate\Support\Facades\Route;
 
 //Protected routes
-//Route::group(['middleware' => 'auth:sanctum'], function () {
-//    Route::get('/my-listing', function () {
-//        return 'protected';
-//    });
-//});
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/my-listing', function () {
+        return 'protected';
+    });
+});
 
 //User
 Route::group(['prefix' => 'user'], function () {
     Route::post('/create', [\App\Http\Controllers\UserController::class, 'store']);
     Route::post('/update/{id}', [\App\Http\Controllers\UserController::class, 'update']);
+    Route::get('/auth/fetch', [\App\Http\Controllers\UserController::class, 'isAuthenticated']);
 });
 
 //Email
@@ -32,10 +33,10 @@ Route::group(['prefix' => 'vehicle'], function () {
 
 //Offer
 Route::group(['prefix' => 'offer'], function () {
-    Route::post('/create', [\App\Http\Controllers\OfferController::class, 'createOffer']);
+    Route::post('/create', [\App\Http\Controllers\OfferController::class, 'store']);
 });
 
 //Image
 Route::group(['prefix' => 'image'], function () {
-    Route::post('/image/upload', [\App\Http\Controllers\ImageController::class, 'uploadImage']);
+    Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'uploadImage']);
 });

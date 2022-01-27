@@ -38,5 +38,8 @@ export default {
     components: {
         BaseCarousel,
     },
+    mounted() {
+        console.log('Home mounted')
+    }
 };
 </script>

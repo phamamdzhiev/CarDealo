@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserCreation;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -28,13 +30,20 @@ class UserController extends Controller
      */
     public function store(UserCreation $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'mobile' => $request->mobile,
-            'password' => Hash::make($request->password),
-            'ip' => $request->ip()
-        ]);
+        $user = User::whereEmail($request->input('email'))->first();
+
+        if (empty($user)) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'mobile' => $request->mobile,
+                'password' => Hash::make($request->password),
+                'ip' => $request->ip()
+            ]);
+        }
+
+        Auth::login($user); // manually log the user
+        $user->createToken('api-token')->plainTextToken;
 
         return response($user);
     }
@@ -80,5 +89,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
+    }
+
+
+    public function isAuthenticated(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+    {
+        if (Auth::check()) {
+            return response(Auth::user());
+        } else {
+            return response('no user');
+        }
     }
 }

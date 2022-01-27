@@ -64,7 +64,6 @@
                                                 message="Моля въведете валидна цена"/>
                 </div>
             </div>
-            {{ IS_OWNER_BUSINESS }}
             <div :style="IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal'"
                  class="d-flex justify-content-end align-items-center"
                  @click="toggleBusinessOffer"
@@ -104,27 +103,6 @@
                                                 message="Моля въведете валиден мобилен номер във формат 08хххххххх"/>
                 </div>
             </div>
-            <div class="question-section mb-3" v-if="true">
-                <h5 class="fw-bold">Създай профил</h5>
-                <div class="form-floating form-group">
-                    <input type="email" class="form-control form__input" id="floatingInputEmail"
-                           placeholder="Имейл адрес"
-                           v-model.trim="ownerEmail">
-                    <label for="floatingInputEmail">Имейл адрес</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете валиден имейл адрес"
-                    />
-                </div>
-                <div class="form-floating form-group">
-                    <input type="password" class="form-control form__input" id="floatingInputPassword"
-                           placeholder="Парола"
-                           v-model.trim="ownerPassword">
-                    <label for="floatingInputEmail">Парола</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете валидна парола"
-                    />
-                </div>
-            </div>
             <div class="question-section" v-if="IS_OWNER_BUSINESS">
                 <h5 class="fw-bold">Детайли за фирмата?</h5>
                 <div class="form-floating form-group">
@@ -155,6 +133,27 @@
                     <input type="text" class="form__input form-control" id="floatingInputDomain"
                            placeholder="Личен домейн в CarDealo" v-model.trim="ownerCompanyURL">
                     <label for="floatingInputDomain">Личен домейн в {{ window.APP_NAME }}</label>
+                </div>
+            </div>
+            <div class="question-section mb-3" v-if="true">
+                <h5 class="fw-bold">Създай профил</h5>
+                <div class="form-floating form-group">
+                    <input type="email" class="form-control form__input" id="floatingInputEmail"
+                           placeholder="Имейл адрес"
+                           v-model.trim="ownerEmail">
+                    <label for="floatingInputEmail">Имейл адрес</label>
+                    <FromInputValidationMessage v-if="false"
+                                                message="Моля въведете валиден имейл адрес"
+                    />
+                </div>
+                <div class="form-floating form-group">
+                    <input type="password" class="form-control form__input" id="floatingInputPassword"
+                           placeholder="Парола"
+                           v-model.trim="ownerPassword">
+                    <label for="floatingInputEmail">Парола</label>
+                    <FromInputValidationMessage v-if="false"
+                                                message="Моля въведете валидна парола"
+                    />
                 </div>
             </div>
             <button @click="showLastStep" class="base-button">
@@ -360,27 +359,26 @@ export default {
         },
         async showLastStep() {
             const data = {
-                // allData: this.getAllData,
-                ownerNames: this.ownerNames,
-                ownerEmail: this.ownerEmail,
-                ownerMobile: this.ownerMobile,
-                ownerPassword: this.ownerPassword,
+                name: this.ownerNames,
+                email: this.ownerEmail,
+                mobile: this.ownerMobile,
+                password: this.ownerPassword,
+                is_business: this.getAllData['car_offer_owner']['is_owner_business']
             }
 
             try {
                 this.isLoading = true;
-                const response = await axios.post('/api/create/offer', data);
-                console.log('Res', response);
-                // if (response.data === 'ok') {
-                //     this.setStepPlus();
-                // }
+
+                await axios.get('sanctum/csrf-token'); // this should be moved on more global place
+                const res = await axios.post('user/create', data);
+                console.log(res.data);
+                this.setStepPlus();
+
                 this.isLoading = false;
             } catch (e) {
-                console.error(e,'Catch eror');
+                throw new Error('User cannot be created');
             }
-
-
-        },
+        }
     }
 }
 </script>

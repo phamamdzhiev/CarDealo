@@ -42,7 +42,8 @@ pos
                 </div>
             </div>
             <error-display :errors="errors"></error-display>
-            <button @click="uploadOffer" class="base-button" v-show="images.length > 4">
+<!--            v-show="images.length > 4"-->
+            <button @click="uploadOffer" class="base-button" >
                 <span v-if="!isLoading">Публикувай обява</span>
                 <loading-dots v-else></loading-dots>
             </button>
@@ -113,7 +114,7 @@ export default {
             }
 
             formImages.append('offer', JSON.stringify(self.getAllData));
-            formImages.append('userEmail', self.GET_OWNER_EMAIL);
+            formImages.append('email', self.GET_OWNER_EMAIL);
 
             const config = {
                 headers: {
@@ -123,31 +124,25 @@ export default {
             this.isLoading = true
 
             try {
-                await axios.post('api/image/test', formImages, config);
+                await axios.post('offer/create', formImages, config);
             } catch (error) {
-                if (error.response) {
-                    this.errors = error.response.data['errors'];
-                    console.log(error.response.data['errors'])
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
-                }
+               throw new Error('Offer or images cannot be created or uploaded');
             }
 
             this.isLoading = false
         },
         async uploadOffer() {
-            const lArr = this.imageTmpUrl.length
-            if (lArr === 0) {
-                alert(`Моля, качете снимки`);
-                return
-            } else if (lArr < 5) {
-                alert(`Моля, качете поне още ${5 - lArr} снимки`);
-                return
-            } else if (lArr > 16) {
-                alert(`Моля, изтриите ${lArr - 16} снимки`);
-                return;
-            }
+            // const lArr = this.imageTmpUrl.length
+            // if (lArr === 0) {
+            //     alert(`Моля, качете снимки`);
+            //     return
+            // } else if (lArr < 5) {
+            //     alert(`Моля, качете поне още ${5 - lArr} снимки`);
+            //     return
+            // } else if (lArr > 16) {
+            //     alert(`Моля, изтриите ${lArr - 16} снимки`);
+            //     return;
+            // }
 
             // this.$store.commit('sellCar/setCarImages', this.images);
             await this.imageUpload();

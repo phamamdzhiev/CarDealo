@@ -138,8 +138,8 @@ export default {
 
             this.setCarBrand(null);
             try {
-                const res = await axios.get('api/livesearch/car-brands', {params: {keyword: this.keyword}});
-                this.filterCarBrands = res.data.success;
+                const res = await axios.get('vehicle/search/brands', {params: {keyword: this.keyword}});
+                this.filterCarBrands = res.data;
             } catch (e) {
                 console.log('Live Search Error', e);
             }

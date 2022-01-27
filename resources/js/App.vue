@@ -13,6 +13,10 @@ export default {
     components: {
         TheHeader,
     },
+    async mounted() {
+       const res = await axios.get('/user/auth/fetch');
+        console.log(res.data);
+    }
 };
 </script>
 <style>

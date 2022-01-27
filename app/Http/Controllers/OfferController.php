@@ -2,108 +2,109 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\AuthException;
-use App\Http\Resources\OfferResource;
-use App\Models\CarBrand;
-use App\Models\CarExtra;
+use App\Http\Requests\OfferCreationRequest;
 use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Response as Response;
 
 class OfferController extends Controller
 {
     /**
-     * @throws AuthException
-     * @var Request $request
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    private function saveUser($request)
+    public function index()
     {
 
     }
 
     /**
-     * @throws AuthException
-     * @throws \Exception
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function createOffer(Request $request)
+    public function store(Request $request)
     {
-        $request->validate([
-            'ownerEmail' => 'required',
-            'ownerPassword' => 'required'
+        $offerData = json_decode($request->input('offer'), true);
+        $userEmail = $request->input('email');
+
+        Validator::make($offerData, [
+            'new_or_used' => 'required',
+            'car_brand' => 'required',
+            //add rest of validations...
         ]);
 
-//        $user = User::whereEmail($request->ownerEmail)->first();
-//        dump(Hash::check($request->ownerPassword, $user->password)); die;
-//
-//        if (!$user || !Hash::check($request->ownerPassword, $user->password)) {
-//
-//            return response(['auth' => 'failed'], 401);
-//        }
+        $user = User::whereEmail($userEmail)->first();
 
-//        /** @var User $user */
-//        $user = User::whereEmail($request->input('ownerEmail'))->first();
-//
-//        if (empty($user)) {
-//            $user = User::create([
-//                'name' => $request->input('ownerNames'),
-//                'mobile' => $request->input('ownerMobile'),
-//                'email' => $request->ownerEmail,
-//                'password' => Hash::make($request->ownerPassword),
-//                'is_business' => 0
-//            ]);
-//        }
-//
-        $token = $user->createToken('myapitoken')->plainTextToken;
+        $offer = Offer::create([
+            'is_new' => $offerData['new_or_used'],
+            'car_brands_id' => 1,
+            'car_models_id' => 4,
+            'title' => $offerData['car_offer_title'],
+            'description' => $offerData['car_offer_description'],
+            'price' => $offerData['car_price'],
+            'km' => $offerData['car_km'],
+            'hp' => $offerData['car_hp'],
+            'cm3' => $offerData['car_cm3'],
+            'year' => $offerData['car_year'],
+            'fuel' => 1,
+            'transmission' => 1,
+            'color' => 1,
+            'coupe_type' => 1,
+            'year_acquired' => 0,
+            'user_id' => $user->id
+        ]);
 
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
+        $image = ImageController::uploadImages($request, $offer->id);
 
-        return response($response, 201);
+        return response($image);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param \App\Models\Offer $offer
+     * @return Offer[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function show(Offer $offer)
+    {
+        return $offer->all();
+    }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param \App\Models\Offer $offer
+     * @return \Illuminate\Http\Response
+     */
+    public function showApproved(Offer $offer)
+    {
+        return $offer->approved()->get();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Offer $offer
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Offer $offer)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\Models\Offer $offer
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Offer $offer)
+    {
+        //
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//            $uploadToKit = new ImageKit(
-//                env('IMAGE_KIT_PUBLIC'),
-//                env('IMAGE_KIT_PRIVATE'),
-//                env('IMAGE_KIT_URL')
-//            );
-
-//            $path = public_path('images');
-//                $filename = $file->getClientOriginalName();
-//
-//                $imagePath = $path . DIRECTORY_SEPARATOR . $filename;
-//
-//                /**
-//                 * @var $res Response
-//                 */
-//                $uploadToKit->upload([
-//                    'file' => fopen($imagePath, 'r'),
-//                    'fileName' => $filename,
-//                    'folder' => date('Y-m')
-//                ]);
-//
-//                unlink($imagePath);
