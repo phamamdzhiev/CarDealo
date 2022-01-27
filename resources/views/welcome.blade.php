@@ -16,12 +16,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-{{ \Illuminate\Support\Facades\Auth::user()->email }}
 <div id="app"></div>
 <script>
     const APP_VERSION = window.APP_VERSION = '{{ env('APP_VERSION') }}';
     const APP_NAME = window.APP_NAME = '{{ env('APP_NAME') }}';
-    const AUTH = window.AUTH = '{{ \Illuminate\Support\Facades\Auth::check() }}';
+    const AUTH = window.AUTH = {!! json_encode(\Illuminate\Support\Facades\Auth::user()) !!}
 </script>
 <script defer src="{{ asset('js/app.js') }}"></script>
 </body>

@@ -20532,21 +20532,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     TheHeader: _components_layout_header_TheHeader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  mounted: function mounted() {
+  mounted: function mounted() {// const res = await axios.get('/user/auth/fetch');
+    //  console.log(res.data);
+
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var res;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/user/auth/fetch');
-
-            case 2:
-              res = _context.sent;
-              console.log(res.data);
-
-            case 4:
             case "end":
               return _context.stop();
           }
@@ -20903,7 +20896,7 @@ __webpack_require__.r(__webpack_exports__);
     BaseCarousel: _components_ui_base_BaseCarousel_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   mounted: function mounted() {
-    console.log('Home mounted');
+    console.log('Home mounted', window.AUTH);
   }
 });
 

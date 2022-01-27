@@ -39,7 +39,7 @@ export default {
         BaseCarousel,
     },
     mounted() {
-        console.log('Home mounted')
+        console.log('Home mounted', window.AUTH)
     }
 };
 </script>

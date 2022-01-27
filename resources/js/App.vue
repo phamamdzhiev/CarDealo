@@ -14,8 +14,8 @@ export default {
         TheHeader,
     },
     async mounted() {
-       const res = await axios.get('/user/auth/fetch');
-        console.log(res.data);
+       // const res = await axios.get('/user/auth/fetch');
+       //  console.log(res.data);
     }
 };
 </script>
