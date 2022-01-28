@@ -17,8 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('admin/login', [App\Http\Controllers\Admin\AuthController::class, 'index'])
+    ->name('admin.login.index')->middleware('guest:admin');
 
-require __DIR__.'/auth.php';
+Route::post('admin/login', [App\Http\Controllers\Admin\AuthController::class, 'login'])
+    ->name('admin.login');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
+    Route::get('/index', [App\Http\Controllers\Admin\IndexController::class, 'index'])->name('admin.index');
+    Route::get('/listings', [App\Http\Controllers\Admin\ListingController::class, 'index'])->name('admin.listings');
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users');
+    Route::get('/logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('admin.logout');
+});
+
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');

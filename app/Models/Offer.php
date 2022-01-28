@@ -50,6 +50,15 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereYear($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereYearAcquired($value)
  * @mixin \Eloquent
+ * @property int $user_id
+ * @property int $is_approved
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer notApproved()
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereIsApproved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereUserId($value)
  */
 class Offer  extends Model
 {
