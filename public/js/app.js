@@ -24835,18 +24835,22 @@ __webpack_require__.r(__webpack_exports__);
   namespaced: true,
   state: function state() {
     return {
-      hasUserAuth: false
+      user: false,
+      is_authenticated: false
     };
   },
   mutations: {
-    SET_USER_AUTH: function SET_USER_AUTH(state) {
-      state.hasUserAuth = true;
+    SET_USER_AUTH: function SET_USER_AUTH(state, payload) {
+      state.user = payload;
+      state.is_authenticated = !!payload;
     }
   },
   getters: {
-    HAS_USER_AUTH: function HAS_USER_AUTH(state) {
-      console.log('getter');
-      return state.hasUserAuth;
+    GET_AUTH_USER: function GET_AUTH_USER(state) {
+      return state.user;
+    },
+    HAS_USER: function HAS_USER(state) {
+      return state.is_authenticated;
     }
   },
   actions: {
@@ -24869,46 +24873,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
-/* harmony import */ var _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sell-car/sell-car */ "./resources/js/store/sell-car/sell-car.js");
-/* harmony import */ var _auth_auth_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth/auth-store */ "./resources/js/store/auth/auth-store.js");
+/* harmony import */ var _persist_state_persist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./persist-state/persist */ "./resources/js/store/persist-state/persist.js");
+/* harmony import */ var _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sell-car/sell-car */ "./resources/js/store/sell-car/sell-car.js");
+/* harmony import */ var _auth_auth_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth/auth-store */ "./resources/js/store/auth/auth-store.js");
 
- //modules
+ //persisting states
+
+ //store modules
 
 
 
-var PersistSellCarState = (0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_4__.createStore)({
+  modules: {
+    sellCar: _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_2__["default"],
+    auth: _auth_auth_store__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])(_persist_state_persist__WEBPACK_IMPORTED_MODULE_1__.sellCarPersist), (0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])(_persist_state_persist__WEBPACK_IMPORTED_MODULE_1__.persistAuthUser)]
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store/persist-state/persist.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/store/persist-state/persist.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "sellCarPersist": () => (/* binding */ sellCarPersist),
+/* harmony export */   "persistAuthUser": () => (/* binding */ persistAuthUser)
+/* harmony export */ });
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+
+var sellCarPersist = {
   key: 'sellCar',
-  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models', 'livesearch', 'sellCar.owner_email'],
+  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models', 'sellCar.owner_email'],
   fetchBeforeUse: false,
   storage: window.sessionStorage
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_3__.createStore)({
-  state: {
-    hasUserAuth: false
-  },
-  mutations: {
-    SET_USER_AUTH: function SET_USER_AUTH(state) {
-      state.hasUserAuth = true;
+};
+var persistAuthUser = {
+  key: 'auth',
+  paths: ['auth.is_authenticated', 'auth.user'],
+  storage: {
+    getItem: function getItem(key) {
+      return js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].get(key);
+    },
+    setItem: function setItem(key, value) {
+      return js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].set(key, value, {
+        expires: 1,
+        secure: true
+      });
+    },
+    removeItem: function removeItem(key) {
+      return js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].remove(key);
     }
-  },
-  getters: {
-    HAS_USER_AUTH: function HAS_USER_AUTH(state) {
-      return state.hasUserAuth;
-    }
-  },
-  actions: {
-    SET_USER_AUTH_ASYNC: function SET_USER_AUTH_ASYNC(context) {
-      context.commit('SET_USER_AUTH');
-    }
-  },
-  modules: {
-    sellCar: _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_1__["default"],
-    authStore: _auth_auth_store__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
-  plugins: [PersistSellCarState]
-}));
+  }
+};
 
 /***/ }),
 
@@ -25353,7 +25377,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nhtml {\n    /*font-size: 62.5%;*/\n}\nbody {\n    background-color: #fafafa;\n    font-family: \"Nunito\", sans-serif;\n}\nheader {\n    background-color: white;\n}\n#app {\n    /* text-align: center; */\n    color: #2c3e50;\n}\na {\n    text-decoration: none;\n    color: #2c3e50;\n    font-weight: 700;\n}\na:hover,\na:active {\n    color: #fd5750;\n}\nul {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nhtml {\r\n    /*font-size: 62.5%;*/\n}\nbody {\r\n    background-color: #fafafa;\r\n    font-family: \"Nunito\", sans-serif;\n}\nheader {\r\n    background-color: white;\n}\n#app {\r\n    /* text-align: center; */\r\n    color: #2c3e50;\n}\na {\r\n    text-decoration: none;\r\n    color: #2c3e50;\r\n    font-weight: 700;\n}\na:hover,\r\na:active {\r\n    color: #fd5750;\n}\nul {\r\n    padding: 0;\r\n    margin: 0;\r\n    list-style: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64466,6 +64490,155 @@ function del(target, key) {
 
 
 
+
+
+/***/ }),
+
+/***/ "./node_modules/js-cookie/dist/js.cookie.mjs":
+/*!***************************************************!*\
+  !*** ./node_modules/js-cookie/dist/js.cookie.mjs ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/*! js-cookie v3.0.1 | MIT */
+/* eslint-disable no-var */
+function assign (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+    for (var key in source) {
+      target[key] = source[key];
+    }
+  }
+  return target
+}
+/* eslint-enable no-var */
+
+/* eslint-disable no-var */
+var defaultConverter = {
+  read: function (value) {
+    if (value[0] === '"') {
+      value = value.slice(1, -1);
+    }
+    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
+  },
+  write: function (value) {
+    return encodeURIComponent(value).replace(
+      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
+      decodeURIComponent
+    )
+  }
+};
+/* eslint-enable no-var */
+
+/* eslint-disable no-var */
+
+function init (converter, defaultAttributes) {
+  function set (key, value, attributes) {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    attributes = assign({}, defaultAttributes, attributes);
+
+    if (typeof attributes.expires === 'number') {
+      attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
+    }
+    if (attributes.expires) {
+      attributes.expires = attributes.expires.toUTCString();
+    }
+
+    key = encodeURIComponent(key)
+      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
+      .replace(/[()]/g, escape);
+
+    var stringifiedAttributes = '';
+    for (var attributeName in attributes) {
+      if (!attributes[attributeName]) {
+        continue
+      }
+
+      stringifiedAttributes += '; ' + attributeName;
+
+      if (attributes[attributeName] === true) {
+        continue
+      }
+
+      // Considers RFC 6265 section 5.2:
+      // ...
+      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
+      //     character:
+      // Consume the characters of the unparsed-attributes up to,
+      // not including, the first %x3B (";") character.
+      // ...
+      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
+    }
+
+    return (document.cookie =
+      key + '=' + converter.write(value, key) + stringifiedAttributes)
+  }
+
+  function get (key) {
+    if (typeof document === 'undefined' || (arguments.length && !key)) {
+      return
+    }
+
+    // To prevent the for loop in the first place assign an empty array
+    // in case there are no cookies at all.
+    var cookies = document.cookie ? document.cookie.split('; ') : [];
+    var jar = {};
+    for (var i = 0; i < cookies.length; i++) {
+      var parts = cookies[i].split('=');
+      var value = parts.slice(1).join('=');
+
+      try {
+        var foundKey = decodeURIComponent(parts[0]);
+        jar[foundKey] = converter.read(value, foundKey);
+
+        if (key === foundKey) {
+          break
+        }
+      } catch (e) {}
+    }
+
+    return key ? jar[key] : jar
+  }
+
+  return Object.create(
+    {
+      set: set,
+      get: get,
+      remove: function (key, attributes) {
+        set(
+          key,
+          '',
+          assign({}, attributes, {
+            expires: -1
+          })
+        );
+      },
+      withAttributes: function (attributes) {
+        return init(this.converter, assign({}, this.attributes, attributes))
+      },
+      withConverter: function (converter) {
+        return init(assign({}, this.converter, converter), this.attributes)
+      }
+    },
+    {
+      attributes: { value: Object.freeze(defaultAttributes) },
+      converter: { value: Object.freeze(converter) }
+    }
+  )
+}
+
+var api = init(defaultConverter, { path: '/' });
+/* eslint-enable no-var */
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (api);
 
 
 /***/ }),

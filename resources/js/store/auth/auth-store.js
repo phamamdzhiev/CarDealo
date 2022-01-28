@@ -2,18 +2,22 @@ export default {
     namespaced: true,
     state() {
         return {
-            hasUserAuth: false,
+            user: false,
+            is_authenticated: false
         }
     },
     mutations: {
-        SET_USER_AUTH(state) {
-            state.hasUserAuth = true;
+        SET_USER_AUTH(state, payload) {
+            state.user = payload;
+            state.is_authenticated = !!payload;
         }
     },
     getters: {
-        HAS_USER_AUTH(state) {
-            console.log('getter')
-            return state.hasUserAuth;
+        GET_AUTH_USER(state) {
+            return state.user;
+        },
+        HAS_USER(state) {
+            return state.is_authenticated;
         }
     },
     actions: {
