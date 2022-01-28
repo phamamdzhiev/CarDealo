@@ -142,7 +142,7 @@
                            placeholder="Имейл адрес"
                            v-model.trim="ownerEmail">
                     <label for="floatingInputEmail">Имейл адрес</label>
-                    <FromInputValidationMessage v-if="false"
+                    <FromInputValidationMessage v-if="v$.ownerEmail.$error"
                                                 message="Моля въведете валиден имейл адрес"
                     />
                 </div>
@@ -151,8 +151,8 @@
                            placeholder="Парола"
                            v-model.trim="ownerPassword">
                     <label for="floatingInputEmail">Парола</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете валидна парола"
+                    <FromInputValidationMessage v-if="v$.ownerPassword.$error"
+                                                message="Моля въведете парола с дължина между 6 и 25 символа"
                     />
                 </div>
             </div>
@@ -178,7 +178,7 @@ import BaseCard from "../../components/ui/base/BaseCard";
 import BaseModal from "../../components/ui/base/BaseModal";
 import useVuelidate from '@vuelidate/core';
 import FromInputValidationMessage from "../../components/ui/FromInputValidationMessage";
-import {required, email, integer, maxLength, requiredIf, minValue} from '@vuelidate/validators'
+import {required, email, integer, maxLength, requiredIf, minLength} from '@vuelidate/validators'
 import TopBar from "./TopBar";
 import {mapGetters, mapMutations} from "vuex";
 
@@ -193,11 +193,19 @@ export default {
     },
     data() {
         return {
+            v$: useVuelidate(),
             pass: null,
             isLoading: false,
             showModal: false,
             hasPrice: false,
             toggleBusinessOfferDetails: false,
+        }
+    },
+    validations() {
+        return {
+            ownerEmail: { required, email },
+            offerRegion: { required },
+            ownerPassword: { required, minLength: minLength(6) }
         }
     },
 
@@ -358,6 +366,8 @@ export default {
             this.SET_OWNER_STATUTE(!this.IS_OWNER_BUSINESS);
         },
         async showLastStep() {
+            const isFormCorrect = await this.v$.$validate();
+            if (!isFormCorrect) return;
             const data = {
                 name: this.ownerNames,
                 email: this.ownerEmail,

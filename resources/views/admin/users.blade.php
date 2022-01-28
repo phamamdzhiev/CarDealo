@@ -16,8 +16,8 @@
         <tr>
             <th>{{ $loop->iteration }}</th>
             <td style="color: red; font-weight: bold">{{ $user->id }}</td>
-            <td>{{ $user->created_at->format('d.m.y; H:m:s')  }}</td>
-            <td>{{ $user->updated_at->format('d.m.y; H:m:s') }}</td>
+            <td>{{ $user->created_at  }}</td>
+            <td>{{ $user->updated_at }}</td>
             <td>{{ $user->name }}.</td>
             <td>{{ $user->email }}.</td>
         </tr>

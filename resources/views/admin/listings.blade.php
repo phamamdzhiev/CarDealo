@@ -18,8 +18,8 @@
             <th>{{ $loop->iteration }}</th>
             <td>{{ $listing->id }}</td>
             <td>{{ $listing->user_id }}</td>
-            <td>{{ $listing->created_at->format('d.m.y; H:m:s')  }}</td>
-            <td>{{ $listing->updated_at->format('d.m.y; H:m:s') }}</td>
+            <td>{{ $listing->created_at  }}</td>
+            <td>{{ $listing->updated_at }}</td>
             <td>{{ $listing->title }}</td>
             <td>{{ $listing->price }} lv.</td>
         </tr>
