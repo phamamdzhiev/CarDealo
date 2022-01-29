@@ -11892,9 +11892,45 @@ ul#by__brand__by_budget li.active::after {
 .sell-car select.form__input {
   padding-top: 1rem;
 }
+.sell-car .text-area-wrapper {
+  position: relative;
+}
+.sell-car .text-area-wrapper:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: calc(100% - 10px);
+  height: 30px;
+  border-radius: 8px;
+  background-color: #f2f3f7;
+}
 .sell-car textarea.form__input {
-  height: 150px;
+  padding-top: 32px !important;
+  /* height of pseudo element */
+  height: 200px;
   resize: vertical;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+  scrollbar-width: thin;
+  scrollbar-color: #fd5750 #262B34;
+}
+.sell-car textarea.form__input::-webkit-scrollbar {
+  width: 7px;
+}
+.sell-car textarea.form__input::-webkit-scrollbar-track {
+  background: rgba(36, 39, 44, 0.1);
+  border-radius: 20px;
+}
+.sell-car textarea.form__input::-webkit-scrollbar-thumb {
+  background: #fd5750;
+  border-radius: 20px;
+}
+.sell-car textarea.form__input::-webkit-scrollbar-thumb:hover {
+  background: #ff3b33;
 }
 .sell-car .currently__chosen {
   display: flex;

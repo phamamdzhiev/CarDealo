@@ -357,10 +357,25 @@ $ul-max-height: 300px;
     select.form__input {
         padding-top: 1rem;
     }
-
+    .text-area-wrapper {
+        position: relative;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: calc(100% - 10px);
+            height: 30px;
+            border-radius: 8px;
+            background-color: #f2f3f7;
+        }
+    }
     textarea.form__input {
-        height: 150px;
+        padding-top: 32px!important; /* height of pseudo element */
+        height: 200px;
         resize: vertical;
+        @include scrollbar;
     }
 
     .currently__chosen {

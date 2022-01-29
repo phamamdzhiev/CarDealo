@@ -9,49 +9,50 @@
                     <input type="text" class="form-control form__input"
                            placeholder="Заглавие на обявата"
                            id="floatingInputOfferTitle"
-                           v-model="offerTitle"
+                           v-model.trim="offerTitle"
                     >
                     <label for="floatingInputOfferTitle">Заглавие на обявата</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете заглавие"/>
+                    <FromInputValidationMessage v-if="v$.offerTitle.$error"
+                                                :messages="v$.offerTitle.$errors"/>
                 </div>
-                <div class="form-floating form-group">
+                <div class="form-floating form-group text-area-wrapper">
                     <textarea class="form__input form-control" placeholder="Допълнителна информация"
                               id="floatingTextarea"
-                              v-model="offerDesc"
+                              v-model.trim="offerDesc"
                     ></textarea>
                     <label for="floatingTextarea">Допълнителна информация</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете информация"/>
+                    <small style="font-size: 13px; display:block"> {{ offerDesc.length }} / 5000</small>
+                    <FromInputValidationMessage v-if="v$.offerDesc.$error"
+                                                :messages="v$.offerDesc.$errors"/>
                 </div>
                 <div class="form-floating form-group">
                     <select class="form__input form-select" id="floatingSelectRegion"
-                            v-model="offerRegion"
+                            v-model.trim="offerRegion"
                     >
                         <option value="София">София</option>
                         <option value="Пловдив">Пловдив</option>
                         <option value="Варна">Варна</option>
                     </select>
                     <label for="floatingSelectRegion">Моля изберете област</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Mоля изберете област"/>
+                    <FromInputValidationMessage v-if="v$.offerRegion.$error"
+                                                :messages="v$.offerRegion.$errors"/>
                 </div>
                 <div class="form-floating form-group">
                     <select class="form__input form-select" id="floatingSelectCity"
-                            v-model="offerCity"
+                            v-model.trim="offerCity"
                     >
                         <option value="One">One</option>
                         <option value="Two">Two</option>
                         <option value="Three">Three</option>
                     </select>
                     <label for="floatingSelectCity">Моля изберете населено място</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Mоля изберете град"/>
+                    <FromInputValidationMessage v-if="v$.offerCity.$error"
+                                                :messages="v$.offerCity.$errors"/>
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" class="form-control form__input" id="floatingInputPrice"
                            placeholder="Цена (BGN)" :disabled="!GET_CAR_HAS_PRICE"
-                           v-model="offerPrice"
+                           v-model.trim="offerPrice"
                     >
                     <label for="floatingInputPrice">Цена (BGN)</label>
                     <div class="mt-1 ms-1 negotiable-price">
@@ -60,14 +61,14 @@
                             По договаряне?
                         </label>
                     </div>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете валидна цена"/>
+                    <FromInputValidationMessage v-if="v$.offerPrice.$error"
+                                                :messages="v$.offerPrice.$errors"/>
                 </div>
             </div>
             <div :style="IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal'"
                  class="d-flex justify-content-end align-items-center"
                  @click="toggleBusinessOffer"
-                 style="cursor:pointer;user-select: none">
+                 style="cursor:pointer;user-select: none;max-width: max-content;margin: 0 0 0 auto;">
                 Публикува Бизнес Обява?
                 <span class="ms-2">
                     <svg v-show="!IS_OWNER_BUSINESS" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -88,19 +89,19 @@
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputNames"
                            placeholder="Име и фамилия"
-                           v-model="ownerNames"
+                           v-model.trim="ownerNames"
                     >
                     <label for="floatingInputNames">Име и фамилия</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете имена"/>
+                    <FromInputValidationMessage v-if="v$.ownerNames.$error"
+                                                :messages="v$.ownerNames.$errors"/>
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputMobile"
                            placeholder="Мобилен номер"
                            v-model.trim="ownerMobile">
                     <label for="floatingInputMobile">Мобилен номер</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете валиден мобилен номер във формат 08хххххххх"/>
+                    <FromInputValidationMessage v-if="v$.ownerMobile.$error"
+                                                :messages="v$.ownerMobile.$errors"/>
                 </div>
             </div>
             <div class="question-section" v-if="IS_OWNER_BUSINESS">
@@ -110,24 +111,24 @@
                            placeholder="Име на автокъщата"
                            v-model.trim="ownerCompanyName">
                     <label for="floatingInputCompany">Име на автокъщата</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете име на автокъщата"/>
+                    <FromInputValidationMessage v-if="v$.ownerCompanyName.$error"
+                                                :messages="v$.ownerCompanyName.$errors"/>
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form__input form-control" id="floatingInputBulstat"
                            placeholder="Булстат/ЕИК"
                            v-model.trim="ownerCompanyEik">
                     <label for="floatingInputBulstat">Булстат/ЕИК</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="Моля въведете ЕИК на автокъщата"/>
+                    <FromInputValidationMessage v-if="v$.ownerCompanyEik.$error"
+                                                :messages="v$.ownerCompanyEik.$errors"/>
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form__input form-control" id="floatingInputAddress"
                            placeholder="Адрес на автокъщата"
                            v-model.trim="ownerCompanyAddress">
                     <label for="floatingInputAddress">Адрес на автокъщата</label>
-                    <FromInputValidationMessage v-if="false"
-                                                message="'Моля въведете адрес на автокъщата"/>
+                    <FromInputValidationMessage v-if="v$.ownerCompanyAddress.$error"
+                                                :messages="v$.ownerCompanyAddress.$errors"/>
                 </div>
                 <div class="form-floating form-group">
                     <input type="text" class="form__input form-control" id="floatingInputDomain"
@@ -143,7 +144,7 @@
                            v-model.trim="ownerEmail">
                     <label for="floatingInputEmail">Имейл адрес</label>
                     <FromInputValidationMessage v-if="v$.ownerEmail.$error"
-                                                message="Моля въведете валиден имейл адрес"
+                                                :messages="v$.ownerEmail.$errors"
                     />
                 </div>
                 <div class="form-floating form-group">
@@ -152,7 +153,7 @@
                            v-model.trim="ownerPassword">
                     <label for="floatingInputEmail">Парола</label>
                     <FromInputValidationMessage v-if="v$.ownerPassword.$error"
-                                                message="Моля въведете парола с дължина между 6 и 25 символа"
+                                                :messages="v$.ownerPassword.$errors"
                     />
                 </div>
             </div>
@@ -161,15 +162,15 @@
                 <loading-dots v-else></loading-dots>
             </button>
         </base-card>
-<!--        <button @click="showModal = true">Open Modal</button>-->
-<!--        <BaseModal v-if="showModal" @close-modal="showModal = false">-->
-<!--            <div class="form-group">-->
-<!--                <form @submit.prevent="">-->
-<!--                    <input type="text" placeholder="Въведете кода от емайла, който поличихте">-->
-<!--                    <button>Верифицирай</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </BaseModal>-->
+        <!--        <button @click="showModal = true">Open Modal</button>-->
+        <!--        <BaseModal v-if="showModal" @close-modal="showModal = false">-->
+        <!--            <div class="form-group">-->
+        <!--                <form @submit.prevent="">-->
+        <!--                    <input type="text" placeholder="Въведете кода от емайла, който поличихте">-->
+        <!--                    <button>Верифицирай</button>-->
+        <!--                </form>-->
+        <!--            </div>-->
+        <!--        </BaseModal>-->
     </div>
 </template>
 
@@ -178,7 +179,7 @@ import BaseCard from "../../components/ui/base/BaseCard";
 import BaseModal from "../../components/ui/base/BaseModal";
 import useVuelidate from '@vuelidate/core';
 import FromInputValidationMessage from "../../components/ui/FromInputValidationMessage";
-import {required, email, integer, maxLength, requiredIf, minLength} from '@vuelidate/validators'
+import {required, email, integer, maxLength, requiredIf, minLength, minValue, helpers} from '@vuelidate/validators'
 import TopBar from "./TopBar";
 import {mapGetters, mapMutations} from "vuex";
 
@@ -193,6 +194,9 @@ export default {
     },
     data() {
         return {
+            vuelidateExternalResults: {
+                ownerEmail: [] //this Array shall be populated with Server-side errors
+            },
             v$: useVuelidate(),
             pass: null,
             isLoading: false,
@@ -203,9 +207,49 @@ export default {
     },
     validations() {
         return {
-            ownerEmail: { required, email },
-            offerRegion: { required },
-            ownerPassword: { required, minLength: minLength(6) }
+            offerTitle: {
+                required: helpers.withMessage('Заглавието е задължително', required)
+            },
+            offerDesc: {
+                required: helpers.withMessage('Описанието е задължително', required),
+                maxLength: helpers.withMessage('Описанието трябва да бъде до 5000 символа', maxLength(5000))
+            },
+            offerRegion: {
+                required: helpers.withMessage('Областта е задължителна', required)
+            },
+            offerCity: {
+                required: helpers.withMessage('Градът е задължителен', required)
+            },
+            offerPrice: {
+                requiredIf: helpers.withMessage('Цената е задължителна', requiredIf(this.GET_CAR_HAS_PRICE)),
+                minValue: helpers.withMessage('Минимална цена 1 лев', minValue(1))
+            },
+            ownerNames: {
+                required: helpers.withMessage('Име и фамилия са задължителни', required)
+            },
+            ownerMobile: {
+                required: helpers.withMessage('Телефонът е задължителен', required),
+                integer: helpers.withMessage('Телефонът трябва да във формат 08хххххххх', integer)
+            },
+            ownerEmail: {
+                required: helpers.withMessage('Имейл адресът е задължителен', required),
+                email: helpers.withMessage('Въведете валиден имейл', email)
+            },
+            ownerPassword: {
+                required: helpers.withMessage('Паролата е задължителна', required),
+                minLength: helpers.withMessage('Паролата е трябва да бъде минимум 6 символа', minLength(6)),
+                maxLength: helpers.withMessage('Паролата е трябва да бъде максимум 25 символа', maxLength(25))
+            },
+            //business details optional
+            ownerCompanyName: {
+                requiredIf: helpers.withMessage('Името на автокъщата задължително', requiredIf(this.IS_OWNER_BUSINESS))
+            },
+            ownerCompanyEik: {
+                requiredIf: helpers.withMessage('ЕИК/Булстат е задължителен', requiredIf(this.IS_OWNER_BUSINESS))
+            },
+            ownerCompanyAddress: {
+                requiredIf: helpers.withMessage('Адресът на фирмата е задължителен', requiredIf(this.IS_OWNER_BUSINESS))
+            }
         }
     },
 
@@ -379,14 +423,20 @@ export default {
             try {
                 this.isLoading = true;
 
-                await axios.get('sanctum/csrf-token'); // this should be moved on more global place
-                const res = await axios.post('user/create', data);
-                console.log(res.data);
+                await axios.get('sanctum/csrf-token');
+                await axios.post('user/create', data);
                 this.setStepPlus();
 
                 this.isLoading = false;
             } catch (e) {
-                throw new Error('User cannot be created');
+                this.isLoading = false;
+
+                if (e.response.data.errors) {
+                    Object.assign(this.vuelidateExternalResults, {ownerEmail: e.response.data.errors.email});
+                    return;
+                }
+
+                throw new Error('General error! User cannot be created');
             }
         }
     }

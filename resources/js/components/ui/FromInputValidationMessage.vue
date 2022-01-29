@@ -1,17 +1,18 @@
 <template>
-    <small class='input__error'>
-        <i class="bi bi-exclamation-circle"></i>
-        {{ message }}
-    </small>
+    <div v-for="message in messages" :key="message">
+        <small class='input__error' >
+            <i class="bi bi-exclamation-circle"></i>
+            {{ message.$message }}
+        </small>
+    </div>
 </template>
 
 <script>
 export default {
     name: "FromInputValidationMessage",
     props: {
-        message: {
+        messages: {
             required: true,
-            default: 'Моля въведете това поле'
         }
     }
 }
