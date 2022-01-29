@@ -22314,7 +22314,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.setCarBrand(null);
       this.filterCarBrands = [];
     }
-  }, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapMutations)('sellCar', ['setNewOrUsed', 'setPopularCarBrands', 'setSelectedCarBrandID', 'setCarBrand', 'setStepPlus', 'setCarYear', 'setCarModel', 'setCarFuel', 'setCarTransmission', 'setCarKm', 'setCarCm3', 'setCarHp', 'setStepToOne'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapActions)('sellCar', ['setCarBrandWithModels'])), {}, {
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapMutations)('sellCar', ['setNewOrUsed', 'setPopularCarBrands', 'setSelectedCarBrandID', 'setCarBrand', 'setStepPlus', 'setCarYear', 'setCarModel', 'setCarFuel', 'setCarTransmission', 'setCarKm', 'setCarCm3', 'setCarHp', 'setStepToOne', 'setCarExtras'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapActions)('sellCar', ['setCarBrandWithModels'])), {}, {
     livesearchCarBrands: function livesearchCarBrands() {
       var _this = this;
 
@@ -22400,6 +22400,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.setCarCm3(null);
       this.setCarHp(null);
       this.setCarKm(null);
+      this.setCarExtras(null);
     },
     selectBrand: function selectBrand(_ref) {
       var brandName = _ref.brandName,

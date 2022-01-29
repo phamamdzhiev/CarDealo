@@ -13,8 +13,9 @@
 @import "pages/used-cars";
 @import "pages/sell-car/sell-car";
 
-
-
+html {
+    @include scrollbar
+}
 
 body {
     background: #1a202c;

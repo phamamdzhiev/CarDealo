@@ -125,7 +125,8 @@ export default {
                 'setCarKm',
                 'setCarCm3',
                 'setCarHp',
-                'setStepToOne'
+                'setStepToOne',
+                'setCarExtras'
             ]
         ),
         ...mapActions('sellCar', ['setCarBrandWithModels']),
@@ -161,6 +162,7 @@ export default {
             this.setCarCm3(null);
             this.setCarHp(null);
             this.setCarKm(null);
+            this.setCarExtras(null);
         },
         selectBrand({brandName, brandID}) {
             if (this.getAllData['car_brand'] !== brandName) {

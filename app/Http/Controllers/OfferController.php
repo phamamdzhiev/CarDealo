@@ -78,7 +78,7 @@ class OfferController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Offer $offer
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Offer[]
      */
     public function showApproved(Offer $offer)
     {

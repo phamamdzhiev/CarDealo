@@ -36,9 +36,12 @@ class UserCreation extends FormRequest
         return [
             'name.required' => 'Името е задължително',
             'email.required' => 'Имейлът е задължителен',
+            'email.email' => 'Въведете валиден имейл',
             'email.unique' => 'Имейлът е вече е регистриран',
             'mobile.required' => 'Телефонът е задължителен',
-            'password.required' => 'Паролата е задължителна'
+            'password.required' => 'Паролата е задължителна',
+            'password.min' => 'Паролата трябва да бъде минимум 6 символа',
+            'password.max' => 'Паролата трябва да бъде максимум 25 символа'
         ];
     }
 }
