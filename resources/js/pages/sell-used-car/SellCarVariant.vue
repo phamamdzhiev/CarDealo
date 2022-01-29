@@ -44,40 +44,32 @@
                 <div class="form-floating form-group">
                     <input type="number" id="cm3" class="form-control form__input"
                            v-model.number="carCm3"
-                           @change="formatInputCm3"
                            placeholder="Кубатура"
                     />
-                    <label for="cm3">Кубатура
-                        <small class='input__error' v-if="errors.errorCm3">
-                            <i>(Въведете реална кубатура)</i>
-                        </small>
-                    </label>
+                    <label for="cm3">Кубатура</label>
+                    <FromInputValidationMessage v-if="v$.carCm3.$error"
+                                                :messages="v$.carCm3.$errors"
+                    />
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="horsepower" class="form-control form__input"
                            v-model.number="carHp"
-                           @change="formatInputHp"
                            placeholder="Мощност (к.с)"
                     />
-                    <label for="horsepower">
-                        Мощност (к.с)
-                        <small class='input__error' v-if="errors.errorHp">
-                            <i>(Въведете реали конски сили)</i>
-                        </small>
-                    </label>
+                    <label for="horsepower">Мощност (к.с)</label>
+                    <FromInputValidationMessage v-if="v$.carHp.$error"
+                                                :messages="v$.carHp.$errors"
+                    />
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" id="km" class="form-control form__input"
                            v-model.number="carKm"
-                           @change="formatInputKm"
                            placeholder="Пробег (км.)"
                     />
-                    <label for="horsepower">
-                        Пробег (км.)
-                        <small class='input__error' v-if="errors.errorKm">
-                            <i>(Въведете реален пробег)</i>
-                        </small>
-                    </label>
+                    <label for="horsepower">Пробег (км.)</label>
+                    <FromInputValidationMessage v-if="v$.carKm.$error"
+                                                :messages="v$.carKm.$errors"
+                    />
                 </div>
             </div>
             <button @click="showStepFive" v-if="toggleNextStepButton" class="base-button">
@@ -92,19 +84,44 @@
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import TopBar from "./TopBar";
 import {mapGetters, mapMutations} from "vuex";
+import FromInputValidationMessage from "../../components/ui/FromInputValidationMessage";
+import useVuelidate from '@vuelidate/core';
+import {required, integer, minValue, maxValue, helpers} from '@vuelidate/validators'
+
 
 export default {
     name: "SellCarVariant",
     components: {
         TopBar,
-        BaseCard
+        BaseCard,
+        FromInputValidationMessage
     },
     data() {
         return {
+            v$: useVuelidate(),
             errors: {
                 errorCm3: false,
                 errorHp: false,
                 errorKm: false,
+            }
+        }
+    },
+    validations() {
+        return {
+            carHp: {
+                required: helpers.withMessage('Задължително поле', required),
+                maxValue: helpers.withMessage('Въведете реални конски сили', maxValue(2500)),
+                minValue: helpers.withMessage('Въведете реални конски сили', minValue(20)),
+            },
+            carCm3: {
+                required: helpers.withMessage('Задължително поле', required),
+                maxValue: helpers.withMessage('Въведете реална кубатура', maxValue(8000)),
+                minValue: helpers.withMessage('Въведете реална кубатура', minValue(1)),
+            },
+            carKm: {
+                required: helpers.withMessage('Задължително поле', required),
+                maxValue: helpers.withMessage('Въведете реален пробег', maxValue(999999)),
+                minValue: helpers.withMessage('Въведете реален пробег', minValue(1)),
             }
         }
     },
@@ -139,10 +156,8 @@ export default {
                 this.getAllData['car_fuel'] &&
                 this.getAllData['car_cm3'] &&
                 this.getAllData['car_hp'] &&
-                this.getAllData['car_km'] &&
-                !this.errors.errorCm3 &&
-                !this.errors.errorHp &&
-                !this.errors.errorKm);
+                this.getAllData['car_km']
+            );
         }
     },
 
@@ -158,19 +173,10 @@ export default {
             ]
         ),
 
-        //some validation for inputs
-        formatInputCm3() {
-            this.errors.errorCm3 = this.getAllData['car_cm3'] >= 8000;
-        },
-        formatInputHp() {
-            this.errors.errorHp = this.getAllData['car_hp'] >= 1500;
-        },
-        formatInputKm() {
-            this.errors.errorKm = this.getAllData['car_km'] >= 1000000;
-        },
+        async showStepFive() {
+            const isFormCorrect = await this.v$.$validate();
+            if (!isFormCorrect) return;
 
-        showStepFive() {
-            if (!this.toggleNextStepButton) return;
             this.setStepPlus();
         }
     }
