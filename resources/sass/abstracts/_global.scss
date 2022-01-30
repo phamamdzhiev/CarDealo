@@ -1,0 +1,25 @@
+.input__error {
+    color: $error-red;
+    font-weight: bold;
+    padding-left: 0.15rem;
+}
+
+input[type='number'] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.bi-exclamation-circle,
+.bi-exclamation-circle-fill {
+    color: $error-red;
+}
+
+.carousel__prev--in-active,
+.carousel__next--in-active {
+    display: none;
+}

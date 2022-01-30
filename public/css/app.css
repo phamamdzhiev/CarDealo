@@ -11302,6 +11302,15 @@ input[type=number] {
   color: #ff3939;
 }
 
+.carousel__prev--in-active,
+.carousel__next--in-active {
+  display: none;
+}
+
+.text-normal-gray {
+  color: rgba(36, 39, 44, 0.5) !important;
+}
+
 .text-base-color {
   color: #fd5750;
 }
@@ -11946,6 +11955,12 @@ ul#by__brand__by_budget li.active::after {
   margin-bottom: 5px;
 }
 
+.vehicle-singleton {
+  outline: 2px solid red;
+}
+.vehicle-singleton .vehicle-image-wrapper {
+  outline: 2px solid blue;
+}
 html {
   /* width */
   /* Track */
@@ -11970,16 +11985,16 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 body {
-  background: #1a202c;
+  background-color: #fafafa;
   position: relative;
+}
+
+#app {
+  background-color: #fafafa;
 }
 
 a, p, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, li, button {
   color: #262B34;
-}
-
-p {
-  font-size: 1.125rem;
 }
 
 a {

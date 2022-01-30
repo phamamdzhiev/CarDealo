@@ -3,7 +3,9 @@
 
 @import "abstracts/variables";
 @import "abstracts/mixins";
-@import 'abstracts/_abstracts';
+@import 'abstracts/global';
+//utils
+@import "abstracts/utils";
 //layout
 @import "layout/base-button";
 @import "layout/base-card";
@@ -12,22 +14,28 @@
 @import 'pages/_home';
 @import "pages/used-cars";
 @import "pages/sell-car/sell-car";
+//components
+@import "components/vehicle-singleton";
 
 html {
     @include scrollbar
 }
 
 body {
-    background: #1a202c;
+    background-color: #fafafa;
     position: relative;
+}
+
+#app {
+    background-color: #fafafa;
 }
 
 a, p, h1, h2, h3, h4, h5, h6, li, button {
     color: $secondary-color;
 }
-p {
-    font-size: 1.125rem;
-}
+//p {
+//    font-size: 1.125rem;
+//}
 
 a {
     text-transform: none;

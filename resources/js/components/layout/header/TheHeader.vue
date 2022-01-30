@@ -5,7 +5,7 @@
                 class="d-flex flex-row flex-nowrap align-items-center justify-content-between inner__header"
             >
                 <div class="fs-4 logo">
-                    <router-link to="/">CarDeelo</router-link>
+                    <router-link to="/">{{ window.APP_NAME }}</router-link>
                 </div>
                 <nav id="nav" class="main__nav">
                     <router-link to="/" class="me-3">Вход</router-link>
@@ -68,6 +68,7 @@ export default {
         SubMenuHoverableItems,
         BaseButton,
     },
+    inject: ['window'],
     data() {
         return {
             newCarsItemShown: false,
@@ -99,7 +100,7 @@ export default {
                 {
                     id: 1,
                     link: "/usedCars",
-                    linkText: "Търси в 'Употребявани коли'",
+                    linkText: `${window.APP_NAME} употребявани коли`,
                 },
                 {
                     id: 2,

@@ -1,136 +1,96 @@
 <template>
     <div>
-        <base-carousel :height="400" :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"></base-carousel>
+        <base-carousel :height="400"
+                       :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"></base-carousel>
         <BaseCard>
-            <h3 class="fw-bold">Употребявани автомобили</h3>
+            <h5 class="fw-bold">Употребявани автомобили</h5>
             <p>
                 Намерете пълен списък на сертифицирани употребявани автомобили в
                 България. Можете да изберете коли втора употреба, като приложите
                 филтри като местоположение, цена, тип каросерия, марка и т.н.
             </p>
         </BaseCard>
+
         <BaseCard>
-            <h3 class="fw-bold">Последно добавени</h3>
-            <div class="showcase">
-                <VueAgile :dots="false" :slidesToShow="4">
-                    <div class="item slide">
-                        <img
-                            src="https://images10.gaadicdn.com/usedcar_image/320x240/zz1_crop_img_619b3049bc8a5_1637560393.jpg"
-                            alt=""
-                            class="img-responsive"
-                        />
-                        <div class="info">
-                            <div class="top__info">
-                                <span class="year">2005</span>
-                                <span class="car">Skoda Octavia Mk2</span>
-                                <span class="price">4 599 BGN</span>
-                            </div>
-                            <div class="bottom__info">
-                                <small class="milliage">250 000</small>
-                                <small class="fuel">Дизел</small>
-                                <small class="city">Пловдив</small>
-                            </div>
-                        </div>
+            <h5 class="fw-bold">Препоръчани автомобили за теб</h5>
+            <Carousel :settings="sliderConfig">
+                <Slide v-for="slide in 10" :key="slide">
+                    <div class="carousel__item">
+                        <CarSingleItem></CarSingleItem>
                     </div>
-                    <div class="item slide">
-                        <img
-                            src="https://images10.gaadicdn.com/usedcar_image/320x240/zz1_crop_img_61cd6b18143f2_1640852248.jpg"
-                            alt=""
-                        />
-                        <div>
-                            <span class="year">2014</span>
-                            <span class="car">BMW 535i F10</span>
-                            <span class="price">17 800 BGN</span>
-                        </div>
-                        <div class="bottom-info">
-                            <small class="milliage">128 000</small>
-                            <small class="fuel">Бензин</small>
-                            <small class="city">Велинград</small>
-                        </div>
-                    </div>
-                    <div class="item slide">
-                        <img
-                            src="https://images10.gaadicdn.com/usedcar_image/320x240/zz1_crop_img_619b3049bc8a5_1637560393.jpg"
-                            alt=""
-                        />
-                        <div>
-                            <span class="year">2005</span>
-                            <span class="car">Skoda Octavia Mk2</span>
-                            <span class="price">4 599 BGN</span>
-                        </div>
-                        <div class="bottom-info">
-                            <small class="milliage">250 000</small>
-                            <small class="fuel">Дизел</small>
-                            <small class="city">Пловдив</small>
-                        </div>
-                    </div>
-                    <div class="item slide">
-                        <img
-                            src="https://images10.gaadicdn.com/usedcar_image/320x240/zz1_crop_img_61cd6b18143f2_1640852248.jpg"
-                            alt=""
-                        />
-                        <div>
-                            <span class="year">2014</span>
-                            <span class="car">BMW 535i F10</span>
-                            <span class="price">17 800 BGN</span>
-                        </div>
-                        <div class="bottom-info">
-                            <small class="milliage">128 000</small>
-                            <small class="fuel">Бензин</small>
-                            <small class="city">Велинград</small>
-                        </div>
-                    </div>
-                    <div class="item slide">
-                        <img
-                            src="https://images10.gaadicdn.com/usedcar_image/320x240/zz1_crop_img_619b3049bc8a5_1637560393.jpg"
-                            alt=""
-                        />
-                        <div>
-                            <span class="year">2005</span>
-                            <span class="car">Skoda Octavia Mk2</span>
-                            <span class="price">4 599 BGN</span>
-                        </div>
-                        <div class="bottom-info">
-                            <small class="milliage">250 000</small>
-                            <small class="fuel">Дизел</small>
-                            <small class="city">Пловдив</small>
-                        </div>
-                    </div>
-                    <div class="item slide">
-                        <img
-                            src="https://images10.gaadicdn.com/usedcar_image/320x240/zz1_crop_img_61cd6b18143f2_1640852248.jpg"
-                            alt=""
-                        />
-                        <div>
-                            <span class="year">2014</span>
-                            <span class="car">BMW 535i F10</span>
-                            <span class="price">17 800 BGN</span>
-                        </div>
-                        <div class="bottom-info">
-                            <small class="milliage">128 000</small>
-                            <small class="fuel">Бензин</small>
-                            <small class="city">Велинград</small>
-                        </div>
-                    </div>
-                </VueAgile>
-            </div>
+                </Slide>
+                <template #addons>
+                    <Navigation/>
+                </template>
+            </Carousel>
+        </BaseCard>
+
+        <BaseCard>
+            <h5 class="fw-bold">Автомобили в България по град</h5>
+
+        </BaseCard>
+
+        <BaseCard>
+            <h5 class="fw-bold">Автомобили според бюджет</h5>
+
+        </BaseCard>
+
+        <BaseCard>
+            <h5 class="fw-bold">Автомобили по каросерия</h5>
+
+        </BaseCard>
+
+        <BaseCard>
+            <!--            interna add-->
+
+        </BaseCard>
+
+        <BaseCard>
+            <h5 class="fw-bold">Автомобили по вид на двигателя</h5>
+
         </BaseCard>
     </div>
 </template>
 <script>
+import {Carousel, Slide, Navigation} from 'vue3-carousel';
+import 'vue3-carousel/dist/carousel.css';
 import BaseCarousel from "../../components/ui/base/BaseCarousel.vue";
-import { VueAgile } from "vue-agile";
 import BaseCard from "../../components/ui/base/BaseCard.vue";
+import CarSingleItem from "../../components/car/CarSingleItem";
+import {onMounted, reactive, ref} from "vue";
 
 export default {
     components: {
         BaseCarousel,
-        VueAgile,
         BaseCard,
+        CarSingleItem,
+        Carousel,
+        Slide,
+        Navigation
     },
+    setup() {
+        const sliderConfig = {
+            itemsToShow: 4,
+            snapAlign: 'start',
+        }
+
+        const data = reactive({
+            name: 0
+        });
+
+        const a = ref([
+            {name: 'Petar', age: 24},
+            {name: 'Raddy', age: 21},
+        ])
+
+        onMounted(() => {
+            console.log('mounted');
+        });
+
+        return {
+            data,
+            sliderConfig
+        }
+    }
 };
 </script>
-
-<style>
-
-</style>
