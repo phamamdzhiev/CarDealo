@@ -1,14 +1,59 @@
 .vehicle-singleton {
-    //display: flex;
-    //flex-flow: column nowrap;
-    //height: 260px;
-    //justify-content: stretch;
-    outline: 2px solid red;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    overflow: hidden;
+    user-select:none;
+    //outline: 2px solid red;
 
     .vehicle-image-wrapper {
-        outline: 2px solid blue;
+        //outline: 2px solid blue;
+        height: 194px;
+
+        > img {
+            height: inherit;
+        }
     }
 
     .vehicle-details {
+        padding: 1rem 0.75rem;
+        text-align: left;
+        > a {
+            white-space: nowrap;
+            max-width: 230px;
+            text-overflow: ellipsis;
+            display: block;
+            overflow: hidden;
+        }
+    }
+
+    .price {
+        color: $main-color;
+    }
+
+    .dotlist {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        margin-top: 0.5rem;
+
+        span {
+            position: relative;
+
+            &:not(:first-child) {
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: -20px;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background-color: $normal-gray;
+                }
+            }
+        }
     }
 }

@@ -13,8 +13,9 @@
 
         <BaseCard>
             <h5 class="fw-bold">Препоръчани автомобили за теб</h5>
+            <hr/>
             <Carousel :settings="sliderConfig">
-                <Slide v-for="slide in 10" :key="slide">
+                <Slide v-for="slide in 9" :key="slide">
                     <div class="carousel__item">
                         <CarSingleItem></CarSingleItem>
                     </div>
@@ -27,12 +28,23 @@
 
         <BaseCard>
             <h5 class="fw-bold">Автомобили в България по град</h5>
-
+            <hr/>
+            <PopularCities></PopularCities>
         </BaseCard>
 
         <BaseCard>
             <h5 class="fw-bold">Автомобили според бюджет</h5>
-
+            <hr/>
+            <Carousel :settings="sliderConfig">
+                <Slide v-for="slide in 9" :key="slide">
+                    <div class="carousel__item">
+                        <CarSingleItem></CarSingleItem>
+                    </div>
+                </Slide>
+                <template #addons>
+                    <Navigation/>
+                </template>
+            </Carousel>
         </BaseCard>
 
         <BaseCard>
@@ -57,6 +69,7 @@ import 'vue3-carousel/dist/carousel.css';
 import BaseCarousel from "../../components/ui/base/BaseCarousel.vue";
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
+import PopularCities from "./partials/PopularCities.vue";
 import {onMounted, reactive, ref} from "vue";
 
 export default {
@@ -66,7 +79,8 @@ export default {
         CarSingleItem,
         Carousel,
         Slide,
-        Navigation
+        Navigation,
+        PopularCities
     },
     setup() {
         const sliderConfig = {
@@ -94,3 +108,22 @@ export default {
     }
 };
 </script>
+
+<style>
+.carousel__track {
+    padding: 7px 0;
+}
+.carousel__slide {
+    /*padding: 0 5px;*/
+}
+.carousel__prev--in-active,
+.carousel__next--in-active {
+    display: none;
+}
+.carousel__prev,
+.carousel__next {
+    background-color: #fd5750;
+    border: 4px solid white;
+}
+
+</style>

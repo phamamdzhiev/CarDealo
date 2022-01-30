@@ -11,9 +11,9 @@
                 23 500 <span>BGN</span>
             </div>
             <div class="dotlist text-normal-gray">
-                <span>45 900 км</span>
+                <span>450 800 км</span>
                 <span>Бензин</span>
-                <span>гр. Пловдив</span>
+                <span>Пловдив</span>
             </div>
         </div>
     </div>

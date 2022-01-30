@@ -19,7 +19,6 @@ input[type='number'] {
     color: $error-red;
 }
 
-.carousel__prev--in-active,
-.carousel__next--in-active {
-    display: none;
+hr {
+    background-color: rgba(36, 39, 44, 0.3);
 }
