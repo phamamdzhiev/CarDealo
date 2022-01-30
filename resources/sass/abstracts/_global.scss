@@ -19,7 +19,41 @@ input[type='number'] {
     color: $error-red;
 }
 
-.carousel__prev--in-active,
-.carousel__next--in-active {
-    display: none;
+hr {
+    background-color: rgba(36, 39, 44, 0.3);
+}
+
+//swiper slider
+.swiper {
+    overflow: unset !important;
+}
+
+.swiper-slide {
+    padding: 2px 0 !important;
+}
+
+.swiper-button-disabled {
+    display: none !important;
+}
+
+.swiper-button-prev {
+    left: -1rem !important;
+}
+
+.swiper-button-next {
+    right: -1rem !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    width: 32px !important;
+    height: 32px !important;
+    color: white !important;
+    border: 2px solid white !important;
+    background-color: $main-color !important;
+    border-radius: 50%;
+
+    &:after {
+        font-size: 1rem !important;
+    }
 }

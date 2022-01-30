@@ -11302,9 +11302,42 @@ input[type=number] {
   color: #ff3939;
 }
 
-.carousel__prev--in-active,
-.carousel__next--in-active {
-  display: none;
+hr {
+  background-color: rgba(36, 39, 44, 0.3);
+}
+
+.swiper {
+  overflow: unset !important;
+}
+
+.swiper-slide {
+  padding: 2px 0 !important;
+}
+
+.swiper-button-disabled {
+  display: none !important;
+}
+
+.swiper-button-prev {
+  left: -1rem !important;
+}
+
+.swiper-button-next {
+  right: -1rem !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 32px !important;
+  height: 32px !important;
+  color: white !important;
+  border: 2px solid white !important;
+  background-color: #fd5750 !important;
+  border-radius: 50%;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1rem !important;
 }
 
 .text-normal-gray {
@@ -11956,11 +11989,56 @@ ul#by__brand__by_budget li.active::after {
 }
 
 .vehicle-singleton {
-  outline: 2px solid red;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(36, 39, 44, 0.15);
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  max-width: 320px;
+  margin: auto;
 }
-.vehicle-singleton .vehicle-image-wrapper {
-  outline: 2px solid blue;
+.vehicle-singleton .vehicle-image-wrapper > img {
+  height: inherit;
 }
+.vehicle-singleton .vehicle-details {
+  padding: 1rem 0.75rem;
+  text-align: left;
+}
+.vehicle-singleton .vehicle-details > a {
+  white-space: nowrap;
+  max-width: 230px;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+}
+.vehicle-singleton .price {
+  color: #fd5750;
+}
+.vehicle-singleton .dotlist {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 0.5rem;
+}
+.vehicle-singleton .dotlist span {
+  position: relative;
+}
+.vehicle-singleton .dotlist span:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(36, 39, 44, 0.5);
+}
+
 html {
   /* width */
   /* Track */
