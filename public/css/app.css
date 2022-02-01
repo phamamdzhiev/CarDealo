@@ -11466,18 +11466,17 @@ hr {
   font-weight: 700;
 }
 
-footer .d-grid.valuables {
-  grid-template-columns: repeat(4, 1fr);
+footer .row.valuables {
   padding: 1rem 0;
 }
-footer .d-grid.valuables .item {
+footer .row.valuables .item {
   display: flex;
   align-items: center;
 }
-footer .d-grid.valuables .item > span {
+footer .row.valuables .item > span {
   margin-right: 8px;
 }
-footer .d-grid.valuables .item h5, footer .d-grid.valuables .item .h5, footer .d-grid.valuables .item p {
+footer .row.valuables .item h5, footer .row.valuables .item .h5, footer .row.valuables .item p {
   margin-bottom: 0;
 }
 footer .d-grid.footer-link-sections {

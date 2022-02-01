@@ -23163,12 +23163,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_ui_base_BaseCarousel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/base/BaseCarousel.vue */ "./resources/js/components/ui/base/BaseCarousel.vue");
-/* harmony import */ var _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/base/BaseCard.vue */ "./resources/js/components/ui/base/BaseCard.vue");
+/* harmony import */ var _components_ui_base_BaseCarousel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/base/BaseCarousel */ "./resources/js/components/ui/base/BaseCarousel.vue");
+/* harmony import */ var _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/base/BaseCard */ "./resources/js/components/ui/base/BaseCard.vue");
 /* harmony import */ var _sliders_UsedCarsVue3Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sliders/UsedCarsVue3Carousel */ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue");
-/* harmony import */ var _partials_PopularCities_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./partials/PopularCities.vue */ "./resources/js/pages/used-cars/partials/PopularCities.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue3-tabs-component */ "./node_modules/vue3-tabs-component/src/index.js");
+/* harmony import */ var _partials_PopularCities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./partials/PopularCities */ "./resources/js/pages/used-cars/partials/PopularCities.vue");
+/* harmony import */ var _partials_PopularEngines__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./partials/PopularEngines */ "./resources/js/pages/used-cars/partials/PopularEngines.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue3_tabs_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue3-tabs-component */ "./node_modules/vue3-tabs-component/src/index.js");
+/* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/asset */ "./resources/js/mixins/asset.js");
+/* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_mixins_asset__WEBPACK_IMPORTED_MODULE_7__);
+
+
 
 
 
@@ -23177,13 +23182,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    BaseCarousel: _components_ui_base_BaseCarousel_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    BaseCard: _components_ui_base_BaseCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PopularCities: _partials_PopularCities_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    BaseCarousel: _components_ui_base_BaseCarousel__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__["default"],
+    PopularCities: _partials_PopularCities__WEBPACK_IMPORTED_MODULE_3__["default"],
+    PopularEngines: _partials_PopularEngines__WEBPACK_IMPORTED_MODULE_4__["default"],
     UsedCarsVue3Carousel: _sliders_UsedCarsVue3Carousel__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Tab: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__.Tab,
-    Tabs: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__.Tabs
+    Tab: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_6__.Tab,
+    Tabs: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_6__.Tabs
   },
+  mixins: [(_mixins_asset__WEBPACK_IMPORTED_MODULE_7___default())],
   setup: function setup() {}
 });
 
@@ -23230,6 +23237,23 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "PopularEngines"
 });
 
 /***/ }),
@@ -23358,7 +23382,7 @@ var _hoisted_1 = {
   "class": "container"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"d-grid valuables\"><div class=\"item\"><span><i class=\"bi bi-award fs-1\"></i></span><div><h5 class=\"fw-bold\">#1 в България</h5><p class=\"text-normal-gray\">Най-добрият Авто портал</p></div></div><div class=\"item\"><span><i class=\"bi bi-percent fs-1\"></i></span><div><h5 class=\"fw-bold\">Оферти</h5><p class=\"text-normal-gray\">Намирате автомобил изгодно</p></div></div><div class=\"item\"><span><i class=\"bi bi-shield-check fs-1\"></i></span><div><h5 class=\"fw-bold\">Сравнете</h5><p class=\"text-normal-gray\">Избирате правилният модел</p></div></div><div class=\"item\"><span><i class=\"bi bi-chat-dots fs-1\"></i></span><div><h5 class=\"fw-bold\">Чат на живо</h5><p class=\"text-normal-gray\">7 дни в седмицата</p></div></div></div><hr><div class=\"d-grid footer-link-sections\"><div class=\"item\"><h6 class=\"fw-bold\">Полезни страници</h6><ul><li><a href=\"/\">За нас</a></li><li><a href=\"/\">ЧЗВ</a></li><li><a href=\"/\">Рекламирай при нас</a></li><li><a href=\"/\">Условия на ползване</a></li><li><a href=\"/\">Политика на поверителност</a></li></ul></div><div class=\"item\"><h6 class=\"fw-bold\">Контакти</h6><ul><li><a href=\"/\">Чат на живо</a></li><li><a href=\"/\">Контактна форма</a></li><li><a href=\"/\">support@cardealo.com</a></li><li><a href=\"/\">Обратна връзка</a></li></ul></div><div class=\"item\"><h6 class=\"fw-bold\">Последвайте ни</h6><ul class=\"d-flex flex-nowrap\"><li class=\"me-2\"><a href=\"/\"><i class=\"bi bi-facebook fs-4\"></i></a></li><li><a href=\"/\"><i class=\"bi bi-instagram fs-4\"></i></a></li></ul></div></div><hr>", 4);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row valuables\"><div class=\"item col-lg-3\"><span><i class=\"bi bi-award fs-1\"></i></span><div><h5 class=\"fw-bold\">#1 в България</h5><p class=\"text-normal-gray\">Най-добрият Авто портал</p></div></div><div class=\"item col-lg-3\"><span><i class=\"bi bi-percent fs-1\"></i></span><div><h5 class=\"fw-bold\">Оферти</h5><p class=\"text-normal-gray\">Намирате автомобил изгодно</p></div></div><div class=\"item col-lg-3\"><span><i class=\"bi bi-shield-check fs-1\"></i></span><div><h5 class=\"fw-bold\">Сравнете</h5><p class=\"text-normal-gray\">Избирате правилният модел</p></div></div><div class=\"item col-lg-3\"><span><i class=\"bi bi-chat-dots fs-1\"></i></span><div><h5 class=\"fw-bold\">Чат на живо</h5><p class=\"text-normal-gray\">7 дни в седмицата</p></div></div></div><hr><div class=\"d-grid footer-link-sections\"><div class=\"item\"><h6 class=\"fw-bold\">Полезни страници</h6><ul><li><a href=\"/\">За нас</a></li><li><a href=\"/\">ЧЗВ</a></li><li><a href=\"/\">Рекламирай при нас</a></li><li><a href=\"/\">Условия на ползване</a></li><li><a href=\"/\">Политика на поверителност</a></li></ul></div><div class=\"item\"><h6 class=\"fw-bold\">Контакти</h6><ul><li><a href=\"/\">Чат на живо</a></li><li><a href=\"/\">Контактна форма</a></li><li><a href=\"/\">support@cardealo.com</a></li><li><a href=\"/\">Обратна връзка</a></li></ul></div><div class=\"item\"><h6 class=\"fw-bold\">Последвайте ни</h6><ul class=\"d-flex flex-nowrap\"><li class=\"me-2\"><a href=\"/\"><i class=\"bi bi-facebook fs-4\"></i></a></li><li><a href=\"/\"><i class=\"bi bi-instagram fs-4\"></i></a></li></ul></div></div><hr>", 4);
 
 var _hoisted_6 = {
   "class": "copyright"
@@ -25929,9 +25953,35 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-lg-6 col-sm-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  style: {
+    "outline": "2px solid #dc3545"
+  }
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, "Sell your car"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mb-0"
+}, "Lorem ipsum dolor ismet")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-lg-6 col-sm-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  style: {
+    "outline": "2px solid #0a53be"
+  }
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, "Compare cars"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mb-0"
+}, "Lorem ipsum dolor ismet")])])], -1
+/* HOISTED */
+);
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
   "class": "fw-bold"
 }, "Автомобили по вид на двигателя", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
 /* HOISTED */
 );
 
@@ -25947,6 +25997,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Tab = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tab");
 
   var _component_Tabs = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tabs");
+
+  var _component_PopularEngines = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PopularEngines");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_carousel, {
     height: 400,
@@ -26084,14 +26136,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseCard, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            interna add")];
+      return [_hoisted_9];
     }),
     _: 1
     /* STABLE */
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseCard, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_9];
+      return [_hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PopularEngines)];
     }),
     _: 1
     /* STABLE */
@@ -26136,6 +26188,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 128
   /* KEYED_FRAGMENT */
   ))]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _withScopeId = function _withScopeId(n) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-6b7af6c8"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
+};
+
+var _hoisted_1 = {
+  "class": "d-grid"
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"item\" data-v-6b7af6c8> Дизелов </div><div class=\"item\" data-v-6b7af6c8> Бензинов </div><div class=\"item\" data-v-6b7af6c8> CNG (Газ) </div><div class=\"item\" data-v-6b7af6c8> Хибриден </div><div class=\"item\" data-v-6b7af6c8> Електрически </div>", 5);
+
+var _hoisted_7 = [_hoisted_2];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_7);
 }
 
 /***/ }),
@@ -26259,6 +26342,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/mixins/asset.js":
+/*!**************************************!*\
+  !*** ./resources/js/mixins/asset.js ***!
+  \**************************************/
+/***/ ((module) => {
+
+module.exports = {
+  methods: {
+    asset: function asset(path) {
+      var base_path = window._asset || '';
+      return base_path + path;
+    }
+  }
+};
 
 /***/ }),
 
@@ -27095,6 +27195,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-ccbba224] {\n    grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));\n    grid-template-rows: 1fr 1fr;\n    justify-content: center;\n    gap: 10px 15px;\n}\n.items[data-v-ccbba224] {\n    text-align: center;\n    height: 150px;\n    display: flex;\n    flex-flow: column nowrap;\n    justify-content: space-evenly;\n    align-items: center;\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\n    border-radius: 4px;\n}\n.items[data-v-ccbba224]:hover {\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-6b7af6c8] {\n    grid-template-columns: repeat(5, 1fr);\n    gap: 10px;\n}\n.item[data-v-6b7af6c8] {\n    text-align: center;\n    height: 150px;\n    display: flex;\n    flex-flow: column nowrap;\n    justify-content: space-evenly;\n    align-items: center;\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\n    border-radius: 4px;\n}\n.item[data-v-6b7af6c8]:hover {\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49505,6 +49629,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_style_index_0_id_6b7af6c8_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_style_index_0_id_6b7af6c8_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_style_index_0_id_6b7af6c8_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=style&index=0&id=1a02db6f&lang=css":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=style&index=0&id=1a02db6f&lang=css ***!
@@ -50975,6 +51129,37 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/pages/used-cars/partials/PopularEngines.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/PopularEngines.vue ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PopularEngines_vue_vue_type_template_id_6b7af6c8_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true */ "./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true");
+/* harmony import */ var _PopularEngines_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopularEngines.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=script&lang=js");
+/* harmony import */ var _PopularEngines_vue_vue_type_style_index_0_id_6b7af6c8_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css */ "./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css");
+/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+
+
+const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_PopularEngines_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PopularEngines_vue_vue_type_template_id_6b7af6c8_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-6b7af6c8"],['__file',"resources/js/pages/used-cars/partials/PopularEngines.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue":
 /*!***********************************************************************!*\
   !*** ./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue ***!
@@ -51454,6 +51639,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=script&lang=js":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=script&lang=js ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PopularEngines.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=script&lang=js":
 /*!***********************************************************************************************!*\
   !*** ./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=script&lang=js ***!
@@ -51918,6 +52119,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_template_id_6b7af6c8_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_template_id_6b7af6c8_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=template&id=6b7af6c8&scoped=true");
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=template&id=1a02db6f":
 /*!*****************************************************************************************************!*\
   !*** ./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=template&id=1a02db6f ***!
@@ -52047,6 +52264,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularCities_vue_vue_type_style_index_0_id_ccbba224_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PopularCities.vue?vue&type=style&index=0&id=ccbba224&scoped=true&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularCities.vue?vue&type=style&index=0&id=ccbba224&scoped=true&lang=css");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css":
+/*!**************************************************************************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css ***!
+  \**************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PopularEngines_vue_vue_type_style_index_0_id_6b7af6c8_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/PopularEngines.vue?vue&type=style&index=0&id=6b7af6c8&scoped=true&lang=css");
 
 
 /***/ }),

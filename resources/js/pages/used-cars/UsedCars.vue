@@ -26,7 +26,6 @@
             <PopularCities></PopularCities>
         </BaseCard>
 
-
         <BaseCard>
             <h5 class="fw-bold">Автомобили според бюджет</h5>
             <Tabs :options="{ useUrlFragment: false }">
@@ -62,23 +61,41 @@
                 </Tab>
             </Tabs>
         </BaseCard>
+
         <BaseCard>
-            <!--            interna add-->
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div style="outline: 2px solid #dc3545">
+                        <h4>Sell your car</h4>
+                        <p class="mb-0">Lorem ipsum dolor ismet</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div style="outline: 2px solid #0a53be">
+                        <h4>Compare cars</h4>
+                        <p class="mb-0">Lorem ipsum dolor ismet</p>
+                    </div>
+                </div>
+            </div>
         </BaseCard>
 
         <BaseCard>
             <h5 class="fw-bold">Автомобили по вид на двигателя</h5>
+            <hr />
+            <PopularEngines></PopularEngines>
         </BaseCard>
     </div>
 </template>
 <script>
-import BaseCarousel from "../../components/ui/base/BaseCarousel.vue";
-import BaseCard from "../../components/ui/base/BaseCard.vue";
+import BaseCarousel from "../../components/ui/base/BaseCarousel";
+import BaseCard from "../../components/ui/base/BaseCard";
 
 import UsedCarsVue3Carousel from "./sliders/UsedCarsVue3Carousel";
-import PopularCities from "./partials/PopularCities.vue";
+import PopularCities from "./partials/PopularCities";
+import PopularEngines from "./partials/PopularEngines";
 import {reactive, ref} from "vue";
 import {Tab, Tabs} from 'vue3-tabs-component';
+import assetMixin from '../../mixins/asset';
 
 
 export default {
@@ -86,10 +103,12 @@ export default {
         BaseCarousel,
         BaseCard,
         PopularCities,
+        PopularEngines,
         UsedCarsVue3Carousel,
         Tab,
         Tabs
     },
+    mixins: [assetMixin],
     setup() {
     }
 };

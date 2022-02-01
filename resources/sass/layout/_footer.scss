@@ -1,6 +1,5 @@
 footer {
-    .d-grid.valuables {
-        grid-template-columns: repeat(4, 1fr);
+    .row.valuables {
         padding: 1rem 0;
         .item {
             display: flex;
