@@ -11466,6 +11466,52 @@ hr {
   font-weight: 700;
 }
 
+footer .d-grid.valuables {
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1rem 0;
+}
+footer .d-grid.valuables .item {
+  display: flex;
+  align-items: center;
+}
+footer .d-grid.valuables .item > span {
+  margin-right: 8px;
+}
+footer .d-grid.valuables .item h5, footer .d-grid.valuables .item .h5, footer .d-grid.valuables .item p {
+  margin-bottom: 0;
+}
+footer .d-grid.footer-link-sections {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+footer .d-grid.footer-link-sections .item {
+  padding: 0.5rem;
+}
+footer .d-grid.footer-link-sections .item a {
+  font-weight: normal;
+  color: rgba(36, 39, 44, 0.5);
+  font-size: 14px;
+}
+footer .d-grid.footer-link-sections .item a:hover {
+  color: #ff3b33;
+}
+footer .bi-instagram {
+  background: #d6249f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+footer .bi-facebook {
+  color: #1877F2;
+}
+footer .copyright {
+  padding: 0.5rem;
+}
+footer .copyright p {
+  font-size: 11px;
+}
+
 .base-button {
   padding: 0.75rem 2rem;
   margin-top: 1rem;
@@ -11554,33 +11600,21 @@ ul#by__brand__by_budget li.active::after {
   border-radius: 50%;
 }
 
-.agile__nav-button {
-  border: none;
-  border-radius: 50%;
-  background-color: white;
-  height: 40px;
-  width: 40px;
-  box-shadow: 0 0 5px gray;
-  position: absolute;
-  top: 50%;
+ul.tabs-component-tabs {
+  display: flex;
+  margin: 1.2rem auto 1rem auto;
+  border-bottom: 1px solid rgba(36, 39, 44, 0.2);
 }
-
-.agile__nav-button--next {
-  right: 0;
-  transform: translate(50%, -50%);
+ul.tabs-component-tabs li {
+  margin-right: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid transparent;
 }
-
-.agile__nav-button--prev {
-  left: 0;
-  transform: translate(-50%, -50%);
+ul.tabs-component-tabs li.is-active {
+  border-bottom: 2px solid #fd5750;
 }
-
-.showcase .item {
-  text-align: center;
-}
-
-.showcase .info {
-  border: 1px solid #262B34;
+ul.tabs-component-tabs li.is-active a {
+  color: #fd5750;
 }
 
 .sell-car {

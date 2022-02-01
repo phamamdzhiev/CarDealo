@@ -29,15 +29,14 @@
 
         <BaseCard>
             <h5 class="fw-bold">Автомобили според бюджет</h5>
-            <hr/>
             <Tabs :options="{ useUrlFragment: false }">
-                <Tab name="до 5000 BGN">
+                <Tab name="до 5000 лв.">
                     <UsedCarsVue3Carousel></UsedCarsVue3Carousel>
                 </Tab>
-                <Tab name="5000 - 10 000 BGN">
+                <Tab name="5000 - 10 000 лв.">
                     <UsedCarsVue3Carousel></UsedCarsVue3Carousel>
                 </Tab>
-                <Tab name="над 10 000 BGN">
+                <Tab name="над 10 000 лв.">
                     <UsedCarsVue3Carousel></UsedCarsVue3Carousel>
                 </Tab>
             </Tabs>
@@ -45,7 +44,6 @@
 
         <BaseCard>
             <h5 class="fw-bold">Автомобили по каросерия</h5>
-            <hr>
             <Tabs :options="{ useUrlFragment: false }">
                 <Tab name="Хечбек">
                     <UsedCarsVue3Carousel></UsedCarsVue3Carousel>

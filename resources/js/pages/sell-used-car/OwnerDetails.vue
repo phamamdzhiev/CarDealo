@@ -21,7 +21,7 @@
                               v-model.trim="offerDesc"
                     ></textarea>
                     <label for="floatingTextarea">Допълнителна информация</label>
-                    <small style="font-size: 13px; display:block"> {{ offerDesc.length }} / 5000</small>
+<!--                    <small style="font-size: 13px; display:block" v-if="offerDesc"> {{ offerDesc.length }} / 5000</small>-->
                     <FromInputValidationMessage v-if="v$.offerDesc.$error"
                                                 :messages="v$.offerDesc.$errors"/>
                 </div>

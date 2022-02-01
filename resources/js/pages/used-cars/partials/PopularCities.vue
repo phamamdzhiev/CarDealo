@@ -28,7 +28,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .d-grid {
     grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
     grid-template-rows: 1fr 1fr;

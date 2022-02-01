@@ -1,17 +1,19 @@
 <template>
     <div class="app-content">
         <the-header></the-header>
-        <router-view>
-        </router-view>
+        <router-view></router-view>
+        <the-footer></the-footer>
     </div>
 </template>
 <script>
 import TheHeader from "./components/layout/header/TheHeader.vue";
+import TheFooter from "./components/layout/footer/TheFooter";
 import axios from 'axios';
 
 export default {
     components: {
         TheHeader,
+        TheFooter
     },
     async mounted() {
        // const res = await axios.get('/user/auth/fetch');

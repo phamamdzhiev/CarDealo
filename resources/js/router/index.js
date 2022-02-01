@@ -20,8 +20,8 @@ const routes = [
     },
     {
         path: "/sell-car",
-        name: "sell-cars",
-        component: SellCar,
+        name: "sell.car",
+        component: SellCar
     },
     {
         path: "/my-listing",
