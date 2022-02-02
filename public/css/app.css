@@ -11348,6 +11348,13 @@ hr {
   color: #fd5750;
 }
 
+.text-link-blue {
+  color: #2176ae;
+}
+.text-link-blue:hover {
+  color: #1d6799;
+}
+
 .base-button {
   background-color: #fd5750;
   border-radius: 4px;
@@ -11466,17 +11473,23 @@ hr {
   font-weight: 700;
 }
 
-footer .row.valuables {
+footer .d-grid.valuables {
+  grid-template-columns: repeat(4, 1fr);
   padding: 1rem 0;
 }
-footer .row.valuables .item {
+footer .d-grid.valuables .item {
   display: flex;
   align-items: center;
 }
-footer .row.valuables .item > span {
+@media (max-width: 767.98px) {
+  footer .d-grid.valuables .item {
+    margin-bottom: 1rem;
+  }
+}
+footer .d-grid.valuables .item > span {
   margin-right: 8px;
 }
-footer .row.valuables .item h5, footer .row.valuables .item .h5, footer .row.valuables .item p {
+footer .d-grid.valuables .item h5, footer .d-grid.valuables .item .h5, footer .d-grid.valuables .item p {
   margin-bottom: 0;
 }
 footer .d-grid.footer-link-sections {

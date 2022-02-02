@@ -1,29 +1,29 @@
 <template>
     <footer v-show="$route.name !== 'sell.car'">
         <div class="container">
-            <div class="row valuables">
-                <div class="item col-lg-3">
+            <div class="d-grid valuables">
+                <div class="item">
                     <span><i class="bi bi-award fs-1"></i></span>
                     <div>
                         <h5 class="fw-bold">#1 в България</h5>
                         <p class="text-normal-gray">Най-добрият Авто портал</p>
                     </div>
                 </div>
-                <div class="item col-lg-3">
+                <div class="item">
                     <span><i class="bi bi-percent fs-1"></i></span>
                     <div>
                         <h5 class="fw-bold">Оферти</h5>
                         <p class="text-normal-gray">Намирате автомобил изгодно</p>
                     </div>
                 </div>
-                <div class="item col-lg-3">
+                <div class="item">
                     <span><i class="bi bi-shield-check fs-1"></i></span>
                     <div>
-                        <h5 class="fw-bold">Сравнете</h5>
+                        <h5 class="fw-bold">Сравнете коли</h5>
                         <p class="text-normal-gray">Избирате правилният модел</p>
                     </div>
                 </div>
-                <div class="item col-lg-3">
+                <div class="item">
                     <span><i class="bi bi-chat-dots fs-1"></i></span>
                     <div>
                         <h5 class="fw-bold">Чат на живо</h5>
