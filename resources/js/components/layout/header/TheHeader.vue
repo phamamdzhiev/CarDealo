@@ -39,10 +39,10 @@
                     class="sub__menu__wrapper"
                 >
                     <span>Използвани автомобили</span>
-                    <SubMenuHoverableItems
-                        v-show="oldCarsItemShown"
-                        :subLink="oldCarsSubLinks"
-                    ></SubMenuHoverableItems>
+                       <SubMenuHoverableItems
+                           v-show="oldCarsItemShown"
+                           :subLink="oldCarsSubLinks"
+                       ></SubMenuHoverableItems>
                 </div>
                 <div
                     @mouseover="showSubMenuVisibility('sell-car')"

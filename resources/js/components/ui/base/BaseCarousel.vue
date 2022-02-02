@@ -9,6 +9,7 @@
                 <slot></slot>
             </div>
         </div>
+        <slot name="simpleSearch"></slot>
     </div>
 </template>
 <script>

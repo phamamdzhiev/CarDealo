@@ -3,7 +3,11 @@
         <base-carousel
             :height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
-        ></base-carousel>
+        >
+            <template #simpleSearch>
+                <h3><i>...render simple search component here...</i></h3>
+            </template>
+        </base-carousel>
 
         <BaseCard>
             <h5 class="fw-bold">Употребявани автомобили</h5>
