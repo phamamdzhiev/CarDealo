@@ -17,6 +17,7 @@
 @import "pages/sell-car/sell-car";
 //components
 @import "components/vehicle-singleton";
+@import "components/simple-search";
 
 html {
     @include scrollbar

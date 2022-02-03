@@ -1,32 +1,28 @@
 <template>
-    <div class="gradient" style="margin: 55px auto auto 100px; max-width: max-content">
-        <slot></slot>
+    <div id="simple-search">
         <div>
             <ul>
-                <li :class="{active: filter === 1}" @click="changeFilter(1)">По бюджет</li>
-                <li :class="{active: filter === 2}" @click="changeFilter(2)">По модел</li>
+                <li :class="{active: filter === 1}" @click="filter = 1">По бюджет</li>
+                <li :class="{active: filter === 2}" @click="filter = 2">По модел</li>
             </ul>
         </div>
         <form v-show="filter === 1" @submit.prevent="handleSimpleSearchSubmitByBudget">
             <div class="form-inner d-flex justify-content-center">
                 <div class="form-group">
-                    <select class="form-select">
-                        <option>0 - 5000 лв.</option>
-                        <option>5000 - 10 000 лв.</option>
-                        <option>10 000 - 20 000 лв.</option>
-                        <option>20 000 - 50 000 лв.</option>
-                        <option>50 000 - 100 000 лв.</option>
+                    <select class="form-select" v-model='budget'>
+                        <option value="0-5000">0 - 5000 лв.</option>
+                        <option value="5000-10000">5000 - 10 000 лв.</option>
+                        <option value="10000-20000">10 000 - 20 000 лв.</option>
+                        <option value="20000-50000">20 000 - 50 000 лв.</option>
+                        <option value="50000-100000">50 000 - 100 000 лв.</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-select">
-                        <option>София</option>
-                        <option>Пловдив</option>
-                        <option>Варна</option>
-                        <option>Бургас</option>
-                        <option>Русе</option>
-                        <option>Велико Търново</option>
-                        <option>Стара Загора</option>
+                    <select class="form-select" v-model='city'> 
+                        <option value="София">София</option>
+                        <option value="Пловдив">Пловдив</option>
+                        <option value="Варна">Варна</option>
+                        <option value="Стара Загора">Стара Загора</option>
                     </select>
                 </div>
                 <div class="form-group p-2">
@@ -40,13 +36,19 @@
         <form v-show="filter === 2" @submit.prevent="handleSimpleSearchSubmitByModel">
             <div class="form-inner d-flex justify-content-center">
                 <div class="form-group">
-                    <select class="form-select">
-                        <option>Disabled select</option>
+                    <select class="form-select" v-model="carModel">
+                        <option value="Audi">Audi</option>
+                        <option value="Skoda">Skoda</option>
+                        <option value="Opel">Opel</option>
+                        <option value="Mercedez-Benz">Mercedez-Benz</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-select">
-                        <option>Disabled select</option>
+                    <select class="form-select" v-model='city'> 
+                        <option value="София">София</option>
+                        <option value="Пловдив">Пловдив</option>
+                        <option value="Варна">Варна</option>
+                        <option value="Стара Загора">Стара Загора</option>
                     </select>
                 </div>
                 <div class="form-group p-2">
@@ -61,97 +63,35 @@
 </template>
 
 <script>
-import BaseButton from "./base/BaseButton";
 import {ref} from "vue";
+import {useRouter} from 'vue-router';
 
 export default {
     name: "SimpleSearch",
-    components: {
-        BaseButton
-    },
     setup() {
+        const router = useRouter();
+
         let filter = ref(1);
+        let budget = ref("0-5000");
+        let city = ref('София');
+        let carModel = ref('Audi');
 
-        function changeFilter(value) {
-            filter.value = value;
+        async function handleSimpleSearchSubmitByBudget() {
+            await router.push({name: 'used-cars', query: {budget: budget.value, city: city.value }})
         }
 
-        function handleSimpleSearchSubmitByBudget() {
-            console.log('by budget')
-        }
-
-        function handleSimpleSearchSubmitByModel() {
-            console.log('by model')
+        async function handleSimpleSearchSubmitByModel() {
+            await router.push({name: 'used-cars', query: {carModel: carModel.value, city: city.value }})
         }
 
         return {
             handleSimpleSearchSubmitByBudget,
             handleSimpleSearchSubmitByModel,
-            changeFilter,
-            filter
+            filter,
+            budget,
+            city,
+            carModel
         }
     }
 }
 </script>
-
-<style scoped>
-/*#simple-search-wrapper {*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 5rem;*/
-/*}*/
-
-form {
-    background-color: white;
-    max-width: max-content;
-
-}
-
-li {
-    display: inline-block;
-    background-color: #fd5750;
-    transform: translateY(5px);
-    margin-right: 5px;
-    cursor: pointer;
-    padding: 0.3rem 0.5rem;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    font-size: 14px;
-    color: white;
-}
-
-li.active {
-    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);
-    color: black;
-    padding: 0.4rem 0.5rem;
-    transform: unset;
-    background-color: white;
-    font-size: 16px;
-}
-
-.form-select:focus {
-    border: 0;
-    box-shadow: none;
-}
-
-ul {
-}
-
-button {
-    margin: 0;
-}
-
-.form-group {
-    margin: 0;
-}
-
-.form-group:nth-child(1) {
-    border-right: 1px solid #c6c6c6;
-}
-
-select {
-    border: 0;
-    height: 100%;
-    border-radius: 0;
-}
-</style>

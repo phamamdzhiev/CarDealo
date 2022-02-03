@@ -4,10 +4,13 @@
             :height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
         >
+            <div class="banner-heading mt-5">
+                <h1 class="text-white fw-bold mb-5" style="max-width:600px; margin-left: 100px">
+                    Вашето търсене на надежден употребяван автомобил приключи!
+                </h1>
+            </div>
             <template #simpleSearch>
-                <simple-search>
-                    <h1 style="max-width: 325px;" class="text-white fw-bold mb-5">Your search for a trusted used car is over!</h1>
-                </simple-search>
+                <simple-search></simple-search>
             </template>
         </base-carousel>
 
