@@ -7,9 +7,9 @@
         <div class="carousel-inner">
             <div class="carousel-item active" :style="setBannerAndImageHeight">
                 <slot></slot>
+                <slot name="simpleSearch"></slot>
             </div>
         </div>
-        <slot name="simpleSearch"></slot>
     </div>
 </template>
 <script>
