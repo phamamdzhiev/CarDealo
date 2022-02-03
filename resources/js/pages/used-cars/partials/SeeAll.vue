@@ -1,7 +1,9 @@
 <template>
     <div class="see-more pt-3 mt-3">
         <a href="/" class="d-inline-block text-link-blue ps-1">
-            {{ message }}
+            <span>
+                {{ message }}
+            </span>
         </a>
     </div>
 </template>

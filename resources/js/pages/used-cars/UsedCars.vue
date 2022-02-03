@@ -4,8 +4,13 @@
             :height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
         >
+          <div class="banner-heading mt-5">
+               <h1 class="text-white fw-bold mb-5" style="max-width:600px; margin-left: 100px">
+                   Вашето търсене на надежден употребяван автомобил приключи!
+               </h1>
+          </div>
             <template #simpleSearch>
-                <h3><i>...render simple search component here...</i></h3>
+                <simple-search></simple-search>
             </template>
         </base-carousel>
 
@@ -37,9 +42,6 @@
                     <UsedCarsVue3Carousel></UsedCarsVue3Carousel>
                 </Tab>
                 <Tab name="5000 - 10 000 лв.">
-                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>
-                </Tab>
-                <Tab name="над 10 000 лв.">
                     <UsedCarsVue3Carousel></UsedCarsVue3Carousel>
                 </Tab>
             </Tabs>
@@ -79,7 +81,7 @@
                 <div class="col-md-6 ps-0">
                     <div class="base-card d-flex justify-content-between">
                         <div class="py-3">
-                            <h4 class="mb-0 fw-bold">Продай своя автомобил бързо</h4>
+                            <h5 class="mb-0 fw-bold">Продай своя автомобил бързо</h5>
                             <p class="mb-0 text-normal-gray">Директно от вкъщи</p>
                             <a href="/" class="mt-4 d-block text-link-blue">Продай своя автомобил тук</a>
                         </div>
@@ -94,7 +96,7 @@
                 <div class="col-md-6 pe-0">
                     <div class="base-card d-flex justify-content-between">
                         <div class="py-3">
-                            <h4 class="mb-0 fw-bold">Сравни автомобилни марки</h4>
+                            <h5 class="mb-0 fw-bold">Сравни автомобилни марки</h5>
                             <p class="mb-0 text-normal-gray ">Избери правилният за теб сега</p>
                             <a href="/" class="mt-4 d-block text-link-blue">Сравни автомобили тук</a>
                         </div>
@@ -126,6 +128,7 @@ import {reactive, ref} from "vue";
 import {Tab, Tabs} from 'vue3-tabs-component';
 import assetMixin from '../../mixins/asset';
 import SeeAll from "./partials/SeeAll";
+import SimpleSearch from "../../components/ui/SimpleSearch";
 
 
 export default {
@@ -135,6 +138,7 @@ export default {
         BaseGrid,
         UsedCarsVue3Carousel,
         SeeAll,
+        SimpleSearch,
         Tab,
         Tabs
     },

@@ -12085,6 +12085,57 @@ ul.tabs-component-tabs li.is-active a {
   background-color: rgba(36, 39, 44, 0.5);
 }
 
+#simple-search {
+  margin: 235px auto auto 100px;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  position: relative;
+  z-index: 500;
+}
+#simple-search .form-group {
+  margin: 0;
+}
+#simple-search .form-group:first-child {
+  border-right: 1px solid #c6c6c6;
+}
+#simple-search form {
+  background-color: white;
+}
+#simple-search li {
+  display: inline-block;
+  background-color: #fd5750;
+  transform: translateY(5px);
+  margin-right: 5px;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 14px;
+  color: white;
+}
+#simple-search li.active {
+  box-shadow: 0 4px 8px 0 rgba(36, 39, 44, 0.1), 0 2px 2px 0 rgba(36, 39, 44, 0.1);
+  color: black;
+  padding: 0.4rem 0.5rem;
+  transform: unset;
+  background-color: white;
+  font-size: 16px;
+}
+#simple-search select.form-select {
+  border: 0;
+  height: 100%;
+  border-radius: 0;
+  min-width: 200px;
+}
+#simple-search select.form-select:focus {
+  border: 0;
+  box-shadow: none;
+}
+#simple-search .base-button {
+  margin: 0;
+}
+
 html {
   /* width */
   /* Track */

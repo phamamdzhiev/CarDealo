@@ -8,8 +8,8 @@
             <div class="carousel-item active" :style="setBannerAndImageHeight">
                 <slot></slot>
             </div>
+            <slot name="simpleSearch"></slot>
         </div>
-        <slot name="simpleSearch"></slot>
     </div>
 </template>
 <script>
