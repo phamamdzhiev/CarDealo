@@ -12034,6 +12034,28 @@ ul.tabs-component-tabs li.is-active a {
   margin-bottom: 5px;
 }
 
+.advanced-single-filter {
+  box-shadow: 0 4px 8px 0 rgba(36, 39, 44, 0.1), 0 2px 2px 0 rgba(36, 39, 44, 0.1);
+  border-radius: 12px;
+  background-color: white;
+  padding: 1.5rem 1rem;
+  margin-bottom: 20px;
+}
+.advanced-single-filter > h6, .advanced-single-filter > .h6 {
+  margin: 0 0 1.5rem 0;
+}
+.advanced-single-filter .advanced-filter-range-slider {
+  padding: 0 0.5rem;
+}
+
+.advanced-filter-range-slider {
+  --slider-connect-bg: rgba(82, 82, 82, 0.5);
+  --slider-height: 3px;
+  --slider-handle-border: 2px solid black;
+  --slider-handle-height: 20px;
+  --slider-handle-width: 20px;
+}
+
 .vehicle-singleton {
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(36, 39, 44, 0.15);

@@ -1,0 +1,17 @@
+.advanced-single-filter {
+    box-shadow: $box-shadow-large;
+    border-radius: 12px;
+    background-color: white;
+    padding: 1.5rem 1rem;
+    margin-bottom: 20px;
+
+    > h6 {
+        margin: 0 0 1.5rem 0;
+    }
+
+    .advanced-filter-range-slider {
+        padding: 0 0.5rem;
+    }
+}
+
+@import "../../components/vue-range-slider";
