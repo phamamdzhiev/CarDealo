@@ -62,8 +62,9 @@ __webpack_require__.r(__webpack_exports__);
     CarSingleItem: _components_car_CarSingleItem__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   setup: function setup() {
-    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRoute)();
-    console.log(router.query);
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRoute)(); // onMounted(() => {
+    //     console.log('Mounted', router.query)
+    // });
   }
 });
 
@@ -82,6 +83,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vueform_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vueform/slider */ "./node_modules/@vueform/slider/dist/slider.js");
 /* harmony import */ var _vueform_slider_themes_default_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vueform/slider/themes/default.css */ "./node_modules/@vueform/slider/themes/default.css");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+
 
 
 
@@ -91,9 +94,31 @@ __webpack_require__.r(__webpack_exports__);
     Slider: _vueform_slider__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   setup: function setup() {
-    var value = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([0, 20000]);
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
+    var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRoute)();
+    var budgetRange = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
+
+    if (Object.keys(route.query).length === 0) {
+      budgetRange.value[0] = 0;
+      budgetRange.value[1] = 20000;
+    } else {
+      var splitRouteParams = route.query.budget.split('-');
+      budgetRange.value[0] = Number(splitRouteParams[0]);
+      budgetRange.value[1] = Number(splitRouteParams[1]);
+    }
+
+    function handleBudgetSlider() {
+      router.push({
+        name: 'used-cars',
+        query: {
+          budget: budgetRange.value[0] + '-' + budgetRange.value[1]
+        }
+      });
+    }
+
     return {
-      value: value
+      budgetRange: budgetRange,
+      handleBudgetSlider: handleBudgetSlider
     };
   }
 });
@@ -161,7 +186,7 @@ var _hoisted_4 = {
 var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
     "class": "fw-bold mb-3"
-  }, "Search by filters", -1
+  }, "Търсене по филтри", -1
   /* HOISTED */
   );
 });
@@ -210,23 +235,24 @@ var _hoisted_3 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Slider = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Slider");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.value[0]) + " лв. - ", 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.budgetRange[0]) + " лв. - ", 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.value[1]) + " лв.", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.budgetRange[1]) + " лв.", 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Slider, {
-    modelValue: $setup.value,
+    modelValue: $setup.budgetRange,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $setup.value = $event;
+      return $setup.budgetRange = $event;
     }),
     max: 20000,
     step: 500,
     tooltips: false,
     lazy: false,
-    "class": "advanced-filter-range-slider"
+    "class": "advanced-filter-range-slider",
+    onChange: $setup.handleBudgetSlider
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]);
+  , ["modelValue", "onChange"])]);
 }
 
 /***/ }),
