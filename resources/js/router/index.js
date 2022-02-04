@@ -22,6 +22,12 @@ const routes = [
         component: () => import("../pages/advanced-search/AdvancedSearch"),
     },
     {
+        path: "/car/:id",
+        name: "single-listing",
+        component: () => import("../components/car/SingleListing"),
+        props: true
+    },
+    {
         path: "/sell-car",
         name: "sell.car",
         component: () => import("../pages/sell-used-car/SellCar"),

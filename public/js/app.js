@@ -20258,6 +20258,13 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_pages_advanced-search_AdvancedSearch_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/advanced-search/AdvancedSearch */ "./resources/js/pages/advanced-search/AdvancedSearch.vue"));
   }
 }, {
+  path: "/car/:id",
+  name: "single-listing",
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_components_car_SingleListing_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/car/SingleListing */ "./resources/js/components/car/SingleListing.vue"));
+  },
+  props: true
+}, {
   path: "/sell-car",
   name: "sell.car",
   component: function component() {
@@ -28327,7 +28334,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\laragon\\\\www\\\\
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_components_car_SingleListing_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

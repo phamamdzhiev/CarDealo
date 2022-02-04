@@ -4,9 +4,9 @@
             <img class="img-fluid" src="https://images10.gaadicdn.com/usedcar_image/320x240/VCC_1333743_24_1642322761.jpg" alt="">
         </div>
         <div class="vehicle-details">
-            <a href="#">
+            <router-link to="/car/1">
                 2019 BMW M3 xDrive
-            </a>
+            </router-link>
             <div class="price">
                 23 500 <span>BGN</span>
             </div>
