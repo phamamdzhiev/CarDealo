@@ -5,7 +5,6 @@
                 <div style="height: 400px;" class="p-2 advanced-filters">
                     <h5 class="fw-bold mb-3">Търсене по филтри</h5>
                     <BudgetFilter></BudgetFilter>
-                    <BudgetFilter></BudgetFilter>
                 </div>
             </div>
             <div class="col-lg-9 p-2">

@@ -4,4 +4,8 @@
     --slider-handle-border: 2px solid black;
     --slider-handle-height: 20px;
     --slider-handle-width: 20px;
+
+    .slider-handle:focus {
+        box-shadow: .5px .5px 2px 1px rgba(0,0,0,0.5);
+    }
 }

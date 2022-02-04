@@ -10,15 +10,14 @@
             <div class="form-inner d-flex justify-content-center">
                 <div class="form-group">
                     <select class="form-select" v-model='budget'>
-                        <option value="0-5000">0 - 5000 лв.</option>
-                        <option value="5000-10000">5000 - 10 000 лв.</option>
+                        <option value="0-2000">0 - 2000 лв.</option>
+                        <option value="2000-5000">2000 - 5 000 лв.</option>
+                        <option value="5000-10000">5 000 - 10 000 лв.</option>
                         <option value="10000-20000">10 000 - 20 000 лв.</option>
-                        <option value="20000-50000">20 000 - 50 000 лв.</option>
-                        <option value="50000-100000">50 000 - 100 000 лв.</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-select" v-model='city'> 
+                    <select class="form-select" v-model='city'>
                         <option value="София">София</option>
                         <option value="Пловдив">Пловдив</option>
                         <option value="Варна">Варна</option>
@@ -44,7 +43,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-select" v-model='city'> 
+                    <select class="form-select" v-model='city'>
                         <option value="София">София</option>
                         <option value="Пловдив">Пловдив</option>
                         <option value="Варна">Варна</option>
@@ -72,16 +71,16 @@ export default {
         const router = useRouter();
 
         let filter = ref(1);
-        let budget = ref("0-5000");
+        let budget = ref("0-2000");
         let city = ref('София');
         let carModel = ref('Audi');
 
-        async function handleSimpleSearchSubmitByBudget() {
-            await router.push({name: 'used-cars', query: {budget: budget.value, city: city.value }})
+        function handleSimpleSearchSubmitByBudget() {
+            router.push({name: 'used-cars', query: {budget: budget.value, city: city.value }})
         }
 
-        async function handleSimpleSearchSubmitByModel() {
-            await router.push({name: 'used-cars', query: {carModel: carModel.value, city: city.value }})
+        function handleSimpleSearchSubmitByModel() {
+            router.push({name: 'used-cars', query: {carModel: carModel.value, city: city.value }})
         }
 
         return {

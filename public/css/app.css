@@ -11332,7 +11332,7 @@ hr {
   height: 32px !important;
   color: white !important;
   border: 2px solid white !important;
-  background-color: #fd5750 !important;
+  background-color: #ff7771 !important;
   border-radius: 50%;
 }
 .swiper-button-prev:after,
@@ -11345,7 +11345,7 @@ hr {
 }
 
 .text-base-color {
-  color: #fd5750;
+  color: #ff7771;
 }
 
 .text-link-blue {
@@ -11356,7 +11356,7 @@ hr {
 }
 
 .base-button {
-  background-color: #fd5750;
+  background-color: #ff7771;
   border-radius: 4px;
   border: none;
   padding: 0.4rem 1rem;
@@ -11372,10 +11372,10 @@ hr {
   transition: background 500ms ease-in-out;
 }
 .base-button.ripple:hover {
-  background: rgba(253, 87, 80, 0.9) radial-gradient(circle, transparent 1%, rgba(253, 87, 80, 0.9) 1%) center/15000%;
+  background: rgba(255, 119, 113, 0.9) radial-gradient(circle, transparent 1%, rgba(255, 119, 113, 0.9) 1%) center/15000%;
 }
 .base-button.ripple:active {
-  background-color: rgba(253, 87, 80, 0.7);
+  background-color: rgba(255, 119, 113, 0.7);
   background-size: 100%;
   transition: background 0s;
 }
@@ -11444,7 +11444,7 @@ hr {
   border-bottom: 2px solid transparent;
 }
 #the__header .sub__menu__wrapper > span:hover {
-  border-top: 2px solid #fd5750;
+  border-top: 2px solid #ff7771;
 }
 
 .sub__menu__items {
@@ -11602,7 +11602,7 @@ ul#by__brand__by_budget li::before {
 ul#by__brand__by_budget li.active::after {
   content: "";
   position: absolute;
-  background-color: #fd5750;
+  background-color: #ff7771;
   top: 50%;
   transform: translateY(-50%);
   left: -21px;
@@ -11623,10 +11623,10 @@ ul.tabs-component-tabs li {
   border-bottom: 2px solid transparent;
 }
 ul.tabs-component-tabs li.is-active {
-  border-bottom: 2px solid #fd5750;
+  border-bottom: 2px solid #ff7771;
 }
 ul.tabs-component-tabs li.is-active a {
-  color: #fd5750;
+  color: #ff7771;
 }
 
 .sell-car {
@@ -11638,7 +11638,7 @@ ul.tabs-component-tabs li.is-active a {
 }
 .sell-car span.back__button:hover {
   cursor: pointer;
-  color: #fd5750;
+  color: #ff7771;
 }
 .sell-car ul#new__or__used {
   width: 100%;
@@ -11708,7 +11708,7 @@ ul.tabs-component-tabs li.is-active a {
 }
 .sell-car div#brand .item.active {
   cursor: default;
-  border: 2px solid #fd5750;
+  border: 2px solid #ff7771;
 }
 .sell-car div#brand .item.active > span {
   cursor: pointer;
@@ -11723,7 +11723,7 @@ ul.tabs-component-tabs li.is-active a {
   /* Handle */
   /* Handle on hover */
   scrollbar-width: thin;
-  scrollbar-color: #fd5750 #262B34;
+  scrollbar-color: #ff7771 #262B34;
 }
 .sell-car ul#year::-webkit-scrollbar,
 .sell-car ul#model::-webkit-scrollbar {
@@ -11736,7 +11736,7 @@ ul.tabs-component-tabs li.is-active a {
 }
 .sell-car ul#year::-webkit-scrollbar-thumb,
 .sell-car ul#model::-webkit-scrollbar-thumb {
-  background: #fd5750;
+  background: #ff7771;
   border-radius: 20px;
 }
 .sell-car ul#year::-webkit-scrollbar-thumb:hover,
@@ -11762,7 +11762,7 @@ ul.tabs-component-tabs li.is-active a {
 .sell-car ul#year li.active,
 .sell-car ul#model li.active {
   font-weight: 700;
-  border: 2px solid #fd5750;
+  border: 2px solid #ff7771;
 }
 .sell-car ul#fuel,
 .sell-car ul#transmission {
@@ -11789,7 +11789,7 @@ ul.tabs-component-tabs li.is-active a {
 .sell-car ul#fuel li.active,
 .sell-car ul#transmission li.active {
   font-weight: 700;
-  border: 2px solid #fd5750;
+  border: 2px solid #ff7771;
 }
 .sell-car ul#car-extras-categories {
   display: flex;
@@ -11805,11 +11805,11 @@ ul.tabs-component-tabs li.is-active a {
   cursor: pointer;
   flex: 1;
   border: 0;
-  border-bottom: 2px solid #fd5750;
+  border-bottom: 2px solid #ff7771;
 }
 .sell-car ul#car-extras-categories li.active {
   font-weight: 700;
-  border: 2px solid #fd5750;
+  border: 2px solid #ff7771;
   border-bottom: 0;
 }
 .sell-car ul#extras > div {
@@ -11896,7 +11896,7 @@ ul.tabs-component-tabs li.is-active a {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #fd5750;
+  background-color: #ff7771;
   color: #262B34;
   text-align: center;
   font-weight: 700;
@@ -11912,7 +11912,7 @@ ul.tabs-component-tabs li.is-active a {
   font-size: 2rem;
   top: -10px;
   left: 5px;
-  color: #fd5750;
+  color: #ff7771;
 }
 .sell-car #car-image-gallery-preview li {
   padding: 0.375rem 1rem;
@@ -12004,7 +12004,7 @@ ul.tabs-component-tabs li.is-active a {
   /* Handle */
   /* Handle on hover */
   scrollbar-width: thin;
-  scrollbar-color: #fd5750 #262B34;
+  scrollbar-color: #ff7771 #262B34;
 }
 .sell-car textarea.form__input::-webkit-scrollbar {
   width: 7px;
@@ -12014,7 +12014,7 @@ ul.tabs-component-tabs li.is-active a {
   border-radius: 20px;
 }
 .sell-car textarea.form__input::-webkit-scrollbar-thumb {
-  background: #fd5750;
+  background: #ff7771;
   border-radius: 20px;
 }
 .sell-car textarea.form__input::-webkit-scrollbar-thumb:hover {
@@ -12055,6 +12055,9 @@ ul.tabs-component-tabs li.is-active a {
   --slider-handle-height: 20px;
   --slider-handle-width: 20px;
 }
+.advanced-filter-range-slider .slider-handle:focus {
+  box-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.5);
+}
 
 .vehicle-singleton {
   border-radius: 3px;
@@ -12082,7 +12085,7 @@ ul.tabs-component-tabs li.is-active a {
   overflow: hidden;
 }
 .vehicle-singleton .price {
-  color: #fd5750;
+  color: #ff7771;
 }
 .vehicle-singleton .dotlist {
   display: flex;
@@ -12164,7 +12167,7 @@ html {
   /* Handle */
   /* Handle on hover */
   scrollbar-width: thin;
-  scrollbar-color: #fd5750 #262B34;
+  scrollbar-color: #ff7771 #262B34;
 }
 html::-webkit-scrollbar {
   width: 7px;
@@ -12174,7 +12177,7 @@ html::-webkit-scrollbar-track {
   border-radius: 20px;
 }
 html::-webkit-scrollbar-thumb {
-  background: #fd5750;
+  background: #ff7771;
   border-radius: 20px;
 }
 html::-webkit-scrollbar-thumb:hover {
@@ -12184,6 +12187,7 @@ html::-webkit-scrollbar-thumb:hover {
 body {
   background-color: #fafafa;
   position: relative;
+  font-family: "Nunito", sans-serif;
 }
 
 #app {

@@ -22,14 +22,6 @@ export default {
 };
 </script>
 <style>
-html {
-    /*font-size: 62.5%;*/
-}
-
-body {
-    background-color: #fafafa;
-    font-family: "Nunito", sans-serif;
-}
 
 header {
     background-color: white;
