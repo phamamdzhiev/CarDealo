@@ -1,7 +1,9 @@
 <template>
     <div class="vehicle-singleton">
         <div class="vehicle-image-wrapper">
-            <img class="img-fluid" src="https://images10.gaadicdn.com/usedcar_image/320x240/VCC_1333743_24_1642322761.jpg" alt="">
+            <img class="img-fluid"
+                 :src="asset('storage/aaaa.png')"
+                 alt="">
         </div>
         <div class="vehicle-details">
             <router-link to="/car/1">
@@ -20,7 +22,10 @@
 </template>
 
 <script>
+import assetMixin from '../../mixins/asset';
+
 export default {
-    name: "CarSingleItem"
+    name: "CarSingleItem",
+    mixins: [assetMixin]
 }
 </script>

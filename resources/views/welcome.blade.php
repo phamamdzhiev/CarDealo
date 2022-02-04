@@ -17,9 +17,9 @@
 <body>
 <div id="app"></div>
 <script>
-    const APP_VERSION = window.APP_VERSION = '{{ env('APP_VERSION') }}';
-    const APP_NAME = window.APP_NAME = '{{ env('APP_NAME') }}';
-    const AUTH = window.AUTH = {!! json_encode( Auth::guard('web')->user()) !!};
+    window.APP_VERSION = '{{ env('APP_VERSION') }}';
+    window.APP_NAME = '{{ env('APP_NAME') }}';
+    window.AUTH = {!! json_encode( Auth::guard('web')->user()) !!};
     window._asset = '{{ asset('') }}';
 </script>
 <script defer src="{{ asset('js/app.js') }}"></script>

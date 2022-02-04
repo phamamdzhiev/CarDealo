@@ -2,9 +2,14 @@
     <div class="container-xxl py-3">
         <div class="row gx-1">
             <div class="col-lg-3">
-                <div style="height: 400px;" class="p-2 advanced-filters">
+                <div class="p-2 advanced-filters">
                     <h5 class="fw-bold mb-3">Търсене по филтри</h5>
                     <BudgetFilter></BudgetFilter>
+                    <YearFilter></YearFilter>
+                    <KmFilter></KmFilter>
+                    <FuelFilter></FuelFilter>
+                    <TransmissionFilter></TransmissionFilter>
+                    <ColorFilter></ColorFilter>
                 </div>
             </div>
             <div class="col-lg-9 p-2">
@@ -31,11 +36,21 @@ import CarSingleItem from "../../components/car/CarSingleItem";
 
 //Filters
 import BudgetFilter from "./partials/BudgetFilter";
+import YearFilter from "./partials/YearFilter";
+import KmFilter from "./partials/KmFilter";
+import FuelFilter from "./partials/FuelFilter";
+import TransmissionFilter from "./partials/TransmissionFilter";
+import ColorFilter from "./partials/ColorFilter";
 
 export default {
     name: "AdvancedSearch",
     components: {
         BudgetFilter,
+        YearFilter,
+        KmFilter,
+        FuelFilter,
+        TransmissionFilter,
+        ColorFilter,
         CarSingleItem
     },
     setup() {

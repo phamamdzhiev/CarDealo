@@ -72,7 +72,7 @@ import OwnerDetails from "./OwnerDetails";
 import DisplayCarBrands from "./partials/DisplayCarBrands";
 import SellCarFinal from "./SellCarFinal";
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import _ from "lodash";
+import axios from "axios";
 
 export default {
     name: "SellCar",
