@@ -9,9 +9,12 @@
                 </div>
                 <div>
                     <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">
-                        <span v-if="getUser" class="fw-bold me-3">
-                            Здравейте, {{ getUser.name }}
-                        </span>
+                        <div v-if="getUser" class="fw-bold me-3">
+                            <form @submit.prevent="logout">
+                                Здравейте, {{ getUser.name }}
+                                <button class="btn" id="logout-button">Изход</button>
+                            </form>
+                        </div>
                         <span v-else>
                            <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация</router-link>
                        </span>
@@ -65,6 +68,7 @@
 <script>
 import SubMenuHoverableItems from "../../ui/hover-menu-items/SubMenuHoverableItems";
 import BaseButton from "../../ui/base/BaseButton";
+import axios from "axios";
 
 export default {
     components: {
@@ -149,6 +153,20 @@ export default {
         this.$store.commit('auth/SET_USER_AUTH', window.AUTH);
     },
     methods: {
+        async logout() {
+            try {
+                await axios.get('/sanctum/csrf-cookie');
+                const res = await axios.post('/logout');
+
+                if (res.data.success) {
+                    window.location.href = '/';
+                }else {
+                    console.log(res)
+                }
+            } catch (e) {
+                console.log('Logout failed', e);
+            }
+        },
         showSubMenuVisibility(param) {
             switch (param) {
                 case "new-cars":
@@ -184,6 +202,9 @@ export default {
 </script>
 
 <style scoped>
+#logout-button:hover {
+    color: #ff7771;
+}
 #nav {
     white-space: nowrap;
 }

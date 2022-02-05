@@ -31,7 +31,7 @@ const routes = [
     {
         path: "/sell-car",
         name: "sell.car",
-        meta: { protected: true },
+        meta: {protected: true, hideFooter: true},
         component: () => import("../pages/sell-used-car/SellCar"),
         beforeEnter(to, from, next) {
             if (store.getters['auth/GET_AUTH_USER']) {
@@ -49,6 +49,16 @@ const routes = [
         path: "/login",
         name: "login",
         component: () => import('../pages/auth/Login'),
+        meta: {
+            hideFooter: true
+        },
+        beforeEnter(to, from, next) {
+            if (!store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'Home'})
+            }
+        }
     },
     {
         path: '/:pathMatch(.*)*',

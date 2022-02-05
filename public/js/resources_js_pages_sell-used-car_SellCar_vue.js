@@ -2174,11 +2174,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_base_BaseModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ui/base/BaseModal */ "./resources/js/components/ui/base/BaseModal.vue");
 /* harmony import */ var _vuelidate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vuelidate/core */ "./node_modules/@vuelidate/core/dist/index.esm.js");
 /* harmony import */ var _components_ui_FromInputValidationMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ui/FromInputValidationMessage */ "./resources/js/components/ui/FromInputValidationMessage.vue");
-/* harmony import */ var _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @vuelidate/validators */ "./node_modules/@vuelidate/validators/dist/index.esm.js");
+/* harmony import */ var _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @vuelidate/validators */ "./node_modules/@vuelidate/validators/dist/index.esm.js");
 /* harmony import */ var _TopBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TopBar */ "./resources/js/pages/sell-used-car/TopBar.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2198,7 +2196,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "OwnerDetails",
   inject: ['window'],
@@ -2210,62 +2207,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      vuelidateExternalResults: {
-        ownerEmail: [] //this Array shall be populated with Server-side errors
-
-      },
       v$: (0,_vuelidate_core__WEBPACK_IMPORTED_MODULE_3__["default"])(),
-      pass: null,
       isLoading: false,
-      showModal: false,
-      hasPrice: false,
-      toggleBusinessOfferDetails: false
+      hasPrice: false
     };
   },
   validations: function validations() {
     return {
       offerTitle: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Заглавието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required)
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Заглавието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required)
       },
       offerDesc: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Описанието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required),
-        maxLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Описанието трябва да бъде до 5000 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.maxLength)(5000))
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Описанието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required),
+        maxLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Описанието трябва да бъде до 5000 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.maxLength)(5000))
       },
       offerRegion: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Областта е задължителна', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required)
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Областта е задължителна', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required)
       },
       offerCity: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Градът е задължителен', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required)
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Градът е задължителен', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required)
       },
       offerPrice: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Цената е задължителна', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.GET_CAR_HAS_PRICE)),
-        minValue: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Минимална цена 1 лев', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.minValue)(1))
-      },
-      ownerNames: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Име и фамилия са задължителни', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(!this.getUser))
-      },
-      ownerMobile: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Телефонът е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(!this.getUser)),
-        integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Телефонът трябва да във формат 08хххххххх', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.integer)
-      },
-      ownerEmail: {
-        email: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Въведете валиден имейл', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.email)
-      },
-      ownerPassword: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Паролата е задължителна', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(!this.getUser)),
-        minLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Паролата е трябва да бъде минимум 6 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.minLength)(6)),
-        maxLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Паролата е трябва да бъде максимум 25 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.maxLength)(25))
-      },
-      //business details optional
-      ownerCompanyName: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Името на автокъщата задължително', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.IS_OWNER_BUSINESS))
-      },
-      ownerCompanyEik: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('ЕИК/Булстат е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.IS_OWNER_BUSINESS))
-      },
-      ownerCompanyAddress: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Адресът на фирмата е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.IS_OWNER_BUSINESS))
-      }
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Цената е задължителна', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.GET_CAR_HAS_PRICE)),
+        minValue: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Минимална цена 1 лев', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.minValue)(1))
+      } //business details optional
+      // ownerCompanyName: {
+      //     requiredIf: helpers.withMessage('Името на автокъщата задължително', requiredIf(this.IS_OWNER_BUSINESS))
+      // },
+      // ownerCompanyEik: {
+      //     requiredIf: helpers.withMessage('ЕИК/Булстат е задължителен', requiredIf(this.IS_OWNER_BUSINESS))
+      // },
+      // ownerCompanyAddress: {
+      //     requiredIf: helpers.withMessage('Адресът на фирмата е задължителен', requiredIf(this.IS_OWNER_BUSINESS))
+      // }
+
     };
   },
   computed: _objectSpread({
@@ -2296,38 +2271,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.SET_CAR_PRICE(value);
       }
     },
-    ownerNames: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_NAMES'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_NAME(value);
-      }
-    },
-    ownerEmail: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_EMAIL'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_EMAIL(value);
-      }
-    },
-    ownerPassword: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_PASSWORD'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_PASSWORD(value);
-      }
-    },
-    ownerMobile: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_MOBILE'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_MOBILE(value);
-      }
-    },
     offerCity: {
       get: function get() {
         return this.$store.getters['sellCar/GET_CAR_OFFER_CITY'];
@@ -2343,60 +2286,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       set: function set(value) {
         this.SET_OFFER_REGION(value);
       }
-    },
-    ownerCompanyName: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_COMPANY_NAME'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_COMPANY_NAME(value);
-      }
-    },
-    ownerCompanyAddress: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_COMPANY_ADDRESS'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_COMPANY_ADDRESS(value);
-      }
-    },
-    ownerCompanyEik: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_COMPANY_EIK'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_COMPANY_EIK(value);
-      }
-    },
-    ownerCompanyURL: {
-      get: function get() {
-        return this.$store.getters['sellCar/GET_OWNER_COMPANY_URL'];
-      },
-      set: function set(value) {
-        this.SET_OWNER_COMPANY_URL(value);
-      }
     }
-  }, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapGetters)('sellCar', ['getAllData', 'GET_CAR_HAS_PRICE', 'IS_OWNER_BUSINESS'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapMutations)('sellCar', ['setStepMinus', 'setStepPlus', 'SET_OFFER_TITLE', 'SET_OFFER_DESC', 'SET_CAR_PRICE', 'SET_OFFER_CITY', 'SET_OFFER_REGION', 'SET_CAR_HAS_PRICE', 'SET_OWNER_NAME', 'SET_OWNER_EMAIL', 'SET_OWNER_PASSWORD', 'SET_OWNER_MOBILE', 'SET_OWNER_STATUTE', 'SET_OWNER_COMPANY_NAME', 'SET_OWNER_COMPANY_ADDRESS', 'SET_OWNER_COMPANY_EIK', 'SET_OWNER_COMPANY_URL'])), {}, {
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('sellCar', ['getAllData', 'GET_CAR_HAS_PRICE'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('sellCar', ['setStepMinus', 'setStepPlus', 'SET_OFFER_TITLE', 'SET_OFFER_DESC', 'SET_CAR_PRICE', 'SET_OFFER_CITY', 'SET_OFFER_REGION', 'SET_CAR_HAS_PRICE'])), {}, {
     togglePrice: function togglePrice() {
       this.SET_CAR_PRICE(null);
       this.SET_CAR_HAS_PRICE(!this.GET_CAR_HAS_PRICE);
-    },
-    toggleBusinessOffer: function toggleBusinessOffer() {
-      if (!this.IS_OWNER_BUSINESS) {
-        this.SET_OWNER_COMPANY_NAME(null);
-        this.SET_OWNER_COMPANY_ADDRESS(null);
-        this.SET_OWNER_COMPANY_EIK(null);
-        this.SET_OWNER_COMPANY_URL(null);
-      }
-
-      this.SET_OWNER_STATUTE(!this.IS_OWNER_BUSINESS);
     },
     showLastStep: function showLastStep() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var isFormCorrect, data, res;
+        var isFormCorrect;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2415,64 +2316,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _context.abrupt("return");
 
               case 5:
-                data = {
-                  name: _this.ownerNames,
-                  email: _this.ownerEmail,
-                  mobile: _this.ownerMobile,
-                  password: _this.ownerPassword,
-                  is_business: _this.getAllData['car_offer_owner']['is_owner_business']
-                };
-                _context.prev = 6;
-                _this.isLoading = true;
-
-                if (_this.getUser) {
-                  _context.next = 15;
-                  break;
-                }
-
-                _context.next = 11;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default().get('sanctum/csrf-token');
-
-              case 11:
-                _context.next = 13;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default().post('user/create', data);
-
-              case 13:
-                res = _context.sent;
-
-                _this.$store.commit('auth/SET_USER_AUTH', res.data);
-
-              case 15:
                 _this.setStepPlus();
 
-                _this.isLoading = false;
-                _context.next = 26;
-                break;
-
-              case 19:
-                _context.prev = 19;
-                _context.t0 = _context["catch"](6);
-                _this.isLoading = false;
-
-                if (!_context.t0.response.data.errors) {
-                  _context.next = 25;
-                  break;
-                }
-
-                Object.assign(_this.vuelidateExternalResults, {
-                  ownerEmail: _context.t0.response.data.errors.email
-                });
-                return _context.abrupt("return");
-
-              case 25:
-                throw new Error('General error! User cannot be created');
-
-              case 26:
+              case 6:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[6, 19]]);
+        }, _callee);
       }))();
     }
   })
@@ -3044,7 +2895,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this2.imageUpload();
 
               case 2:
-                _this2.$store.commit('sellCar/setCarBrand', null);
+                _this2.$store.commit('sellCar/resetState');
 
                 _this2.$store.commit('sellCar/setStepPlus');
 
@@ -3687,193 +3538,7 @@ var _hoisted_26 = {
 
 var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" По договаряне? ");
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Публикува Бизнес Обява? ");
-
-var _hoisted_29 = {
-  "class": "ms-2"
-};
-var _hoisted_30 = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "28",
-  height: "28",
-  fill: "currentColor",
-  "class": "bi bi-toggle2-off",
-  viewBox: "0 0 16 16"
-};
-
-var _hoisted_31 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-    d: "M9 11c.628-.836 1-1.874 1-3a4.978 4.978 0 0 0-1-3h4a3 3 0 1 1 0 6H9z"
-  }, null, -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_32 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-    d: "M5 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1A5 5 0 1 0 5 3a5 5 0 0 0 0 10z"
-  }, null, -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_33 = [_hoisted_31, _hoisted_32];
-var _hoisted_34 = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "28",
-  height: "28",
-  fill: "currentColor",
-  "class": "bi bi-toggle2-on",
-  viewBox: "0 0 16 16"
-};
-
-var _hoisted_35 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-    d: "M7 5H3a3 3 0 0 0 0 6h4a4.995 4.995 0 0 1-.584-1H3a2 2 0 1 1 0-4h3.416c.156-.357.352-.692.584-1z"
-  }, null, -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_36 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-    d: "M16 8A5 5 0 1 1 6 8a5 5 0 0 1 10 0z"
-  }, null, -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_37 = [_hoisted_35, _hoisted_36];
-var _hoisted_38 = {
-  key: 1,
-  "class": "question-section mb-3"
-};
-
-var _hoisted_39 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-    "class": "fw-bold"
-  }, "Данни за контакт", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_40 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_41 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputNames"
-  }, "Име и фамилия", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_42 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_43 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputMobile"
-  }, "Мобилен номер", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_44 = {
-  key: 2,
-  "class": "question-section"
-};
-
-var _hoisted_45 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-    "class": "fw-bold"
-  }, "Детайли за фирмата?", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_46 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_47 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputCompany"
-  }, "Име на автокъщата", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_48 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_49 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputBulstat"
-  }, "Булстат/ЕИК", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_50 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_51 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputAddress"
-  }, "Адрес на автокъщата", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_52 = {
-  "class": "form-floating form-group"
-};
-var _hoisted_53 = {
-  "for": "floatingInputDomain"
-};
-var _hoisted_54 = {
-  key: 3,
-  "class": "question-section mb-3"
-};
-
-var _hoisted_55 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-    "class": "fw-bold"
-  }, "Създай профил", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_56 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_57 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputEmail"
-  }, "Имейл адрес", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_58 = {
-  "class": "form-floating form-group"
-};
-
-var _hoisted_59 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "floatingInputEmail"
-  }, "Парола", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_60 = {
+var _hoisted_28 = {
   key: 0
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -3988,158 +3653,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         messages: $data.v$.offerPrice.$errors
       }, null, 8
       /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), !$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-        key: 0,
-        style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)([_ctx.IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal', {
-          "cursor": "pointer",
-          "user-select": "none",
-          "max-width": "max-content",
-          "margin": "0 0 0 auto"
-        }]),
-        "class": "d-flex justify-content-end align-items-center",
+      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <div v-if=\"!getUser\" :style=\"IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal'\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                 class=\"d-flex justify-content-end align-items-center\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                 @click=\"toggleBusinessOffer\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                 style=\"cursor:pointer;user-select: none;max-width: max-content;margin: 0 0 0 auto;\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                Публикува Бизнес Обява?"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <span class=\"ms-2\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <svg v-show=\"!IS_OWNER_BUSINESS\" xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                         fill=\"currentColor\" class=\"bi bi-toggle2-off\" viewBox=\"0 0 16 16\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                      <path d=\"M9 11c.628-.836 1-1.874 1-3a4.978 4.978 0 0 0-1-3h4a3 3 0 1 1 0 6H9z\"/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                      <path d=\"M5 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1A5 5 0 1 0 5 3a5 5 0 0 0 0 10z\"/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </svg>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <svg v-show=\"IS_OWNER_BUSINESS\" xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                         fill=\"currentColor\" class=\"bi bi-toggle2-on\" viewBox=\"0 0 16 16\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                      <path"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                          d=\"M7 5H3a3 3 0 0 0 0 6h4a4.995 4.995 0 0 1-.584-1H3a2 2 0 1 1 0-4h3.416c.156-.357.352-.692.584-1z\"/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                      <path d=\"M16 8A5 5 0 1 1 6 8a5 5 0 0 1 10 0z\"/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </svg>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </span>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <div class=\"question-section\" v-if=\"false\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <h5 class=\"fw-bold\">Детайли за фирмата?</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"form-floating form-group\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <input type=\"text\" class=\"form__input form-control\" id=\"floatingInputCompany\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                           placeholder=\"Име на автокъщата\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                           v-model.trim=\"ownerCompanyName\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <label for=\"floatingInputCompany\">Име на автокъщата</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <FromInputValidationMessage v-if=\"v$.ownerCompanyName.$error\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                                :messages=\"v$.ownerCompanyName.$errors\"/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"form-floating form-group\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <input type=\"text\" class=\"form__input form-control\" id=\"floatingInputBulstat\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                           placeholder=\"Булстат/ЕИК\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                           v-model.trim=\"ownerCompanyEik\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <label for=\"floatingInputBulstat\">Булстат/ЕИК</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <FromInputValidationMessage v-if=\"v$.ownerCompanyEik.$error\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                                :messages=\"v$.ownerCompanyEik.$errors\"/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"form-floating form-group\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <input type=\"text\" class=\"form__input form-control\" id=\"floatingInputAddress\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                           placeholder=\"Адрес на автокъщата\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                           v-model.trim=\"ownerCompanyAddress\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <label for=\"floatingInputAddress\">Адрес на автокъщата</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <FromInputValidationMessage v-if=\"v$.ownerCompanyAddress.$error\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                                :messages=\"v$.ownerCompanyAddress.$errors\"/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"form-floating form-group\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <input type=\"text\" class=\"form__input form-control\" id=\"floatingInputDomain\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                           placeholder=\"Личен домейн в CarDealo\" v-model.trim=\"ownerCompanyURL\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <label for=\"floatingInputDomain\">Личен домейн в {{ window.APP_NAME }}</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[7] || (_cache[7] = function () {
-          return $options.toggleBusinessOffer && $options.toggleBusinessOffer.apply($options, arguments);
-        })
-      }, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_30, _hoisted_33, 512
-      /* NEED_PATCH */
-      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !_ctx.IS_OWNER_BUSINESS]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_34, _hoisted_37, 512
-      /* NEED_PATCH */
-      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.IS_OWNER_BUSINESS]])])], 4
-      /* STYLE */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
-        "class": "form-control form__input",
-        id: "floatingInputNames",
-        placeholder: "Име и фамилия",
-        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-          return $options.ownerNames = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerNames, void 0, {
-        trim: true
-      }]]), _hoisted_41, $data.v$.ownerNames.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        messages: $data.v$.ownerNames.$errors
-      }, null, 8
-      /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
-        "class": "form-control form__input",
-        id: "floatingInputMobile",
-        placeholder: "Мобилен номер",
-        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-          return $options.ownerMobile = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerMobile, void 0, {
-        trim: true
-      }]]), _hoisted_43, $data.v$.ownerMobile.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        messages: $data.v$.ownerMobile.$errors
-      }, null, 8
-      /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.IS_OWNER_BUSINESS ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, [_hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
-        "class": "form__input form-control",
-        id: "floatingInputCompany",
-        placeholder: "Име на автокъщата",
-        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-          return $options.ownerCompanyName = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyName, void 0, {
-        trim: true
-      }]]), _hoisted_47, $data.v$.ownerCompanyName.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        messages: $data.v$.ownerCompanyName.$errors
-      }, null, 8
-      /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
-        "class": "form__input form-control",
-        id: "floatingInputBulstat",
-        placeholder: "Булстат/ЕИК",
-        "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-          return $options.ownerCompanyEik = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyEik, void 0, {
-        trim: true
-      }]]), _hoisted_49, $data.v$.ownerCompanyEik.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        messages: $data.v$.ownerCompanyEik.$errors
-      }, null, 8
-      /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
-        "class": "form__input form-control",
-        id: "floatingInputAddress",
-        placeholder: "Адрес на автокъщата",
-        "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-          return $options.ownerCompanyAddress = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyAddress, void 0, {
-        trim: true
-      }]]), _hoisted_51, $data.v$.ownerCompanyAddress.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        messages: $data.v$.ownerCompanyAddress.$errors
-      }, null, 8
-      /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
-        "class": "form__input form-control",
-        id: "floatingInputDomain",
-        placeholder: "Личен домейн в CarDealo",
-        "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-          return $options.ownerCompanyURL = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerCompanyURL, void 0, {
-        trim: true
-      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_53, "Личен домейн в " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.window.APP_NAME), 1
-      /* TEXT */
-      )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_54, [_hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "email",
-        "class": "form-control form__input",
-        id: "floatingInputEmail",
-        placeholder: "Имейл адрес",
-        "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-          return $options.ownerEmail = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerEmail, void 0, {
-        trim: true
-      }]]), _hoisted_57]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "password",
-        "class": "form-control form__input",
-        id: "floatingInputPassword",
-        placeholder: "Парола",
-        "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
-          return $options.ownerPassword = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerPassword, void 0, {
-        trim: true
-      }]]), _hoisted_59, $data.v$.ownerPassword.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        messages: $data.v$.ownerPassword.$errors
-      }, null, 8
-      /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        onClick: _cache[16] || (_cache[16] = function () {
           return $options.showLastStep && $options.showLastStep.apply($options, arguments);
         }),
         "class": "base-button"
-      }, [!$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_60, "Качване на снимки")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
+      }, [!$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_28, "Качване на снимки")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
         key: 1
       }))])];
     }),

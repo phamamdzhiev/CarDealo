@@ -30,6 +30,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/asset */ "./resources/js/mixins/asset.js");
 /* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_mixins_asset__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CarSingleItem",
@@ -108,8 +110,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _partials_FuelFilter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./partials/FuelFilter */ "./resources/js/pages/advanced-search/partials/FuelFilter.vue");
 /* harmony import */ var _partials_TransmissionFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./partials/TransmissionFilter */ "./resources/js/pages/advanced-search/partials/TransmissionFilter.vue");
 /* harmony import */ var _partials_ColorFilter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./partials/ColorFilter */ "./resources/js/pages/advanced-search/partials/ColorFilter.vue");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_10__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -119,7 +119,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
  //Filters
-
 
 
 
@@ -172,7 +171,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](0);
-                console.log(_context.t0, 'fetch offers');
+                console.log(_context.t0, 'fetch offers failed');
 
               case 12:
               case "end":

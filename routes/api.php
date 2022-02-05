@@ -7,6 +7,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/my-listing', function () {
         return 'protected';
     });
+
+    Route::post('offer/create', [\App\Http\Controllers\OfferController::class, 'store']);
+    Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 });
 
 //User
@@ -31,17 +34,13 @@ Route::group(['prefix' => 'vehicle'], function () {
     Route::get('/fetch/extras', [\App\Http\Controllers\CarController::class, 'getCarExtras']);
 });
 
-//Offer
-Route::group(['prefix' => 'offer'], function () {
-    Route::post('/create', [\App\Http\Controllers\OfferController::class, 'store']);
-});
-
 //Advanced search
 Route::get('/fetch/offers', [\App\Http\Controllers\AdvancedSearch::class, 'fetchOffers']);
 
 //Client Auth
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+    Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
 });
 
 //Image

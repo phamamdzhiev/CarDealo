@@ -28,10 +28,11 @@
 
 <script>
 import assetMixin from '../../mixins/asset';
+import {ref} from "vue";
 
 export default {
     name: "CarSingleItem",
     mixins: [assetMixin],
-    props: ['offer']
+    props: ['offer'],
 }
 </script>

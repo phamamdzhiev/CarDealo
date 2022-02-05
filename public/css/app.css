@@ -11360,6 +11360,10 @@ hr {
   color: #ff3939;
 }
 
+.text-warning-color {
+  color: #eed202;
+}
+
 .text-link-blue {
   color: #2176ae;
 }
@@ -12081,6 +12085,10 @@ ul.tabs-component-tabs li.is-active a {
           user-select: none;
   max-width: 320px;
   margin: auto;
+}
+.vehicle-singleton .vehicle-image-wrapper {
+  height: 210px;
+  overflow: hidden;
 }
 .vehicle-singleton .vehicle-image-wrapper > img {
   height: inherit;

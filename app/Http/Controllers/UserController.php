@@ -30,22 +30,22 @@ class UserController extends Controller
      */
     public function store(UserCreation $request)
     {
-        $user = User::whereEmail($request->input('email'))->first();
-
-        if (empty($user)) {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'mobile' => $request->mobile,
-                'password' => Hash::make($request->password),
-                'ip' => $request->ip()
-            ]);
-        }
-
-        Auth::login($user); // manually log the user
-        $user->createToken('api-token')->plainTextToken;
-
-        return response($user);
+//        $user = User::whereEmail($request->input('email'))->first();
+//
+//        if (empty($user)) {
+//            $user = User::create([
+//                'name' => $request->name,
+//                'email' => $request->email,
+//                'mobile' => $request->mobile,
+//                'password' => Hash::make($request->password),
+//                'ip' => $request->ip()
+//            ]);
+//        }
+//
+//        Auth::login($user); // manually log the user
+//        $user->createToken('api-token')->plainTextToken;
+//
+//        return response($user);
     }
 
     /**

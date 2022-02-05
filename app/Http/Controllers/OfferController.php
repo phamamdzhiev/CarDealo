@@ -29,7 +29,6 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         $offerData = json_decode($request->input('offer'), true);
-        $userEmail = $request->input('email');
 
         Validator::make($offerData, [
             'new_or_used' => 'required',
@@ -37,7 +36,6 @@ class OfferController extends Controller
             //add rest of validations...
         ]);
 
-        $user = User::whereEmail($userEmail)->first();
 
         $offer = Offer::create([
             'is_new' => $offerData['new_or_used'],
@@ -55,7 +53,7 @@ class OfferController extends Controller
             'color' => 1,
             'coupe_type' => 1,
             'year_acquired' => 0,
-            'user_id' => $user->id
+            'user_id' => \Auth::id()
         ]);
 
         $image = ImageController::uploadImages($request, $offer->id);

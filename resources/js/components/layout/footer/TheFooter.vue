@@ -1,5 +1,5 @@
 <template>
-    <footer v-show="$route.name !== 'sell.car'">
+    <footer v-show="!$route.meta['hideFooter']">
         <div class="container">
             <div class="d-grid valuables">
                 <div class="item">

@@ -19494,14 +19494,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui/hover-menu-items/SubMenuHoverableItems */ "./resources/js/components/ui/hover-menu-items/SubMenuHoverableItems.vue");
-/* harmony import */ var _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/base/BaseButton */ "./resources/js/components/ui/base/BaseButton.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/hover-menu-items/SubMenuHoverableItems */ "./resources/js/components/ui/hover-menu-items/SubMenuHoverableItems.vue");
+/* harmony import */ var _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/base/BaseButton */ "./resources/js/components/ui/base/BaseButton.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    SubMenuHoverableItems: _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_0__["default"],
-    BaseButton: _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_1__["default"]
+    SubMenuHoverableItems: _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BaseButton: _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   inject: ['window'],
   data: function data() {
@@ -19567,6 +19578,46 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.commit('auth/SET_USER_AUTH', window.AUTH);
   },
   methods: {
+    logout: function logout() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default().get('/sanctum/csrf-cookie');
+
+              case 3:
+                _context.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default().post('/logout');
+
+              case 5:
+                res = _context.sent;
+
+                if (res.data.success) {
+                  window.location.href = '/';
+                } else {
+                  console.log(res);
+                }
+
+                _context.next = 12;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](0);
+                console.log('Logout failed', _context.t0);
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 9]]);
+      }))();
+    },
     showSubMenuVisibility: function showSubMenuVisibility(param) {
       switch (param) {
         case "new-cars":
@@ -19786,7 +19837,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )])])], 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.$route.name !== 'sell.car']]);
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !_ctx.$route.meta['hideFooter']]]);
 }
 
 /***/ }),
@@ -19829,34 +19880,44 @@ var _hoisted_6 = {
   key: 0,
   "class": "fw-bold me-3"
 };
-var _hoisted_7 = {
+
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn",
+    id: "logout-button"
+  }, "Изход", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_8 = {
   key: 1
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Вход / Регистрация");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Вход / Регистрация");
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("+ Публикувай");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("+ Публикувай");
 
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "container-xxl sub__nav"
 };
-var _hoisted_11 = {
+var _hoisted_12 = {
   "class": "d-flex flex-row flex-nowrap align-items-center"
 };
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Нови автомобили", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Използвани автомобили", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Продай своя автомобил", -1
   /* HOISTED */
   );
@@ -19880,16 +19941,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_5, [$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_6, " Здравейте, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUser.name), 1
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_5, [$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.logout && $options.logout.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Здравейте, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUser.name) + " ", 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  ), _hoisted_7], 32
+  /* HYDRATE_EVENTS */
+  )])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'login'
     },
     "class": "me-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_8];
+      return [_hoisted_9];
     }),
     _: 1
     /* STABLE */
@@ -19899,48 +19966,48 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "special"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_9];
+      return [_hoisted_10];
     }),
     _: 1
     /* STABLE */
 
-  })])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onMouseover: _cache[0] || (_cache[0] = function ($event) {
+  })])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onMouseover: _cache[1] || (_cache[1] = function ($event) {
       return $options.showSubMenuVisibility('new-cars');
     }),
-    onMouseleave: _cache[1] || (_cache[1] = function ($event) {
+    onMouseleave: _cache[2] || (_cache[2] = function ($event) {
       return $options.hideSubMenuVisibility('new-cars');
     }),
     "class": "sub__menu__wrapper"
-  }, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubMenuHoverableItems, {
+  }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubMenuHoverableItems, {
     subLink: $data.newCarsSubLinks
   }, null, 8
   /* PROPS */
   , ["subLink"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.newCarsItemShown]])], 32
   /* HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onMouseover: _cache[2] || (_cache[2] = function ($event) {
+    onMouseover: _cache[3] || (_cache[3] = function ($event) {
       return $options.showSubMenuVisibility('old-cars');
     }),
-    onMouseleave: _cache[3] || (_cache[3] = function ($event) {
+    onMouseleave: _cache[4] || (_cache[4] = function ($event) {
       return $options.hideSubMenuVisibility('old-cars');
     }),
     "class": "sub__menu__wrapper"
-  }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubMenuHoverableItems, {
+  }, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubMenuHoverableItems, {
     subLink: $data.oldCarsSubLinks
   }, null, 8
   /* PROPS */
   , ["subLink"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.oldCarsItemShown]])], 32
   /* HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onMouseover: _cache[4] || (_cache[4] = function ($event) {
+    onMouseover: _cache[5] || (_cache[5] = function ($event) {
       return $options.showSubMenuVisibility('sell-car');
     }),
-    onMouseleave: _cache[5] || (_cache[5] = function ($event) {
+    onMouseleave: _cache[6] || (_cache[6] = function ($event) {
       return $options.hideSubMenuVisibility('sell-car');
     }),
     "class": "sub__menu__wrapper"
-  }, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubMenuHoverableItems, {
+  }, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SubMenuHoverableItems, {
     subLink: $data.sellCarSubLinks
   }, null, 8
   /* PROPS */
@@ -20285,7 +20352,8 @@ var routes = [{
   path: "/sell-car",
   name: "sell.car",
   meta: {
-    "protected": true
+    "protected": true,
+    hideFooter: true
   },
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_sell-used-car_SellCar_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/sell-used-car/SellCar */ "./resources/js/pages/sell-used-car/SellCar.vue"));
@@ -20308,6 +20376,18 @@ var routes = [{
   name: "login",
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_auth_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/auth/Login */ "./resources/js/pages/auth/Login.vue"));
+  },
+  meta: {
+    hideFooter: true
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (!_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/GET_AUTH_USER"]) {
+      next();
+    } else {
+      next({
+        name: 'Home'
+      });
+    }
   }
 }, {
   path: '/:pathMatch(.*)*',
@@ -20481,8 +20561,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         car_extra_5: [],
         car_extra_6: []
       },
-      owner_email: null,
-      owner_password: null,
       //final offer
       car_offer: {
         //step 1
@@ -20511,15 +20589,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         car_has_price: true,
         car_offer_city: null,
         car_offer_region: null,
-        car_offer_owner: {
-          is_owner_business: false,
-          owner_name: null,
-          owner_mobile: null,
-          owner_company: null,
-          owner_company_eik: null,
-          owner_company_address: null,
-          owner_company_url: null
-        },
         //step 7
         car_images: null //array
 
@@ -20527,6 +20596,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mutations: {
+    resetState: function resetState(state) {
+      Object.keys(state.car_offer).forEach(function (key) {
+        state.car_offer[key] = null;
+      });
+      state.car_offer['car_has_price'] = true;
+      state.car_offer['new_or_used'] = 1;
+      state.car_brand_with_models = null;
+      state.selected_brand_id = null;
+    },
     setStepPlus: function setStepPlus(state) {
       state.step++;
     },
@@ -20618,41 +20696,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       state.car_offer.car_offer_region = payload;
     },
     //Owner Details
-    SET_OWNER_NAME: function SET_OWNER_NAME(state, payload) {
-      state.car_offer.car_offer_owner.owner_name = payload;
-    },
-    SET_OWNER_EMAIL: function SET_OWNER_EMAIL(state, payload) {
-      state.owner_email = payload;
-    },
-    SET_OWNER_MOBILE: function SET_OWNER_MOBILE(state, payload) {
-      state.car_offer.car_offer_owner.owner_mobile = payload;
-    },
-    SET_OWNER_PASSWORD: function SET_OWNER_PASSWORD(state, payload) {
-      state.owner_password = payload;
-    },
+    // SET_OWNER_NAME(state, payload) {
+    //     state.car_offer.car_offer_owner.owner_name = payload;
+    // },
+    // SET_OWNER_EMAIL(state, payload) {
+    //     state.owner_email = payload;
+    // },
+    // SET_OWNER_MOBILE(state, payload) {
+    //     state.car_offer.car_offer_owner.owner_mobile = payload;
+    // },
+    // SET_OWNER_PASSWORD(state, payload) {
+    //     state.owner_password= payload;
+    // },
     SET_OWNER_STATUTE: function SET_OWNER_STATUTE(state, payload) {
       state.car_offer.car_offer_owner.is_owner_business = payload;
-    },
-    SET_OWNER_COMPANY_NAME: function SET_OWNER_COMPANY_NAME(state, payload) {
-      state.car_offer.car_offer_owner.owner_company = payload;
-    },
-    SET_OWNER_COMPANY_ADDRESS: function SET_OWNER_COMPANY_ADDRESS(state, payload) {
-      state.car_offer.car_offer_owner.owner_company_address = payload;
-    },
-    SET_OWNER_COMPANY_EIK: function SET_OWNER_COMPANY_EIK(state, payload) {
-      state.car_offer.car_offer_owner.owner_company_eik = payload;
-    },
-    SET_OWNER_COMPANY_URL: function SET_OWNER_COMPANY_URL(state, payload) {
-      state.car_offer.car_offer_owner.owner_company_url = payload;
-    },
-    setCarImages: function setCarImages(state, payload) {
-      state.car_offer.car_images = payload;
-    },
-    setCarDetails: function setCarDetails(state, payload) {
-      state.car_offer.car_offer_title = payload.offerTitle;
-      state.car_offer.car_offer_description = payload.offerDescription;
-      state.car_offer.car_price = payload.offerPrice;
-    }
+    } // SET_OWNER_COMPANY_NAME(state, payload) {
+    //     state.car_offer.car_offer_owner.owner_company = payload;
+    // },
+    // SET_OWNER_COMPANY_ADDRESS(state, payload) {
+    //     state.car_offer.car_offer_owner.owner_company_address = payload;
+    // },
+    // SET_OWNER_COMPANY_EIK(state, payload) {
+    //     state.car_offer.car_offer_owner.owner_company_eik = payload;
+    // },
+    // SET_OWNER_COMPANY_URL(state, payload) {
+    //     state.car_offer.car_offer_owner.owner_company_url = payload;
+    // },
+    // setCarImages(state, payload) {
+    //     state.car_offer.car_images = payload;
+    // },
+    // setCarDetails(state, payload) {
+    //     state.car_offer.car_offer_title = payload.offerTitle;
+    //     state.car_offer.car_offer_description = payload.offerDescription;
+    //     state.car_offer.car_price = payload.offerPrice;
+    // }
+
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -20696,30 +20774,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     IS_OWNER_BUSINESS: function IS_OWNER_BUSINESS(state) {
       return state.car_offer.car_offer_owner.is_owner_business;
     },
-    GET_OWNER_NAMES: function GET_OWNER_NAMES(state) {
-      return state.car_offer.car_offer_owner.owner_name;
-    },
+    // GET_OWNER_NAMES(state) {
+    //     return state.car_offer.car_offer_owner.owner_name;
+    // },
     GET_OWNER_EMAIL: function GET_OWNER_EMAIL(state) {
       return state.owner_email;
     },
-    GET_OWNER_MOBILE: function GET_OWNER_MOBILE(state) {
-      return state.car_offer.car_offer_owner.owner_mobile;
-    },
-    GET_OWNER_PASSWORD: function GET_OWNER_PASSWORD(state) {
-      return state.owner_password;
-    },
-    GET_OWNER_COMPANY_NAME: function GET_OWNER_COMPANY_NAME(state) {
-      return state.car_offer.car_offer_owner.owner_company;
-    },
-    GET_OWNER_COMPANY_ADDRESS: function GET_OWNER_COMPANY_ADDRESS(state) {
-      return state.car_offer.car_offer_owner.owner_company_address;
-    },
-    GET_OWNER_COMPANY_EIK: function GET_OWNER_COMPANY_EIK(state) {
-      return state.car_offer.car_offer_owner.owner_company_eik;
-    },
-    GET_OWNER_COMPANY_URL: function GET_OWNER_COMPANY_URL(state) {
-      return state.car_offer.car_offer_owner.owner_company_url;
-    },
+    // GET_OWNER_MOBILE(state) {
+    //     return state.car_offer.car_offer_owner.owner_mobile;
+    // },
+    // GET_OWNER_PASSWORD(state) {
+    //     return state.owner_password;
+    // },
+    // GET_OWNER_COMPANY_NAME(state) {
+    //     return state.car_offer.car_offer_owner.owner_company;
+    // },
+    // GET_OWNER_COMPANY_ADDRESS(state) {
+    //     return state.car_offer.car_offer_owner.owner_company_address;
+    // },
+    // GET_OWNER_COMPANY_EIK(state) {
+    //     return state.car_offer.car_offer_owner.owner_company_eik;
+    // },
+    // GET_OWNER_COMPANY_URL(state) {
+    //     return state.car_offer.car_offer_owner.owner_company_url;
+    // },
     //get the final offer
     getAllData: function getAllData(state) {
       return state.car_offer;
@@ -20821,20 +20899,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3, null, [[0, 9]]);
       }))();
-    },
-    //SEND ALL DATA TO THE SERVER
-    sendDataApi: function sendDataApi(_, payload) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }))();
     }
   }
 });
@@ -20882,7 +20946,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#nav[data-v-c7f1def4] {\n    white-space: nowrap;\n}\n#nav .base-button[data-v-c7f1def4] {\n    margin: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#logout-button[data-v-c7f1def4]:hover {\n    color: #ff7771;\n}\n#nav[data-v-c7f1def4] {\n    white-space: nowrap;\n}\n#nav .base-button[data-v-c7f1def4] {\n    margin: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -18,8 +18,6 @@ export default {
                 car_extra_5: [],
                 car_extra_6: [],
             },
-            owner_email: null,
-            owner_password: null,
             //final offer
             car_offer: {
                 //step 1
@@ -46,21 +44,22 @@ export default {
                 car_has_price: true,
                 car_offer_city: null,
                 car_offer_region: null,
-                car_offer_owner: {
-                    is_owner_business: false,
-                    owner_name: null,
-                    owner_mobile: null,
-                    owner_company: null,
-                    owner_company_eik: null,
-                    owner_company_address: null,
-                    owner_company_url: null,
-                },
                 //step 7
                 car_images: null, //array
             }
         }
     },
     mutations: {
+        resetState(state) {
+            Object.keys(state.car_offer).forEach((key) => {
+                state.car_offer[key] = null;
+            });
+
+            state.car_offer['car_has_price'] = true;
+            state.car_offer['new_or_used'] = 1;
+            state.car_brand_with_models = null;
+            state.selected_brand_id = null;
+        },
         setStepPlus(state) {
             state.step++
         },
@@ -153,41 +152,41 @@ export default {
             state.car_offer.car_offer_region = payload;
         },
         //Owner Details
-        SET_OWNER_NAME(state, payload) {
-            state.car_offer.car_offer_owner.owner_name = payload;
-        },
-        SET_OWNER_EMAIL(state, payload) {
-            state.owner_email = payload;
-        },
-        SET_OWNER_MOBILE(state, payload) {
-            state.car_offer.car_offer_owner.owner_mobile = payload;
-        },
-        SET_OWNER_PASSWORD(state, payload) {
-            state.owner_password= payload;
-        },
+        // SET_OWNER_NAME(state, payload) {
+        //     state.car_offer.car_offer_owner.owner_name = payload;
+        // },
+        // SET_OWNER_EMAIL(state, payload) {
+        //     state.owner_email = payload;
+        // },
+        // SET_OWNER_MOBILE(state, payload) {
+        //     state.car_offer.car_offer_owner.owner_mobile = payload;
+        // },
+        // SET_OWNER_PASSWORD(state, payload) {
+        //     state.owner_password= payload;
+        // },
         SET_OWNER_STATUTE(state, payload) {
             state.car_offer.car_offer_owner.is_owner_business = payload;
         },
-        SET_OWNER_COMPANY_NAME(state, payload) {
-            state.car_offer.car_offer_owner.owner_company = payload;
-        },
-        SET_OWNER_COMPANY_ADDRESS(state, payload) {
-            state.car_offer.car_offer_owner.owner_company_address = payload;
-        },
-        SET_OWNER_COMPANY_EIK(state, payload) {
-            state.car_offer.car_offer_owner.owner_company_eik = payload;
-        },
-        SET_OWNER_COMPANY_URL(state, payload) {
-            state.car_offer.car_offer_owner.owner_company_url = payload;
-        },
-        setCarImages(state, payload) {
-            state.car_offer.car_images = payload;
-        },
-        setCarDetails(state, payload) {
-            state.car_offer.car_offer_title = payload.offerTitle;
-            state.car_offer.car_offer_description = payload.offerDescription;
-            state.car_offer.car_price = payload.offerPrice;
-        }
+        // SET_OWNER_COMPANY_NAME(state, payload) {
+        //     state.car_offer.car_offer_owner.owner_company = payload;
+        // },
+        // SET_OWNER_COMPANY_ADDRESS(state, payload) {
+        //     state.car_offer.car_offer_owner.owner_company_address = payload;
+        // },
+        // SET_OWNER_COMPANY_EIK(state, payload) {
+        //     state.car_offer.car_offer_owner.owner_company_eik = payload;
+        // },
+        // SET_OWNER_COMPANY_URL(state, payload) {
+        //     state.car_offer.car_offer_owner.owner_company_url = payload;
+        // },
+        // setCarImages(state, payload) {
+        //     state.car_offer.car_images = payload;
+        // },
+        // setCarDetails(state, payload) {
+        //     state.car_offer.car_offer_title = payload.offerTitle;
+        //     state.car_offer.car_offer_description = payload.offerDescription;
+        //     state.car_offer.car_price = payload.offerPrice;
+        // }
     },
     getters: {
         isLoading(state) {
@@ -231,30 +230,30 @@ export default {
         IS_OWNER_BUSINESS(state) {
             return state.car_offer.car_offer_owner.is_owner_business;
         },
-        GET_OWNER_NAMES(state) {
-            return state.car_offer.car_offer_owner.owner_name;
-        },
+        // GET_OWNER_NAMES(state) {
+        //     return state.car_offer.car_offer_owner.owner_name;
+        // },
         GET_OWNER_EMAIL(state) {
             return state.owner_email;
         },
-        GET_OWNER_MOBILE(state) {
-            return state.car_offer.car_offer_owner.owner_mobile;
-        },
-        GET_OWNER_PASSWORD(state) {
-            return state.owner_password;
-        },
-        GET_OWNER_COMPANY_NAME(state) {
-            return state.car_offer.car_offer_owner.owner_company;
-        },
-        GET_OWNER_COMPANY_ADDRESS(state) {
-            return state.car_offer.car_offer_owner.owner_company_address;
-        },
-        GET_OWNER_COMPANY_EIK(state) {
-            return state.car_offer.car_offer_owner.owner_company_eik;
-        },
-        GET_OWNER_COMPANY_URL(state) {
-            return state.car_offer.car_offer_owner.owner_company_url;
-        },
+        // GET_OWNER_MOBILE(state) {
+        //     return state.car_offer.car_offer_owner.owner_mobile;
+        // },
+        // GET_OWNER_PASSWORD(state) {
+        //     return state.owner_password;
+        // },
+        // GET_OWNER_COMPANY_NAME(state) {
+        //     return state.car_offer.car_offer_owner.owner_company;
+        // },
+        // GET_OWNER_COMPANY_ADDRESS(state) {
+        //     return state.car_offer.car_offer_owner.owner_company_address;
+        // },
+        // GET_OWNER_COMPANY_EIK(state) {
+        //     return state.car_offer.car_offer_owner.owner_company_eik;
+        // },
+        // GET_OWNER_COMPANY_URL(state) {
+        //     return state.car_offer.car_offer_owner.owner_company_url;
+        // },
         //get the final offer
         getAllData(state) {
             return state.car_offer;
@@ -292,11 +291,6 @@ export default {
             } catch (e) {
                 console.log('in setCarExtras', e);
             }
-        },
-
-        //SEND ALL DATA TO THE SERVER
-        async sendDataApi(_, payload) {
-
         }
     }
 }

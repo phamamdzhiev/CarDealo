@@ -38,7 +38,6 @@ import KmFilter from "./partials/KmFilter";
 import FuelFilter from "./partials/FuelFilter";
 import TransmissionFilter from "./partials/TransmissionFilter";
 import ColorFilter from "./partials/ColorFilter";
-import {isUndefined} from "lodash";
 
 export default {
     name: "AdvancedSearch",
@@ -64,7 +63,7 @@ export default {
                     offers.value = res.data;
                 }
             } catch (e) {
-                console.log(e, 'fetch offers');
+                console.log(e, 'fetch offers failed');
             }
         }
 

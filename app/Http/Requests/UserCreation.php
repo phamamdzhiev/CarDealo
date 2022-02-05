@@ -24,7 +24,7 @@ class UserCreation extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'names' => 'required',
             'email' => 'required|email|unique:users',
             'mobile' => 'required|unique:users',
             'password' => 'required|min:6|max:25'
@@ -34,7 +34,7 @@ class UserCreation extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Името е задължително',
+            'names.required' => 'Името е задължително',
             'email.required' => 'Имейлът е задължителен',
             'email.email' => 'Въведете валиден имейл',
             'email.unique' => 'Имейлът е вече е регистриран',
