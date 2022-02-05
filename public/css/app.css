@@ -11348,6 +11348,18 @@ hr {
   color: #ff7771;
 }
 
+.text-secondary-color {
+  color: #262B34;
+}
+
+.text-success-color {
+  color: #4BB543;
+}
+
+.text-error-color {
+  color: #ff3939;
+}
+
 .text-link-blue {
   color: #2176ae;
 }

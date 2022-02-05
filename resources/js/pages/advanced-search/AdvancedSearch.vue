@@ -13,15 +13,13 @@
                 </div>
             </div>
             <div class="col-lg-9 p-2">
-                <div class="d-grid">
-                    <CarSingleItem></CarSingleItem>
-                    <CarSingleItem></CarSingleItem>
-                    <CarSingleItem></CarSingleItem>
-                    <CarSingleItem></CarSingleItem>
-                    <CarSingleItem></CarSingleItem>
-                    <CarSingleItem></CarSingleItem>
-                    <CarSingleItem></CarSingleItem>
+                <div v-if="isLoading">
+                    Зареждане
                 </div>
+                <div class="d-grid" v-else-if="offers">
+                    <CarSingleItem v-for="offer in offers" :offer="offer"></CarSingleItem>
+                </div>
+                <div v-else>Няма намерени обяви</div>
             </div>
         </div>
     </div>
@@ -30,8 +28,7 @@
 
 <script>
 import axios from "axios";
-import {onMounted, reactive} from "vue";
-import {useRoute} from "vue-router";
+import {onMounted, reactive, ref} from "vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
 
 //Filters
@@ -41,6 +38,7 @@ import KmFilter from "./partials/KmFilter";
 import FuelFilter from "./partials/FuelFilter";
 import TransmissionFilter from "./partials/TransmissionFilter";
 import ColorFilter from "./partials/ColorFilter";
+import {isUndefined} from "lodash";
 
 export default {
     name: "AdvancedSearch",
@@ -54,11 +52,31 @@ export default {
         CarSingleItem
     },
     setup() {
-        const router = useRoute();
+        let offers = ref(null);
+        let isLoading = ref(false);
 
-        // onMounted(() => {
-        //     console.log('Mounted', router.query)
-        // });
+        async function fetchData() {
+            try {
+                isLoading.value = true;
+                const res = await axios.get('/fetch/offers');
+                isLoading.value = false
+                if (res.data.length > 0) {
+                    offers.value = res.data;
+                }
+            } catch (e) {
+                console.log(e, 'fetch offers');
+            }
+        }
+
+        onMounted(() => {
+            fetchData();
+        });
+
+
+        return {
+            offers,
+            isLoading
+        }
     }
 
 }

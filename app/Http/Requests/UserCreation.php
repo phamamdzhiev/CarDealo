@@ -26,7 +26,7 @@ class UserCreation extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'mobile' => 'required',
+            'mobile' => 'required|unique:users',
             'password' => 'required|min:6|max:25'
         ];
     }
@@ -39,6 +39,7 @@ class UserCreation extends FormRequest
             'email.email' => 'Въведете валиден имейл',
             'email.unique' => 'Имейлът е вече е регистриран',
             'mobile.required' => 'Телефонът е задължителен',
+            'mobile.unique' => 'Телефонът е вече регистриран',
             'password.required' => 'Паролата е задължителна',
             'password.min' => 'Паролата трябва да бъде минимум 6 символа',
             'password.max' => 'Паролата трябва да бъде максимум 25 символа'

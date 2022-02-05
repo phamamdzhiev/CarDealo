@@ -178,7 +178,6 @@ export default {
         await this.$store.dispatch('sellCar/setCarPopularBrands');
         await this.$store.dispatch('sellCar/setCarExtrasApi');
     },
-
     beforeRouteLeave(to, from, next) {
         if (this.getAllData['car_brand']) {
             if (!window.confirm("Ако напуснете тази страница сега, възможно е да загубите информацията, която сте въвели!")) {

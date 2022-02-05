@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "../pages/Home.vue";
+import store from "../store";
 // import MyListing from "../pages/admin/my-listing/MyListing";
 // import Login from "../pages/Auth/Login";
 
@@ -30,17 +31,25 @@ const routes = [
     {
         path: "/sell-car",
         name: "sell.car",
+        meta: { protected: true },
         component: () => import("../pages/sell-used-car/SellCar"),
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
+        }
     },
     // {
     //     path: "/my-listing",
     //     name: "my-listing",
     //     component: MyListing,
-    // {
-    //     path: "/login",
-    //     name: "login",
-    //     component: Login,
-    // },
+    {
+        path: "/login",
+        name: "login",
+        component: () => import('../pages/auth/Login'),
+    },
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',

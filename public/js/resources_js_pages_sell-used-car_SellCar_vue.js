@@ -2174,9 +2174,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_base_BaseModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ui/base/BaseModal */ "./resources/js/components/ui/base/BaseModal.vue");
 /* harmony import */ var _vuelidate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vuelidate/core */ "./node_modules/@vuelidate/core/dist/index.esm.js");
 /* harmony import */ var _components_ui_FromInputValidationMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ui/FromInputValidationMessage */ "./resources/js/components/ui/FromInputValidationMessage.vue");
-/* harmony import */ var _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @vuelidate/validators */ "./node_modules/@vuelidate/validators/dist/index.esm.js");
+/* harmony import */ var _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @vuelidate/validators */ "./node_modules/@vuelidate/validators/dist/index.esm.js");
 /* harmony import */ var _TopBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TopBar */ "./resources/js/pages/sell-used-car/TopBar.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2188,6 +2190,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2222,51 +2225,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   validations: function validations() {
     return {
       offerTitle: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Заглавието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required)
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Заглавието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required)
       },
       offerDesc: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Описанието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required),
-        maxLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Описанието трябва да бъде до 5000 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.maxLength)(5000))
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Описанието е задължително', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required),
+        maxLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Описанието трябва да бъде до 5000 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.maxLength)(5000))
       },
       offerRegion: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Областта е задължителна', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required)
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Областта е задължителна', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required)
       },
       offerCity: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Градът е задължителен', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required)
+        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Градът е задължителен', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.required)
       },
       offerPrice: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Цената е задължителна', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.GET_CAR_HAS_PRICE)),
-        minValue: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Минимална цена 1 лев', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.minValue)(1))
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Цената е задължителна', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.GET_CAR_HAS_PRICE)),
+        minValue: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Минимална цена 1 лев', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.minValue)(1))
       },
       ownerNames: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Име и фамилия са задължителни', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required)
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Име и фамилия са задължителни', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(!this.getUser))
       },
       ownerMobile: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Телефонът е задължителен', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required),
-        integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Телефонът трябва да във формат 08хххххххх', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.integer)
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Телефонът е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(!this.getUser)),
+        integer: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Телефонът трябва да във формат 08хххххххх', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.integer)
       },
       ownerEmail: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Имейл адресът е задължителен', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required),
-        email: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Въведете валиден имейл', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.email)
+        email: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Въведете валиден имейл', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.email)
       },
       ownerPassword: {
-        required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Паролата е задължителна', _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.required),
-        minLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Паролата е трябва да бъде минимум 6 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.minLength)(6)),
-        maxLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Паролата е трябва да бъде максимум 25 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.maxLength)(25))
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Паролата е задължителна', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(!this.getUser)),
+        minLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Паролата е трябва да бъде минимум 6 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.minLength)(6)),
+        maxLength: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Паролата е трябва да бъде максимум 25 символа', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.maxLength)(25))
       },
       //business details optional
       ownerCompanyName: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Името на автокъщата задължително', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.IS_OWNER_BUSINESS))
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Името на автокъщата задължително', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.IS_OWNER_BUSINESS))
       },
       ownerCompanyEik: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('ЕИК/Булстат е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.IS_OWNER_BUSINESS))
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('ЕИК/Булстат е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.IS_OWNER_BUSINESS))
       },
       ownerCompanyAddress: {
-        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.helpers.withMessage('Адресът на фирмата е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_6__.requiredIf)(this.IS_OWNER_BUSINESS))
+        requiredIf: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.helpers.withMessage('Адресът на фирмата е задължителен', (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_7__.requiredIf)(this.IS_OWNER_BUSINESS))
       }
     };
   },
   computed: _objectSpread({
+    getUser: function getUser() {
+      return this.$store.getters['auth/GET_AUTH_USER'];
+    },
     offerTitle: {
       get: function get() {
         return this.$store.getters['sellCar/GET_OFFER_TITLE'];
@@ -2371,8 +2376,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.SET_OWNER_COMPANY_URL(value);
       }
     }
-  }, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('sellCar', ['getAllData', 'GET_CAR_HAS_PRICE', 'IS_OWNER_BUSINESS'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('sellCar', ['setStepMinus', 'setStepPlus', 'SET_OFFER_TITLE', 'SET_OFFER_DESC', 'SET_CAR_PRICE', 'SET_OFFER_CITY', 'SET_OFFER_REGION', 'SET_CAR_HAS_PRICE', 'SET_OWNER_NAME', 'SET_OWNER_EMAIL', 'SET_OWNER_PASSWORD', 'SET_OWNER_MOBILE', 'SET_OWNER_STATUTE', 'SET_OWNER_COMPANY_NAME', 'SET_OWNER_COMPANY_ADDRESS', 'SET_OWNER_COMPANY_EIK', 'SET_OWNER_COMPANY_URL'])), {}, {
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapGetters)('sellCar', ['getAllData', 'GET_CAR_HAS_PRICE', 'IS_OWNER_BUSINESS'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapMutations)('sellCar', ['setStepMinus', 'setStepPlus', 'SET_OFFER_TITLE', 'SET_OFFER_DESC', 'SET_CAR_PRICE', 'SET_OFFER_CITY', 'SET_OFFER_REGION', 'SET_CAR_HAS_PRICE', 'SET_OWNER_NAME', 'SET_OWNER_EMAIL', 'SET_OWNER_PASSWORD', 'SET_OWNER_MOBILE', 'SET_OWNER_STATUTE', 'SET_OWNER_COMPANY_NAME', 'SET_OWNER_COMPANY_ADDRESS', 'SET_OWNER_COMPANY_EIK', 'SET_OWNER_COMPANY_URL'])), {}, {
     togglePrice: function togglePrice() {
       this.SET_CAR_PRICE(null);
       this.SET_CAR_HAS_PRICE(!this.GET_CAR_HAS_PRICE);
@@ -2391,7 +2396,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var isFormCorrect, data;
+        var isFormCorrect, data, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2419,27 +2424,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 };
                 _context.prev = 6;
                 _this.isLoading = true;
-                _context.next = 10;
-                return axios.get('sanctum/csrf-token');
 
-              case 10:
-                _context.next = 12;
-                return axios.post('user/create', data);
+                if (_this.getUser) {
+                  _context.next = 15;
+                  break;
+                }
 
-              case 12:
+                _context.next = 11;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default().get('sanctum/csrf-token');
+
+              case 11:
+                _context.next = 13;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default().post('user/create', data);
+
+              case 13:
+                res = _context.sent;
+
+                _this.$store.commit('auth/SET_USER_AUTH', res.data);
+
+              case 15:
                 _this.setStepPlus();
 
                 _this.isLoading = false;
-                _context.next = 23;
+                _context.next = 26;
                 break;
 
-              case 16:
-                _context.prev = 16;
+              case 19:
+                _context.prev = 19;
                 _context.t0 = _context["catch"](6);
                 _this.isLoading = false;
 
                 if (!_context.t0.response.data.errors) {
-                  _context.next = 22;
+                  _context.next = 25;
                   break;
                 }
 
@@ -2448,15 +2464,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 });
                 return _context.abrupt("return");
 
-              case 22:
+              case 25:
                 throw new Error('General error! User cannot be created');
 
-              case 23:
+              case 26:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[6, 16]]);
+        }, _callee, null, [[6, 19]]);
       }))();
     }
   })
@@ -2894,7 +2910,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.umd.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_ui_ErrorDisplay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/ui/ErrorDisplay */ "./resources/js/components/ui/ErrorDisplay.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2911,6 +2929,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SellCarImages",
   components: {
@@ -2918,6 +2937,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ErrorDisplay: _components_ui_ErrorDisplay__WEBPACK_IMPORTED_MODULE_3__["default"],
     draggable: (vuedraggable__WEBPACK_IMPORTED_MODULE_2___default())
   },
+  inject: ['window'],
   data: function data() {
     return {
       errors: [],
@@ -2928,7 +2948,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isLoading: false
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('sellCar', ['getAllData', 'GET_OWNER_EMAIL'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('sellCar', ['getAllData', 'GET_OWNER_EMAIL'])),
   methods: {
     back: function back() {
       this.$store.commit('sellCar/setStepMinus');
@@ -2987,21 +3007,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _this.isLoading = true;
                 _context.prev = 8;
                 _context.next = 11;
-                return axios.post('offer/create', formImages, config);
+                return axios__WEBPACK_IMPORTED_MODULE_4___default().post('offer/create', formImages, config);
 
               case 11:
-                _context.next = 16;
+                _context.next = 17;
                 break;
 
               case 13:
                 _context.prev = 13;
                 _context.t0 = _context["catch"](8);
+                _this.errors = {
+                  'errors': ['Имаме проблем с качването на обявата. Опитайте отново по късно!']
+                };
                 throw new Error('Offer or images cannot be created or uploaded');
 
-              case 16:
+              case 17:
                 _this.isLoading = false;
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -3021,6 +3044,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this2.imageUpload();
 
               case 2:
+                _this2.$store.commit('sellCar/setCarBrand', null);
+
+                _this2.$store.commit('sellCar/setStepPlus');
+
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -3717,6 +3745,7 @@ var _hoisted_36 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_37 = [_hoisted_35, _hoisted_36];
 var _hoisted_38 = {
+  key: 1,
   "class": "question-section mb-3"
 };
 
@@ -3753,7 +3782,7 @@ var _hoisted_43 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_44 = {
-  key: 0,
+  key: 2,
   "class": "question-section"
 };
 
@@ -3808,7 +3837,7 @@ var _hoisted_53 = {
   "for": "floatingInputDomain"
 };
 var _hoisted_54 = {
-  key: 1,
+  key: 3,
   "class": "question-section mb-3"
 };
 
@@ -3959,7 +3988,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         messages: $data.v$.offerPrice.$errors
       }, null, 8
       /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), !$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        key: 0,
         style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)([_ctx.IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal', {
           "cursor": "pointer",
           "user-select": "none",
@@ -3976,7 +4006,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* NEED_PATCH */
       )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.IS_OWNER_BUSINESS]])])], 4
       /* STYLE */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form-control form__input",
         id: "floatingInputNames",
@@ -4010,7 +4040,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         messages: $data.v$.ownerMobile.$errors
       }, null, 8
       /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), _ctx.IS_OWNER_BUSINESS ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, [_hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.IS_OWNER_BUSINESS ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, [_hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         "class": "form__input form-control",
         id: "floatingInputCompany",
@@ -4075,7 +4105,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         trim: true
       }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_53, "Личен домейн в " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.window.APP_NAME), 1
       /* TEXT */
-      )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true),  true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_54, [_hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_54, [_hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "email",
         "class": "form-control form__input",
         id: "floatingInputEmail",
@@ -4087,12 +4117,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.ownerEmail, void 0, {
         trim: true
-      }]]), _hoisted_57, $data.v$.ownerEmail.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
-        messages: $data.v$.ownerEmail.$errors
-      }, null, 8
-      /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), _hoisted_57]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "password",
         "class": "form-control form__input",
         id: "floatingInputPassword",
@@ -4109,7 +4134,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         messages: $data.v$.ownerPassword.$errors
       }, null, 8
       /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : 0, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[16] || (_cache[16] = function () {
           return $options.showLastStep && $options.showLastStep.apply($options, arguments);
         }),
@@ -4638,23 +4663,33 @@ var _hoisted_1 = {
   "class": "sell-car"
 };
 var _hoisted_2 = {
-  key: 0
-};
-var _hoisted_3 = {
-  key: 0
-};
-var _hoisted_4 = {
-  key: 0
-};
-var _hoisted_5 = {
-  key: 1
+  key: 0,
+  "class": "text-center"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Готови сте!", -1
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "bi bi-check-circle text-success-color",
+  style: {
+    "font-size": "5rem"
+  }
+}, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Към начална страница");
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "mb-4"
+}, "Поздраления Вие успешно качихте своята обява!", -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Може да видите своите обяви от "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "/my-listing",
+  "class": "text-link-blue"
+}, "ТУК")], -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Към начална страница");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_base_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("base-button");
@@ -4663,48 +4698,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_card, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [ true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [_ctx.GET_OWNER_EMAIL ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.GET_OWNER_EMAIL) + " ", 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        onClick: _cache[0] || (_cache[0] = function () {
-          return $options.sendVerificationCode && $options.sendVerificationCode.apply($options, arguments);
-        })
-      }, " Изпрати код", 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.isCodeRequested]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Кодът беше изпрате успешно", 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.isCodeRequested]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return $data.code = $event;
-        }),
-        type: "text"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.code, void 0, {
-        number: true
-      }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        onClick: _cache[2] || (_cache[2] = function () {
-          return $options.verifyEmail && $options.verifyEmail.apply($options, arguments);
-        })
-      }, "Верифицирай имейл"), $data.msg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.msg), 1
-      /* TEXT */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 32
-      /* HYDRATE_EVENTS */
-      )])) : 0, $data.codeVerified ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_button, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <div v-if=\"true\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <p v-if=\"GET_OWNER_EMAIL\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    {{ GET_OWNER_EMAIL }}"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <button @click=\"sendVerificationCode\" v-show=\"!isCodeRequested\"> Изпрати код</button>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <span v-show=\"isCodeRequested\"> Кодът беше изпрате успешно</span>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </p>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <form @submit.prevent>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <input v-model.number=\"code\" type=\"text\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <button @click=\"verifyEmail\">Верифицирай имейл</button>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <span v-if=\"msg\"> {{ msg }} </span>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </form>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </div>"),  true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [_hoisted_3, _hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_button, {
         onClick: $options.navigateToHomepage,
         link: ""
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_7];
+          return [_hoisted_6];
         }),
         _: 1
         /* STABLE */
 
       }, 8
       /* PROPS */
-      , ["onClick"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      , ["onClick"])])) : 0];
     }),
     _: 1
     /* STABLE */
@@ -5467,7 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-6ad67308] {\r\n    max-width: 800px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sell-car[data-v-6ad67308] {\n    max-width: 800px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -1,14 +1,14 @@
 <template>
-    <Swiper :breakpoints="swiperBreakPoints"
-            :slides-per-view="4"
-            :space-between="40"
-            :navigation="true"
-            :modules="modules"
-            virtual>
-        <SwiperSlide v-for="slide in 9" :key="slide" :virtualIndex="slide">
-            <CarSingleItem></CarSingleItem>
-        </SwiperSlide>
-    </Swiper>
+<!--    <Swiper :breakpoints="swiperBreakPoints"-->
+<!--            :slides-per-view="4"-->
+<!--            :space-between="40"-->
+<!--            :navigation="true"-->
+<!--            :modules="modules"-->
+<!--            virtual>-->
+<!--        <SwiperSlide v-for="slide in 9" :key="slide" :virtualIndex="slide">-->
+<!--            <CarSingleItem></CarSingleItem>-->
+<!--        </SwiperSlide>-->
+<!--    </Swiper>-->
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ path: genLink }" class="base-button ripple">
+    <router-link :to="{ path: genLink }" class="base-button d-block ripple">
         <slot></slot>
     </router-link>
 </template>

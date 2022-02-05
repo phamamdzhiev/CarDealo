@@ -8,13 +8,17 @@ import sellCar from "./sell-car/sell-car";
 import auth from "./auth/auth-store";
 
 
-export default createStore({
+const store = createStore({
     modules: {
-        sellCar,
-        auth
+        auth,
+        sellCar
     },
     plugins: [
         createPersistedState(sellCarPersist),
         createPersistedState(persistAuthUser),
     ],
-})
+});
+
+
+
+export default store;

@@ -37,9 +37,6 @@ export default {
     name: "Home",
     components: {
         BaseCarousel,
-    },
-    mounted() {
-        console.log('Home mounted', window.AUTH)
     }
 };
 </script>

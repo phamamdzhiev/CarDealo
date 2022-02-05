@@ -21,7 +21,7 @@
                               v-model.trim="offerDesc"
                     ></textarea>
                     <label for="floatingTextarea">Допълнителна информация</label>
-<!--                    <small style="font-size: 13px; display:block" v-if="offerDesc"> {{ offerDesc.length }} / 5000</small>-->
+                    <!--                    <small style="font-size: 13px; display:block" v-if="offerDesc"> {{ offerDesc.length }} / 5000</small>-->
                     <FromInputValidationMessage v-if="v$.offerDesc.$error"
                                                 :messages="v$.offerDesc.$errors"/>
                 </div>
@@ -65,7 +65,7 @@
                                                 :messages="v$.offerPrice.$errors"/>
                 </div>
             </div>
-            <div :style="IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal'"
+            <div v-if="!getUser" :style="IS_OWNER_BUSINESS ? 'font-weight: bold' : 'font-weight: normal'"
                  class="d-flex justify-content-end align-items-center"
                  @click="toggleBusinessOffer"
                  style="cursor:pointer;user-select: none;max-width: max-content;margin: 0 0 0 auto;">
@@ -84,7 +84,7 @@
                     </svg>
                 </span>
             </div>
-            <div class="question-section mb-3">
+            <div class="question-section mb-3" v-if="!getUser">
                 <h5 class="fw-bold">Данни за контакт</h5>
                 <div class="form-floating form-group">
                     <input type="text" class="form-control form__input" id="floatingInputNames"
@@ -136,16 +136,13 @@
                     <label for="floatingInputDomain">Личен домейн в {{ window.APP_NAME }}</label>
                 </div>
             </div>
-            <div class="question-section mb-3" v-if="true">
+            <div class="question-section mb-3" v-if="!getUser">
                 <h5 class="fw-bold">Създай профил</h5>
                 <div class="form-floating form-group">
                     <input type="email" class="form-control form__input" id="floatingInputEmail"
                            placeholder="Имейл адрес"
                            v-model.trim="ownerEmail">
                     <label for="floatingInputEmail">Имейл адрес</label>
-                    <FromInputValidationMessage v-if="v$.ownerEmail.$error"
-                                                :messages="v$.ownerEmail.$errors"
-                    />
                 </div>
                 <div class="form-floating form-group">
                     <input type="password" class="form-control form__input" id="floatingInputPassword"
@@ -182,6 +179,7 @@ import FromInputValidationMessage from "../../components/ui/FromInputValidationM
 import {required, email, integer, maxLength, requiredIf, minLength, minValue, helpers} from '@vuelidate/validators'
 import TopBar from "./TopBar";
 import {mapGetters, mapMutations} from "vuex";
+import axios from "axios";
 
 export default {
     name: "OwnerDetails",
@@ -225,18 +223,17 @@ export default {
                 minValue: helpers.withMessage('Минимална цена 1 лев', minValue(1))
             },
             ownerNames: {
-                required: helpers.withMessage('Име и фамилия са задължителни', required)
+                requiredIf: helpers.withMessage('Име и фамилия са задължителни', requiredIf(!this.getUser))
             },
             ownerMobile: {
-                required: helpers.withMessage('Телефонът е задължителен', required),
+                requiredIf: helpers.withMessage('Телефонът е задължителен', requiredIf(!this.getUser)),
                 integer: helpers.withMessage('Телефонът трябва да във формат 08хххххххх', integer)
             },
             ownerEmail: {
-                required: helpers.withMessage('Имейл адресът е задължителен', required),
                 email: helpers.withMessage('Въведете валиден имейл', email)
             },
             ownerPassword: {
-                required: helpers.withMessage('Паролата е задължителна', required),
+                requiredIf: helpers.withMessage('Паролата е задължителна', requiredIf(!this.getUser)),
                 minLength: helpers.withMessage('Паролата е трябва да бъде минимум 6 символа', minLength(6)),
                 maxLength: helpers.withMessage('Паролата е трябва да бъде максимум 25 символа', maxLength(25))
             },
@@ -254,6 +251,9 @@ export default {
     },
 
     computed: {
+        getUser() {
+            return this.$store.getters['auth/GET_AUTH_USER'];
+        },
         offerTitle: {
             get() {
                 return this.$store.getters['sellCar/GET_OFFER_TITLE'];
@@ -423,8 +423,12 @@ export default {
             try {
                 this.isLoading = true;
 
-                await axios.get('sanctum/csrf-token');
-                await axios.post('user/create', data);
+                if (!this.getUser) {
+                    await axios.get('sanctum/csrf-token');
+                    const res = await axios.post('user/create', data);
+                    this.$store.commit('auth/SET_USER_AUTH', res.data);
+                }
+
                 this.setStepPlus();
 
                 this.isLoading = false;

@@ -42,8 +42,8 @@ pos
                 </div>
             </div>
             <error-display :errors="errors"></error-display>
-<!--            v-show="images.length > 4"-->
-            <button @click="uploadOffer" class="base-button" >
+            <!--            v-show="images.length > 4"-->
+            <button @click="uploadOffer" class="base-button">
                 <span v-if="!isLoading">Публикувай обява</span>
                 <loading-dots v-else></loading-dots>
             </button>
@@ -56,6 +56,7 @@ import BaseCard from "../../components/ui/base/BaseCard";
 import draggable from 'vuedraggable';
 import ErrorDisplay from "../../components/ui/ErrorDisplay";
 import {mapGetters} from "vuex";
+import axios from "axios";
 
 export default {
     name: "SellCarImages",
@@ -64,6 +65,7 @@ export default {
         ErrorDisplay,
         draggable
     },
+    inject: ['window'],
     data() {
         return {
             errors: [],
@@ -126,7 +128,8 @@ export default {
             try {
                 await axios.post('offer/create', formImages, config);
             } catch (error) {
-               throw new Error('Offer or images cannot be created or uploaded');
+                this.errors = {'errors': ['Имаме проблем с качването на обявата. Опитайте отново по късно!']}
+                throw new Error('Offer or images cannot be created or uploaded');
             }
 
             this.isLoading = false
@@ -146,7 +149,8 @@ export default {
 
             // this.$store.commit('sellCar/setCarImages', this.images);
             await this.imageUpload();
-            // this.$store.commit('sellCar/setStepPlus');
+            this.$store.commit('sellCar/setCarBrand', null);
+            this.$store.commit('sellCar/setStepPlus');
         }
     }
 }

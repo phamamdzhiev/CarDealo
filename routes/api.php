@@ -36,6 +36,14 @@ Route::group(['prefix' => 'offer'], function () {
     Route::post('/create', [\App\Http\Controllers\OfferController::class, 'store']);
 });
 
+//Advanced search
+Route::get('/fetch/offers', [\App\Http\Controllers\AdvancedSearch::class, 'fetchOffers']);
+
+//Client Auth
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+});
+
 //Image
 Route::group(['prefix' => 'image'], function () {
     Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'uploadImage']);

@@ -60,4 +60,15 @@ class AuthController extends Controller
     {
         //
     }
+
+
+    public function login(Request $request) {
+
+        $request->validate([
+            'email' => 'bail|required|email',
+            'password' => 'required'
+        ]);
+
+        dump($request->all());
+    }
 }

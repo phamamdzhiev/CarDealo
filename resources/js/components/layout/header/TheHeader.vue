@@ -7,15 +7,17 @@
                 <div class="fs-4 logo">
                     <router-link to="/">{{ window.APP_NAME }}</router-link>
                 </div>
-                <nav id="nav" class="main__nav">
-                    <router-link to="/" class="me-3">Вход</router-link>
-                    <router-link to="/about" class="me-3"
-                    >Регистрация</router-link
-                    >
-                    <base-button :link="'sell-car'" class="special"
-                    >+ Публикувай</base-button
-                    >
-                </nav>
+                <div>
+                    <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">
+                        <span v-if="getUser" class="fw-bold me-3">
+                            Здравейте, {{ getUser.name }}
+                        </span>
+                        <span v-else>
+                           <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация</router-link>
+                       </span>
+                        <base-button :link="'sell-car'" class="special">+ Публикувай</base-button>
+                    </nav>
+                </div>
             </div>
         </div>
         <div class="container-xxl sub__nav">
@@ -39,10 +41,10 @@
                     class="sub__menu__wrapper"
                 >
                     <span>Използвани автомобили</span>
-                       <SubMenuHoverableItems
-                           v-show="oldCarsItemShown"
-                           :subLink="oldCarsSubLinks"
-                       ></SubMenuHoverableItems>
+                    <SubMenuHoverableItems
+                        v-show="oldCarsItemShown"
+                        :subLink="oldCarsSubLinks"
+                    ></SubMenuHoverableItems>
                 </div>
                 <div
                     @mouseover="showSubMenuVisibility('sell-car')"
@@ -63,6 +65,7 @@
 <script>
 import SubMenuHoverableItems from "../../ui/hover-menu-items/SubMenuHoverableItems";
 import BaseButton from "../../ui/base/BaseButton";
+
 export default {
     components: {
         SubMenuHoverableItems,
@@ -137,6 +140,14 @@ export default {
             ],
         };
     },
+    computed: {
+        getUser() {
+            return this.$store.getters['auth/GET_AUTH_USER'];
+        }
+    },
+    mounted() {
+        this.$store.commit('auth/SET_USER_AUTH', window.AUTH);
+    },
     methods: {
         showSubMenuVisibility(param) {
             switch (param) {
@@ -173,5 +184,11 @@ export default {
 </script>
 
 <style scoped>
+#nav {
+    white-space: nowrap;
+}
 
+#nav .base-button {
+    margin: 0;
+}
 </style>

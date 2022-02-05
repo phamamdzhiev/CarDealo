@@ -1,21 +1,23 @@
 <template>
     <div class="sell-car">
         <base-card>
-            <div v-if="true">
-                <p v-if="GET_OWNER_EMAIL">
-                    {{ GET_OWNER_EMAIL }}
-                    <button @click="sendVerificationCode" v-show="!isCodeRequested"> Изпрати код</button>
-                    <span v-show="isCodeRequested"> Кодът беше изпрате успешно</span>
-                </p>
+            <!--            <div v-if="true">-->
+            <!--                <p v-if="GET_OWNER_EMAIL">-->
+            <!--                    {{ GET_OWNER_EMAIL }}-->
+            <!--                    <button @click="sendVerificationCode" v-show="!isCodeRequested"> Изпрати код</button>-->
+            <!--                    <span v-show="isCodeRequested"> Кодът беше изпрате успешно</span>-->
+            <!--                </p>-->
 
-                <form @submit.prevent>
-                    <input v-model.number="code" type="text">
-                    <button @click="verifyEmail">Верифицирай имейл</button>
-                    <span v-if="msg"> {{ msg }} </span>
-                </form>
-            </div>
-            <div v-if="codeVerified">
-                <h3>Готови сте!</h3>
+            <!--                <form @submit.prevent>-->
+            <!--                    <input v-model.number="code" type="text">-->
+            <!--                    <button @click="verifyEmail">Верифицирай имейл</button>-->
+            <!--                    <span v-if="msg"> {{ msg }} </span>-->
+            <!--                </form>-->
+            <!--            </div>-->
+            <div v-if="true" class="text-center">
+                <i class="bi bi-check-circle text-success-color" style="font-size: 5rem"></i>
+                <h3 class="mb-4">Поздраления Вие успешно качихте своята обява!</h3>
+                <span>Може да видите своите обяви от <a href="/my-listing" class="text-link-blue">ТУК</a></span>
                 <base-button @click="navigateToHomepage" link="">Към начална страница</base-button>
             </div>
         </base-card>
