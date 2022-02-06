@@ -2,7 +2,7 @@
     <div class="vehicle-singleton">
         <div class="vehicle-image-wrapper">
             <router-link :to="'/car/' + offer.id">
-                <img v-if="offer.images[0]"
+                <img v-if="offer.images"
                      class="img-fluid"
                      :src="asset('storage/' + offer.images[0].image)"
                      alt=""
@@ -33,6 +33,6 @@ import {ref} from "vue";
 export default {
     name: "CarSingleItem",
     mixins: [assetMixin],
-    props: ['offer'],
+    props: ['offer']
 }
 </script>

@@ -36,7 +36,6 @@ class OfferController extends Controller
             //add rest of validations...
         ]);
 
-
         $offer = Offer::create([
             'is_new' => $offerData['new_or_used'],
             'car_brands_id' => 1,
@@ -65,11 +64,11 @@ class OfferController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Offer $offer
-     * @return Offer[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder[]
      */
-    public function show(Offer $offer)
+    public function show(Offer $offer): array|\Illuminate\Database\Eloquent\Collection
     {
-        return $offer->all();
+        return $offer->with('images')->take(10)->get();
     }
 
     /**

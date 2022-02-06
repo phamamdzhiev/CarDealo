@@ -47,3 +47,8 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'image'], function () {
     Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'uploadImage']);
 });
+
+//CarDealo used offers/cars
+Route::group(['prefix' => 'offers'], function () {
+    Route::get('/fetch/recommended', [\App\Http\Controllers\OfferController::class, 'show']);
+});

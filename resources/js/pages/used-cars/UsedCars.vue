@@ -4,30 +4,28 @@
             :height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
         >
-            <div class="banner-heading mt-5">
-                <h1 class="text-white fw-bold mb-5" style="max-width:600px; margin-left: 100px">
-                    Вашето търсене на надежден употребяван автомобил приключи!
-                </h1>
-            </div>
-            <template #simpleSearch>
-                <simple-search></simple-search>
-            </template>
+                <div class="banner-heading mt-5">
+                   <div class="container">
+                       <h1 class="text-white fw-bold mb-5" style="max-width:600px;">
+                           Вашето търсене на надежден употребяван автомобил приключи!
+                       </h1>
+                   </div>
+                </div>
+                <template #simpleSearch>
+                    <simple-search></simple-search>
+                </template>
         </base-carousel>
 
-<!--        <BaseCard>-->
-<!--            <h5 class="fw-bold">Употребявани автомобили</h5>-->
-<!--            <p>-->
-<!--                Намерете пълен списък на сертифицирани употребявани автомобили в-->
-<!--                България. Можете да изберете коли втора употреба, като приложите филтри-->
-<!--                като местоположение, цена, тип каросерия, марка и т.н.-->
-<!--            </p>-->
-<!--        </BaseCard>-->
+        <BaseCard>
+            <h5 class="fw-bold">Употребявани автомобили</h5>
+            <p>
+                Намерете пълен списък на сертифицирани употребявани автомобили в
+                България. Можете да изберете коли втора употреба, като приложите филтри
+                като местоположение, цена, тип каросерия, марка и т.н.
+            </p>
+        </BaseCard>
 
-<!--        <BaseCard>-->
-<!--            <h5 class="fw-bold">Препоръчани автомобили за теб</h5>-->
-<!--            <hr/>-->
-<!--            <UsedCarsVue3Carousel></UsedCarsVue3Carousel>-->
-<!--        </BaseCard>-->
+        <RecommendedCars></RecommendedCars>
 
 <!--        <BaseCard>-->
 <!--            <h5 class="fw-bold">Автомобили в България по град</h5>-->
@@ -122,13 +120,13 @@
 import BaseCarousel from "../../components/ui/base/BaseCarousel";
 import BaseCard from "../../components/ui/base/BaseCard";
 
-import UsedCarsVue3Carousel from "./sliders/UsedCarsVue3Carousel";
 import BaseGrid from "../../components/ui/base/BaseGrid";
 import {reactive, ref} from "vue";
 import {Tab, Tabs} from 'vue3-tabs-component';
 import assetMixin from '../../mixins/asset';
 import SeeAll from "./partials/SeeAll";
 import SimpleSearch from "../../components/ui/SimpleSearch";
+import RecommendedCars from "./partials/RecommendedCars";
 
 
 export default {
@@ -136,11 +134,11 @@ export default {
         BaseCarousel,
         BaseCard,
         BaseGrid,
-        UsedCarsVue3Carousel,
         SeeAll,
         SimpleSearch,
         Tab,
-        Tabs
+        Tabs,
+        RecommendedCars
     },
     mixins: [assetMixin],
     setup() {

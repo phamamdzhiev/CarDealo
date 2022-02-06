@@ -12131,7 +12131,7 @@ ul.tabs-component-tabs li.is-active a {
 }
 
 #simple-search {
-  margin: 235px auto auto 100px;
+  margin: 235px 0 0 0;
   max-width: -webkit-max-content;
   max-width: -moz-max-content;
   max-width: max-content;
