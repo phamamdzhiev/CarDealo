@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class UserCreation extends FormRequest
 {
@@ -24,8 +25,8 @@ class UserCreation extends FormRequest
     public function rules()
     {
         return [
-            'names' => 'required',
-            'email' => 'required|email|unique:users',
+            'names' => 'required|string',
+            'email' => 'required|email|string|unique:users, email',
             'mobile' => 'required|unique:users',
             'password' => 'required|min:6|max:25'
         ];

@@ -6,6 +6,7 @@ use App\Http\Requests\OfferCreationRequest;
 use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class OfferController extends Controller
@@ -103,5 +104,12 @@ class OfferController extends Controller
     public function destroy(Offer $offer)
     {
         //
+    }
+
+
+    public function userListing()
+    {
+        $offers = Offer::whereUserId(Auth::id())->get();
+        return response($offers);
     }
 }

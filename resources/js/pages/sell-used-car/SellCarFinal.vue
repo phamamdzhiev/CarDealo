@@ -17,7 +17,8 @@
             <div v-if="true" class="text-center">
                 <i class="bi bi-check-circle text-success-color" style="font-size: 5rem"></i>
                 <h3 class="mb-4">Поздраления Вие успешно качихте своята обява!</h3>
-                <span>Може да видите своите обяви от <a href="/my-listing" class="text-link-blue">ТУК</a></span>
+                <span>Може да видите своите обяви от <router-link :to="{name: 'my.listing'}"
+                                                                  class="text-link-blue">ТУК</router-link></span>
                 <base-button @click="navigateToHomepage" link="">Към начална страница</base-button>
             </div>
         </base-card>

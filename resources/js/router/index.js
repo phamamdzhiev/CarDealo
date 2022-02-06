@@ -41,10 +41,18 @@ const routes = [
             }
         }
     },
-    // {
-    //     path: "/my-listing",
-    //     name: "my-listing",
-    //     component: MyListing,
+    {
+        path: "/my-listing",
+        name: "my.listing",
+        component: () => import('../pages/admin/my-listing/MyListing'),
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
+        }
+    },
     {
         path: "/login",
         name: "login",

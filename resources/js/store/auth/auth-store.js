@@ -2,7 +2,7 @@ export default {
     namespaced: true,
     state() {
         return {
-            user: false,
+            user: null,
             is_authenticated: false
         }
     },
@@ -21,8 +21,8 @@ export default {
         }
     },
     actions: {
-        SET_USER_AUTH_ASYNC(context) {
-            context.commit('SET_USER_AUTH');
+        SET_USER_AUTH_ASYNC({commit}, payload) {
+            commit('SET_USER_AUTH', payload);
         }
     },
 }

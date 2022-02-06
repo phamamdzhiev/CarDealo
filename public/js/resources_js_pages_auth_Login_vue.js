@@ -2188,7 +2188,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       fieldType.value = fieldType.value === "password" ? "text" : "password";
     }
 
-    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_6__.isUndefined)(route.redirectedFrom)) {
+    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_6__.isUndefined)(route.redirectedFrom) && route.redirectedFrom.name === 'sell.car') {
       isRedirected.value = true;
     }
 
@@ -2258,31 +2258,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 res = _context.sent;
                 isLoading.value = false;
 
-                if (!res.data['user']) {
-                  _context.next = 16;
+                if (!res.data.user) {
+                  _context.next = 17;
                   break;
                 }
 
-                store.commit('auth/SET_USER_AUTH', res.data['user']);
-                _context.next = 16;
+                _context.next = 15;
+                return store.dispatch('auth/SET_USER_AUTH_ASYNC', res.data.user);
+
+              case 15:
+                _context.next = 17;
                 return router.replace({
                   name: 'Home'
                 });
 
-              case 16:
-                if (res.data['error']) {
-                  errors.value = res.data['message'];
-                }
-
-                _context.next = 22;
+              case 17:
+                _context.next = 26;
                 break;
 
               case 19:
                 _context.prev = 19;
                 _context.t0 = _context["catch"](4);
-                console.log(_context.t0, 'Login failed');
+                isLoading.value = false;
 
-              case 22:
+                if (!_context.t0.response.data.error) {
+                  _context.next = 25;
+                  break;
+                }
+
+                errors.value = _context.t0.response.data.message;
+                return _context.abrupt("return");
+
+              case 25:
+                console.log(_context.t0.response, 'Login failed');
+
+              case 26:
               case "end":
                 return _context.stop();
             }
@@ -2326,21 +2336,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 isLoadingR.value = false;
 
                 if (!res.data.success) {
-                  _context2.next = 14;
+                  _context2.next = 16;
                   break;
                 }
 
                 _context2.next = 14;
+                return store.dispatch('auth/SET_USER_AUTH_ASYNC', res.data.user);
+
+              case 14:
+                _context2.next = 16;
                 return router.replace({
                   name: 'Home'
                 });
 
-              case 14:
-                _context2.next = 20;
+              case 16:
+                _context2.next = 22;
                 break;
 
-              case 16:
-                _context2.prev = 16;
+              case 18:
+                _context2.prev = 18;
                 _context2.t0 = _context2["catch"](5);
                 isLoadingR.value = false;
                 Object.assign($externalResults, {
@@ -2348,12 +2362,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   mobile: _context2.t0.response.data.errors.mobile
                 });
 
-              case 20:
+              case 22:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[5, 16]]);
+        }, _callee2, this, [[5, 18]]);
       }));
       return _handleRegister.apply(this, arguments);
     }

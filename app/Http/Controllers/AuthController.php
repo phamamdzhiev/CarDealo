@@ -71,16 +71,22 @@ class AuthController extends Controller
     {
 
         $credentials = $request->validate([
-            'email' => 'bail|required|email',
+            'email' => 'required|email|string',
             'password' => 'required'
         ]);
 
-        if (Auth::guard('web')->attempt($credentials)) {
-            $request->session()->regenerate();
+        try {
+            if (Auth::guard('web')->attempt($credentials)) {
+                $request->session()->regenerate();
 
-            return response()->json(['user' => Auth::getUser()]);
-        } else {
-            return response(['error' => true, 'message' => 'Грешни данни за вход. Опитайте отново!']);
+                $user = Auth::user();
+                $token = $user->createToken('login-token')->plainTextToken;
+                return response()->json(['user' => $user, 'token' => $token ]);
+            } else {
+                return response(['error' => true, 'message' => 'Грешни данни за вход. Опитайте отново!'], 401);
+            }
+        } catch (QueryException $e) {
+            throw new \Error($e->getMessage());
         }
     }
 
@@ -101,13 +107,16 @@ class AuthController extends Controller
         Auth::login($user); // manually log the user
         $user->createToken('api-token')->plainTextToken;
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'user' => $user]);
     }
 
-    public function logout(): \Illuminate\Http\JsonResponse
+    public function logout(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
             Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
             $success = true;
             $message = 'Successfully logged out!';
         }catch (QueryException $e) {

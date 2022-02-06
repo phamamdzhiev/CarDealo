@@ -150,7 +150,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.commit('auth/SET_USER_AUTH', window.AUTH);
+        this.$store.dispatch('auth/SET_USER_AUTH_ASYNC', window.AUTH);
     },
     methods: {
         async logout() {

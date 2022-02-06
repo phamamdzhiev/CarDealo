@@ -19575,7 +19575,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.$store.commit('auth/SET_USER_AUTH', window.AUTH);
+    this.$store.dispatch('auth/SET_USER_AUTH_ASYNC', window.AUTH);
   },
   methods: {
     logout: function logout() {
@@ -20367,11 +20367,22 @@ var routes = [{
       });
     }
   }
-}, // {
-//     path: "/my-listing",
-//     name: "my-listing",
-//     component: MyListing,
-{
+}, {
+  path: "/my-listing",
+  name: "my.listing",
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_pages_admin_my-listing_MyListing_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/admin/my-listing/MyListing */ "./resources/js/pages/admin/my-listing/MyListing.vue"));
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/GET_AUTH_USER"]) {
+      next();
+    } else {
+      next({
+        name: 'login'
+      });
+    }
+  }
+}, {
   path: "/login",
   name: "login",
   component: function component() {
@@ -20419,7 +20430,7 @@ __webpack_require__.r(__webpack_exports__);
   namespaced: true,
   state: function state() {
     return {
-      user: false,
+      user: null,
       is_authenticated: false
     };
   },
@@ -20438,8 +20449,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   actions: {
-    SET_USER_AUTH_ASYNC: function SET_USER_AUTH_ASYNC(context) {
-      context.commit('SET_USER_AUTH');
+    SET_USER_AUTH_ASYNC: function SET_USER_AUTH_ASYNC(_ref, payload) {
+      var commit = _ref.commit;
+      commit('SET_USER_AUTH', payload);
     }
   }
 });
@@ -20474,7 +20486,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.createStore)({
     auth: _auth_auth_store__WEBPACK_IMPORTED_MODULE_3__["default"],
     sellCar: _sell_car_sell_car__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])(_persist_state_persist__WEBPACK_IMPORTED_MODULE_1__.sellCarPersist), (0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])(_persist_state_persist__WEBPACK_IMPORTED_MODULE_1__.persistAuthUser)]
+  plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])(_persist_state_persist__WEBPACK_IMPORTED_MODULE_1__.sellCarPersist)]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
@@ -20489,35 +20501,31 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.createStore)({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "sellCarPersist": () => (/* binding */ sellCarPersist),
-/* harmony export */   "persistAuthUser": () => (/* binding */ persistAuthUser)
+/* harmony export */   "sellCarPersist": () => (/* binding */ sellCarPersist)
 /* harmony export */ });
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
-
+// import Cookies from "js-cookie";
 var sellCarPersist = {
   key: 'sellCar',
-  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models', 'sellCar.owner_email'],
+  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models'],
   fetchBeforeUse: false,
   storage: window.sessionStorage
-};
-var persistAuthUser = {
-  key: 'auth',
-  paths: ['auth.is_authenticated', 'auth.user'],
-  storage: {
-    getItem: function getItem(key) {
-      return js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].get(key);
-    },
-    setItem: function setItem(key, value) {
-      return js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].set(key, value, {
-        expires: 1,
-        secure: true
-      });
-    },
-    removeItem: function removeItem(key) {
-      return js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].remove(key);
-    }
-  }
-};
+}; //
+// export const persistAuthUser = {
+//     key: 'auth',
+//     paths: [
+//         'auth.is_authenticated',
+//         'auth.user'
+//     ],
+//     storage: window.sessionStorage
+// storage: {
+//     getItem: (key) => Cookies.get(key),
+//     setItem: (key, value) => Cookies.set(key, value, {
+//         expires: 1,
+//         secure: true
+//     }),
+//     removeItem: (key) => Cookies.remove(key)
+// }
+// };
 
 /***/ }),
 
@@ -28232,155 +28240,6 @@ var index = {
 
 /***/ }),
 
-/***/ "./node_modules/js-cookie/dist/js.cookie.mjs":
-/*!***************************************************!*\
-  !*** ./node_modules/js-cookie/dist/js.cookie.mjs ***!
-  \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/*! js-cookie v3.0.1 | MIT */
-/* eslint-disable no-var */
-function assign (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-    for (var key in source) {
-      target[key] = source[key];
-    }
-  }
-  return target
-}
-/* eslint-enable no-var */
-
-/* eslint-disable no-var */
-var defaultConverter = {
-  read: function (value) {
-    if (value[0] === '"') {
-      value = value.slice(1, -1);
-    }
-    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
-  },
-  write: function (value) {
-    return encodeURIComponent(value).replace(
-      /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
-      decodeURIComponent
-    )
-  }
-};
-/* eslint-enable no-var */
-
-/* eslint-disable no-var */
-
-function init (converter, defaultAttributes) {
-  function set (key, value, attributes) {
-    if (typeof document === 'undefined') {
-      return
-    }
-
-    attributes = assign({}, defaultAttributes, attributes);
-
-    if (typeof attributes.expires === 'number') {
-      attributes.expires = new Date(Date.now() + attributes.expires * 864e5);
-    }
-    if (attributes.expires) {
-      attributes.expires = attributes.expires.toUTCString();
-    }
-
-    key = encodeURIComponent(key)
-      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
-      .replace(/[()]/g, escape);
-
-    var stringifiedAttributes = '';
-    for (var attributeName in attributes) {
-      if (!attributes[attributeName]) {
-        continue
-      }
-
-      stringifiedAttributes += '; ' + attributeName;
-
-      if (attributes[attributeName] === true) {
-        continue
-      }
-
-      // Considers RFC 6265 section 5.2:
-      // ...
-      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
-      //     character:
-      // Consume the characters of the unparsed-attributes up to,
-      // not including, the first %x3B (";") character.
-      // ...
-      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
-    }
-
-    return (document.cookie =
-      key + '=' + converter.write(value, key) + stringifiedAttributes)
-  }
-
-  function get (key) {
-    if (typeof document === 'undefined' || (arguments.length && !key)) {
-      return
-    }
-
-    // To prevent the for loop in the first place assign an empty array
-    // in case there are no cookies at all.
-    var cookies = document.cookie ? document.cookie.split('; ') : [];
-    var jar = {};
-    for (var i = 0; i < cookies.length; i++) {
-      var parts = cookies[i].split('=');
-      var value = parts.slice(1).join('=');
-
-      try {
-        var foundKey = decodeURIComponent(parts[0]);
-        jar[foundKey] = converter.read(value, foundKey);
-
-        if (key === foundKey) {
-          break
-        }
-      } catch (e) {}
-    }
-
-    return key ? jar[key] : jar
-  }
-
-  return Object.create(
-    {
-      set: set,
-      get: get,
-      remove: function (key, attributes) {
-        set(
-          key,
-          '',
-          assign({}, attributes, {
-            expires: -1
-          })
-        );
-      },
-      withAttributes: function (attributes) {
-        return init(this.converter, assign({}, this.attributes, attributes))
-      },
-      withConverter: function (converter) {
-        return init(assign({}, this.converter, converter), this.attributes)
-      }
-    },
-    {
-      attributes: { value: Object.freeze(defaultAttributes) },
-      converter: { value: Object.freeze(converter) }
-    }
-  )
-}
-
-var api = init(defaultConverter, { path: '/' });
-/* eslint-enable no-var */
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (api);
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/package.json":
 /*!*****************************************!*\
   !*** ./node_modules/axios/package.json ***!
@@ -28499,7 +28358,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\laragon\\\\www\\\\
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_components_car_SingleListing_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_components_car_SingleListing_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_admin_my-listing_MyListing_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

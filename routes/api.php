@@ -51,4 +51,6 @@ Route::group(['prefix' => 'image'], function () {
 //CarDealo used offers/cars
 Route::group(['prefix' => 'offers'], function () {
     Route::get('/fetch/recommended', [\App\Http\Controllers\OfferController::class, 'show']);
+    Route::get('/fetch/user/listing', [\App\Http\Controllers\OfferController::class, 'userListing'])
+        ->middleware('auth:sanctum');
 });

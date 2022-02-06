@@ -159,7 +159,7 @@ export default {
             fieldType.value = fieldType.value === "password" ? "text" : "password";
         }
 
-        if (!isUndefined(route.redirectedFrom)) {
+        if (!isUndefined(route.redirectedFrom) && route.redirectedFrom.name === 'sell.car') {
             isRedirected.value = true;
         }
 
@@ -197,16 +197,17 @@ export default {
                 await axios.get('sanctum/csrf-token');
                 const res = await axios.post('auth/login', loginState);
                 isLoading.value = false;
-                if (res.data['user']) {
-                    store.commit('auth/SET_USER_AUTH', res.data['user']);
+                if (res.data.user) {
+                    await store.dispatch('auth/SET_USER_AUTH_ASYNC', res.data.user);
                     await router.replace({name: 'Home'});
                 }
-
-                if (res.data['error']) {
-                    errors.value = res.data['message'];
-                }
             } catch (e) {
-                console.log(e, 'Login failed');
+                isLoading.value = false;
+                if (e.response.data.error) {
+                    errors.value = e.response.data.message;
+                    return;
+                }
+                console.log(e.response, 'Login failed');
             }
         }
 
@@ -220,6 +221,7 @@ export default {
                 const res = await axios.post('auth/register', registerState);
                 isLoadingR.value = false;
                 if (res.data.success) {
+                    await store.dispatch('auth/SET_USER_AUTH_ASYNC', res.data.user);
                     await router.replace({name: 'Home'});
                 }
             } catch (e) {
