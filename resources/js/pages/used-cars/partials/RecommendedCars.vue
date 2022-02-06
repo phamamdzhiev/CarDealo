@@ -1,12 +1,11 @@
 <template>
-    <BaseCard>
+    <div v-if="isLoading">
+        Зареждане
+    </div>
+    <BaseCard v-else>
         <h5 class="fw-bold">Препоръчани автомобили за теб</h5>
         <hr/>
-        <div v-if="isLoading">
-            Зареждане
-        </div>
         <UsedCarsVue3Carousel v-if="recommendedCars" :carData="recommendedCars"></UsedCarsVue3Carousel>
-
     </BaseCard>
 </template>
 

@@ -131,14 +131,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_base_BaseCarousel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui/base/BaseCarousel */ "./resources/js/components/ui/base/BaseCarousel.vue");
 /* harmony import */ var _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui/base/BaseCard */ "./resources/js/components/ui/base/BaseCard.vue");
 /* harmony import */ var _components_ui_base_BaseGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ui/base/BaseGrid */ "./resources/js/components/ui/base/BaseGrid.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue3_tabs_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue3-tabs-component */ "./node_modules/vue3-tabs-component/src/index.js");
-/* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/asset */ "./resources/js/mixins/asset.js");
-/* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_mixins_asset__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _partials_SeeAll__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./partials/SeeAll */ "./resources/js/pages/used-cars/partials/SeeAll.vue");
-/* harmony import */ var _components_ui_SimpleSearch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/ui/SimpleSearch */ "./resources/js/components/ui/SimpleSearch.vue");
-/* harmony import */ var _partials_RecommendedCars__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./partials/RecommendedCars */ "./resources/js/pages/used-cars/partials/RecommendedCars.vue");
-
+/* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/asset */ "./resources/js/mixins/asset.js");
+/* harmony import */ var _mixins_asset__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mixins_asset__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_ui_SimpleSearch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ui/SimpleSearch */ "./resources/js/components/ui/SimpleSearch.vue");
+/* harmony import */ var _partials_RecommendedCars__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./partials/RecommendedCars */ "./resources/js/pages/used-cars/partials/RecommendedCars.vue");
+/* harmony import */ var _partials_BudgetCars__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./partials/BudgetCars */ "./resources/js/pages/used-cars/partials/BudgetCars.vue");
+/* harmony import */ var _partials_BodyTypeCars__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./partials/BodyTypeCars */ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue");
 
 
 
@@ -152,13 +150,12 @@ __webpack_require__.r(__webpack_exports__);
     BaseCarousel: _components_ui_base_BaseCarousel__WEBPACK_IMPORTED_MODULE_0__["default"],
     BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__["default"],
     BaseGrid: _components_ui_base_BaseGrid__WEBPACK_IMPORTED_MODULE_2__["default"],
-    SeeAll: _partials_SeeAll__WEBPACK_IMPORTED_MODULE_6__["default"],
-    SimpleSearch: _components_ui_SimpleSearch__WEBPACK_IMPORTED_MODULE_7__["default"],
-    Tab: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_4__.Tab,
-    Tabs: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_4__.Tabs,
-    RecommendedCars: _partials_RecommendedCars__WEBPACK_IMPORTED_MODULE_8__["default"]
+    SimpleSearch: _components_ui_SimpleSearch__WEBPACK_IMPORTED_MODULE_4__["default"],
+    RecommendedCars: _partials_RecommendedCars__WEBPACK_IMPORTED_MODULE_5__["default"],
+    BudgetCars: _partials_BudgetCars__WEBPACK_IMPORTED_MODULE_6__["default"],
+    BodyTypeCars: _partials_BodyTypeCars__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  mixins: [(_mixins_asset__WEBPACK_IMPORTED_MODULE_5___default())],
+  mixins: [(_mixins_asset__WEBPACK_IMPORTED_MODULE_3___default())],
   setup: function setup() {
     var cities = [{
       name: 'София'
@@ -203,25 +200,282 @@ __webpack_require__.r(__webpack_exports__);
     }, {
       name: 'Hibris'
     }];
-    var selectedBudgetTab = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(null);
-    var selectedBodyTypeTab = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(null);
+    return {
+      cities: cities,
+      brands: brands,
+      engines: engines
+    };
+  }
+});
 
-    function setBudgetTab(data) {
-      selectedBudgetTab.value = data.tab.name;
-    }
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/ui/base/BaseCard */ "./resources/js/components/ui/base/BaseCard.vue");
+/* harmony import */ var _sliders_UsedCarsVue3Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sliders/UsedCarsVue3Carousel */ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue");
+/* harmony import */ var _SeeAll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SeeAll */ "./resources/js/pages/used-cars/partials/SeeAll.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue3-tabs-component */ "./node_modules/vue3-tabs-component/src/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "BodyTypeCars",
+  components: {
+    BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__["default"],
+    UsedCarsVue3Carousel: _sliders_UsedCarsVue3Carousel__WEBPACK_IMPORTED_MODULE_2__["default"],
+    SeeAll: _SeeAll__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Tab: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__.Tab,
+    Tabs: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__.Tabs
+  },
+  setup: function setup() {
+    var isLoading = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(false);
+    var selectedBodyTypeTab = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(null);
+    var bodyTypes = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(null);
 
     function setBodyTypeTab(data) {
       selectedBodyTypeTab.value = data.tab.name;
     }
 
+    function getBodyTypes() {
+      return _getBodyTypes.apply(this, arguments);
+    }
+
+    function _getBodyTypes() {
+      _getBodyTypes = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                isLoading.value = true;
+                _context2.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default().get('offers/fetch/recommended');
+
+              case 4:
+                res = _context2.sent;
+                isLoading.value = false;
+                bodyTypes.value = res.data;
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0, 'Could not fetch body types');
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 9]]);
+      }));
+      return _getBodyTypes.apply(this, arguments);
+    }
+
+    (0,vue__WEBPACK_IMPORTED_MODULE_4__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return getBodyTypes();
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
     return {
-      cities: cities,
-      brands: brands,
-      engines: engines,
-      setBudgetTab: setBudgetTab,
+      isLoading: isLoading,
       setBodyTypeTab: setBodyTypeTab,
+      selectedBodyTypeTab: selectedBodyTypeTab,
+      bodyTypes: bodyTypes
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=script&lang=js":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=script&lang=js ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/ui/base/BaseCard */ "./resources/js/components/ui/base/BaseCard.vue");
+/* harmony import */ var _sliders_UsedCarsVue3Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sliders/UsedCarsVue3Carousel */ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue");
+/* harmony import */ var _SeeAll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SeeAll */ "./resources/js/pages/used-cars/partials/SeeAll.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue3-tabs-component */ "./node_modules/vue3-tabs-component/src/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "BudgetCars",
+  components: {
+    BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_1__["default"],
+    UsedCarsVue3Carousel: _sliders_UsedCarsVue3Carousel__WEBPACK_IMPORTED_MODULE_2__["default"],
+    SeeAll: _SeeAll__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Tab: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__.Tab,
+    Tabs: vue3_tabs_component__WEBPACK_IMPORTED_MODULE_5__.Tabs
+  },
+  setup: function setup() {
+    var selectedBudgetTab = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(null);
+    var isLoading = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(false);
+    var budgetCars5000 = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(null);
+    var budgetCars500010000 = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(null);
+
+    function setBudgetTab(data) {
+      selectedBudgetTab.value = data.tab.name;
+    }
+
+    function budget5000() {
+      return _budget.apply(this, arguments);
+    }
+
+    function _budget() {
+      _budget = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                isLoading.value = true;
+                _context2.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default().get('offers/fetch/recommended');
+
+              case 4:
+                res = _context2.sent;
+                isLoading.value = false;
+                budgetCars5000.value = res.data;
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0, 'Could not fetch budget cars');
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 9]]);
+      }));
+      return _budget.apply(this, arguments);
+    }
+
+    function budget500010000() {
+      return _budget2.apply(this, arguments);
+    }
+
+    function _budget2() {
+      _budget2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                isLoading.value = true;
+                _context3.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default().get('offers/fetch/recommended');
+
+              case 4:
+                res = _context3.sent;
+                isLoading.value = false;
+                budgetCars500010000.value = res.data;
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0, 'Could not fetch budget cars');
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 9]]);
+      }));
+      return _budget2.apply(this, arguments);
+    }
+
+    (0,vue__WEBPACK_IMPORTED_MODULE_4__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return budget5000();
+
+            case 2:
+              _context.next = 4;
+              return budget500010000();
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+    return {
+      setBudgetTab: setBudgetTab,
       selectedBudgetTab: selectedBudgetTab,
-      selectedBodyTypeTab: selectedBodyTypeTab
+      budgetCars5000: budgetCars5000,
+      budgetCars500010000: budgetCars500010000,
+      isLoading: isLoading
     };
   }
 });
@@ -641,7 +895,15 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
+var _hoisted_31 = {
+  "class": "text-end"
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Подробно търсене ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       active: $setup.filter === 1
@@ -700,7 +962,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.city]])]), _hoisted_30])], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.filter === 2]])])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.filter === 2]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: {
+      name: 'used-cars'
+    },
+    "class": "text-link-blue"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_32];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])])]);
 }
 
 /***/ }),
@@ -803,6 +1077,38 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "fw-bold"
+}, "Автомобили в България по област", -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "fw-bold"
+}, "Доверени автомобили по марка", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"container-xxl\"><div class=\"row\"><div class=\"col-md-6 ps-0\"><div class=\"base-card d-flex justify-content-between\"><div class=\"py-3\"><h5 class=\"mb-0 fw-bold\">Продай своя автомобил бързо</h5><p class=\"mb-0 text-normal-gray\">Директно от вкъщи</p><a href=\"/\" class=\"mt-4 d-block text-link-blue\">Продай своя автомобил тук</a></div><img width=\"130\" height=\"130\" src=\"https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/sell-car_vNZwdICyt.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1643796442201\" alt=\"\"></div></div><div class=\"col-md-6 pe-0\"><div class=\"base-card d-flex justify-content-between\"><div class=\"py-3\"><h5 class=\"mb-0 fw-bold\">Сравни автомобилни марки</h5><p class=\"mb-0 text-normal-gray\">Избери правилният за теб сега</p><a href=\"/\" class=\"mt-4 d-block text-link-blue\">Сравни автомобили тук</a></div><img width=\"130\" height=\"130\" src=\"https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/compare_bAgMtQMPc.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1643796387286\" alt=\"\"></div></div></div></div>", 1);
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "fw-bold"
+}, "Автомобили по вид на двигателя", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_simple_search = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-search");
 
@@ -811,6 +1117,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_BaseCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BaseCard");
 
   var _component_RecommendedCars = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("RecommendedCars");
+
+  var _component_BaseGrid = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BaseGrid");
+
+  var _component_BudgetCars = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BudgetCars");
+
+  var _component_BodyTypeCars = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BodyTypeCars");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_base_carousel, {
     height: 400,
@@ -834,7 +1146,265 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RecommendedCars), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <h5 class=\"fw-bold\">Автомобили в България по град</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <hr/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <BaseGrid :items=\"cities\"></BaseGrid>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <h5 class=\"fw-bold\">Автомобили според бюджет</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;            <Tabs :options=\"{ useUrlFragment: false }\" @changed=\"setBudgetTab\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                <Tab name=\"до 5000 лв.\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                </Tab>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                <Tab name=\"5000 - 10 000 лв.\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                </Tab>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;            </Tabs>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;            <SeeAll :message=\"`Виж всички ${selectedBudgetTab}`\"></SeeAll>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <h5 class=\"fw-bold\">Автомобили по каросерия</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;            <Tabs :options=\"{ useUrlFragment: false }\" @changed=\"setBodyTypeTab\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                <Tab name=\"Хечбек\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                </Tab>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                <Tab name=\"Седан\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                </Tab>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                <Tab name=\"Комби\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                </Tab>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                <Tab name=\"SUV\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                </Tab>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                <Tab name=\"Купе\">&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                    <UsedCarsVue3Carousel></UsedCarsVue3Carousel>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                </Tab>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;            </Tabs>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;            <SeeAll :message=\"`Виж всички автомобили ${selectedBodyTypeTab}`\"></SeeAll>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <h5 class=\"fw-bold\">Доверени автомобили по марка</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <hr/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <BaseGrid :items=\"brands\"></BaseGrid>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <div class=\"container-xxl\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <div class=\"row\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"col-md-6 ps-0\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <div class=\"base-card d-flex justify-content-between\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <div class=\"py-3\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <h5 class=\"mb-0 fw-bold\">Продай своя автомобил бързо</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <p class=\"mb-0 text-normal-gray\">Директно от вкъщи</p>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <a href=\"/\" class=\"mt-4 d-block text-link-blue\">Продай своя автомобил тук</a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <img"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            width=\"130\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            height=\"130\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            src=\"https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/sell-car_vNZwdICyt.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796442201\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            alt=\"\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        />"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"col-md-6 pe-0\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <div class=\"base-card d-flex justify-content-between\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <div class=\"py-3\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <h5 class=\"mb-0 fw-bold\">Сравни автомобилни марки</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <p class=\"mb-0 text-normal-gray \">Избери правилният за теб сега</p>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <a href=\"/\" class=\"mt-4 d-block text-link-blue\">Сравни автомобили тук</a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <img"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            width=\"130\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            height=\"130\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            src=\"https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/compare_bAgMtQMPc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796387286\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            alt=\"\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        />"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <BaseCard>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <h5 class=\"fw-bold\">Автомобили по вид на двигателя</h5>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <hr/>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <BaseGrid :items=\"engines\"></BaseGrid>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </BaseCard>")]);
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RecommendedCars), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseCard, null, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseGrid, {
+        items: $setup.cities
+      }, null, 8
+      /* PROPS */
+      , ["items"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BudgetCars), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BodyTypeCars), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseCard, null, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseGrid, {
+        items: $setup.brands
+      }, null, 8
+      /* PROPS */
+      , ["items"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseCard, null, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseGrid, {
+        items: $setup.engines
+      }, null, 8
+      /* PROPS */
+      , ["items"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=template&id=3bfaf402":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=template&id=3bfaf402 ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  key: 0
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "fw-bold"
+}, "Автомобили по каросерия", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_UsedCarsVue3Carousel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("UsedCarsVue3Carousel");
+
+  var _component_Tab = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tab");
+
+  var _component_Tabs = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tabs");
+
+  var _component_SeeAll = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SeeAll");
+
+  var _component_BaseCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BaseCard");
+
+  return $setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, " Зареждане ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BaseCard, {
+    key: 1
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tabs, {
+        options: {
+          useUrlFragment: false
+        },
+        onChanged: $setup.setBodyTypeTab
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tab, {
+            name: "Хечбек"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UsedCarsVue3Carousel, {
+                "car-data": $setup.bodyTypes
+              }, null, 8
+              /* PROPS */
+              , ["car-data"])];
+            }),
+            _: 1
+            /* STABLE */
+
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tab, {
+            name: "Седан"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UsedCarsVue3Carousel, {
+                "car-data": $setup.bodyTypes
+              }, null, 8
+              /* PROPS */
+              , ["car-data"])];
+            }),
+            _: 1
+            /* STABLE */
+
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tab, {
+            name: "Комби"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UsedCarsVue3Carousel, {
+                "car-data": $setup.bodyTypes
+              }, null, 8
+              /* PROPS */
+              , ["car-data"])];
+            }),
+            _: 1
+            /* STABLE */
+
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tab, {
+            name: "SUV"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UsedCarsVue3Carousel, {
+                "car-data": $setup.bodyTypes
+              }, null, 8
+              /* PROPS */
+              , ["car-data"])];
+            }),
+            _: 1
+            /* STABLE */
+
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tab, {
+            name: "Купе"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UsedCarsVue3Carousel, {
+                "car-data": $setup.bodyTypes
+              }, null, 8
+              /* PROPS */
+              , ["car-data"])];
+            }),
+            _: 1
+            /* STABLE */
+
+          })];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["onChanged"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SeeAll, {
+        message: "\u0412\u0438\u0436 \u0432\u0441\u0438\u0447\u043A\u0438 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u0438 ".concat($setup.selectedBodyTypeTab)
+      }, null, 8
+      /* PROPS */
+      , ["message"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }));
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=template&id=39978970":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=template&id=39978970 ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  key: 0
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+  "class": "fw-bold"
+}, "Автомобили според бюджет", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_UsedCarsVue3Carousel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("UsedCarsVue3Carousel");
+
+  var _component_Tab = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tab");
+
+  var _component_Tabs = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tabs");
+
+  var _component_SeeAll = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SeeAll");
+
+  var _component_BaseCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BaseCard");
+
+  return $setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, " Зареждане ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BaseCard, {
+    key: 1
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tabs, {
+        options: {
+          useUrlFragment: false
+        },
+        onChanged: $setup.setBudgetTab
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tab, {
+            name: "до 5000 лв."
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [$setup.budgetCars5000 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_UsedCarsVue3Carousel, {
+                key: 0,
+                "car-data": $setup.budgetCars5000
+              }, null, 8
+              /* PROPS */
+              , ["car-data"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+            }),
+            _: 1
+            /* STABLE */
+
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tab, {
+            name: "5000 - 10 000 лв."
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [$setup.budgetCars500010000 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_UsedCarsVue3Carousel, {
+                key: 0,
+                "car-data": $setup.budgetCars500010000
+              }, null, 8
+              /* PROPS */
+              , ["car-data"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+            }),
+            _: 1
+            /* STABLE */
+
+          })];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["onChanged"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SeeAll, {
+        message: "\u0412\u0438\u0436 \u0432\u0441\u0438\u0447\u043A\u0438 ".concat($setup.selectedBudgetTab)
+      }, null, 8
+      /* PROPS */
+      , ["message"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }));
 }
 
 /***/ }),
@@ -852,29 +1422,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  key: 0
+};
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
   "class": "fw-bold"
 }, "Препоръчани автомобили за теб", -1
 /* HOISTED */
 );
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = {
-  key: 0
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_UsedCarsVue3Carousel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("UsedCarsVue3Carousel");
 
   var _component_BaseCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BaseCard");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BaseCard, null, {
+  return $setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, " Зареждане ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BaseCard, {
+    key: 1
+  }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1, _hoisted_2, $setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, " Зареждане ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.recommendedCars ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_UsedCarsVue3Carousel, {
-        key: 1,
+      return [_hoisted_2, _hoisted_3, $setup.recommendedCars ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_UsedCarsVue3Carousel, {
+        key: 0,
         carData: $setup.recommendedCars
       }, null, 8
       /* PROPS */
@@ -883,7 +1455,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  });
+  }));
 }
 
 /***/ }),
@@ -1738,6 +2310,62 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/BodyTypeCars.vue ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BodyTypeCars_vue_vue_type_template_id_3bfaf402__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BodyTypeCars.vue?vue&type=template&id=3bfaf402 */ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=template&id=3bfaf402");
+/* harmony import */ var _BodyTypeCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BodyTypeCars.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=script&lang=js");
+/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BodyTypeCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BodyTypeCars_vue_vue_type_template_id_3bfaf402__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/BodyTypeCars.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/pages/used-cars/partials/BudgetCars.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/BudgetCars.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BudgetCars_vue_vue_type_template_id_39978970__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BudgetCars.vue?vue&type=template&id=39978970 */ "./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=template&id=39978970");
+/* harmony import */ var _BudgetCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BudgetCars.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=script&lang=js");
+/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BudgetCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BudgetCars_vue_vue_type_template_id_39978970__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/BudgetCars.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/pages/used-cars/partials/RecommendedCars.vue":
 /*!*******************************************************************!*\
   !*** ./resources/js/pages/used-cars/partials/RecommendedCars.vue ***!
@@ -1908,6 +2536,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=script&lang=js":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=script&lang=js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BodyTypeCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BodyTypeCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BodyTypeCars.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=script&lang=js":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BudgetCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BudgetCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BudgetCars.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/pages/used-cars/partials/RecommendedCars.vue?vue&type=script&lang=js":
 /*!*******************************************************************************************!*\
   !*** ./resources/js/pages/used-cars/partials/RecommendedCars.vue?vue&type=script&lang=js ***!
@@ -2032,6 +2692,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UsedCars_vue_vue_type_template_id_407066a5__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UsedCars_vue_vue_type_template_id_407066a5__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UsedCars.vue?vue&type=template&id=407066a5 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/UsedCars.vue?vue&type=template&id=407066a5");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=template&id=3bfaf402":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=template&id=3bfaf402 ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BodyTypeCars_vue_vue_type_template_id_3bfaf402__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BodyTypeCars_vue_vue_type_template_id_3bfaf402__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BodyTypeCars.vue?vue&type=template&id=3bfaf402 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=template&id=3bfaf402");
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=template&id=39978970":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=template&id=39978970 ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BudgetCars_vue_vue_type_template_id_39978970__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BudgetCars_vue_vue_type_template_id_39978970__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BudgetCars.vue?vue&type=template&id=39978970 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=template&id=39978970");
 
 
 /***/ }),

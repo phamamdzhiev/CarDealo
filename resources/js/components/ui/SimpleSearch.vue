@@ -59,6 +59,11 @@
                   </div>
               </div>
           </form>
+          <div class="text-end">
+              <router-link :to="{ name: 'used-cars' }" class="text-link-blue">
+                  Подробно търсене
+              </router-link>
+          </div>
       </div>
   </div>
 </template>
