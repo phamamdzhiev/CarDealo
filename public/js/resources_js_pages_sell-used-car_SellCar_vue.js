@@ -2861,21 +2861,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return axios__WEBPACK_IMPORTED_MODULE_4___default().post('offer/create', formImages, config);
 
               case 11:
-                _context.next = 17;
+                _context.next = 18;
                 break;
 
               case 13:
                 _context.prev = 13;
                 _context.t0 = _context["catch"](8);
+                _this.isLoading = false;
                 _this.errors = {
-                  'errors': ['Имаме проблем с качването на обявата. Опитайте отново по късно!']
+                  'errors': ['Имаме проблем с качването на обявата. Опитайте отново по-късно!']
                 };
                 throw new Error('Offer or images cannot be created or uploaded');
 
-              case 17:
+              case 18:
                 _this.isLoading = false;
 
-              case 18:
+              case 19:
               case "end":
                 return _context.stop();
             }

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OfferCreationRequest;
 use App\Models\Offer;
 use App\Models\User;
+use Doctrine\DBAL\Query\QueryException;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Psy\Input\CodeArgument;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OfferController extends Controller
 {
@@ -64,7 +68,7 @@ class OfferController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Offer $offer
+     * @param Offer $offer
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder[]
      */
     public function show(Offer $offer): array|\Illuminate\Database\Eloquent\Collection
@@ -75,7 +79,7 @@ class OfferController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Offer $offer
+     * @param Offer $offer
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Offer[]
      */
     public function showApproved(Offer $offer)
@@ -87,7 +91,7 @@ class OfferController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Offer $offer
+     * @param Offer $offer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Offer $offer)
@@ -97,19 +101,37 @@ class OfferController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Offer $offer
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws Exception
      */
-    public function destroy(Offer $offer)
+    public function destroy($id)
     {
-        //
+        $offer = Offer::findOrFail((int)$id);
+
+        if (Auth::id() !== $offer->user_id) {
+            abort(401, 'Unauthorized');
+        }
+
+        try {
+            $offer->delete();
+            return response(['success' => true]);
+        } catch (Exception $exception) {
+            throw new Exception($exception->getMessage());
+        }
     }
 
 
-    public function userListing()
+    /**
+     * @throws Exception
+     */
+    public function userListing(): \Illuminate\Http\JsonResponse
     {
-        $offers = Offer::whereUserId(Auth::id())->get();
-        return response($offers);
+        try {
+            $offers = Offer::whereUserId(Auth::id())->get();
+            return response()->json(['success' => true, 'offers' => $offers]);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }

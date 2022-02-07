@@ -50,9 +50,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   mixins: [(_mixins_asset__WEBPACK_IMPORTED_MODULE_4___default())],
+  inject: ['$toast'],
   setup: function setup() {
-    var listing = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)({});
+    var listing = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
     var listingGridView = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(1);
+    var $toast = (0,vue__WEBPACK_IMPORTED_MODULE_2__.inject)('$toast');
 
     function getUserListing() {
       return _getUserListing.apply(this, arguments);
@@ -71,7 +73,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 res = _context2.sent;
-                Object.assign(listing, res.data);
+
+                if (res.data.success) {
+                  listing.value = res.data.offers;
+                }
+
                 _context2.next = 10;
                 break;
 
@@ -88,6 +94,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, null, [[0, 7]]);
       }));
       return _getUserListing.apply(this, arguments);
+    }
+
+    function handleDelete(_x, _x2) {
+      return _handleDelete.apply(this, arguments);
+    }
+
+    function _handleDelete() {
+      _handleDelete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(id, index) {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!confirm('Сигурни ли сте, че искате да изтриета тази обява')) {
+                  _context3.next = 12;
+                  break;
+                }
+
+                _context3.prev = 1;
+                _context3.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("offer/delete/".concat(id));
+
+              case 4:
+                res = _context3.sent;
+                listing.value.splice(index, 1);
+
+                if (res.data.success) {
+                  $toast.open({
+                    message: "Успешно изтрихте обявата!",
+                    type: 'success',
+                    duration: 5000,
+                    dismissible: true
+                  });
+                }
+
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](1);
+
+                if (_context3.t0.response.data) {
+                  $toast.open({
+                    message: "Грешка! Опитайте отново",
+                    type: 'error',
+                    duration: 5000,
+                    dismissible: true
+                  });
+                  console.log(_context3.t0.response.data.message, 'Cannot delete this offer');
+                }
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[1, 9]]);
+      }));
+      return _handleDelete.apply(this, arguments);
     }
 
     (0,vue__WEBPACK_IMPORTED_MODULE_2__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -107,7 +173,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     })));
     return {
       listing: listing,
-      listingGridView: listingGridView
+      listingGridView: listingGridView,
+      handleDelete: handleDelete
     };
   }
 });
@@ -165,7 +232,7 @@ var _hoisted_3 = {
   "class": "fw-bold"
 };
 var _hoisted_4 = {
-  "class": "base-card"
+  "class": "row"
 };
 var _hoisted_5 = ["src", "alt"];
 var _hoisted_6 = {
@@ -180,39 +247,63 @@ var _hoisted_8 = {
 
 var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "text-secondary-color"
+    "class": "text-secondary-color mb-0"
   }, "Колата е нов внос, регистрирана е преди 3 месеца, напълно обслужена и всичко е платено за тази година. Много запазена и поддържана, без забележки. Качваш се и караш. Заповядайте да я видите, може би е вашият автомобил.", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "actions text-end position-absolute bottom-0 end-0"
+var _hoisted_10 = {
+  "class": "actions text-end position-absolute bottom-0 end-0 d-flex align-items-center"
+};
+
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn p-0 me-2"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "bi bi-pencil-square text-success-color fs-4 me-3"
-  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "bi bi-trash text-error-color fs-4 me-3"
-  }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "bi bi-eye-slash text-secondary fs-4"
+    "class": "bi bi-pencil-square text-success-color fs-4"
+  })])], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_12 = ["onSubmit"];
+
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn p-0 me-2"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "bi bi-trash text-error-color fs-4"
   })], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_11 = {
+var _hoisted_14 = [_hoisted_13];
+
+var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn p-0"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "bi bi-eye-slash text-secondary fs-4"
+  })])], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_16 = {
   key: 1,
   "class": "container-xxl text-center py-5 my-5"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Все още нямате активни обяви. Може да добавите нова обява от ");
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Все още нямате активни обяви. Може да добавите нова обява от ");
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ТУК ");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ТУК ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return Object.keys($setup.listing).length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_3, "Общо обяви: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Object.keys($setup.listing).length), 1
+  return $setup.listing.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_3, "Общо обяви: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.listing.length), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['bi bi-view-list fs-3 me-2', {
@@ -232,17 +323,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 2
   /* CLASS */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-      'grid-view': $setup.listingGridView === 2
+      'col-lg-3 col-sm-1': $setup.listingGridView === 2
     })
-  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.listing, function (item) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.listing, function (item, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": "base-card",
+      key: item.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['listing d-flex position-relative', {
         'flex-column': $setup.listingGridView === 2
       }])
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['img-wrapper me-3', {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['img-wrapper', {
         'mb-4': $setup.listingGridView === 2
       }])
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -258,21 +352,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item['price']) + " лв.", 1
     /* TEXT */
-    ), _hoisted_9]), _hoisted_10], 2
+    ), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+      onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $setup.handleDelete(item['id'], index);
+      }, ["prevent"])
+    }, _hoisted_14, 40
+    /* PROPS, HYDRATE_EVENTS */
+    , _hoisted_12), _hoisted_15])], 2
     /* CLASS */
     )]);
-  }), 256
-  /* UNKEYED_FRAGMENT */
+  }), 128
+  /* KEYED_FRAGMENT */
   ))], 2
   /* CLASS */
-  )])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  )])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "text-base-color fw-bold",
     to: {
       name: 'sell.car'
     }
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_13];
+      return [_hoisted_18];
     }),
     _: 1
     /* STABLE */
@@ -318,7 +418,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.grid-view[data-v-2acea455] {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n}\n.bordered[data-v-2acea455] {\n    border-bottom: 2px solid #ff7771;\n}\ni[data-v-2acea455] {\n    cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.details[data-v-2acea455] {\n    margin-left: 1rem;\n}\n.flex-column .details[data-v-2acea455] {\n    margin-left: 0;\n}\n.bordered[data-v-2acea455] {\n    border-bottom: 2px solid #ff7771;\n}\ni[data-v-2acea455] {\n    cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -1,8 +1,8 @@
 <template>
-    <div class="container-xxl mt-4" v-if="Object.keys(listing).length > 0">
+    <div class="container-xxl mt-4" v-if="listing.length > 0">
         <div class="d-flex justify-content-between">
             <div>
-                <h6 class="fw-bold">Общо обяви: {{ Object.keys(listing).length }}</h6>
+                <h6 class="fw-bold">Общо обяви: {{ listing.length }}</h6>
             </div>
             <div>
                 <i :class="['bi bi-view-list fs-3 me-2', {'bordered': listingGridView === 1 }]"
@@ -10,33 +10,48 @@
                 <i :class="['bi bi-grid fs-3', {'bordered': listingGridView === 2 }]" @click="listingGridView = 2"></i>
             </div>
         </div>
-        <div :class="{'grid-view': listingGridView === 2 }">
-            <div class="base-card" v-for="item in listing">
-                <div :class="['listing d-flex position-relative', {'flex-column': listingGridView === 2}]">
-                    <div :class="['img-wrapper me-3', {'mb-4': listingGridView === 2}]">
-                        <img
-                            width="350"
-                            class="img-fluid rounded"
-                            :src="asset('storage/202202/3OAhXGbLClwOof08tyWavH3GrH65nbUXP3lyxR2Z.jpg')"
-                            :alt="item['title']"
-                        />
-                    </div>
-                    <div class="details">
-                        <h5 class="fw-bold">
-                            {{ item['title'] }}
-                        </h5>
-                        <p class="text-base-color">{{ item['price'] }} лв.</p>
-                        <p class="text-secondary-color">Колата е нов внос, регистрирана е преди 3 месеца, напълно
-                            обслужена
-                            и всичко е платено за тази
-                            година. Много запазена и поддържана, без забележки. Качваш се и караш. Заповядайте да я
-                            видите,
-                            може би е вашият автомобил.</p>
-                    </div>
-                    <div class="actions text-end position-absolute bottom-0 end-0">
-                        <i class="bi bi-pencil-square text-success-color fs-4 me-3"></i>
-                        <i class="bi bi-trash text-error-color fs-4 me-3"></i>
-                        <i class="bi bi-eye-slash text-secondary fs-4"></i>
+        <div class="row">
+            <div :class="{'col-lg-3 col-sm-1': listingGridView === 2 }">
+                <div class="base-card" v-for="(item, index) in listing" :key="item.id">
+                    <div :class="['listing d-flex position-relative', {'flex-column': listingGridView === 2}]">
+                        <div :class="['img-wrapper', {'mb-4': listingGridView === 2}]">
+                            <img
+                                width="350"
+                                class="img-fluid rounded"
+                                :src="asset('storage/202202/3OAhXGbLClwOof08tyWavH3GrH65nbUXP3lyxR2Z.jpg')"
+                                :alt="item['title']"
+                            />
+                        </div>
+                        <div class="details">
+                            <h5 class="fw-bold">
+                                {{ item['title'] }}
+                            </h5>
+                            <p class="text-base-color">{{ item['price'] }} лв.</p>
+                            <p class="text-secondary-color mb-0">Колата е нов внос, регистрирана е преди 3 месеца,
+                                напълно
+                                обслужена
+                                и всичко е платено за тази
+                                година. Много запазена и поддържана, без забележки. Качваш се и караш. Заповядайте да я
+                                видите,
+                                може би е вашият автомобил.</p>
+                        </div>
+                        <div class="actions text-end position-absolute bottom-0 end-0 d-flex align-items-center">
+                            <form>
+                                <button class="btn p-0 me-2">
+                                    <i class="bi bi-pencil-square text-success-color fs-4"></i>
+                                </button>
+                            </form>
+                            <form @submit.prevent="handleDelete(item['id'], index)">
+                                <button class="btn p-0 me-2">
+                                    <i class="bi bi-trash text-error-color fs-4"></i>
+                                </button>
+                            </form>
+                            <form>
+                                <button class="btn p-0">
+                                    <i class="bi bi-eye-slash text-secondary fs-4"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,7 +69,7 @@
 
 <script>
 import axios from "axios";
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, reactive, ref, inject} from "vue";
 import BaseCard from "../../../components/ui/base/BaseCard";
 import assetMixin from '../../../mixins/asset';
 
@@ -64,16 +79,47 @@ export default {
         BaseCard
     },
     mixins: [assetMixin],
+    inject: ['$toast'],
     setup() {
-        let listing = reactive({});
+        let listing = ref([]);
         let listingGridView = ref(1);
+        const $toast = inject('$toast');
 
         async function getUserListing() {
             try {
                 const res = await axios.get('offers/fetch/user/listing');
-                Object.assign(listing, res.data);
+                if (res.data.success) {
+                    listing.value = res.data.offers;
+                }
             } catch (e) {
                 console.log(e.response.data.error, 'Cannot fetch listings');
+            }
+        }
+
+        async function handleDelete(id, index) {
+            if (confirm('Сигурни ли сте, че искате да изтриета тази обява')) {
+                try {
+                    const res = await axios.delete(`offer/delete/${id}`);
+                    listing.value.splice(index, 1);
+                    if (res.data.success) {
+                        $toast.open({
+                            message: "Успешно изтрихте обявата!",
+                            type: 'success',
+                            duration: 5000,
+                            dismissible: true
+                        })
+                    }
+                } catch (e) {
+                    if (e.response.data) {
+                        $toast.open({
+                            message: "Грешка! Опитайте отново",
+                            type: 'error',
+                            duration: 5000,
+                            dismissible: true
+                        })
+                        console.log(e.response.data.message, 'Cannot delete this offer');
+                    }
+                }
             }
         }
 
@@ -84,16 +130,20 @@ export default {
 
         return {
             listing,
-            listingGridView
+            listingGridView,
+            handleDelete
         }
     }
 
 }
 </script>
 <style scoped>
-.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.details {
+    margin-left: 1rem;
+}
+
+.flex-column .details {
+    margin-left: 0;
 }
 
 .bordered {

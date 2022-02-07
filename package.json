@@ -29,6 +29,7 @@
         "swiper": "^8.0.0",
         "vue": "^3.2.26",
         "vue-router": "^4.0.12",
+        "vue-toast-notification": "^3.0.0",
         "vue3-tabs-component": "^1.0.5",
         "vuedraggable": "^4.1.0",
         "vuex": "^4.0.2",

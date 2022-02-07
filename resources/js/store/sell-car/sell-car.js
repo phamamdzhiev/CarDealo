@@ -55,6 +55,10 @@ export default {
                 state.car_offer[key] = null;
             });
 
+            Object.keys(state.car_extras).forEach((key) => {
+               state.car_extras[key] = [];
+            });
+
             state.car_offer['car_has_price'] = true;
             state.car_offer['new_or_used'] = 1;
             state.car_brand_with_models = null;

@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
+{{--<div class="container-xxl mt-3">--}}
+{{--    <div class="alert alert-warning alert-dismissible p-2 mb-0" role="alert">--}}
+{{--        <h5 class="alert-heading mb-0">В момента се извършва поддръжка на сайт. </h5>--}}
+{{--    </div>--}}
+{{--</div>--}}
 <div id="app"></div>
 <script>
     window.APP_VERSION = '{{ env('APP_VERSION') }}';

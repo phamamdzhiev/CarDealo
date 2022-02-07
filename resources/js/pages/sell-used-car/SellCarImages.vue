@@ -128,7 +128,8 @@ export default {
             try {
                 await axios.post('offer/create', formImages, config);
             } catch (error) {
-                this.errors = {'errors': ['Имаме проблем с качването на обявата. Опитайте отново по късно!']}
+                this.isLoading = false;
+                this.errors = {'errors': ['Имаме проблем с качването на обявата. Опитайте отново по-късно!']}
                 throw new Error('Offer or images cannot be created or uploaded');
             }
 

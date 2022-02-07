@@ -9,6 +9,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::post('offer/create', [\App\Http\Controllers\OfferController::class, 'store']);
+    Route::delete('offer/delete/{id}', [\App\Http\Controllers\OfferController::class, 'destroy']);
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 });
 
