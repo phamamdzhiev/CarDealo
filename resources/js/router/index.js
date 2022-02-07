@@ -1,20 +1,22 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "../pages/Home.vue";
 import store from "../store";
-// import MyListing from "../pages/admin/my-listing/MyListing";
-// import Login from "../pages/Auth/Login";
-
 
 const routes = [
     {
         path: "/",
         name: "Home",
+        meta: {
+            title: 'Начало'
+        },
         component: Home,
     },
-    // used cars
     {
         path: "/usedCars",
         name: "usedCars",
+        meta: {
+            title: 'Упоребявани автомобили'
+        },
         component: () => import("../pages/used-cars/UsedCars.vue"),
     },
     {
@@ -31,7 +33,10 @@ const routes = [
     {
         path: "/sell-car",
         name: "sell.car",
-        meta: {protected: true, hideFooter: true},
+        meta: {
+            hideFooter: true,
+            title: 'Качване на обява'
+        },
         component: () => import("../pages/sell-used-car/SellCar"),
         beforeEnter(to, from, next) {
             if (store.getters['auth/GET_AUTH_USER']) {
@@ -45,6 +50,10 @@ const routes = [
         path: "/my-listing",
         name: "my.listing",
         component: () => import('../pages/admin/my-listing/MyListing'),
+        meta: {
+            hideFooter: true,
+            title: 'Моите обяви'
+        },
         beforeEnter(to, from, next) {
             if (store.getters['auth/GET_AUTH_USER']) {
                 next()
@@ -58,7 +67,8 @@ const routes = [
         name: "login",
         component: () => import('../pages/auth/Login'),
         meta: {
-            hideFooter: true
+            hideFooter: true,
+            title: 'Вход / Регистрация'
         },
         beforeEnter(to, from, next) {
             if (!store.getters['auth/GET_AUTH_USER']) {

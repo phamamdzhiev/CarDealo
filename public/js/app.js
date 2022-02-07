@@ -19447,6 +19447,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     TheHeader: _components_layout_header_TheHeader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     TheFooter: _components_layout_footer_TheFooter__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  inject: ['window'],
+  watch: {
+    $route: function $route(to) {
+      document.title = to.meta.title ? to.meta.title + ' | ' + window.APP_NAME + ' - Порталът на Българските автомобили' : window.APP_NAME + ' | Порталът на Българските автомобили';
+    }
+  },
   mounted: function mounted() {// const res = await axios.get('/user/auth/fetch');
     //  console.log(res.data);
 
@@ -20321,17 +20327,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.js");
 
 
- // import MyListing from "../pages/admin/my-listing/MyListing";
-// import Login from "../pages/Auth/Login";
 
 var routes = [{
   path: "/",
   name: "Home",
+  meta: {
+    title: 'Начало'
+  },
   component: _pages_Home_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-}, // used cars
-{
+}, {
   path: "/usedCars",
   name: "usedCars",
+  meta: {
+    title: 'Упоребявани автомобили'
+  },
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_used-cars_UsedCars_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/used-cars/UsedCars.vue */ "./resources/js/pages/used-cars/UsedCars.vue"));
   }
@@ -20352,8 +20361,8 @@ var routes = [{
   path: "/sell-car",
   name: "sell.car",
   meta: {
-    "protected": true,
-    hideFooter: true
+    hideFooter: true,
+    title: 'Качване на обява'
   },
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_sell-used-car_SellCar_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/sell-used-car/SellCar */ "./resources/js/pages/sell-used-car/SellCar.vue"));
@@ -20373,6 +20382,10 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_admin_my-listing_MyListing_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/admin/my-listing/MyListing */ "./resources/js/pages/admin/my-listing/MyListing.vue"));
   },
+  meta: {
+    hideFooter: true,
+    title: 'Моите обяви'
+  },
   beforeEnter: function beforeEnter(to, from, next) {
     if (_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/GET_AUTH_USER"]) {
       next();
@@ -20389,7 +20402,8 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_pages_auth_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/auth/Login */ "./resources/js/pages/auth/Login.vue"));
   },
   meta: {
-    hideFooter: true
+    hideFooter: true,
+    title: 'Вход / Регистрация'
   },
   beforeEnter: function beforeEnter(to, from, next) {
     if (!_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/GET_AUTH_USER"]) {
@@ -20930,7 +20944,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nheader {\r\n    background-color: white;\n}\n#app {\r\n    /* text-align: center; */\r\n    color: #2c3e50;\n}\na {\r\n    text-decoration: none;\r\n    color: #2c3e50;\r\n    font-weight: 700;\n}\na:hover,\r\na:active {\r\n    color: #fd5750;\n}\nul {\r\n    padding: 0;\r\n    margin: 0;\r\n    list-style: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nheader {\n    background-color: white;\n}\n#app {\n    /* text-align: center; */\n    color: #2c3e50;\n}\na {\n    text-decoration: none;\n    color: #2c3e50;\n    font-weight: 700;\n}\na:hover,\na:active {\n    color: #fd5750;\n}\nul {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

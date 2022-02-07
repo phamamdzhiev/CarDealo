@@ -15,9 +15,17 @@ export default {
         TheHeader,
         TheFooter
     },
+    inject: ['window'],
+    watch: {
+        $route(to) {
+            document.title = to.meta.title ?
+                to.meta.title + ' | ' + window.APP_NAME + ' - Порталът на Българските автомобили' :
+                window.APP_NAME + ' | Порталът на Българските автомобили';
+        }
+    },
     async mounted() {
-       // const res = await axios.get('/user/auth/fetch');
-       //  console.log(res.data);
+        // const res = await axios.get('/user/auth/fetch');
+        //  console.log(res.data);
     }
 };
 </script>
