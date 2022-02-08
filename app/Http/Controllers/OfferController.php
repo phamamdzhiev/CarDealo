@@ -76,6 +76,25 @@ class OfferController extends Controller
         return $offer->with('images')->take(10)->get();
     }
 
+    public function showSingle($id): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $offer = Offer::findOrFail((int)$id);
+            $response = [
+                'success' => true,
+                'data' => $offer
+            ];
+        } catch (NotFoundHttpException $exception) {
+            $response = [
+                'error' => true,
+                'message' => $exception->getMessage()
+            ];
+        }
+
+
+        return response()->json($response);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -114,7 +133,13 @@ class OfferController extends Controller
         }
 
         try {
+
+            foreach ($offer->images as $image) {
+                Storage::delete($image->image);
+            }
+
             $offer->delete();
+
             return response(['success' => true]);
         } catch (Exception $exception) {
             throw new Exception($exception->getMessage());

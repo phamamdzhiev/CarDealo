@@ -51,8 +51,6 @@ export default {
             carFuel.value = route.query.fuel.split('-');
         }
 
-        console.log(route.query.fuel)
-
         function handleFuel() {
             router.push({
                 name: route.name,

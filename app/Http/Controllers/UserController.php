@@ -66,11 +66,11 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($id): \Illuminate\Http\Response
     {
         try {
-            $user = User::findOrFail($id);
-        } catch (\Exception) {
+            $user = User::findOrFail((int)$id);
+        } catch (NotFoundHttpException $e) {
             throw new NotFoundHttpException('Потребител с ид ' . $id . ' не съществува');
         }
 

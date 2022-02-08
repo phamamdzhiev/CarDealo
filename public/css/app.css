@@ -11332,7 +11332,7 @@ hr {
   height: 32px !important;
   color: white !important;
   border: 2px solid white !important;
-  background-color: #ff7771 !important;
+  background-color: #f75d35 !important;
   border-radius: 50%;
 }
 .swiper-button-prev:after,
@@ -11350,7 +11350,7 @@ hr {
 }
 
 .text-base-color {
-  color: #ff7771;
+  color: #f75d35;
 }
 
 .text-secondary-color {
@@ -11377,7 +11377,7 @@ hr {
 }
 
 .base-button {
-  background-color: #ff7771;
+  background-color: #f75d35;
   border-radius: 4px;
   border: none;
   padding: 0.4rem 1rem;
@@ -11386,17 +11386,17 @@ hr {
 }
 .base-button:hover, .base-button:active, .base-button:focus, .base-button:active:hover, .base-button:active:focus {
   color: white;
-  background-color: #ff3b33;
+  background-color: #f75d34;
 }
 .base-button.ripple {
   background-position: center;
   transition: background 500ms ease-in-out;
 }
 .base-button.ripple:hover {
-  background: rgba(255, 119, 113, 0.9) radial-gradient(circle, transparent 1%, rgba(255, 119, 113, 0.9) 1%) center/15000%;
+  background: rgba(247, 93, 53, 0.9) radial-gradient(circle, transparent 1%, rgba(247, 93, 53, 0.9) 1%) center/15000%;
 }
 .base-button.ripple:active {
-  background-color: rgba(255, 119, 113, 0.7);
+  background-color: rgba(247, 93, 53, 0.7);
   background-size: 100%;
   transition: background 0s;
 }
@@ -11465,7 +11465,7 @@ hr {
   border-bottom: 2px solid transparent;
 }
 #the__header .sub__menu__wrapper > span:hover {
-  border-top: 2px solid #ff7771;
+  border-top: 2px solid #f75d35;
 }
 
 .sub__menu__items {
@@ -11526,7 +11526,7 @@ footer .d-grid.footer-link-sections .item a {
   font-size: 14px;
 }
 footer .d-grid.footer-link-sections .item a:hover {
-  color: #ff3b33;
+  color: #f75d34;
 }
 footer .bi-instagram {
   background: #d6249f;
@@ -11623,7 +11623,7 @@ ul#by__brand__by_budget li::before {
 ul#by__brand__by_budget li.active::after {
   content: "";
   position: absolute;
-  background-color: #ff7771;
+  background-color: #f75d35;
   top: 50%;
   transform: translateY(-50%);
   left: -21px;
@@ -11644,10 +11644,10 @@ ul.tabs-component-tabs li {
   border-bottom: 2px solid transparent;
 }
 ul.tabs-component-tabs li.is-active {
-  border-bottom: 2px solid #ff7771;
+  border-bottom: 2px solid #f75d35;
 }
 ul.tabs-component-tabs li.is-active a {
-  color: #ff7771;
+  color: #f75d35;
 }
 
 .sell-car {
@@ -11659,7 +11659,7 @@ ul.tabs-component-tabs li.is-active a {
 }
 .sell-car span.back__button:hover {
   cursor: pointer;
-  color: #ff7771;
+  color: #f75d35;
 }
 .sell-car ul#new__or__used {
   width: 100%;
@@ -11729,7 +11729,7 @@ ul.tabs-component-tabs li.is-active a {
 }
 .sell-car div#brand .item.active {
   cursor: default;
-  border: 2px solid #ff7771;
+  border: 2px solid #f75d35;
 }
 .sell-car div#brand .item.active > span {
   cursor: pointer;
@@ -11744,7 +11744,7 @@ ul.tabs-component-tabs li.is-active a {
   /* Handle */
   /* Handle on hover */
   scrollbar-width: thin;
-  scrollbar-color: #ff7771 #262B34;
+  scrollbar-color: #f75d35 #262B34;
 }
 .sell-car ul#year::-webkit-scrollbar,
 .sell-car ul#model::-webkit-scrollbar {
@@ -11757,12 +11757,12 @@ ul.tabs-component-tabs li.is-active a {
 }
 .sell-car ul#year::-webkit-scrollbar-thumb,
 .sell-car ul#model::-webkit-scrollbar-thumb {
-  background: #ff7771;
+  background: #f75d35;
   border-radius: 20px;
 }
 .sell-car ul#year::-webkit-scrollbar-thumb:hover,
 .sell-car ul#model::-webkit-scrollbar-thumb:hover {
-  background: #ff3b33;
+  background: #f75d34;
 }
 @media (max-width: 575.98px) {
   .sell-car ul#year,
@@ -11783,7 +11783,7 @@ ul.tabs-component-tabs li.is-active a {
 .sell-car ul#year li.active,
 .sell-car ul#model li.active {
   font-weight: 700;
-  border: 2px solid #ff7771;
+  border: 2px solid #f75d35;
 }
 .sell-car ul#fuel,
 .sell-car ul#transmission {
@@ -11810,7 +11810,7 @@ ul.tabs-component-tabs li.is-active a {
 .sell-car ul#fuel li.active,
 .sell-car ul#transmission li.active {
   font-weight: 700;
-  border: 2px solid #ff7771;
+  border: 2px solid #f75d35;
 }
 .sell-car ul#car-extras-categories {
   display: flex;
@@ -11826,11 +11826,11 @@ ul.tabs-component-tabs li.is-active a {
   cursor: pointer;
   flex: 1;
   border: 0;
-  border-bottom: 2px solid #ff7771;
+  border-bottom: 2px solid #f75d35;
 }
 .sell-car ul#car-extras-categories li.active {
   font-weight: 700;
-  border: 2px solid #ff7771;
+  border: 2px solid #f75d35;
   border-bottom: 0;
 }
 .sell-car ul#extras > div {
@@ -11917,7 +11917,7 @@ ul.tabs-component-tabs li.is-active a {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #ff7771;
+  background-color: #f75d35;
   color: #262B34;
   text-align: center;
   font-weight: 700;
@@ -11933,7 +11933,7 @@ ul.tabs-component-tabs li.is-active a {
   font-size: 2rem;
   top: -10px;
   left: 5px;
-  color: #ff7771;
+  color: #f75d35;
 }
 .sell-car #car-image-gallery-preview li {
   padding: 0.375rem 1rem;
@@ -12025,7 +12025,7 @@ ul.tabs-component-tabs li.is-active a {
   /* Handle */
   /* Handle on hover */
   scrollbar-width: thin;
-  scrollbar-color: #ff7771 #262B34;
+  scrollbar-color: #f75d35 #262B34;
 }
 .sell-car textarea.form__input::-webkit-scrollbar {
   width: 7px;
@@ -12035,11 +12035,11 @@ ul.tabs-component-tabs li.is-active a {
   border-radius: 20px;
 }
 .sell-car textarea.form__input::-webkit-scrollbar-thumb {
-  background: #ff7771;
+  background: #f75d35;
   border-radius: 20px;
 }
 .sell-car textarea.form__input::-webkit-scrollbar-thumb:hover {
-  background: #ff3b33;
+  background: #f75d34;
 }
 .sell-car .currently__chosen {
   display: flex;
@@ -12110,7 +12110,7 @@ ul.tabs-component-tabs li.is-active a {
   overflow: hidden;
 }
 .vehicle-singleton .price {
-  color: #ff7771;
+  color: #f75d35;
 }
 .vehicle-singleton .dotlist {
   display: flex;
@@ -12192,7 +12192,7 @@ html {
   /* Handle */
   /* Handle on hover */
   scrollbar-width: thin;
-  scrollbar-color: #ff7771 #262B34;
+  scrollbar-color: #f75d35 #262B34;
 }
 html::-webkit-scrollbar {
   width: 7px;
@@ -12202,11 +12202,11 @@ html::-webkit-scrollbar-track {
   border-radius: 20px;
 }
 html::-webkit-scrollbar-thumb {
-  background: #ff7771;
+  background: #f75d35;
   border-radius: 20px;
 }
 html::-webkit-scrollbar-thumb:hover {
-  background: #ff3b33;
+  background: #f75d34;
 }
 
 body {

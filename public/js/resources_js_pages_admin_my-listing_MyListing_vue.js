@@ -50,7 +50,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     BaseCard: _components_ui_base_BaseCard__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   mixins: [(_mixins_asset__WEBPACK_IMPORTED_MODULE_4___default())],
-  inject: ['$toast'],
   setup: function setup() {
     var listing = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
     var listingGridView = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(1);
@@ -342,7 +341,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       width: "350",
       "class": "img-fluid rounded",
-      src: _ctx.asset('storage/202202/3OAhXGbLClwOof08tyWavH3GrH65nbUXP3lyxR2Z.jpg'),
+      src: _ctx.asset('storage/202202/guOZDomPiqt2lKcFYUDjgzfOKQGeTxUXpLaGNGVb.jpg'),
       alt: item['title']
     }, null, 8
     /* PROPS */

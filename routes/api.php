@@ -16,12 +16,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 //User
 Route::group(['prefix' => 'user'], function () {
     Route::post('/create', [\App\Http\Controllers\UserController::class, 'store']);
-    Route::post('/update/{id}', [\App\Http\Controllers\UserController::class, 'update']);
+    Route::post('/update/{id}', [\App\Http\Controllers\UserController::class, 'update'])->middleware('auth:sanctum');
     Route::get('/auth/fetch', [\App\Http\Controllers\UserController::class, 'isAuthenticated']);
 });
 
 //Email
-Route::group(['prefix' => 'email'], function () {
+Route::group(['prefix' => 'email', 'middleware' => 'auth:sanctum'], function () {
     Route::post('/verify', [\App\Http\Controllers\EmailController::class, 'confirmEmail']);
     Route::post('/generate-verification-code', [\App\Http\Controllers\EmailController::class, 'sendEmailConfirmationCode']);
 });
@@ -37,6 +37,7 @@ Route::group(['prefix' => 'vehicle'], function () {
 
 //Advanced search
 Route::get('/fetch/offers', [\App\Http\Controllers\AdvancedSearch::class, 'fetchOffers']);
+Route::get('/fetch/offer/{id}', [\App\Http\Controllers\OfferController::class, 'showSingle']);
 
 //Client Auth
 Route::group(['prefix' => 'auth'], function () {
@@ -45,7 +46,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 //Image
-Route::group(['prefix' => 'image'], function () {
+Route::group(['prefix' => 'image', 'middleware' => 'auth:sanctum'], function () {
     Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'uploadImage']);
 });
 

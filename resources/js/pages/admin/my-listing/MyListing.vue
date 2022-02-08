@@ -18,7 +18,7 @@
                             <img
                                 width="350"
                                 class="img-fluid rounded"
-                                :src="asset('storage/202202/3OAhXGbLClwOof08tyWavH3GrH65nbUXP3lyxR2Z.jpg')"
+                                :src="asset('storage/202202/guOZDomPiqt2lKcFYUDjgzfOKQGeTxUXpLaGNGVb.jpg')"
                                 :alt="item['title']"
                             />
                         </div>
@@ -79,7 +79,6 @@ export default {
         BaseCard
     },
     mixins: [assetMixin],
-    inject: ['$toast'],
     setup() {
         let listing = ref([]);
         let listingGridView = ref(1);
