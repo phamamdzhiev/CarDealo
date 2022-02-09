@@ -7,10 +7,11 @@ export const sellCarPersist = {
         'sellCar.step',
         'sellCar.selected_brand_id',
         'sellCar.selected_model_id',
-        'sellCar.car_brand_with_models'
+        'sellCar.car_brand_with_models',
+        'sellCar.firstLoad'
     ],
     fetchBeforeUse: false,
-    storage: window.sessionStorage
+    storage: window.sessionStorage,
 };
 //
 // export const persistAuthUser = {

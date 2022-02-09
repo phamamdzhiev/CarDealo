@@ -39,6 +39,7 @@ class OfferController extends Controller
         Validator::make($offerData, [
             'new_or_used' => 'required',
             'car_brand' => 'required',
+            'price' => 'integer|max:1'
             //add rest of validations...
         ]);
 

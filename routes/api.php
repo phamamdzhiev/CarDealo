@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 //Protected routes
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -55,4 +56,22 @@ Route::group(['prefix' => 'offers'], function () {
     Route::get('/fetch/recommended', [\App\Http\Controllers\OfferController::class, 'show']);
     Route::get('/fetch/user/listing', [\App\Http\Controllers\OfferController::class, 'userListing'])
         ->middleware('auth:sanctum');
+});
+
+//Regions
+Route::get('fetch/regions', function () {
+    $expire = \Carbon\Carbon::now()->addCentury();
+    $regions = \Illuminate\Support\Facades\Cache::remember('regions', $expire, function () {
+        return \App\Models\Region::all();
+    });
+    return response()->json(['success' => true, 'data' => $regions]);
+});
+
+//Cities
+Route::get('fetch/cities/{id}', function ($id) {
+    return response()->json([
+        'success' => true,
+        'data' => \App\Models\City::where('region_id', $id)->whereNull('asCity')->get(),
+        'asCity' =>\App\Models\City::where('region_id', $id)->where('asCity', 1)->get()
+        ]);
 });
