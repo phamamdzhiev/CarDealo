@@ -24,7 +24,7 @@
                         v-for="model in filteredCarModelBySearchField"
                         :key="model.id"
                         :class="{ active: model.name === getAllData['car_model'] }"
-                        @click="chooseModel(model.name)"
+                        @click="chooseModel(model.name, model.id)"
                     >
                         {{ model.name }}
                     </li>
@@ -59,14 +59,15 @@ export default {
         };
     },
     methods: {
-        ...mapMutations('sellCar', ["setStepMinus", "setStepPlus", "setCarModel"]),
+        ...mapMutations('sellCar', ["setStepMinus", "setStepPlus", "setCarModel", "setSelectedCarModelID"]),
 
         showStepFour() {
             if (!this.getAllData['car_model']) return;
             this.setStepPlus();
         },
-        chooseModel(modelName) {
+        chooseModel(modelName, modelId) {
             this.setCarModel(modelName);
+            this.setSelectedCarModelID(modelId);
         },
     },
 
@@ -79,7 +80,7 @@ export default {
 
         filteredCarModelBySearchField() {
             if (this.search) {
-                this.setCarModel(null);
+                // this.setCarModel(null);
                 this.search = this.search.toLowerCase();
                 return this.getCarBrandWithModels.filter((model) =>
                     model.name.toLowerCase().includes(this.search)

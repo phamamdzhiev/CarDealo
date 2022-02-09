@@ -2419,7 +2419,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.keyword.length <= 2)) {
+                if (!(_this.keyword.length <= 1)) {
                   _context.next = 3;
                   break;
                 }
@@ -2947,13 +2947,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       search: null
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('sellCar', ["setStepMinus", "setStepPlus", "setCarModel"])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('sellCar', ["setStepMinus", "setStepPlus", "setCarModel", "setSelectedCarModelID"])), {}, {
     showStepFour: function showStepFour() {
       if (!this.getAllData['car_model']) return;
       this.setStepPlus();
     },
-    chooseModel: function chooseModel(modelName) {
+    chooseModel: function chooseModel(modelName, modelId) {
       this.setCarModel(modelName);
+      this.setSelectedCarModelID(modelId);
     }
   }),
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('sellCar', ["getAllData", "getCarBrandWithModels"])), {}, {
@@ -2964,7 +2965,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       if (this.search) {
-        this.setCarModel(null);
+        // this.setCarModel(null);
         this.search = this.search.toLowerCase();
         return this.getCarBrandWithModels.filter(function (model) {
           return model.name.toLowerCase().includes(_this.search);
@@ -4521,7 +4522,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             active: model.name === _ctx.getAllData['car_model']
           }),
           onClick: function onClick($event) {
-            return $options.chooseModel(model.name);
+            return $options.chooseModel(model.name, model.id);
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(model.name), 11
         /* TEXT, CLASS, PROPS */

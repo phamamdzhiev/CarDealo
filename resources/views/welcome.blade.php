@@ -28,5 +28,8 @@
     window._asset = '{{ asset('') }}';
 </script>
 <script defer src="{{ asset('js/app.js') }}"></script>
+<script defer type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?forceLang=bg&theme=grey&tracking=1&always=1&noGeoIp=1&hideDetailsBtn=1&remember=365"></script>
 </body>
 </html>
+

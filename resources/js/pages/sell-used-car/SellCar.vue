@@ -132,7 +132,7 @@ export default {
         ...mapActions('sellCar', ['setCarBrandWithModels']),
 
         async livesearchCarBrands() {
-            if (this.keyword.length <= 2) {
+            if (this.keyword.length <= 1) {
                 this.filterCarBrands = [];
                 return;
             }

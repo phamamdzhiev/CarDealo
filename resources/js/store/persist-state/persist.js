@@ -6,7 +6,8 @@ export const sellCarPersist = {
         'sellCar.car_offer',
         'sellCar.step',
         'sellCar.selected_brand_id',
-        'sellCar.car_brand_with_models',
+        'sellCar.selected_model_id',
+        'sellCar.car_brand_with_models'
     ],
     fetchBeforeUse: false,
     storage: window.sessionStorage

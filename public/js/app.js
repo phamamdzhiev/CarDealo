@@ -20526,7 +20526,7 @@ __webpack_require__.r(__webpack_exports__);
 // import Cookies from "js-cookie";
 var sellCarPersist = {
   key: 'sellCar',
-  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.car_brand_with_models'],
+  paths: ['sellCar.car_offer', 'sellCar.step', 'sellCar.selected_brand_id', 'sellCar.selected_model_id', 'sellCar.car_brand_with_models'],
   fetchBeforeUse: false,
   storage: window.sessionStorage
 }; //
@@ -20581,6 +20581,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       car_popular_brands: null,
       car_brand_with_models: null,
       selected_brand_id: null,
+      selected_model_id: null,
       car_extras: {
         car_extra_1: [],
         car_extra_2: [],
@@ -20635,6 +20636,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       state.car_offer['new_or_used'] = 1;
       state.car_brand_with_models = null;
       state.selected_brand_id = null;
+      state.selected_model_id = null;
     },
     setStepPlus: function setStepPlus(state) {
       state.step++;
@@ -20662,6 +20664,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setSelectedCarBrandID: function setSelectedCarBrandID(state, payload) {
       state.selected_brand_id = payload;
+    },
+    setSelectedCarModelID: function setSelectedCarModelID(state, payload) {
+      state.selected_model_id = payload;
     },
     setCarYear: function setCarYear(state, payload) {
       state.car_offer.car_year = payload;

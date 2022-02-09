@@ -10,6 +10,7 @@ export default {
             car_popular_brands: null,
             car_brand_with_models: null,
             selected_brand_id: null,
+            selected_model_id: null,
             car_extras: {
                 car_extra_1: [],
                 car_extra_2: [],
@@ -63,6 +64,7 @@ export default {
             state.car_offer['new_or_used'] = 1;
             state.car_brand_with_models = null;
             state.selected_brand_id = null;
+            state.selected_model_id = null;
         },
         setStepPlus(state) {
             state.step++
@@ -90,6 +92,9 @@ export default {
         },
         setSelectedCarBrandID(state, payload) {
             state.selected_brand_id = payload;
+        },
+        setSelectedCarModelID(state, payload) {
+            state.selected_model_id = payload;
         },
         setCarYear(state, payload) {
             state.car_offer.car_year = payload;

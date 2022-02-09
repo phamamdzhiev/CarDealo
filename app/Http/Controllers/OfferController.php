@@ -9,6 +9,7 @@ use Doctrine\DBAL\Query\QueryException;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Psy\Input\CodeArgument;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -43,8 +44,8 @@ class OfferController extends Controller
 
         $offer = Offer::create([
             'is_new' => $offerData['new_or_used'],
-            'car_brands_id' => 1,
-            'car_models_id' => 4,
+            'car_brands_id' => 314,
+            'car_models_id' => 2038,
             'title' => $offerData['car_offer_title'],
             'description' => $offerData['car_offer_description'],
             'price' => $offerData['car_price'],
