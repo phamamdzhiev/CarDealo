@@ -10,10 +10,8 @@
                 <div>
                     <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">
                         <div v-if="getUser" class="fw-bold me-3">
-                            <form @submit.prevent="logout">
-                                Здравейте, {{ getUser.name }}
-                                <button class="btn" id="logout-button">Изход</button>
-                            </form>
+                            Здравейте, {{ getUser.name }}
+                            <router-link :to="{name:'Profile'}">Профил</router-link>
                         </div>
                         <span v-else>
                            <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация</router-link>
@@ -153,20 +151,6 @@ export default {
         this.$store.dispatch('auth/SET_USER_AUTH_ASYNC', window.AUTH);
     },
     methods: {
-        async logout() {
-            try {
-                await axios.get('/sanctum/csrf-cookie');
-                const res = await axios.post('/logout');
-
-                if (res.data.success) {
-                    window.location.href = '/';
-                }else {
-                    console.log(res)
-                }
-            } catch (e) {
-                console.log('Logout failed', e);
-            }
-        },
         showSubMenuVisibility(param) {
             switch (param) {
                 case "new-cars":
@@ -202,9 +186,6 @@ export default {
 </script>
 
 <style scoped>
-#logout-button:hover {
-    color: #ff7771;
-}
 #nav {
     white-space: nowrap;
 }

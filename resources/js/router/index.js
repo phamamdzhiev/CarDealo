@@ -47,6 +47,24 @@ const routes = [
         }
     },
     {
+        path: "/profile",
+        name: "Profile",
+        meta: {
+            title: 'Профил',
+        },
+        component: () => import("../pages/admin/profile/Profile"),
+        children: [
+            {path: 'edit', name: 'Profile.edit', component: () => import('../pages/admin/profile/ProfileEdit'), meta: {title: 'Редакция на профил'}}
+        ],
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
+        }
+    },
+    {
         path: "/my-listing",
         name: "my.listing",
         component: () => import('../pages/admin/my-listing/MyListing'),

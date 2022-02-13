@@ -19500,25 +19500,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/hover-menu-items/SubMenuHoverableItems */ "./resources/js/components/ui/hover-menu-items/SubMenuHoverableItems.vue");
-/* harmony import */ var _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/base/BaseButton */ "./resources/js/components/ui/base/BaseButton.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui/hover-menu-items/SubMenuHoverableItems */ "./resources/js/components/ui/hover-menu-items/SubMenuHoverableItems.vue");
+/* harmony import */ var _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/base/BaseButton */ "./resources/js/components/ui/base/BaseButton.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    SubMenuHoverableItems: _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_1__["default"],
-    BaseButton: _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SubMenuHoverableItems: _ui_hover_menu_items_SubMenuHoverableItems__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BaseButton: _ui_base_BaseButton__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   inject: ['window'],
   data: function data() {
@@ -19584,46 +19576,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.$store.dispatch('auth/SET_USER_AUTH_ASYNC', window.AUTH);
   },
   methods: {
-    logout: function logout() {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default().get('/sanctum/csrf-cookie');
-
-              case 3:
-                _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default().post('/logout');
-
-              case 5:
-                res = _context.sent;
-
-                if (res.data.success) {
-                  window.location.href = '/';
-                } else {
-                  console.log(res);
-                }
-
-                _context.next = 12;
-                break;
-
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](0);
-                console.log('Logout failed', _context.t0);
-
-              case 12:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 9]]);
-      }))();
-    },
     showSubMenuVisibility: function showSubMenuVisibility(param) {
       switch (param) {
         case "new-cars":
@@ -19887,14 +19839,7 @@ var _hoisted_6 = {
   "class": "fw-bold me-3"
 };
 
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn",
-    id: "logout-button"
-  }, "Изход", -1
-  /* HOISTED */
-  );
-});
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Профил");
 
 var _hoisted_8 = {
   key: 1
@@ -19947,15 +19892,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_5, [$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.logout && $options.logout.apply($options, arguments);
-    }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Здравейте, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUser.name) + " ", 1
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_5, [$options.getUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Здравейте, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUser.name) + " ", 1
   /* TEXT */
-  ), _hoisted_7], 32
-  /* HYDRATE_EVENTS */
-  )])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: {
+      name: 'Profile'
+    }
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_7];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'login'
     },
@@ -19978,10 +19928,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onMouseover: _cache[1] || (_cache[1] = function ($event) {
+    onMouseover: _cache[0] || (_cache[0] = function ($event) {
       return $options.showSubMenuVisibility('new-cars');
     }),
-    onMouseleave: _cache[2] || (_cache[2] = function ($event) {
+    onMouseleave: _cache[1] || (_cache[1] = function ($event) {
       return $options.hideSubMenuVisibility('new-cars');
     }),
     "class": "sub__menu__wrapper"
@@ -19992,10 +19942,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["subLink"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.newCarsItemShown]])], 32
   /* HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onMouseover: _cache[3] || (_cache[3] = function ($event) {
+    onMouseover: _cache[2] || (_cache[2] = function ($event) {
       return $options.showSubMenuVisibility('old-cars');
     }),
-    onMouseleave: _cache[4] || (_cache[4] = function ($event) {
+    onMouseleave: _cache[3] || (_cache[3] = function ($event) {
       return $options.hideSubMenuVisibility('old-cars');
     }),
     "class": "sub__menu__wrapper"
@@ -20006,10 +19956,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["subLink"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.oldCarsItemShown]])], 32
   /* HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onMouseover: _cache[5] || (_cache[5] = function ($event) {
+    onMouseover: _cache[4] || (_cache[4] = function ($event) {
       return $options.showSubMenuVisibility('sell-car');
     }),
-    onMouseleave: _cache[6] || (_cache[6] = function ($event) {
+    onMouseleave: _cache[5] || (_cache[5] = function ($event) {
       return $options.hideSubMenuVisibility('sell-car');
     }),
     "class": "sub__menu__wrapper"
@@ -20373,6 +20323,34 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_sell-used-car_SellCar_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/sell-used-car/SellCar */ "./resources/js/pages/sell-used-car/SellCar.vue"));
   },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/GET_AUTH_USER"]) {
+      next();
+    } else {
+      next({
+        name: 'login'
+      });
+    }
+  }
+}, {
+  path: "/profile",
+  name: "Profile",
+  meta: {
+    title: 'Профил'
+  },
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_pages_admin_profile_Profile_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/admin/profile/Profile */ "./resources/js/pages/admin/profile/Profile.vue"));
+  },
+  children: [{
+    path: 'edit',
+    name: 'Profile.edit',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_pages_admin_profile_ProfileEdit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/admin/profile/ProfileEdit */ "./resources/js/pages/admin/profile/ProfileEdit.vue"));
+    },
+    meta: {
+      title: 'Редакция на профил'
+    }
+  }],
   beforeEnter: function beforeEnter(to, from, next) {
     if (_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/GET_AUTH_USER"]) {
       next();
@@ -21006,7 +20984,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#logout-button[data-v-c7f1def4]:hover {\r\n    color: #ff7771;\n}\n#nav[data-v-c7f1def4] {\r\n    white-space: nowrap;\n}\n#nav .base-button[data-v-c7f1def4] {\r\n    margin: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#nav[data-v-c7f1def4] {\n    white-space: nowrap;\n}\n#nav .base-button[data-v-c7f1def4] {\n    margin: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28450,7 +28428,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\laragon\\\\www\\\\
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_components_car_SingleListing_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_admin_my-listing_MyListing_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_components_car_SingleListing_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_admin_profile_Profile_vue":1,"resources_js_pages_admin_profile_ProfileEdit_vue":1,"resources_js_pages_admin_my-listing_MyListing_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
