@@ -1416,7 +1416,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-4ac35f36] {\n    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));\n    justify-content: center;\n    gap: 10px 15px;\n}\n.items[data-v-4ac35f36] {\n    text-align: center;\n    height: 150px;\n    max-width: 230px;\n    display: flex;\n    flex-flow: column nowrap;\n    justify-content: space-evenly;\n    align-items: center;\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\n    border-radius: 4px;\n}\n.items[data-v-4ac35f36]:hover {\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-4ac35f36] {\r\n    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));\r\n    justify-content: center;\r\n    gap: 10px 15px;\n}\n.items[data-v-4ac35f36] {\r\n    text-align: center;\r\n    height: 150px;\r\n    max-width: 230px;\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    justify-content: space-evenly;\r\n    align-items: center;\r\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\r\n    border-radius: 4px;\n}\n.items[data-v-4ac35f36]:hover {\r\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1440,7 +1440,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-3a9005e2] {\n    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));\n    justify-content: center;\n    gap: 10px 15px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-3a9005e2] {\r\n    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));\r\n    justify-content: center;\r\n    gap: 10px 15px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1488,7 +1488,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-2317f354] {\n    font-weight: bold;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-2317f354] {\r\n    font-weight: bold;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

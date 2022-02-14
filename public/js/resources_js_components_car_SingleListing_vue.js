@@ -194,7 +194,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.share-section[data-v-1e4df2c6] {\n    border-top: 1px solid hsla(0, 0%, 59.2%, .2);\n}\n.panel[data-v-1e4df2c6] {\n    border-radius: 8px;\n    background-color: white;\n    box-shadow: 4px 4px 8px 0 rgb(36 39 44 / 6%);\n    border: 1px solid #e9e9e9;\n    overflow: hidden;\n    margin-bottom: 1rem;\n}\n.base-button[data-v-1e4df2c6] {\n    box-shadow: 0 8px 8px 0 rgb(247 93 52 / 20%);\n    max-width: 300px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.share-section[data-v-1e4df2c6] {\r\n    border-top: 1px solid hsla(0, 0%, 59.2%, .2);\n}\n.panel[data-v-1e4df2c6] {\r\n    border-radius: 8px;\r\n    background-color: white;\r\n    box-shadow: 4px 4px 8px 0 rgb(36 39 44 / 6%);\r\n    border: 1px solid #e9e9e9;\r\n    overflow: hidden;\r\n    margin-bottom: 1rem;\n}\n.base-button[data-v-1e4df2c6] {\r\n    box-shadow: 0 8px 8px 0 rgb(247 93 52 / 20%);\r\n    max-width: 300px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

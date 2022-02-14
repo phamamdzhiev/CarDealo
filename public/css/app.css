@@ -11345,6 +11345,10 @@ hr {
   font-weight: bold;
 }
 
+.d-block-i:before {
+  display: block;
+}
+
 .text-normal-gray {
   color: rgba(36, 39, 44, 0.5) !important;
 }
@@ -11399,6 +11403,15 @@ hr {
   background-color: rgba(247, 93, 53, 0.7);
   background-size: 100%;
   transition: background 0s;
+}
+
+.reset-btn-styles {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  outline: 0;
 }
 
 .base-card {
@@ -11674,7 +11687,7 @@ ul.tabs-component-tabs li.is-active a {
   }
 }
 .sell-car ul#new__or__used li {
-  flex: 0 0 49%;
+  flex: 1 0 auto;
   font-weight: 700;
   background-color: white;
   color: #262B34;
@@ -11683,6 +11696,9 @@ ul.tabs-component-tabs li.is-active a {
   border-radius: 3px;
   text-align: center;
   cursor: pointer;
+}
+.sell-car ul#new__or__used li:not(:last-child) {
+  margin-right: 1rem;
 }
 @media (max-width: 575.98px) {
   .sell-car ul#new__or__used li {

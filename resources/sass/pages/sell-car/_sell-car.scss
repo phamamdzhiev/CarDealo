@@ -24,7 +24,7 @@ $ul-max-height: 300px;
         }
 
         li {
-            flex: 0 0 49%;
+            flex: 1 0 auto;
             font-weight: 700;
             background-color: white;
             color: $secondary-color;
@@ -33,6 +33,9 @@ $ul-max-height: 300px;
             border-radius: $border-radius;
             text-align: center;
             cursor: pointer;
+            &:not(:last-child) {
+                margin-right: 1rem;
+            }
             @include media-breakpoint-down(sm) {
                 flex: 0 0 100%;
                 &:first-child {

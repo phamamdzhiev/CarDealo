@@ -1,5 +1,10 @@
 <template>
-    <div class="container-xxl mt-4" v-if="listing.length > 0">
+    <div v-if="isloading">
+        <h4 class="text-center">
+            Зареджане...
+        </h4>
+    </div>
+    <div class="container-xxl mt-4" v-else-if="listing.length > 0">
         <div class="d-flex justify-content-between">
             <div>
                 <h6 class="fw-bold">Общо обяви: {{ listing.length }}</h6>
@@ -82,11 +87,14 @@ export default {
     setup() {
         let listing = ref([]);
         let listingGridView = ref(1);
+        let isloading = ref(false);
         const $toast = inject('$toast');
 
         async function getUserListing() {
             try {
+                isloading.value = true;
                 const res = await axios.get('offers/fetch/user/listing');
+                isloading.value = false;
                 if (res.data.success) {
                     listing.value = res.data.offers;
                 }
@@ -130,7 +138,8 @@ export default {
         return {
             listing,
             listingGridView,
-            handleDelete
+            handleDelete,
+            isloading
         }
     }
 

@@ -1,7 +1,10 @@
 <template>
     <form @submit.prevent="logout">
-        <button class="btn text-error-color fw-bold">
-            Изход
+        <button class="reset-btn-styles text-error-color fw-bold d-flex align-items-center">
+            <span>Изход</span>
+            <span class="ms-2">
+                <i class="bi bi-box-arrow-right fs-5 d-block-i"></i>
+            </span>
         </button>
     </form>
 </template>

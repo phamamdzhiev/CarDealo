@@ -19,6 +19,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/create', [\App\Http\Controllers\UserController::class, 'store']);
     Route::post('/update/{id}', [\App\Http\Controllers\UserController::class, 'update'])->middleware('auth:sanctum');
     Route::get('/auth/fetch', [\App\Http\Controllers\UserController::class, 'isAuthenticated']);
+    Route::patch('/edit/mobile', [\App\Http\Controllers\UserController::class, 'updateMobile'])->middleware('auth:sanctum');
 });
 
 //Email

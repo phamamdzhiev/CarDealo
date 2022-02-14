@@ -53,6 +53,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   setup: function setup() {
     var listing = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
     var listingGridView = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(1);
+    var isloading = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var $toast = (0,vue__WEBPACK_IMPORTED_MODULE_2__.inject)('$toast');
 
     function getUserListing() {
@@ -67,30 +68,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _context2.next = 3;
+                isloading.value = true;
+                _context2.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().get('offers/fetch/user/listing');
 
-              case 3:
+              case 4:
                 res = _context2.sent;
+                isloading.value = false;
 
                 if (res.data.success) {
                   listing.value = res.data.offers;
                 }
 
-                _context2.next = 10;
+                _context2.next = 12;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0.response.data.error, 'Cannot fetch listings');
 
-              case 10:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 9]]);
       }));
       return _getUserListing.apply(this, arguments);
     }
@@ -173,7 +176,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       listing: listing,
       listingGridView: listingGridView,
-      handleDelete: handleDelete
+      handleDelete: handleDelete,
+      isloading: isloading
     };
   }
 });
@@ -221,30 +225,43 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  key: 0,
+  key: 0
+};
+
+var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+    "class": "text-center"
+  }, " Зареджане... ", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_3 = [_hoisted_2];
+var _hoisted_4 = {
+  key: 1,
   "class": "container-xxl mt-4"
 };
-var _hoisted_2 = {
+var _hoisted_5 = {
   "class": "d-flex justify-content-between"
 };
-var _hoisted_3 = {
-  "class": "fw-bold"
-};
-var _hoisted_4 = {
-  "class": "row"
-};
-var _hoisted_5 = ["src", "alt"];
 var _hoisted_6 = {
-  "class": "details"
+  "class": "fw-bold"
 };
 var _hoisted_7 = {
+  "class": "row"
+};
+var _hoisted_8 = ["src", "alt"];
+var _hoisted_9 = {
+  "class": "details"
+};
+var _hoisted_10 = {
   "class": "fw-bold"
 };
-var _hoisted_8 = {
+var _hoisted_11 = {
   "class": "text-base-color"
 };
 
-var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "text-secondary-color mb-0"
   }, "Колата е нов внос, регистрирана е преди 3 месеца, напълно обслужена и всичко е платено за тази година. Много запазена и поддържана, без забележки. Качваш се и караш. Заповядайте да я видите, може би е вашият автомобил.", -1
@@ -252,11 +269,11 @@ var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_10 = {
+var _hoisted_13 = {
   "class": "actions text-end position-absolute bottom-0 end-0 d-flex align-items-center"
 };
 
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn p-0 me-2"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -266,9 +283,9 @@ var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_12 = ["onSubmit"];
+var _hoisted_15 = ["onSubmit"];
 
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn p-0 me-2"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -278,9 +295,9 @@ var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_14 = [_hoisted_13];
+var _hoisted_17 = [_hoisted_16];
 
-var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn p-0"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -290,19 +307,19 @@ var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_16 = {
-  key: 1,
+var _hoisted_19 = {
+  key: 2,
   "class": "container-xxl text-center py-5 my-5"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Все още нямате активни обяви. Може да добавите нова обява от ");
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Все още нямате активни обяви. Може да добавите нова обява от ");
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ТУК ");
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ТУК ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return $setup.listing.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_3, "Общо обяви: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.listing.length), 1
+  return $setup.isloading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3)) : $setup.listing.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_6, "Общо обяви: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.listing.length), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['bi bi-view-list fs-3 me-2', {
@@ -322,7 +339,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 2
   /* CLASS */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'col-lg-3 col-sm-1': $setup.listingGridView === 2
     })
@@ -345,33 +362,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       alt: item['title']
     }, null, 8
     /* PROPS */
-    , _hoisted_5)], 2
+    , _hoisted_8)], 2
     /* CLASS */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item['title']), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item['title']), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item['price']) + " лв.", 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item['price']) + " лв.", 1
     /* TEXT */
-    ), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    ), _hoisted_12]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
       onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
         return $setup.handleDelete(item['id'], index);
       }, ["prevent"])
-    }, _hoisted_14, 40
+    }, _hoisted_17, 40
     /* PROPS, HYDRATE_EVENTS */
-    , _hoisted_12), _hoisted_15])], 2
+    , _hoisted_15), _hoisted_18])], 2
     /* CLASS */
     )]);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 2
   /* CLASS */
-  )])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  )])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "text-base-color fw-bold",
     to: {
       name: 'sell.car'
     }
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_18];
+      return [_hoisted_21];
     }),
     _: 1
     /* STABLE */
@@ -417,7 +434,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.details[data-v-2acea455] {\n    margin-left: 1rem;\n}\n.flex-column .details[data-v-2acea455] {\n    margin-left: 0;\n}\n.bordered[data-v-2acea455] {\n    border-bottom: 2px solid #ff7771;\n}\ni[data-v-2acea455] {\n    cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.details[data-v-2acea455] {\r\n    margin-left: 1rem;\n}\n.flex-column .details[data-v-2acea455] {\r\n    margin-left: 0;\n}\n.bordered[data-v-2acea455] {\r\n    border-bottom: 2px solid #ff7771;\n}\ni[data-v-2acea455] {\r\n    cursor: pointer;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

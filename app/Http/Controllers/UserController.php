@@ -6,8 +6,8 @@ use App\Http\Requests\UserCreation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
@@ -98,6 +98,35 @@ class UserController extends Controller
             return response(Auth::user());
         } else {
             return response('no user');
+        }
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function updateMobile(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+    {
+        $validator = Validator::make($request->only('mobile'), [
+            'mobile' => 'required|numeric|digits:10|unique:users,mobile',
+        ], [
+            'required' => 'Номерът е задължителен',
+            'numeric' => 'Номерът трябва да бъде във формат 08xxxxxxxx',
+            'digits' => 'Номерът трябва да съдържа 10 цифри',
+            'unique' => 'Този номер вече съществува'
+        ]);
+
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return response(['errors' => true, 'message' => $validator->errors()], 422);
+        }
+
+        try {
+            $user = User::findOrFail(Auth::id());
+            $user->mobile = $request->input('mobile');
+            $user->save();
+
+            return response(['success' => true]);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
     }
 }

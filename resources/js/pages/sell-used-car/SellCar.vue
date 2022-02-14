@@ -5,11 +5,14 @@
                 <div class="question-section mb-4">
                     <h5 class="fw-bold">Състояние на автомобила?</h5>
                     <ul id="new__or__used">
-                        <li class="ripple" :class="{ active: getAllData['new_or_used'] === 1}"
+                        <li :class="{ active: getAllData['new_or_used'] === 1}"
                             @click="setNewOrUsed(1)">Употребяван
                         </li>
-                        <li class="ripple" :class="{ active: getAllData['new_or_used'] === 2 }"
+                        <li :class="{ active: getAllData['new_or_used'] === 2 }"
                             @click="setNewOrUsed(2)">Нов
+                        </li>
+                        <li :class="{ active: getAllData['new_or_used'] === 3 }"
+                            @click="setNewOrUsed(3)">На части
                         </li>
                     </ul>
                 </div>
