@@ -129,4 +129,39 @@ class UserController extends Controller
             throw new \Exception($e->getMessage());
         }
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator::make($request->only(['passwordOld', 'passwordNew']), [
+            'passwordOld' => 'required',
+            'passwordNew' => 'required|min:6|max:25',
+        ], [
+            'passwordOld.required' => 'Моля въведете старата парола',
+            'passwordNew.required' => 'Моля въведете нова парола',
+            'passwordNew.min' => 'Новата паролата трябва да бъде минимум 6 символа',
+            'passwordNew.max' => 'Новата паролата трябва да бъде максимум 25 символа'
+        ]);
+
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return response(['errors' => true, 'message' => $validator->errors()], 422);
+        }
+
+        try {
+            $user = User::findOrFail(Auth::id());
+            if (Hash::check($request->input('passwordOld'), $user->password)) {
+                $user->password = Hash::make($request->input('passwordNew'));
+                $user->save();
+
+                return response(['success' => true]);
+            } else {
+                return response(['errors' => true, 'message' => ['passwordNew' => ['Старата парола не съвпада']]], 422);
+            }
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
 }

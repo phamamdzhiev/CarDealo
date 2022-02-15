@@ -13,7 +13,7 @@
                         <span class="me-2 fs-5">
                             <i class="bi bi-chat-dots"></i>
                         </span>
-                        <router-link to="/">Съобщения</router-link>
+                        <router-link :to="{name: 'Chat'}">Съобщения</router-link>
                     </li>
                     <li class="d-flex align-items-center">
                         <span class="me-2 fs-5">

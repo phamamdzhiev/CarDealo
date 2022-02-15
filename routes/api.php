@@ -20,6 +20,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/update/{id}', [\App\Http\Controllers\UserController::class, 'update'])->middleware('auth:sanctum');
     Route::get('/auth/fetch', [\App\Http\Controllers\UserController::class, 'isAuthenticated']);
     Route::patch('/edit/mobile', [\App\Http\Controllers\UserController::class, 'updateMobile'])->middleware('auth:sanctum');
+    Route::patch('/edit/password', [\App\Http\Controllers\UserController::class, 'updatePassword'])->middleware('auth:sanctum');
 });
 
 //Email
@@ -73,6 +74,13 @@ Route::get('fetch/cities/{id}', function ($id) {
     return response()->json([
         'success' => true,
         'data' => \App\Models\City::where('region_id', $id)->whereNull('asCity')->get(),
-        'asCity' =>\App\Models\City::where('region_id', $id)->where('asCity', 1)->get()
-        ]);
+        'asCity' => \App\Models\City::where('region_id', $id)->where('asCity', 1)->get()
+    ]);
+});
+
+//Messages
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/chat', [App\Http\Controllers\ChatsController::class, 'index']);
+    Route::get('/messages', [App\Http\Controllers\ChatsController::class, 'fetchMessages']);
+    Route::post('/messages/{id}', [App\Http\Controllers\ChatsController::class, 'sendMessage']);
 });

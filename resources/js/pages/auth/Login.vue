@@ -12,7 +12,7 @@
                         <div class="form-floating form-group">
                             <input type="email" class="form-control form__input"
                                    placeholder="Имейл"
-                                   v-model="loginState.email"
+                                   v-model.lazy.trim="loginState.email"
                                    id="email"
                             >
                             <label for="email">Имейл или мобилен номер</label>
@@ -22,18 +22,15 @@
                         <div class="form-floating form-group position-relative">
                             <input :type="fieldType" class="form-control form__input"
                                    placeholder="Парола"
-                                   v-model="loginState.password"
+                                   v-model.lazy.trim="loginState.password"
                                    id="pass"
                             >
                             <label for="pass">Парола</label>
-                            <span
-                                @click="switchVisibility"
-                                style="right: 1rem;"
-                                class="position-absolute top-50 translate-middle-y">
-                                <i :class="['bi fs-4', { 'bi-eye': fieldType === 'password', 'bi-eye-slash': fieldType === 'text'}]"></i>
-                            </span>
+
                             <FromInputValidationMessage v-if="v$.password.$error"
                                                         :messages="v$.password.$errors"/>
+                            <PasswordVisibilityToggle :field-type="fieldType"
+                                                      @click="switchVisibility"></PasswordVisibilityToggle>
                         </div>
                         <div v-if='errors'>
                             <small class='input__error'>
@@ -56,7 +53,7 @@
                         <div class="form-floating form-group">
                             <input type="text" class="form-control form__input"
                                    placeholder="Име и фамилия"
-                                   v-model="registerState.names"
+                                   v-model.lazy.trim="registerState.names"
                                    id="names"
                             />
                             <label for="names">Име и фамилия</label>
@@ -67,7 +64,7 @@
                         <div class="form-floating form-group">
                             <input type="text" class="form-control form__input"
                                    placeholder="Мобилен номер"
-                                   v-model="registerState.mobile"
+                                   v-model.lazy.trim="registerState.mobile"
                                    id="mobile"
                             />
                             <label for="mobile">Мобилен номер</label>
@@ -77,7 +74,7 @@
                         <div class="form-floating form-group">
                             <input type="email" class="form-control form__input"
                                    placeholder="Имейл"
-                                   v-model="registerState.email"
+                                   v-model.lazy.trim="registerState.email"
                                    id="emailR"
                             />
                             <label for="emailR">Имейл</label>
@@ -88,18 +85,14 @@
                         <div class="form-floating form-group position-relative">
                             <input :type="fieldType" class="form-control form__input"
                                    placeholder="Парола"
-                                   v-model="registerState.password"
+                                   v-model.lazy.trim="registerState.password"
                                    id="passR"
                             >
                             <label for="passR">Парола</label>
                             <FromInputValidationMessage v-if="v$R.password.$error"
                                                         :messages="v$R.password.$errors"/>
-                            <span
-                                @click="switchVisibility"
-                                style="right: 1rem;"
-                                class="position-absolute top-50 translate-middle-y">
-                                <i :class="['bi fs-4', { 'bi-eye': fieldType === 'password', 'bi-eye-slash': fieldType === 'text'}]"></i>
-                            </span>
+                            <PasswordVisibilityToggle :field-type="fieldType"
+                                                      @click="switchVisibility"></PasswordVisibilityToggle>
                         </div>
                         <button class="base-button">
                             <loading-dots v-if="isLoadingR"></loading-dots>
@@ -117,17 +110,19 @@ import BaseCard from "../../components/ui/base/BaseCard";
 import useVuelidate from "@vuelidate/core";
 import {useRouter, useRoute} from "vue-router";
 import {useStore} from 'vuex';
-import {helpers, required, email, integer, requiredIf} from "@vuelidate/validators";
+import {helpers, required, email, integer, requiredIf, minLength, maxLength} from "@vuelidate/validators";
 import {reactive, ref} from "vue";
 import FromInputValidationMessage from "../../components/ui/FromInputValidationMessage";
 import axios from "axios";
 import {isUndefined} from "lodash";
+import PasswordVisibilityToggle from "../../components/ui/PasswordVisibilityToggle";
 
 export default {
     name: "Login",
     components: {
         BaseCard,
-        FromInputValidationMessage
+        FromInputValidationMessage,
+        PasswordVisibilityToggle
     },
     setup() {
         const router = useRouter();
@@ -183,7 +178,11 @@ export default {
                 required: helpers.withMessage('Имейлът е задължителен', required),
                 email: helpers.withMessage('Въведете валиден имейл', email)
             },
-            password: {required: helpers.withMessage('Паролата е задължителна', required)}
+            password: {
+                required: helpers.withMessage('Паролата е задължителна', required),
+                minLength: helpers.withMessage('Паролата трябва да бъде минимум 6 символа', minLength(6)),
+                maxLength: helpers.withMessage('Паролата трябва да бъде максимум 25 символа', maxLength(25)),
+            }
         }
 
         const v$ = useVuelidate(loginValidationRules, loginState);

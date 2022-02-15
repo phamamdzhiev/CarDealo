@@ -54,7 +54,8 @@ const routes = [
         },
         component: () => import("../pages/admin/profile/Profile"),
         children: [
-            {path: 'edit', name: 'Profile.edit', component: () => import('../pages/admin/profile/ProfileEdit'), meta: {title: 'Редакция на профил'}}
+            {path: 'edit', name: 'Profile.edit', component: () => import('../pages/admin/profile/ProfileEdit'), meta: {title: 'Редакция на профил'}},
+            {path: 'chat', name: 'Chat', component: () => import('../pages/admin/chat/ChatMessages'), meta: {title: 'Съобщения'}}
         ],
         beforeEnter(to, from, next) {
             if (store.getters['auth/GET_AUTH_USER']) {
