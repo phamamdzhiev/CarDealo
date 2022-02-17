@@ -16,7 +16,7 @@ class EmailVerificationCode extends Mailable
      *
      * @return void
      */
-    public $code;
+    public int $code;
 
     public function __construct($code)
     {
@@ -30,7 +30,7 @@ class EmailVerificationCode extends Mailable
      */
     public function build()
     {
-        return $this->subject('Varify you email via code')
+        return $this->subject('Reset password code')
             ->markdown('emails.verficationCode')
             ->with('code', $this->code);
     }

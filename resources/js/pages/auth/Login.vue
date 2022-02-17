@@ -32,6 +32,7 @@
                             <PasswordVisibilityToggle :field-type="fieldType"
                                                       @click="switchVisibility"></PasswordVisibilityToggle>
                         </div>
+                        <router-link class="text-link-blue" :to="{name: 'Request.password'}">Забравена парола?</router-link>
                         <div v-if='errors'>
                             <small class='input__error'>
                                 <i class="bi bi-exclamation-circle"></i>

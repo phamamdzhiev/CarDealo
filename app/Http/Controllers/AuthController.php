@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreation;
+use App\Models\PasswordReset;
 use App\Models\User;
+use http\Exception\BadQueryStringException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -81,7 +85,7 @@ class AuthController extends Controller
 
                 $user = Auth::user();
                 $token = $user->createToken('login-token')->plainTextToken;
-                return response()->json(['user' => $user, 'token' => $token ]);
+                return response()->json(['user' => $user, 'token' => $token]);
             } else {
                 return response(['error' => true, 'message' => 'Грешни данни за вход. Опитайте отново!'], 401);
             }
@@ -119,7 +123,7 @@ class AuthController extends Controller
 
             $success = true;
             $message = 'Successfully logged out!';
-        }catch (QueryException $e) {
+        } catch (QueryException $e) {
             $success = false;
             $message = $e->getMessage();
         }
@@ -130,5 +134,83 @@ class AuthController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function requestNewPassword(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    {
+        $validator = Validator::make($request->only(['mobile']), [
+            'mobile' => 'required|numeric'
+        ],
+            [
+                'mobile.required' => 'Полето е задължително',
+                'mobile.numeric' => 'Номерът трябва да съдържа само цифри',
+            ]
+        );
+
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return response(['error' => true, 'message' => $validator->errors()], 422);
+        }
+
+
+        $digits = 6;
+        $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1); //generate random 6-digits code
+        $randomString = \Str::random(64);
+        try {
+            PasswordReset::create([
+                'email' => $request->input('mobile'),
+                'token' => $randomString,
+                'code' => $code,
+                'created_at' => Carbon::now(),
+                'expires_at' => Carbon::now()->addMinutes(15)
+            ]);
+
+            return response(['success' => true, 'token' => Hash::make($randomString)]);
+        } catch (QueryException $e) {
+            return response($e->getMessage());
+        }
+
+//        Mail::to($userEmail)->send(new EmailVerificationCode($code));
+
+    }
+
+    public function resetPassword(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    {
+        $validator = Validator::make($request->only(['token', 'code', 'password', 'mobile']),
+            [
+                'password' => 'required|min:6|max:25',
+                'token' => 'required',
+                'code' => 'required|numeric|digits:6',
+                'mobile' => 'required|numeric'
+            ]
+        );
+
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return response(['errors' => true, 'message' => $validator->errors()], 422);
+        }
+
+        $user = User::whereMobile($request->input('mobile'))->first();
+
+        $tokenFromDB = PasswordReset::select('token')
+            ->where('code', '=', $request->input('code'))
+            ->where('email', '=', $request->input('mobile'))
+            ->where('expires_at', '>', Carbon::now())
+            ->orderByDesc('id')
+            ->limit(1)
+            ->first();
+
+        if (!is_null($tokenFromDB)) {
+            if (Hash::check($tokenFromDB->token, $request->input('token'))) {
+                try {
+                    $user->password = Hash::make($request->input('password'));
+                    $user->save();
+
+                } catch (QueryException $e) {
+                }
+
+                return response(['success' => true]);
+            }
+            return response(['errors' => true, 'message' => 'Грешка! Опитайте по-късно'], 422);
+        }
+        return response(['errors' => true, 'code' => 'Невалиден код'], 422);
     }
 }
