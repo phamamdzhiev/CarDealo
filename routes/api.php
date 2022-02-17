@@ -84,3 +84,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/messages', [App\Http\Controllers\ChatsController::class, 'fetchMessages']);
     Route::post('/messages/{id}', [App\Http\Controllers\ChatsController::class, 'sendMessage']);
 });
+
+//Password Request and Password Reset
+Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
+    Route::post('/request', [\App\Http\Controllers\AuthController::class, 'requestNewPassword']);
+    Route::post('/reset', [\App\Http\Controllers\AuthController::class, 'resetPassword']);
+});
+

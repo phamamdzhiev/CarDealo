@@ -1,7 +1,7 @@
 @component('mail::message')
-# Email Verification Code
+# Password Reset Code
 
-Use this code to verify your email.
+Use this code to reset your password.
 
 @component('mail::button', ['url' => ''])
 {{ $code }}

@@ -20411,10 +20411,49 @@ var routes = [{
     }
   }
 }, {
+  path: '/request/password',
+  name: 'Request.password',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_pages_auth_password-reset_RequestNewPassword_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/auth/password-reset/RequestNewPassword */ "./resources/js/pages/auth/password-reset/RequestNewPassword.vue"));
+  },
+  meta: {
+    hideFooter: true,
+    title: 'Въстановяване на парола'
+  }
+}, {
+  path: '/reset/password',
+  name: 'Reset.password',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_pages_auth_password-reset_ResetPassword_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/auth/password-reset/ResetPassword */ "./resources/js/pages/auth/password-reset/ResetPassword.vue"));
+  },
+  meta: {
+    hideFooter: true,
+    title: 'Въстановяване на парола'
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    //basically route is protected and cannot be accessed if user is already logged in...
+    if (_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters["auth/GET_AUTH_USER"]) {
+      next({
+        name: 'Profile'
+      });
+    } else {
+      if (to.query.token && to.query.mobile) {
+        next();
+      } else {
+        next({
+          name: 'Request.password'
+        });
+      }
+    }
+  }
+}, {
   path: '/:pathMatch(.*)*',
   name: 'NotFound',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_404_NotFound_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/404/NotFound */ "./resources/js/pages/404/NotFound.vue"));
+  },
+  meta: {
+    title: 'Не е намерена страница'
   }
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter)({
@@ -34596,7 +34635,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\laragon\\\\www\\\\
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_components_car_SingleListing_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_admin_profile_Profile_vue":1,"resources_js_pages_admin_profile_ProfileEdit_vue":1,"resources_js_pages_admin_chat_ChatMessages_vue":1,"resources_js_pages_admin_my-listing_MyListing_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_used-cars_UsedCars_vue":1,"resources_js_pages_advanced-search_AdvancedSearch_vue":1,"resources_js_components_car_SingleListing_vue":1,"resources_js_pages_sell-used-car_SellCar_vue":1,"resources_js_pages_admin_profile_Profile_vue":1,"resources_js_pages_admin_profile_ProfileEdit_vue":1,"resources_js_pages_admin_chat_ChatMessages_vue":1,"resources_js_pages_admin_my-listing_MyListing_vue":1,"resources_js_pages_auth_Login_vue":1,"resources_js_pages_auth_password-reset_RequestNewPassword_vue":1,"resources_js_pages_auth_password-reset_ResetPassword_vue":1,"resources_js_pages_404_NotFound_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

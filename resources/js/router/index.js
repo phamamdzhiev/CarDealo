@@ -54,8 +54,18 @@ const routes = [
         },
         component: () => import("../pages/admin/profile/Profile"),
         children: [
-            {path: 'edit', name: 'Profile.edit', component: () => import('../pages/admin/profile/ProfileEdit'), meta: {title: 'Редакция на профил'}},
-            {path: 'chat', name: 'Chat', component: () => import('../pages/admin/chat/ChatMessages'), meta: {title: 'Съобщения'}}
+            {
+                path: 'edit',
+                name: 'Profile.edit',
+                component: () => import('../pages/admin/profile/ProfileEdit'),
+                meta: {title: 'Редакция на профил'}
+            },
+            {
+                path: 'chat',
+                name: 'Chat',
+                component: () => import('../pages/admin/chat/ChatMessages'),
+                meta: {title: 'Съобщения'}
+            }
         ],
         beforeEnter(to, from, next) {
             if (store.getters['auth/GET_AUTH_USER']) {
@@ -98,9 +108,42 @@ const routes = [
         }
     },
     {
+        path: '/request/password',
+        name: 'Request.password',
+        component: () => import("../pages/auth/password-reset/RequestNewPassword"),
+        meta: {
+            hideFooter: true,
+            title: 'Въстановяване на парола'
+        },
+    },
+    {
+        path: '/reset/password',
+        name: 'Reset.password',
+        component: () => import("../pages/auth/password-reset/ResetPassword"),
+        meta: {
+            hideFooter: true,
+            title: 'Въстановяване на парола'
+        },
+        beforeEnter(to, from, next) {
+            //basically route is protected and cannot be accessed if user is already logged in...
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next({name: 'Profile'})
+            } else {
+                if (to.query.token && to.query.mobile) {
+                    next();
+                } else {
+                    next({name: 'Request.password'})
+                }
+            }
+        }
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: () => import("../pages/404/NotFound")
+        component: () => import("../pages/404/NotFound"),
+        meta: {
+            title: 'Не е намерена страница'
+        },
     }
 ];
 

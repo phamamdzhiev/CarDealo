@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreation;
+use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -81,7 +84,7 @@ class AuthController extends Controller
 
                 $user = Auth::user();
                 $token = $user->createToken('login-token')->plainTextToken;
-                return response()->json(['user' => $user, 'token' => $token ]);
+                return response()->json(['user' => $user, 'token' => $token]);
             } else {
                 return response(['error' => true, 'message' => 'Грешни данни за вход. Опитайте отново!'], 401);
             }
@@ -119,7 +122,7 @@ class AuthController extends Controller
 
             $success = true;
             $message = 'Successfully logged out!';
-        }catch (QueryException $e) {
+        } catch (QueryException $e) {
             $success = false;
             $message = $e->getMessage();
         }
@@ -130,5 +133,48 @@ class AuthController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function requestNewPassword(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    {
+        $validator = Validator::make($request->only(['mobile']), [
+            'mobile' => 'required|numeric|exists:users'
+        ],
+            [
+                'mobile.required' => 'Полето е задължително',
+                'mobile.numeric' => 'Номерът трябва да съдържа само цифри',
+                'mobile.exists' => 'Този номер не същестува'
+            ]
+        );
+
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return response(['error' => true, 'message' => $validator->errors()], 422);
+        }
+
+
+        $digits = 6;
+        $code = rand(pow(10, $digits - 1), pow(10, $digits) - 1); //generate random 6-digits code
+        $randomString = \Str::random(64);
+        try {
+            PasswordReset::create([
+                'email' => $request->input('mobile'),
+                'token' => $randomString,
+                'code' => $code,
+                'created_at' => Carbon::now(),
+                'expires_at' => Carbon::now()->addHour()
+            ]);
+
+            return response(['success' => true, 'token' => Hash::make($randomString)]);
+        } catch (QueryException $e) {
+            return response($e->getMessage());
+        }
+
+//        Mail::to($userEmail)->send(new EmailVerificationCode($code));
+
+    }
+
+    public function resetPassword(Request $request)
+    {
+        dump((int)$request->code);
     }
 }
