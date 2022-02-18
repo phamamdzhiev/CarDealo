@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" class="form-control form__input" id="floatingInputPrice"
-                           placeholder="Цена (BGN)" :disabled="!GET_CAR_HAS_PRICE"
+                           placeholder="Цена (BGN)" :disabled="GET_CAR_HAS_PRICE !== true"
                            v-model.trim="offerPrice"
                     >
                     <label for="floatingInputPrice">Цена (BGN)</label>

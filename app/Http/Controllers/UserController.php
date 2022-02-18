@@ -113,11 +113,9 @@ class UserController extends Controller
     public function updateMobile(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
     {
         $validator = Validator::make($request->only('mobile'), [
-            'mobile' => 'required|numeric|digits:10|unique:users,mobile',
+            'mobile' => 'required|unique:users,mobile',
         ], [
             'required' => 'Номерът е задължителен',
-            'numeric' => 'Номерът трябва да бъде във формат 08xxxxxxxx',
-            'digits' => 'Номерът трябва да съдържа 10 цифри',
             'unique' => 'Този номер вече съществува'
         ]);
 

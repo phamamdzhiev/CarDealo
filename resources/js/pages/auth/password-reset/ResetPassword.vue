@@ -16,12 +16,18 @@
                                             :messages="v$.password.$errors"/>
             </div>
             <div class="form-floating form-group">
-                <input type="text"
-                       placeholder="6-цифрен код"
-                       v-model.lazy.trim="v$.code.$model"
-                       id="code"
-                       class="form-control form__input"
-                />
+                <cleave v-model.lazy.trim="v$.code.$model"
+                        class="form-control form__input"
+                        name="code"
+                        placeholder="6-цифрен код"
+                        id="code"
+                        :options="{blocks: [3,3]}"/>
+                <!--                <input type="text"-->
+                <!--                       placeholder="6-цифрен код"-->
+                <!--                       v-model.lazy.trim="v$.code.$model"-->
+                <!--                       id="code"-->
+                <!--                       class="form-control form__input"-->
+                <!--                />-->
                 <label for="code">6-цифрен код</label>
                 <FromInputValidationMessage v-if="v$.code.$error"
                                             :messages="v$.code.$errors"/>
@@ -41,14 +47,18 @@ import FromInputValidationMessage from "../../../components/ui/FromInputValidati
 import axios from "axios";
 import useVuelidate from "@vuelidate/core";
 import {helpers, required, minLength, maxLength, integer} from "@vuelidate/validators";
+import Cleave from "vue-cleave-component";
+import router from "../../../router";
 
 export default {
     name: "ResetPassword",
     components: {
         BaseCard,
         PasswordVisibilityToggle,
-        FromInputValidationMessage
+        FromInputValidationMessage,
+        Cleave
     },
+    inject: ['$toast'],
     created() {
         console.log(this.$route.params);
     },
@@ -59,7 +69,8 @@ export default {
             fieldType: 'password',
             isLoading: false,
             v$: useVuelidate(),
-            vuelidateExternalResults: {}
+            vuelidateExternalResults: {},
+            $toast: this.$toast
         }
     },
     validations() {
@@ -91,11 +102,22 @@ export default {
             }
 
             try {
+                this.isLoading = true;
                 const res = await axios.post('password/reset', data);
+                this.isLoading = false;
                 if (res.data.success) {
-                    await this.$router.replace({name: 'login'});
+                    this.$toast.open({
+                        message: "Успешно променихте своята парола!",
+                        type: 'success',
+                        dismissible: true,
+                        duration: 3000,
+                        onDismiss: async () => {
+                            await this.$router.replace({name: 'login'});
+                        }
+                    });
                 }
             } catch (e) {
+                this.isLoading = false;
                 if (e.response.data) {
                     Object.assign(this.vuelidateExternalResults, {
                         code: e.response.data.code

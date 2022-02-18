@@ -5,13 +5,22 @@
                 <form @submit.prevent="handleMobileUpdate">
                     <h6 class="fw-bold">Смяна на мобилен номер</h6>
                     <div class="form-floating form-group">
-                        <input type="text" class="form-control form__input"
-                               placeholder="Смяна на мобилен номер"
-                               name="mobile"
-                               v-model.lazy.trim="mobile"
-                               id="mobile"
-                               required
+                        <cleave
+                            class="form-control form__input"
+                            placeholder="Смяна на мобилен номер"
+                            name="mobile"
+                            v-model.lazy.trim="mobile"
+                            id="mobile"
+                            required
+                            :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                         />
+<!--                        <input type="text" class="form-control form__input"-->
+<!--                               placeholder="Смяна на мобилен номер"-->
+<!--                               name="mobile"-->
+<!--                               v-model.lazy.trim="mobile"-->
+<!--                               id="mobile"-->
+<!--                               required-->
+<!--                        />-->
                         <label for="mobile">Нов мобилен номер</label>
                         <FromInputValidationMessage v-if="v$.mobile.$error"
                                                     :messages="v$.mobile.$errors"/>
@@ -66,13 +75,15 @@ import FromInputValidationMessage from "../../../components/ui/FromInputValidati
 import PasswordVisibilityToggle from "../../../components/ui/PasswordVisibilityToggle";
 import pswVisibilityToggleMixin from "../../../mixins/psw-toggle-visibility";
 import ErrorDisplay from "../../../components/ui/ErrorDisplay";
+import Cleave from "vue-cleave-component";
 
 export default {
     name: "ProfileEdit",
     components: {
         FromInputValidationMessage,
         PasswordVisibilityToggle,
-        ErrorDisplay
+        ErrorDisplay,
+        Cleave
     },
     mixins: [pswVisibilityToggleMixin],
     data() {
@@ -88,9 +99,8 @@ export default {
     validations() {
         return {
             mobile: {
-                integer: helpers.withMessage('Номерът трябва да е във формат 08xxxxxxx', integer),
-                minLength: helpers.withMessage('Номерът трябва да бъде 10 цифрен', minLength(10)),
-                maxLength: helpers.withMessage('Номерът трябва да бъде 10 цифрен', maxLength(10)),
+                minLength: helpers.withMessage('Номерът трябва да бъде 10 цифрен', minLength(14)),
+                maxLength: helpers.withMessage('Номерът трябва да бъде 10 цифрен', maxLength(14)),
             }
 
         }

@@ -27,7 +27,6 @@ class UserCreation extends FormRequest
     {
         return [
             'names' => 'required|string',
-            'email' => 'required|email|string|unique:users,email',
             'mobile' => 'required|unique:users,mobile',
             'password' => 'required|min:6|max:25'
         ];
@@ -37,9 +36,6 @@ class UserCreation extends FormRequest
     {
         return [
             'names.required' => 'Името е задължително',
-            'email.required' => 'Имейлът е задължителен',
-            'email.email' => 'Въведете валиден имейл',
-            'email.unique' => 'Имейлът е вече е регистриран',
             'mobile.required' => 'Телефонът е задължителен',
             'mobile.unique' => 'Телефонът е вече регистриран',
             'password.required' => 'Паролата е задължителна',

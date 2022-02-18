@@ -62,10 +62,16 @@
                     />
                 </div>
                 <div class="form-floating form-group">
-                    <input type="number" id="km" class="form-control form__input"
-                           v-model.number="carKm"
-                           placeholder="Пробег (км.)"
+                    <cleave
+                        id="km" class="form-control form__input"
+                        v-model.number="carKm"
+                        placeholder="Пробег (км.)"
+                        :options="{  numeral: true, delimiter: ' ', numeralThousandsGroupStyle: 'thousand'}"
                     />
+<!--                    <input type="number" id="km" class="form-control form__input"-->
+<!--                           v-model.number="carKm"-->
+<!--                           placeholder="Пробег (км.)"-->
+<!--                    />-->
                     <label for="horsepower">Пробег (км.)</label>
                     <FromInputValidationMessage v-if="v$.carKm.$error"
                                                 :messages="v$.carKm.$errors"
@@ -87,14 +93,15 @@ import {mapGetters, mapMutations} from "vuex";
 import FromInputValidationMessage from "../../components/ui/FromInputValidationMessage";
 import useVuelidate from '@vuelidate/core';
 import {required, integer, minValue, maxValue, helpers} from '@vuelidate/validators'
-
+import Cleave from "vue-cleave-component";
 
 export default {
     name: "SellCarVariant",
     components: {
         TopBar,
         BaseCard,
-        FromInputValidationMessage
+        FromInputValidationMessage,
+        Cleave
     },
     data() {
         return {

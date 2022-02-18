@@ -24,7 +24,6 @@ class AuthController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -75,7 +74,7 @@ class AuthController extends Controller
     {
 
         $credentials = $request->validate([
-            'email' => 'required|email|string',
+            'mobile' => 'required',
             'password' => 'required'
         ]);
 
@@ -139,11 +138,12 @@ class AuthController extends Controller
     public function requestNewPassword(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         $validator = Validator::make($request->only(['mobile']), [
-            'mobile' => 'required|numeric'
+            'mobile' => 'required|numeric|min:14'
         ],
             [
                 'mobile.required' => 'Полето е задължително',
                 'mobile.numeric' => 'Номерът трябва да съдържа само цифри',
+                'mobile.min' => 'Въведете валиден номер',
             ]
         );
 
@@ -198,7 +198,7 @@ class AuthController extends Controller
             ->limit(1)
             ->first();
 
-        if (!is_null($tokenFromDB)) {
+        if ($tokenFromDB) {
             if (Hash::check($tokenFromDB->token, $request->input('token'))) {
                 try {
                     $user->password = Hash::make($request->input('password'));

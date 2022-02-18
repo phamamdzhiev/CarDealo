@@ -30,6 +30,7 @@
         "pusher-js": "^7.0.6",
         "swiper": "^8.0.0",
         "vue": "^3.2.26",
+        "vue-cleave-component": "^3.0.1",
         "vue-router": "^4.0.12",
         "vue-toast-notification": "^3.0.0",
         "vue3-tabs-component": "^1.0.5",

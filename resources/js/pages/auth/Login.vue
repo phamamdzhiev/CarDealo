@@ -10,14 +10,21 @@
                     </p>
                     <form @submit.prevent="handleLogin">
                         <div class="form-floating form-group">
-                            <input type="email" class="form-control form__input"
-                                   placeholder="Имейл"
-                                   v-model.lazy.trim="loginState.email"
-                                   id="email"
-                            >
-                            <label for="email">Имейл или мобилен номер</label>
-                            <FromInputValidationMessage v-if="v$.email.$error"
-                                                        :messages="v$.email.$errors"/>
+                            <cleave
+                                class="form-control form__input"
+                                placeholder="Мобилен номер"
+                                v-model.lazy.trim="loginState.mobile"
+                                id="mobileLogin"
+                                :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
+                            />
+<!--                            <input type="email" class="form-control form__input"-->
+<!--                                   placeholder="Имейл"-->
+<!--                                   v-model.lazy.trim="loginState.email"-->
+<!--                                   id="email"-->
+<!--                            >-->
+                            <label for="mobileLogin">Mобилен номер</label>
+                            <FromInputValidationMessage v-if="v$.mobile.$error"
+                                                        :messages="v$.mobile.$errors"/>
                         </div>
                         <div class="form-floating form-group position-relative">
                             <input :type="fieldType" class="form-control form__input"
@@ -63,22 +70,29 @@
                         </div>
 
                         <div class="form-floating form-group">
-                            <input type="text" class="form-control form__input"
-                                   placeholder="Мобилен номер"
-                                   v-model.lazy.trim="registerState.mobile"
-                                   id="mobile"
+                            <cleave
+                                class="form-control form__input"
+                                placeholder="Мобилен номер"
+                                v-model.lazy.trim="registerState.mobile"
+                                id="mobile"
+                                :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                             />
+<!--                            <input type="text" class="form-control form__input"-->
+<!--                                   placeholder="Мобилен номер"-->
+<!--                                   v-model.lazy.trim="registerState.mobile"-->
+<!--                                   id="mobile"-->
+<!--                            />-->
                             <label for="mobile">Мобилен номер</label>
                             <FromInputValidationMessage v-if="v$R.mobile.$error"
                                                         :messages="v$R.mobile.$errors"/>
                         </div>
                         <div class="form-floating form-group">
                             <input type="email" class="form-control form__input"
-                                   placeholder="Имейл"
+                                   placeholder="Имейл (Не задължителен)"
                                    v-model.lazy.trim="registerState.email"
                                    id="emailR"
                             />
-                            <label for="emailR">Имейл</label>
+                            <label for="emailR">Имейл (Не задължителен)</label>
                             <FromInputValidationMessage v-if="v$R.email.$error"
                                                         :messages="v$R.email.$errors"/>
                         </div>
@@ -95,6 +109,7 @@
                             <PasswordVisibilityToggle :field-type="fieldType"
                                                       @click="switchVisibility"></PasswordVisibilityToggle>
                         </div>
+                        <register-business-user></register-business-user>
                         <button class="base-button">
                             <loading-dots v-if="isLoadingR"></loading-dots>
                             <span v-else>Регистрация</span>
@@ -117,13 +132,17 @@ import FromInputValidationMessage from "../../components/ui/FromInputValidationM
 import axios from "axios";
 import {isUndefined} from "lodash";
 import PasswordVisibilityToggle from "../../components/ui/PasswordVisibilityToggle";
+import Cleave from "vue-cleave-component";
+import RegisterBusinessUser from "../../components/ui/RegisterBusinessUser";
 
 export default {
     name: "Login",
     components: {
         BaseCard,
         FromInputValidationMessage,
-        PasswordVisibilityToggle
+        PasswordVisibilityToggle,
+        Cleave,
+        RegisterBusinessUser
     },
     setup() {
         const router = useRouter();
@@ -140,7 +159,7 @@ export default {
         let isRedirected = ref(false);
 
         let loginState = reactive({
-            email: null,
+            mobile: null,
             password: null
         });
 
@@ -160,9 +179,9 @@ export default {
         }
 
         const loginValidationRules = {
-            email: {
-                required: helpers.withMessage('Имейлът е задължителен', required),
-                email: helpers.withMessage('Въведете валиден имейл', email)
+            mobile: {
+                required: helpers.withMessage('Номерът е задължителен', required),
+                minLength: helpers.withMessage('Въведете валиден номер', minLength(14)),
             },
             password: {required: helpers.withMessage('Паролата е задължителна', required)}
         }
@@ -173,10 +192,9 @@ export default {
             },
             mobile: {
                 required: helpers.withMessage('Телефонът е задължителен', required),
-                integer: helpers.withMessage('Телефонът трябва да във формат 08хххххххх', integer)
+                minLength: helpers.withMessage('Въведете валиден номер', minLength(14)),
             },
             email: {
-                required: helpers.withMessage('Имейлът е задължителен', required),
                 email: helpers.withMessage('Въведете валиден имейл', email)
             },
             password: {

@@ -4,12 +4,19 @@
             <h5 class="fw-bold text-center mb-4">Възстановяване на забравена парола</h5>
             <form @submit.prevent="handlePasswordRequest">
                 <div class="form-floating form-group mb-0">
-                    <input type="text"
-                           placeholder="Мобилен номер"
-                           v-model.lazy.trim="state.mobile"
-                           id="mobile"
-                           class="form-control form__input"
+                    <cleave v-model.lazy.trim="state.mobile"
+                            class="form-control form__input"
+                            name="mobile"
+                            placeholder="Мобилен номер"
+                            id="mobile"
+                            :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                     />
+                    <!--                    <input type="text"-->
+<!--                           placeholder="Мобилен номер"-->
+<!--                           v-model.lazy.trim="state.mobile"-->
+<!--                           id="mobile"-->
+<!--                           class="form-control form__input"-->
+<!--                    />-->
                     <label for="mobile">Мобилен номер</label>
                 </div>
                 <FromInputValidationMessage v-if="v$.mobile.$error"
@@ -20,7 +27,6 @@
                 </button>
             </form>
         </div>
-        <!--        <enter-reset-password-code :email="state.mobile" v-if="isDisabled"></enter-reset-password-code>-->
     </base-card>
 </template>
 
@@ -28,16 +34,18 @@
 import BaseCard from "../../../components/ui/base/BaseCard";
 import {reactive, ref} from "vue";
 import {useRouter} from "vue-router";
-import {helpers, required, integer} from "@vuelidate/validators";
+import {helpers, required, integer, minLength} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import FromInputValidationMessage from "../../../components/ui/FromInputValidationMessage";
 import axios from "axios";
+import Cleave from 'vue-cleave-component';
 
 export default {
     name: "RequestNewPassword",
     components: {
         BaseCard,
         FromInputValidationMessage,
+        Cleave
     },
     setup() {
         const router = useRouter();
@@ -48,7 +56,7 @@ export default {
         const mobileFieldRules = {
             mobile: {
                 required: helpers.withMessage('Полето е задължително', required),
-                integer: helpers.withMessage('Номерът трябва да съдържа само цифри', integer),
+                minLength: helpers.withMessage('Въведете валиден номер', minLength(14)),
             },
         }
         const v$ = useVuelidate(mobileFieldRules, state);

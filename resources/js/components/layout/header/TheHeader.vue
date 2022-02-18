@@ -10,8 +10,11 @@
                 <div>
                     <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">
                         <div v-if="getUser" class="fw-bold me-3">
-                            Здравейте, {{ getUser.name }}
-                            <router-link :to="{name:'Profile'}">Профил</router-link>
+                            Здравейте, {{ getUser.name }}!
+                            <router-link :to="{name:'Profile'}" class="d-flex flex-nowrap align-items-center">
+                                <i class="bi bi-person-circle fs-6"></i>
+                                <span class="ms-1">Профил</span>
+                            </router-link>
                         </div>
                         <span v-else>
                            <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация</router-link>
