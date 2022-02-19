@@ -8,18 +8,18 @@
             <div class="question-section mb-4">
                 <h5 class="fw-bold">Гориво?</h5>
                 <ul id="fuel">
-                    <li :class="{ active: getAllData['car_fuel'] === 'Бензин'}"
-                        @click="setCarFuel('Бензин')">Бензин
+                    <li :class="{ active: getAllData['car_fuel'] === 1}"
+                        @click="setCarFuel(1)">Бензин
                     </li>
-                    <li :class="{ active: getAllData['car_fuel'] === 'Дизел'}"
-                        @click="setCarFuel('Дизел')">Дизел
+                    <li :class="{ active: getAllData['car_fuel'] === 2}"
+                        @click="setCarFuel(2)">Дизел
                     </li>
-                    <li :class="{ active: getAllData['car_fuel'] === 'Електрически'}"
-                        @click="setCarFuel('Електрически')">
+                    <li :class="{ active: getAllData['car_fuel'] === 3}"
+                        @click="setCarFuel(3)">
                         Електрически
                     </li>
-                    <li :class="{ active: getAllData['car_fuel'] === 'Хибрид'}"
-                        @click="setCarFuel('Хибрид')">Хибрид
+                    <li :class="{ active: getAllData['car_fuel'] === 4}"
+                        @click="setCarFuel(4)">Хибрид
                     </li>
                 </ul>
             </div>

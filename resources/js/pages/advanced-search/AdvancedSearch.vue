@@ -38,6 +38,7 @@ import KmFilter from "./partials/KmFilter";
 import FuelFilter from "./partials/FuelFilter";
 import TransmissionFilter from "./partials/TransmissionFilter";
 import ColorFilter from "./partials/ColorFilter";
+import {useRoute, useRouter} from "vue-router";
 
 export default {
     name: "AdvancedSearch",
@@ -50,14 +51,17 @@ export default {
         ColorFilter,
         CarSingleItem
     },
+    inject: ['window'],
     setup() {
         let offers = ref(null);
         let isLoading = ref(false);
+        const route = useRoute();
+        const router = useRouter();
 
         async function fetchData() {
             try {
                 isLoading.value = true;
-                const res = await axios.get('/fetch/offers');
+                const res = await axios.get('/fetch/offers' + window.location.search);
                 isLoading.value = false
                 if (res.data.length > 0) {
                     offers.value = res.data;

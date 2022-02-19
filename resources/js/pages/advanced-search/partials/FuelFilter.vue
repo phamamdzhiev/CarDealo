@@ -3,29 +3,29 @@
         <h6 class="fw-bold">Гориво</h6>
         <div class="form-group">
             <label>
-                <input type="checkbox" class="d-none" name="fuel" value="Бензин" @change="handleFuel" v-model="carFuel"/>
-                <CustomCheckbox :checked-elements="carFuel" checked-value="Бензин"></CustomCheckbox>
+                <input type="checkbox" class="d-none" name="fuel" value="1" @change="handleFuel" v-model="carFuel"/>
+                <CustomCheckbox :checked-elements="carFuel" checked-value="1"></CustomCheckbox>
                 <span>Бензин</span>
             </label>
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" class="d-none" name="fuel" value="Дизел" @change="handleFuel" v-model="carFuel"/>
-                <CustomCheckbox :checked-elements="carFuel" checked-value="Дизел"></CustomCheckbox>
+                <input type="checkbox" class="d-none" name="fuel" value="2" @change="handleFuel" v-model="carFuel"/>
+                <CustomCheckbox :checked-elements="carFuel" checked-value="2"></CustomCheckbox>
                 <span>Дизел</span>
             </label>
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" class="d-none" name="fuel" value="Хибрид" @change="handleFuel" v-model="carFuel"/>
-                <CustomCheckbox :checked-elements="carFuel" checked-value="Хибрид"></CustomCheckbox>
+                <input type="checkbox" class="d-none" name="fuel" value="3" @change="handleFuel" v-model="carFuel"/>
+                <CustomCheckbox :checked-elements="carFuel" checked-value="3"></CustomCheckbox>
                 <span>Хибрид</span>
             </label>
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" class="d-none" name="fuel" value="Електричеки" @change="handleFuel" v-model="carFuel"/>
-                <CustomCheckbox :checked-elements="carFuel" checked-value="Електричеки"></CustomCheckbox>
+                <input type="checkbox" class="d-none" name="fuel" value="4" @change="handleFuel" v-model="carFuel"/>
+                <CustomCheckbox :checked-elements="carFuel" checked-value="4"></CustomCheckbox>
                 <span>Електричеки</span>
             </label>
         </div>
@@ -35,26 +35,27 @@
 <script>
 import {ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {isUndefined} from "lodash";
+import {isUndefined, isArray} from "lodash";
 import CustomCheckbox from "../../../components/ui/CustomCheckbox";
 
+
 export default {
-    name: "YearFilter",
+    name: "FuelFilter",
     components: {CustomCheckbox},
     setup() {
         const router = useRouter();
         const route = useRoute();
         let carFuel = ref([]);
+        const fuel = route.query['fuel[]'];
 
-
-        if (!isUndefined(route.query.fuel)) {
-            carFuel.value = route.query.fuel.split('-');
+        if (!isUndefined(fuel)) {
+            carFuel.value.push(...isArray(fuel) ? fuel : [fuel])
         }
 
         function handleFuel() {
             router.push({
                 name: route.name,
-                query: {...route.query, fuel: carFuel.value.join('-')}
+                query: {...route.query, 'fuel[]': carFuel.value}
             });
         }
 

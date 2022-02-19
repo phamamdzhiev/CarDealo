@@ -54,7 +54,7 @@ class OfferController extends Controller
             'hp' => $offerData['car_hp'],
             'cm3' => $offerData['car_cm3'],
             'year' => $offerData['car_year'],
-            'fuel' => 1,
+            'fuel' => $offerData['car_fuel'],
             'transmission' => 1,
             'color' => 1,
             'coupe_type' => 1,
@@ -73,7 +73,7 @@ class OfferController extends Controller
      * @param Offer $offer
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder[]
      */
-    public function show(Offer $offer): array|\Illuminate\Database\Eloquent\Collection
+    public function show(Offer $offer, Request $request): array|\Illuminate\Database\Eloquent\Collection
     {
         return $offer->with('images')->take(10)->get();
     }
