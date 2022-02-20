@@ -35,20 +35,17 @@ export default {
         const route = useRoute();
         let yearRange = ref([]);
 
-        if (isUndefined(route.query.year)) {
-            yearRange.value[0] = 1995;
-            yearRange.value[1] = 2022;
-        } else {
-            const splitRouteParams = route.query.year.split('-');
-
-            yearRange.value[0] = Number(splitRouteParams[0]);
-            yearRange.value[1] = Number(splitRouteParams[1]);
-        }
+        yearRange.value[0] = isUndefined(route.query.yearMin) ? 0 : route.query.yearMin;
+        yearRange.value[1] = isUndefined(route.query.yearMax) ? 20000 : route.query.yearMax;
 
         function handleYearSlider() {
             router.push({
                 name: route.name,
-                query: {...route.query, year: yearRange.value[0] + '-' + yearRange.value[1]}
+                query: {
+                    ...route.query,
+                    yearMin: yearRange.value[0],
+                    yearMax: yearRange.value[1]
+                }
             });
         }
 

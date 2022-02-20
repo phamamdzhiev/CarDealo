@@ -1634,7 +1634,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-4ac35f36] {\r\n    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));\r\n    justify-content: center;\r\n    gap: 10px 15px;\n}\n.items[data-v-4ac35f36] {\r\n    text-align: center;\r\n    height: 150px;\r\n    max-width: 230px;\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    justify-content: space-evenly;\r\n    align-items: center;\r\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\r\n    border-radius: 4px;\n}\n.items[data-v-4ac35f36]:hover {\r\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-4ac35f36] {\n    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));\n    justify-content: center;\n    gap: 10px 15px;\n}\n.items[data-v-4ac35f36] {\n    text-align: center;\n    height: 150px;\n    max-width: 230px;\n    display: flex;\n    flex-flow: column nowrap;\n    justify-content: space-evenly;\n    align-items: center;\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\n    border-radius: 4px;\n}\n.items[data-v-4ac35f36]:hover {\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1658,7 +1658,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.see-more[data-v-16396edc] {\r\n    border-top: 1px solid #c6c6c6\n}\n.see-more a[data-v-16396edc] {\r\n    font-size: 15px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.see-more[data-v-16396edc] {\n    border-top: 1px solid #c6c6c6\n}\n.see-more a[data-v-16396edc] {\n    font-size: 15px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1682,7 +1682,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.carousel__track {\r\n    padding: 7px 0;\n}\n.carousel__slide {\r\n    /*padding: 0 5px;*/\n}\n.carousel__prev--in-active,\r\n.carousel__next--in-active {\r\n    display: none;\n}\n.carousel__prev,\r\n.carousel__next {\r\n    background-color: #fd5750;\r\n    border: 4px solid white;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.carousel__track {\n    padding: 7px 0;\n}\n.carousel__slide {\n    /*padding: 0 5px;*/\n}\n.carousel__prev--in-active,\n.carousel__next--in-active {\n    display: none;\n}\n.carousel__prev,\n.carousel__next {\n    background-color: #fd5750;\n    border: 4px solid white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1852,13 +1852,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Tab_vue_vue_type_template_id_9f7a49a2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Tab.vue?vue&type=template&id=9f7a49a2 */ "./node_modules/vue3-tabs-component/src/components/Tab.vue?vue&type=template&id=9f7a49a2");
 /* harmony import */ var _Tab_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tab.vue?vue&type=script&lang=js */ "./node_modules/vue3-tabs-component/src/components/Tab.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Tab_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Tab_vue_vue_type_template_id_9f7a49a2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"node_modules/vue3-tabs-component/src/components/Tab.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Tab_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Tab_vue_vue_type_template_id_9f7a49a2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"node_modules/vue3-tabs-component/src/components/Tab.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -1981,13 +1981,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Tabs_vue_vue_type_template_id_5bc42bd4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Tabs.vue?vue&type=template&id=5bc42bd4 */ "./node_modules/vue3-tabs-component/src/components/Tabs.vue?vue&type=template&id=5bc42bd4");
 /* harmony import */ var _Tabs_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tabs.vue?vue&type=script&lang=js */ "./node_modules/vue3-tabs-component/src/components/Tabs.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Tabs_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Tabs_vue_vue_type_template_id_5bc42bd4__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"node_modules/vue3-tabs-component/src/components/Tabs.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Tabs_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Tabs_vue_vue_type_template_id_5bc42bd4__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"node_modules/vue3-tabs-component/src/components/Tabs.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2180,13 +2180,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CarSingleItem_vue_vue_type_template_id_7c38d699__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CarSingleItem.vue?vue&type=template&id=7c38d699 */ "./resources/js/components/car/CarSingleItem.vue?vue&type=template&id=7c38d699");
 /* harmony import */ var _CarSingleItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CarSingleItem.vue?vue&type=script&lang=js */ "./resources/js/components/car/CarSingleItem.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CarSingleItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CarSingleItem_vue_vue_type_template_id_7c38d699__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/car/CarSingleItem.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CarSingleItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CarSingleItem_vue_vue_type_template_id_7c38d699__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/car/CarSingleItem.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2208,13 +2208,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _SimpleSearch_vue_vue_type_template_id_c355c08c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SimpleSearch.vue?vue&type=template&id=c355c08c */ "./resources/js/components/ui/SimpleSearch.vue?vue&type=template&id=c355c08c");
 /* harmony import */ var _SimpleSearch_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleSearch.vue?vue&type=script&lang=js */ "./resources/js/components/ui/SimpleSearch.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_SimpleSearch_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SimpleSearch_vue_vue_type_template_id_c355c08c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ui/SimpleSearch.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_SimpleSearch_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SimpleSearch_vue_vue_type_template_id_c355c08c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ui/SimpleSearch.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2236,13 +2236,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BaseCard_vue_vue_type_template_id_71a969a2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseCard.vue?vue&type=template&id=71a969a2 */ "./resources/js/components/ui/base/BaseCard.vue?vue&type=template&id=71a969a2");
 /* harmony import */ var _BaseCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BaseCard.vue?vue&type=script&lang=js */ "./resources/js/components/ui/base/BaseCard.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BaseCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BaseCard_vue_vue_type_template_id_71a969a2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ui/base/BaseCard.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BaseCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BaseCard_vue_vue_type_template_id_71a969a2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/ui/base/BaseCard.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2265,7 +2265,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BaseGrid_vue_vue_type_template_id_4ac35f36_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseGrid.vue?vue&type=template&id=4ac35f36&scoped=true */ "./resources/js/components/ui/base/BaseGrid.vue?vue&type=template&id=4ac35f36&scoped=true");
 /* harmony import */ var _BaseGrid_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BaseGrid.vue?vue&type=script&lang=js */ "./resources/js/components/ui/base/BaseGrid.vue?vue&type=script&lang=js");
 /* harmony import */ var _BaseGrid_vue_vue_type_style_index_0_id_4ac35f36_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseGrid.vue?vue&type=style&index=0&id=4ac35f36&scoped=true&lang=css */ "./resources/js/components/ui/base/BaseGrid.vue?vue&type=style&index=0&id=4ac35f36&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -2273,7 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_BaseGrid_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BaseGrid_vue_vue_type_template_id_4ac35f36_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-4ac35f36"],['__file',"resources/js/components/ui/base/BaseGrid.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_BaseGrid_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BaseGrid_vue_vue_type_template_id_4ac35f36_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-4ac35f36"],['__file',"resources/js/components/ui/base/BaseGrid.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2295,13 +2295,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _UsedCars_vue_vue_type_template_id_407066a5__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UsedCars.vue?vue&type=template&id=407066a5 */ "./resources/js/pages/used-cars/UsedCars.vue?vue&type=template&id=407066a5");
 /* harmony import */ var _UsedCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UsedCars.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/UsedCars.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_UsedCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UsedCars_vue_vue_type_template_id_407066a5__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/UsedCars.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_UsedCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UsedCars_vue_vue_type_template_id_407066a5__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/UsedCars.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2323,13 +2323,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BodyTypeCars_vue_vue_type_template_id_3bfaf402__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BodyTypeCars.vue?vue&type=template&id=3bfaf402 */ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=template&id=3bfaf402");
 /* harmony import */ var _BodyTypeCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BodyTypeCars.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/partials/BodyTypeCars.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BodyTypeCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BodyTypeCars_vue_vue_type_template_id_3bfaf402__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/BodyTypeCars.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BodyTypeCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BodyTypeCars_vue_vue_type_template_id_3bfaf402__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/BodyTypeCars.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2351,13 +2351,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BudgetCars_vue_vue_type_template_id_39978970__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BudgetCars.vue?vue&type=template&id=39978970 */ "./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=template&id=39978970");
 /* harmony import */ var _BudgetCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BudgetCars.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/partials/BudgetCars.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BudgetCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BudgetCars_vue_vue_type_template_id_39978970__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/BudgetCars.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BudgetCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BudgetCars_vue_vue_type_template_id_39978970__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/BudgetCars.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2379,13 +2379,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RecommendedCars_vue_vue_type_template_id_3564d286__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RecommendedCars.vue?vue&type=template&id=3564d286 */ "./resources/js/pages/used-cars/partials/RecommendedCars.vue?vue&type=template&id=3564d286");
 /* harmony import */ var _RecommendedCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RecommendedCars.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/partials/RecommendedCars.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_RecommendedCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_RecommendedCars_vue_vue_type_template_id_3564d286__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/RecommendedCars.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_RecommendedCars_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_RecommendedCars_vue_vue_type_template_id_3564d286__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/partials/RecommendedCars.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2408,7 +2408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SeeAll_vue_vue_type_template_id_16396edc_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SeeAll.vue?vue&type=template&id=16396edc&scoped=true */ "./resources/js/pages/used-cars/partials/SeeAll.vue?vue&type=template&id=16396edc&scoped=true");
 /* harmony import */ var _SeeAll_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SeeAll.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/partials/SeeAll.vue?vue&type=script&lang=js");
 /* harmony import */ var _SeeAll_vue_vue_type_style_index_0_id_16396edc_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SeeAll.vue?vue&type=style&index=0&id=16396edc&scoped=true&lang=css */ "./resources/js/pages/used-cars/partials/SeeAll.vue?vue&type=style&index=0&id=16396edc&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -2416,7 +2416,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_SeeAll_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SeeAll_vue_vue_type_template_id_16396edc_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-16396edc"],['__file',"resources/js/pages/used-cars/partials/SeeAll.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_SeeAll_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_SeeAll_vue_vue_type_template_id_16396edc_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-16396edc"],['__file',"resources/js/pages/used-cars/partials/SeeAll.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2439,7 +2439,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UsedCarsVue3Carousel_vue_vue_type_template_id_1a02db6f__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UsedCarsVue3Carousel.vue?vue&type=template&id=1a02db6f */ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=template&id=1a02db6f");
 /* harmony import */ var _UsedCarsVue3Carousel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UsedCarsVue3Carousel.vue?vue&type=script&lang=js */ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=script&lang=js");
 /* harmony import */ var _UsedCarsVue3Carousel_vue_vue_type_style_index_0_id_1a02db6f_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UsedCarsVue3Carousel.vue?vue&type=style&index=0&id=1a02db6f&lang=css */ "./resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue?vue&type=style&index=0&id=1a02db6f&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -2447,7 +2447,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_UsedCarsVue3Carousel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UsedCarsVue3Carousel_vue_vue_type_template_id_1a02db6f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_UsedCarsVue3Carousel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UsedCarsVue3Carousel_vue_vue_type_template_id_1a02db6f__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/used-cars/sliders/UsedCarsVue3Carousel.vue"]])
 /* hot reload */
 if (false) {}
 

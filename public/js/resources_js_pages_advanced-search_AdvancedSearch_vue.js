@@ -615,21 +615,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRoute)();
     var yearRange = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
-
-    if ((0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.year)) {
-      yearRange.value[0] = 1995;
-      yearRange.value[1] = 2022;
-    } else {
-      var splitRouteParams = route.query.year.split('-');
-      yearRange.value[0] = Number(splitRouteParams[0]);
-      yearRange.value[1] = Number(splitRouteParams[1]);
-    }
+    yearRange.value[0] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.yearMin) ? 0 : route.query.yearMin;
+    yearRange.value[1] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.yearMax) ? 20000 : route.query.yearMax;
 
     function handleYearSlider() {
       router.push({
         name: route.name,
         query: _objectSpread(_objectSpread({}, route.query), {}, {
-          year: yearRange.value[0] + '-' + yearRange.value[1]
+          yearMin: yearRange.value[0],
+          yearMax: yearRange.value[1]
         })
       });
     }
@@ -1475,7 +1469,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ni[data-v-7c310d14] {\r\n    margin-right: 7px;\r\n    cursor: pointer;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ni[data-v-7c310d14] {\n    margin-right: 7px;\n    cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1499,7 +1493,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-4ac35f36] {\r\n    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));\r\n    justify-content: center;\r\n    gap: 10px 15px;\n}\n.items[data-v-4ac35f36] {\r\n    text-align: center;\r\n    height: 150px;\r\n    max-width: 230px;\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    justify-content: space-evenly;\r\n    align-items: center;\r\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\r\n    border-radius: 4px;\n}\n.items[data-v-4ac35f36]:hover {\r\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.d-grid[data-v-4ac35f36] {\n    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));\n    justify-content: center;\n    gap: 10px 15px;\n}\n.items[data-v-4ac35f36] {\n    text-align: center;\n    height: 150px;\n    max-width: 230px;\n    display: flex;\n    flex-flow: column nowrap;\n    justify-content: space-evenly;\n    align-items: center;\n    box-shadow: 0 1px 3px rgb(36 39 44 / 15%);\n    border-radius: 4px;\n}\n.items[data-v-4ac35f36]:hover {\n    box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1547,7 +1541,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-604b79e3] {\r\n    height: 38px;\r\n    width: 38px;\r\n    margin-right: 10px;\r\n    border-radius: 12px;\n}\n.item[data-v-604b79e3] {\r\n    width: 100%;\r\n    height: 100%;\r\n    border-radius: 12px;\n}\n.item.active[data-v-604b79e3] {\r\n    outline: 2px solid black;\r\n    outline-offset: 3px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-604b79e3] {\n    height: 38px;\n    width: 38px;\n    margin-right: 10px;\n    border-radius: 12px;\n}\n.item[data-v-604b79e3] {\n    width: 100%;\n    height: 100%;\n    border-radius: 12px;\n}\n.item.active[data-v-604b79e3] {\n    outline: 2px solid black;\n    outline-offset: 3px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1595,7 +1589,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-3b9a55f8] {\r\n    font-weight: bold;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-3b9a55f8] {\n    font-weight: bold;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -19037,13 +19031,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CarSingleItem_vue_vue_type_template_id_7c38d699__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CarSingleItem.vue?vue&type=template&id=7c38d699 */ "./resources/js/components/car/CarSingleItem.vue?vue&type=template&id=7c38d699");
 /* harmony import */ var _CarSingleItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CarSingleItem.vue?vue&type=script&lang=js */ "./resources/js/components/car/CarSingleItem.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CarSingleItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CarSingleItem_vue_vue_type_template_id_7c38d699__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/car/CarSingleItem.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CarSingleItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CarSingleItem_vue_vue_type_template_id_7c38d699__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/car/CarSingleItem.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19066,7 +19060,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CustomCheckbox_vue_vue_type_template_id_7c310d14_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomCheckbox.vue?vue&type=template&id=7c310d14&scoped=true */ "./resources/js/components/ui/CustomCheckbox.vue?vue&type=template&id=7c310d14&scoped=true");
 /* harmony import */ var _CustomCheckbox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomCheckbox.vue?vue&type=script&lang=js */ "./resources/js/components/ui/CustomCheckbox.vue?vue&type=script&lang=js");
 /* harmony import */ var _CustomCheckbox_vue_vue_type_style_index_0_id_7c310d14_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CustomCheckbox.vue?vue&type=style&index=0&id=7c310d14&scoped=true&lang=css */ "./resources/js/components/ui/CustomCheckbox.vue?vue&type=style&index=0&id=7c310d14&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -19074,7 +19068,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_CustomCheckbox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CustomCheckbox_vue_vue_type_template_id_7c310d14_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-7c310d14"],['__file',"resources/js/components/ui/CustomCheckbox.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_CustomCheckbox_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CustomCheckbox_vue_vue_type_template_id_7c310d14_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-7c310d14"],['__file',"resources/js/components/ui/CustomCheckbox.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19097,7 +19091,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BaseGrid_vue_vue_type_template_id_4ac35f36_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseGrid.vue?vue&type=template&id=4ac35f36&scoped=true */ "./resources/js/components/ui/base/BaseGrid.vue?vue&type=template&id=4ac35f36&scoped=true");
 /* harmony import */ var _BaseGrid_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BaseGrid.vue?vue&type=script&lang=js */ "./resources/js/components/ui/base/BaseGrid.vue?vue&type=script&lang=js");
 /* harmony import */ var _BaseGrid_vue_vue_type_style_index_0_id_4ac35f36_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseGrid.vue?vue&type=style&index=0&id=4ac35f36&scoped=true&lang=css */ "./resources/js/components/ui/base/BaseGrid.vue?vue&type=style&index=0&id=4ac35f36&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -19105,7 +19099,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_BaseGrid_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BaseGrid_vue_vue_type_template_id_4ac35f36_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-4ac35f36"],['__file',"resources/js/components/ui/base/BaseGrid.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_BaseGrid_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BaseGrid_vue_vue_type_template_id_4ac35f36_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-4ac35f36"],['__file',"resources/js/components/ui/base/BaseGrid.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19128,7 +19122,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdvancedSearch_vue_vue_type_template_id_3a9005e2_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdvancedSearch.vue?vue&type=template&id=3a9005e2&scoped=true */ "./resources/js/pages/advanced-search/AdvancedSearch.vue?vue&type=template&id=3a9005e2&scoped=true");
 /* harmony import */ var _AdvancedSearch_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdvancedSearch.vue?vue&type=script&lang=js */ "./resources/js/pages/advanced-search/AdvancedSearch.vue?vue&type=script&lang=js");
 /* harmony import */ var _AdvancedSearch_vue_vue_type_style_index_0_id_3a9005e2_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdvancedSearch.vue?vue&type=style&index=0&id=3a9005e2&scoped=true&lang=css */ "./resources/js/pages/advanced-search/AdvancedSearch.vue?vue&type=style&index=0&id=3a9005e2&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -19136,7 +19130,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_AdvancedSearch_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_AdvancedSearch_vue_vue_type_template_id_3a9005e2_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-3a9005e2"],['__file',"resources/js/pages/advanced-search/AdvancedSearch.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_AdvancedSearch_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_AdvancedSearch_vue_vue_type_template_id_3a9005e2_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-3a9005e2"],['__file',"resources/js/pages/advanced-search/AdvancedSearch.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19158,13 +19152,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BudgetFilter_vue_vue_type_template_id_61cd7125__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BudgetFilter.vue?vue&type=template&id=61cd7125 */ "./resources/js/pages/advanced-search/partials/BudgetFilter.vue?vue&type=template&id=61cd7125");
 /* harmony import */ var _BudgetFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BudgetFilter.vue?vue&type=script&lang=js */ "./resources/js/pages/advanced-search/partials/BudgetFilter.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BudgetFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BudgetFilter_vue_vue_type_template_id_61cd7125__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/advanced-search/partials/BudgetFilter.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BudgetFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BudgetFilter_vue_vue_type_template_id_61cd7125__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/advanced-search/partials/BudgetFilter.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19187,7 +19181,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ColorFilter_vue_vue_type_template_id_604b79e3_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ColorFilter.vue?vue&type=template&id=604b79e3&scoped=true */ "./resources/js/pages/advanced-search/partials/ColorFilter.vue?vue&type=template&id=604b79e3&scoped=true");
 /* harmony import */ var _ColorFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ColorFilter.vue?vue&type=script&lang=js */ "./resources/js/pages/advanced-search/partials/ColorFilter.vue?vue&type=script&lang=js");
 /* harmony import */ var _ColorFilter_vue_vue_type_style_index_0_id_604b79e3_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColorFilter.vue?vue&type=style&index=0&id=604b79e3&scoped=true&lang=css */ "./resources/js/pages/advanced-search/partials/ColorFilter.vue?vue&type=style&index=0&id=604b79e3&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -19195,7 +19189,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_ColorFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ColorFilter_vue_vue_type_template_id_604b79e3_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-604b79e3"],['__file',"resources/js/pages/advanced-search/partials/ColorFilter.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_ColorFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ColorFilter_vue_vue_type_template_id_604b79e3_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-604b79e3"],['__file',"resources/js/pages/advanced-search/partials/ColorFilter.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19218,7 +19212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FuelFilter_vue_vue_type_template_id_2317f354_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FuelFilter.vue?vue&type=template&id=2317f354&scoped=true */ "./resources/js/pages/advanced-search/partials/FuelFilter.vue?vue&type=template&id=2317f354&scoped=true");
 /* harmony import */ var _FuelFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FuelFilter.vue?vue&type=script&lang=js */ "./resources/js/pages/advanced-search/partials/FuelFilter.vue?vue&type=script&lang=js");
 /* harmony import */ var _FuelFilter_vue_vue_type_style_index_0_id_2317f354_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FuelFilter.vue?vue&type=style&index=0&id=2317f354&scoped=true&lang=css */ "./resources/js/pages/advanced-search/partials/FuelFilter.vue?vue&type=style&index=0&id=2317f354&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -19226,7 +19220,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_FuelFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FuelFilter_vue_vue_type_template_id_2317f354_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-2317f354"],['__file',"resources/js/pages/advanced-search/partials/FuelFilter.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_FuelFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_FuelFilter_vue_vue_type_template_id_2317f354_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-2317f354"],['__file',"resources/js/pages/advanced-search/partials/FuelFilter.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19248,13 +19242,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _KmFilter_vue_vue_type_template_id_1973f1fc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./KmFilter.vue?vue&type=template&id=1973f1fc */ "./resources/js/pages/advanced-search/partials/KmFilter.vue?vue&type=template&id=1973f1fc");
 /* harmony import */ var _KmFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./KmFilter.vue?vue&type=script&lang=js */ "./resources/js/pages/advanced-search/partials/KmFilter.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_KmFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_KmFilter_vue_vue_type_template_id_1973f1fc__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/advanced-search/partials/KmFilter.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_KmFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_KmFilter_vue_vue_type_template_id_1973f1fc__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/advanced-search/partials/KmFilter.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19277,7 +19271,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TransmissionFilter_vue_vue_type_template_id_3b9a55f8_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransmissionFilter.vue?vue&type=template&id=3b9a55f8&scoped=true */ "./resources/js/pages/advanced-search/partials/TransmissionFilter.vue?vue&type=template&id=3b9a55f8&scoped=true");
 /* harmony import */ var _TransmissionFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransmissionFilter.vue?vue&type=script&lang=js */ "./resources/js/pages/advanced-search/partials/TransmissionFilter.vue?vue&type=script&lang=js");
 /* harmony import */ var _TransmissionFilter_vue_vue_type_style_index_0_id_3b9a55f8_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TransmissionFilter.vue?vue&type=style&index=0&id=3b9a55f8&scoped=true&lang=css */ "./resources/js/pages/advanced-search/partials/TransmissionFilter.vue?vue&type=style&index=0&id=3b9a55f8&scoped=true&lang=css");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -19285,7 +19279,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_TransmissionFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_TransmissionFilter_vue_vue_type_template_id_3b9a55f8_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-3b9a55f8"],['__file',"resources/js/pages/advanced-search/partials/TransmissionFilter.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_TransmissionFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_TransmissionFilter_vue_vue_type_template_id_3b9a55f8_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-3b9a55f8"],['__file',"resources/js/pages/advanced-search/partials/TransmissionFilter.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -19307,13 +19301,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _YearFilter_vue_vue_type_template_id_284f301d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./YearFilter.vue?vue&type=template&id=284f301d */ "./resources/js/pages/advanced-search/partials/YearFilter.vue?vue&type=template&id=284f301d");
 /* harmony import */ var _YearFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./YearFilter.vue?vue&type=script&lang=js */ "./resources/js/pages/advanced-search/partials/YearFilter.vue?vue&type=script&lang=js");
-/* harmony import */ var C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_YearFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_YearFilter_vue_vue_type_template_id_284f301d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/advanced-search/partials/YearFilter.vue"]])
+const __exports__ = /*#__PURE__*/(0,_var_www_CarDealo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_YearFilter_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_YearFilter_vue_vue_type_template_id_284f301d__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/advanced-search/partials/YearFilter.vue"]])
 /* hot reload */
 if (false) {}
 
