@@ -19,13 +19,15 @@
             <div :class="{'col-lg-3 col-sm-1': listingGridView === 2 }">
                 <div class="base-card" v-for="(item, index) in listing" :key="item.id">
                     <div :class="['listing d-flex position-relative', {'flex-column': listingGridView === 2}]">
-                        <div :class="['img-wrapper', {'mb-4': listingGridView === 2}]">
+                        <div :class="['img-wrapper', {'mb-4': listingGridView === 2}]" >
                             <img
+                                v-if="item.images.length > 0"
                                 width="350"
                                 class="img-fluid rounded"
-                                :src="asset('storage/202202/guOZDomPiqt2lKcFYUDjgzfOKQGeTxUXpLaGNGVb.jpg')"
+                                :src="asset('storage/' + item.images[0].image)"
                                 :alt="item['title']"
                             />
+                            <img v-else :src="asset('storage/noimage.jpg')" class="img-fluid" alt="Default image">
                         </div>
                         <div class="details">
                             <h5 class="fw-bold">

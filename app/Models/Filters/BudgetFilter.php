@@ -15,8 +15,11 @@ class BudgetFilter extends AbstractBaseFilter
             $offer->where('price', '>=', $this->request->input('budgetMin'));
         });
 
-        $offer->when($this->request->input('budgetMax'), function ($offer) {
-            $offer->where('price', '<=', $this->request->input('budgetMax'));
-        });
+        $offer->when(
+            ($this->request->input('budgetMax') && $this->request->input('budgetMax') < 20000),
+            function ($offer) {
+                $offer->where('price', '<=', $this->request->input('budgetMax'));
+            }
+        );
     }
 }

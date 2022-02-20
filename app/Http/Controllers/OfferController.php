@@ -154,7 +154,7 @@ class OfferController extends Controller
     public function userListing(): \Illuminate\Http\JsonResponse
     {
         try {
-            $offers = Offer::whereUserId(Auth::id())->get();
+            $offers = Offer::with('images')->where('user_id', Auth::id())->get();
             return response()->json(['success' => true, 'offers' => $offers]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

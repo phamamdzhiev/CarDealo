@@ -3,7 +3,7 @@
         <h6 class="fw-bold">Бюджет</h6>
         <div class="fw-bold text-base-color mb-3 text-center">
             <span>{{ budgetRange[0] }} лв. - </span>
-            <span>{{ budgetRange[1] }} лв.</span>
+            <span>{{ budgetRange[1] }}{{ sign }} лв.</span>
         </div>
         <Slider v-model="budgetRange"
                 :max="20000"
@@ -37,8 +37,15 @@ export default {
 
         budgetRange.value[0] = isUndefined(route.query.budgetMin) ? 0 : route.query.budgetMin;
         budgetRange.value[1] = isUndefined(route.query.budgetMax) ? 20000 : route.query.budgetMax;
+        let sign = ref(isUndefined(route.query.budgetMax) ? '+' : '');
 
         async function handleBudgetSlider() {
+            if (budgetRange.value[1] < 20000) {
+                sign.value = null;
+            } else {
+                sign.value = '+';
+            }
+
             await router.push(
                 {
                     name: route.name,
@@ -55,6 +62,7 @@ export default {
 
         return {
             budgetRange,
+            sign,
             handleBudgetSlider
         }
     }
