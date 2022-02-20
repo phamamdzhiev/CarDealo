@@ -1,5 +1,5 @@
 <template>
-    <div class="position-absolute top-50 translate-middle-y">
+    <div class="position-absolute password-eye translate-middle-y">
         <i :class="['bi fs-4', { 'bi-eye': fieldType === 'password', 'bi-eye-slash': fieldType === 'text'}]"></i>
     </div>
 </template>
@@ -18,7 +18,8 @@ export default {
 </script>
 
 <style scoped>
-div {
+.password-eye {
     right: 1rem;
+    top: calc((3.5rem + 2px) / 2);
 }
 </style>

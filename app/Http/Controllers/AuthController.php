@@ -95,15 +95,17 @@ class AuthController extends Controller
 
     public function register(UserCreation $request): \Illuminate\Http\JsonResponse
     {
+        dump($request->all());  die;
         $user = User::whereEmail($request->input('email'))->first();
 
         if (empty($user)) {
             $user = User::create([
-                'name' => $request->names,
-                'email' => $request->email,
-                'mobile' => $request->mobile,
-                'password' => Hash::make($request->password),
-                'ip' => $request->ip()
+                'name' => $request->input('names'),
+                'email' => $request->input('email'),
+                'mobile' => $request->input('mobile'),
+                'password' => Hash::make($request->input('password')),
+                'is_business' => $request->input('is_business'),
+                'ip' => $request->ip(),
             ]);
         }
 
