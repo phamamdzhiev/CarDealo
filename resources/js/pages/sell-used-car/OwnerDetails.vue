@@ -21,7 +21,8 @@
                               v-model.trim="offerDesc"
                     ></textarea>
                     <label for="floatingTextarea">Допълнителна информация</label>
-                    <!--                    <small style="font-size: 13px; display:block" v-if="offerDesc"> {{ offerDesc.length }} / 5000</small>-->
+                    <small style="font-size: 13px; display:block" v-if="offerDesc.length"> {{ offerDesc.length }} /
+                        5000</small>
                     <FromInputValidationMessage v-if="v$.offerDesc.$error"
                                                 :messages="v$.offerDesc.$errors"/>
                 </div>
@@ -31,9 +32,8 @@
                             @change="fetchCity(offerRegion)"
                     >
                         <optgroup label="Област">
-                            <option :value="region.id" v-for="region in regions" :key="region.id">{{
-                                    region.region
-                                }}
+                            <option :value="region.id" v-for="region in regions" :key="region.id">
+                                {{ region.region }}
                             </option>
                         </optgroup>
                     </select>
@@ -45,7 +45,7 @@
                     <select class="form__input form-select" id="floatingSelectCity"
                             v-model.trim="offerCity"
                     >
-                        <optgroup  label="Областен град" v-if="asCity.length > 0">
+                        <optgroup label="Областен град" v-if="asCity.length > 0">
                             <option class="text-base-color fw-bold"
                                     :value="c.id" :key="c.id" v-for="c in asCity">ГР.
                                 {{ c.city }}
@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-floating form-group">
                     <input type="number" class="form-control form__input" id="floatingInputPrice"
-                           placeholder="Цена (BGN)" :disabled="GET_CAR_HAS_PRICE !== true"
+                           placeholder="Цена (BGN)" :disabled="isFieldDisabled"
                            v-model.trim="offerPrice"
                     >
                     <label for="floatingInputPrice">Цена (BGN)</label>
@@ -211,6 +211,13 @@ export default {
     },
 
     computed: {
+        isFieldDisabled() {
+            if (this.GET_CAR_HAS_PRICE) {
+                return '';
+            } else {
+                return 'disabled';
+            }
+        },
         getUser() {
             return this.$store.getters['auth/GET_AUTH_USER'];
         },

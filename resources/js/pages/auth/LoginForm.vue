@@ -83,7 +83,7 @@ export default {
             mobile: null,
             password: null
         });
-        let $externalResults = reactive({});
+
         let isRedirected = ref(false);
 
 

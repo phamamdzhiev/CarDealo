@@ -2252,6 +2252,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({
+    isFieldDisabled: function isFieldDisabled() {
+      if (this.GET_CAR_HAS_PRICE) {
+        return '';
+      } else {
+        return 'disabled';
+      }
+    },
     getUser: function getUser() {
       return this.$store.getters['auth/GET_AUTH_USER'];
     },
@@ -3538,14 +3545,21 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_11 = {
   key: 0,
-  "class": "form-floating form-group"
+  style: {
+    "font-size": "13px",
+    "display": "block"
+  }
 };
 var _hoisted_12 = {
+  key: 0,
+  "class": "form-floating form-group"
+};
+var _hoisted_13 = {
   label: "Област"
 };
-var _hoisted_13 = ["value"];
+var _hoisted_14 = ["value"];
 
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_15 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingSelectRegion"
   }, "Моля изберете област", -1
@@ -3553,18 +3567,18 @@ var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_15 = {
+var _hoisted_16 = {
   key: 1,
   "class": "form-floating form-group"
 };
-var _hoisted_16 = {
+var _hoisted_17 = {
   key: 0,
   label: "Областен град"
 };
-var _hoisted_17 = ["value"];
 var _hoisted_18 = ["value"];
+var _hoisted_19 = ["value"];
 
-var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingSelectCity"
   }, "Моля изберете населено място", -1
@@ -3572,12 +3586,12 @@ var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "form-floating form-group"
 };
-var _hoisted_21 = ["disabled"];
+var _hoisted_22 = ["disabled"];
 
-var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "floatingInputPrice"
   }, "Цена (BGN)", -1
@@ -3585,13 +3599,13 @@ var _hoisted_22 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_23 = {
+var _hoisted_24 = {
   "class": "mt-1 ms-1 negotiable-price"
 };
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" По договаряне? ");
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" По договаряне? ");
 
-var _hoisted_25 = {
+var _hoisted_26 = {
   key: 0
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -3638,12 +3652,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.offerDesc, void 0, {
         trim: true
-      }]]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <small style=\"font-size: 13px; display:block\" v-if=\"offerDesc\"> {{ offerDesc.length }} / 5000</small>"), $data.v$.offerDesc.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
-        key: 0,
+      }]]), _hoisted_10, $options.offerDesc.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.offerDesc.length) + " / 5000", 1
+      /* TEXT */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.v$.offerDesc.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
+        key: 1,
         messages: $data.v$.offerDesc.$errors
       }, null, 8
       /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $data.regions ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $data.regions ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         "class": "form__input form-select",
         id: "floatingSelectRegion",
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
@@ -3652,38 +3668,38 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onChange: _cache[4] || (_cache[4] = function ($event) {
           return $options.fetchCity($options.offerRegion);
         })
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("optgroup", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.regions, function (region) {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("optgroup", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.regions, function (region) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
           value: region.id,
           key: region.id
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(region.region), 9
         /* TEXT, PROPS */
-        , _hoisted_13);
+        , _hoisted_14);
       }), 128
       /* KEYED_FRAGMENT */
       ))])], 544
       /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $options.offerRegion, void 0, {
         trim: true
-      }]]), _hoisted_14, $data.v$.offerRegion.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
+      }]]), _hoisted_15, $data.v$.offerRegion.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
         messages: $data.v$.offerRegion.$errors
       }, null, 8
       /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.cities ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.cities ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         "class": "form__input form-select",
         id: "floatingSelectCity",
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $options.offerCity = $event;
         })
-      }, [$data.asCity.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("optgroup", _hoisted_16, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.asCity, function (c) {
+      }, [$data.asCity.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("optgroup", _hoisted_17, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.asCity, function (c) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
           "class": "text-base-color fw-bold",
           value: c.id,
           key: c.id
         }, "ГР. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.city), 9
         /* TEXT, PROPS */
-        , _hoisted_17);
+        , _hoisted_18);
       }), 128
       /* KEYED_FRAGMENT */
       ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("optgroup", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.cities, function (city) {
@@ -3692,32 +3708,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: city.id
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(city.city), 9
         /* TEXT, PROPS */
-        , _hoisted_18);
+        , _hoisted_19);
       }), 128
       /* KEYED_FRAGMENT */
       ))])], 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $options.offerCity, void 0, {
         trim: true
-      }]]), _hoisted_19, $data.v$.offerCity.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
+      }]]), _hoisted_20, $data.v$.offerCity.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
         messages: $data.v$.offerCity.$errors
       }, null, 8
       /* PROPS */
-      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      , ["messages"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         "class": "form-control form__input",
         id: "floatingInputPrice",
         placeholder: "Цена (BGN)",
-        disabled: _ctx.GET_CAR_HAS_PRICE !== true,
+        disabled: $options.isFieldDisabled,
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $options.offerPrice = $event;
         })
       }, null, 8
       /* PROPS */
-      , _hoisted_21), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.offerPrice, void 0, {
+      , _hoisted_22), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.offerPrice, void 0, {
         trim: true
-      }]]), _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+      }]]), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
         "for": "negotiable-price",
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
           checked: !_ctx.GET_CAR_HAS_PRICE
@@ -3730,7 +3746,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, false]]), _hoisted_24], 2
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, false]]), _hoisted_25], 2
       /* CLASS */
       )]), $data.v$.offerPrice.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_FromInputValidationMessage, {
         key: 0,
@@ -3742,7 +3758,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $options.showLastStep && $options.showLastStep.apply($options, arguments);
         }),
         "class": "base-button"
-      }, [!$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_25, "Качване на снимки")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
+      }, [!$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_26, "Качване на снимки")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_loading_dots, {
         key: 1
       }))])];
     }),
