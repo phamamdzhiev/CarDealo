@@ -35,20 +35,17 @@ export default {
         const route = useRoute();
         let kmRange = ref([]);
 
-        if (isUndefined(route.query.km)) {
-            kmRange.value[0] = 0;
-            kmRange.value[1] = 200000;
-        } else {
-            const splitRouteParams = route.query.km.split('-');
-
-            kmRange.value[0] = Number(splitRouteParams[0]);
-            kmRange.value[1] = Number(splitRouteParams[1]);
-        }
+        kmRange.value[0] = isUndefined(route.query.kmMin) ? 0 : route.query.kmMin;
+        kmRange.value[1] = isUndefined(route.query.kmMax) ? 200000 : route.query.kmMax;
 
         function handleKmSlider() {
             router.push({
                 name: route.name,
-                query: {...route.query, km: kmRange.value[0] + '-' + kmRange.value[1]}
+                query: {
+                    ...route.query,
+                    kmMin: kmRange.value[0],
+                    kmMax: kmRange.value[1]
+                }
             });
         }
 

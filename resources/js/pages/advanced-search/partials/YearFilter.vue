@@ -35,8 +35,8 @@ export default {
         const route = useRoute();
         let yearRange = ref([]);
 
-        yearRange.value[0] = isUndefined(route.query.yearMin) ? 0 : route.query.yearMin;
-        yearRange.value[1] = isUndefined(route.query.yearMax) ? 20000 : route.query.yearMax;
+        yearRange.value[0] = isUndefined(route.query.yearMin) ? 1995 : route.query.yearMin;
+        yearRange.value[1] = isUndefined(route.query.yearMax) ? 2022 : route.query.yearMax;
 
         function handleYearSlider() {
             router.push({

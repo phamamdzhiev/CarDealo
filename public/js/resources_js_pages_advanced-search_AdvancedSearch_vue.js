@@ -491,21 +491,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRoute)();
     var kmRange = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
-
-    if ((0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.km)) {
-      kmRange.value[0] = 0;
-      kmRange.value[1] = 200000;
-    } else {
-      var splitRouteParams = route.query.km.split('-');
-      kmRange.value[0] = Number(splitRouteParams[0]);
-      kmRange.value[1] = Number(splitRouteParams[1]);
-    }
+    kmRange.value[0] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.kmMin) ? 0 : route.query.kmMin;
+    kmRange.value[1] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.kmMax) ? 200000 : route.query.kmMax;
 
     function handleKmSlider() {
       router.push({
         name: route.name,
         query: _objectSpread(_objectSpread({}, route.query), {}, {
-          km: kmRange.value[0] + '-' + kmRange.value[1]
+          kmMin: kmRange.value[0],
+          kmMax: kmRange.value[1]
         })
       });
     }
@@ -615,8 +609,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRoute)();
     var yearRange = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
-    yearRange.value[0] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.yearMin) ? 0 : route.query.yearMin;
-    yearRange.value[1] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.yearMax) ? 20000 : route.query.yearMax;
+    yearRange.value[0] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.yearMin) ? 1995 : route.query.yearMin;
+    yearRange.value[1] = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.isUndefined)(route.query.yearMax) ? 2022 : route.query.yearMax;
 
     function handleYearSlider() {
       router.push({

@@ -4,6 +4,7 @@ namespace App\Http\DataProviders;
 
 use App\Models\Filters\BudgetFilter;
 use App\Models\Filters\FuelFilter;
+use App\Models\Filters\KmFilter;
 use App\Models\Filters\YearFilter;
 use App\Models\Offer;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,7 +24,8 @@ class AdvanceSearchDataProvider
     public function __construct(
         BudgetFilter $budgetFilter,
         FuelFilter $fuelFilter,
-        YearFilter $yearFilter
+        YearFilter $yearFilter,
+        KmFilter $kmFilter
     )
     {
         $this->offer =  Offer::with('images');
@@ -33,6 +35,8 @@ class AdvanceSearchDataProvider
         $fuelFilter
             ->applyTo($this->offer);
         $yearFilter
+            ->applyTo($this->offer);
+        $kmFilter
             ->applyTo($this->offer);
     }
 
