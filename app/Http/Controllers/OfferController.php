@@ -58,7 +58,7 @@ class OfferController extends Controller
             'year' => $offerData['car_year'],
             'fuel' => $offerData['car_fuel'],
             'transmission' => $offerData['car_transmission'],
-            'color' => $offerData['car_color'],
+            'color' => 1,
             'coupe_type' => 1,
             'year_acquired' => 0,
             'user_id' => \Auth::id()

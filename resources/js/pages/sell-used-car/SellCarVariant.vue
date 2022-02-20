@@ -26,15 +26,15 @@
             <div class="question-section mb-4">
                 <h5 class="fw-bold">Трансмисия?</h5>
                 <ul id="transmission">
-                    <li :class="{ active: getAllData['car_transmission'] === 'Ръчна'}"
-                        @click="setCarTransmission('Ръчна')">
+                    <li :class="{ active: getAllData['car_transmission'] === 1}"
+                        @click="setCarTransmission(1)">
                         Ръчна
                     </li>
-                    <li :class="{ active: getAllData['car_transmission'] === 'Автоматична'}"
-                        @click="setCarTransmission('Автоматична')">Автоматична
+                    <li :class="{ active: getAllData['car_transmission'] === 2}"
+                        @click="setCarTransmission(2)">Автоматична
                     </li>
-                    <li :class="{ active: getAllData['car_transmission'] === 'Полуавтоматична'}"
-                        @click="setCarTransmission('Полуавтоматична')">
+                    <li :class="{ active: getAllData['car_transmission'] === 3}"
+                        @click="setCarTransmission(3)">
                         Полуавтоматична
                     </li>
                 </ul>
