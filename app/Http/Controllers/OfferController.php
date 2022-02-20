@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferCreationRequest;
+use App\Models\Enums\Fuel;
+use App\Models\Enums\Transmission;
 use App\Models\Offer;
 use App\Models\User;
 use Doctrine\DBAL\Query\QueryException;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -54,8 +57,8 @@ class OfferController extends Controller
             'cm3' => $offerData['car_cm3'],
             'year' => $offerData['car_year'],
             'fuel' => $offerData['car_fuel'],
-            'transmission' => 1,
-            'color' => 1,
+            'transmission' => $offerData['car_transmission'],
+            'color' => $offerData['car_color'],
             'coupe_type' => 1,
             'year_acquired' => 0,
             'user_id' => \Auth::id()
@@ -77,10 +80,17 @@ class OfferController extends Controller
         return $offer->with('images')->take(10)->get();
     }
 
-    public function showSingle($id): \Illuminate\Http\JsonResponse
+    public function showSingle($id): JsonResponse
     {
         try {
-            $offer = Offer::findOrFail((int)$id);
+            $offer = Offer::with('images')
+                ->with('user')
+                ->findOrFail((int)$id);
+
+            $offer = $offer->toArray();
+            $offer = Fuel::parse($offer, 'fuel');
+            $offer = Transmission::parse($offer, 'transmission');
+
             $response = [
                 'success' => true,
                 'data' => $offer
@@ -151,7 +161,7 @@ class OfferController extends Controller
     /**
      * @throws Exception
      */
-    public function userListing(): \Illuminate\Http\JsonResponse
+    public function userListing(): JsonResponse
     {
         try {
             $offers = Offer::with('images')->where('user_id', Auth::id())->get();

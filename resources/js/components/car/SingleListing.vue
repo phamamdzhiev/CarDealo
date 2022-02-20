@@ -2,18 +2,23 @@
     <div v-if="loading">
         Зареджане...
     </div>
-    <div v-else-if="singleOffer.length > 0 && !loading">
-        <div style="max-width: 750px; height: 1000px; margin: auto">
+    <div v-else-if="singleOffer && !loading">
+        <div style="max-width: 750px; margin: auto">
             <div class="panel">
                 <div class="offer-details p-4">
                     <div class="heading">
                         <h4 class="fw-bold">
-                            <span>2016 Maruti Baleno 1.2 Delta</span>
+                            <span>{{singleOffer.title}}</span>
                         </h4>
-                        <h5 class="fw-bold">7 800 лв.</h5>
-                        <p>We are making a call to the server’s login route and returning the necessary data. We store
-                            the token on localStorage, then pass the token and user information to auth_success to
-                            update the store’s attributes. We also set the header for axios at this point as well.</p>
+                        <div v-for="item in singleOffer.images">
+                            <img
+                                 class="img-fluid"
+                                 :src="asset('storage/' + item.image)"
+                                 alt=""
+                            />
+                        </div>
+                        <h5 class="fw-bold">{{singleOffer.price}} лв.</h5>
+                        <p>{{singleOffer.description}}</p>
                         <button class="fw-bold base-button">Виж детайли на собственика</button>
                     </div>
                 </div>
@@ -34,12 +39,12 @@
                         </h5>
                         <div>
                             <ul>
-                                <li>2016</li>
-                                <li>203 400 км.</li>
-                                <li>Бензин</li>
-                                <li>Частно лице</li>
-                                <li>Ръчка</li>
-                                <li>105 к.с</li>
+                                <li>{{singleOffer.hp}} к.с</li>
+                                <li>{{singleOffer.transmission.name ?? ''}}</li>
+                                <li>{{singleOffer.year}}</li>
+                                <li>{{singleOffer.km}} км.</li>
+                                <li>{{singleOffer.fuel.name ?? ''}}</li>
+                                <li>{{singleOffer.user.is_business ? 'Търговец' : 'Частно лице'}}</li>
                             </ul>
                         </div>
                     </div>
@@ -73,16 +78,17 @@ import axios from "axios";
 import {onMounted, ref, inject} from "vue";
 import BaseCard from "../ui/base/BaseCard";
 import router from "../../router";
+import assetMixin from '../../mixins/asset';
 
 export default {
     name: "SingleListing",
     components: {BaseCard},
-
+    mixins: [assetMixin],
     props: {
         id: String
     },
     setup(props) {
-        let singleOffer = ref([]);
+        let singleOffer = ref(null);
         let loading = ref(false);
         const $toast = inject('$toast');
 
@@ -92,7 +98,7 @@ export default {
                 const res = await axios.get(`/fetch/offer/${props.id}`);
                 loading.value = false;
                 if (res.data.success) {
-                    singleOffer.value.push(res.data.data);``
+                    singleOffer.value = res.data.data;
                 }
             } catch (e) {
                 loading.value = false;
@@ -102,7 +108,7 @@ export default {
                         type: 'error',
                         dismissible: true,
                         duration: 5000,
-                        onDismiss: () => { router.replace({name: 'Home'}) }
+                        //onDismiss: () => { router.replace({name: 'Home'}) }
                     });
                 }
             }

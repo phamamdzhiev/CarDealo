@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Filters\FilterInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Offer
@@ -67,30 +69,45 @@ class Offer  extends Model
     protected $table = 'offers';
 
     protected $guarded = [];
-    public function getCarBrands(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+
+    /**
+     * @return BelongsTo
+     */
+    public function getCarBrands(): BelongsTo
     {
         return $this->belongsTo(CarModel::class, 'car_brands_id', 'id');
     }
 
-    public function asd()
+    /**
+     * @return HasMany
+     */
+    public function images(): HasMany
     {
-        return $this->belongsToMany(CarExtra::class)->using(OfferExtras::class);
-    }
-
-    public function images() {
         return $this->hasMany(Image::class);
     }
 
-    public function user() {
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function scopeApproved($query)
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeApproved($query): mixed
     {
         return $query->where('is_approved', '=', 1);
     }
 
-    public function scopeNotApproved($query)
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeNotApproved($query): mixed
     {
         return $query->where('is_approved', '=', 0);
     }
