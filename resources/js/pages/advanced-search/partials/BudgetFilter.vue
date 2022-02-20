@@ -20,16 +20,17 @@
 <script>
 import Slider from '@vueform/slider';
 import '@vueform/slider/themes/default.css';
-import {onMounted, reactive, ref} from "vue";
+import {ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import { isUndefined } from "lodash";
+import {isUndefined} from "lodash";
 
 export default {
     name: "BudgetFilter",
     components: {
         Slider
     },
-    setup() {
+    emits: ['updateQueryParams'],
+    setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
         let budgetRange = ref([]);
@@ -37,8 +38,8 @@ export default {
         budgetRange.value[0] = isUndefined(route.query.budgetMin) ? 0 : route.query.budgetMin;
         budgetRange.value[1] = isUndefined(route.query.budgetMax) ? 20000 : route.query.budgetMax;
 
-        function handleBudgetSlider() {
-            router.push(
+        async function handleBudgetSlider() {
+            await router.push(
                 {
                     name: route.name,
                     query: {
@@ -48,7 +49,10 @@ export default {
                     }
                 }
             );
+
+            emit('updateQueryParams');
         }
+
         return {
             budgetRange,
             handleBudgetSlider

@@ -15,7 +15,7 @@
                 {{ offer.title }}
             </router-link>
             <div class="price">
-                {{ offer.price }} <span>лв.</span>
+                <span>{{ formatPrice }}</span>
             </div>
             <div class="dotlist text-normal-gray">
                 <span>{{ offer.km }} км</span>
@@ -33,6 +33,11 @@ import {ref} from "vue";
 export default {
     name: "CarSingleItem",
     mixins: [assetMixin],
-    props: ['offer']
+    props: ['offer'],
+    computed: {
+        formatPrice() {
+            return this.offer.price === 0 ? 'По договаряне' : this.offer.price + ' лв.'
+        }
+    }
 }
 </script>

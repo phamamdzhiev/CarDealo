@@ -39,7 +39,6 @@ class OfferController extends Controller
         Validator::make($offerData, [
             'new_or_used' => 'required',
             'car_brand' => 'required',
-            'price' => 'integer|max:1'
             //add rest of validations...
         ]);
 
@@ -49,7 +48,7 @@ class OfferController extends Controller
             'car_models_id' => 2038,
             'title' => $offerData['car_offer_title'],
             'description' => $offerData['car_offer_description'],
-            'price' => $offerData['car_price'],
+            'price' => $offerData['car_price'] ?? 0,
             'km' => $offerData['car_km'],
             'hp' => $offerData['car_hp'],
             'cm3' => $offerData['car_cm3'],
