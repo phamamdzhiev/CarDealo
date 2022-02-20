@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -44,6 +45,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Offer[] $offers
  * @property-read int|null $offers_count
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIp($value)
+ * @property-read \App\Models\Merchant|null $merchant
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Message[] $messages
+ * @property-read int|null $messages_count
  */
 class User extends Authenticatable
 {
@@ -88,6 +92,14 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function merchant(): HasOne
+    {
+        return $this->hasOne(Merchant::class, 'user_id');
     }
 }
 

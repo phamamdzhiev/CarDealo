@@ -28,7 +28,8 @@ class UserCreation extends FormRequest
         return [
             'names' => 'required|string',
             'mobile' => 'required|unique:users,mobile',
-            'password' => 'required|min:6|max:25'
+            'password' => 'required|min:6|max:25',
+            'companyEik' => 'unique:merchants,eik'
         ];
     }
 
@@ -40,7 +41,8 @@ class UserCreation extends FormRequest
             'mobile.unique' => 'Телефонът е вече регистриран',
             'password.required' => 'Паролата е задължителна',
             'password.min' => 'Паролата трябва да бъде минимум 6 символа',
-            'password.max' => 'Паролата трябва да бъде максимум 25 символа'
+            'password.max' => 'Паролата трябва да бъде максимум 25 символа',
+            'companyEik.unique' => 'Вече има регистриран профил с този булстат.'
         ];
     }
 }

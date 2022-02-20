@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreation;
+use App\Models\Merchant;
 use App\Models\PasswordReset;
 use App\Models\User;
 use http\Exception\BadQueryStringException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +23,7 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,7 +33,7 @@ class AuthController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -39,7 +44,7 @@ class AuthController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -51,7 +56,7 @@ class AuthController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -62,7 +67,7 @@ class AuthController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
@@ -93,29 +98,46 @@ class AuthController extends Controller
         }
     }
 
-    public function register(UserCreation $request): \Illuminate\Http\JsonResponse
+    /**
+     * @param UserCreation $request
+     * @return JsonResponse
+     */
+    public function register(UserCreation $request): JsonResponse
     {
-        dump($request->all());  die;
-        $user = User::whereEmail($request->input('email'))->first();
+        try {
+            $user = User::whereMobile($request->input('mobile'))->first();
 
-        if (empty($user)) {
-            $user = User::create([
-                'name' => $request->input('names'),
-                'email' => $request->input('email'),
-                'mobile' => $request->input('mobile'),
-                'password' => Hash::make($request->input('password')),
-                'is_business' => $request->input('is_business'),
-                'ip' => $request->ip(),
-            ]);
+            if (empty($user)) {
+                $user = User::create([
+                    'name' => $request->input('names'),
+                    'email' => $request->input('email'),
+                    'mobile' => $request->input('mobile'),
+                    'password' => Hash::make($request->input('password')),
+                    'is_business' => $request->input('is_business'),
+                    'ip' => $request->ip(),
+                ]);
+
+                if ($request->input('is_business')) {
+                    Merchant::create([
+                        'user_id' => $user->id,
+                        'name' => $request->input('company'),
+                        'address' => $request->input('companyAddress'),
+                        'eik' => $request->input('companyEik'),
+                        'domain' => null
+                    ]);
+                }
+            }
+
+            Auth::login($user); // manually log the user
+            $user->createToken('api-token')->plainTextToken;
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error Occurs']);
         }
-
-        Auth::login($user); // manually log the user
-        $user->createToken('api-token')->plainTextToken;
-
-        return response()->json(['success' => true, 'user' => $user]);
     }
 
-    public function logout(Request $request): \Illuminate\Http\JsonResponse
+    public function logout(Request $request): JsonResponse
     {
         try {
             Auth::guard('web')->logout();
@@ -137,7 +159,7 @@ class AuthController extends Controller
         return response()->json($response);
     }
 
-    public function requestNewPassword(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function requestNewPassword(Request $request): Response|Application|ResponseFactory
     {
         $validator = Validator::make($request->only(['mobile']), [
             'mobile' => 'required|numeric|min:14'
@@ -175,7 +197,7 @@ class AuthController extends Controller
 
     }
 
-    public function resetPassword(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function resetPassword(Request $request): Response|Application|ResponseFactory
     {
         $validator = Validator::make($request->only(['token', 'code', 'password', 'mobile']),
             [
