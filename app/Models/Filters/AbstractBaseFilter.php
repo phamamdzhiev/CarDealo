@@ -1,8 +1,6 @@
 <?php
 namespace App\Models\Filters;
-
-use App\Models\Offer;
-use Illuminate\Database\Eloquent\Builder;
+;
 use Illuminate\Http\Request;
 
 abstract class AbstractBaseFilter implements FilterInterface
