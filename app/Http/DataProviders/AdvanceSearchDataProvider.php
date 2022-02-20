@@ -6,6 +6,7 @@ use App\Models\Filters\BudgetFilter;
 use App\Models\Filters\ColorFilter;
 use App\Models\Filters\FuelFilter;
 use App\Models\Filters\KmFilter;
+use App\Models\Filters\TransmissionFilter;
 use App\Models\Filters\YearFilter;
 use App\Models\Offer;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,13 +22,18 @@ class AdvanceSearchDataProvider
     /**
      * @param BudgetFilter $budgetFilter
      * @param FuelFilter $fuelFilter
+     * @param YearFilter $yearFilter
+     * @param KmFilter $kmFilter
+     * @param ColorFilter $colorFilter
+     * @param TransmissionFilter $transmissionFilter
      */
     public function __construct(
         BudgetFilter $budgetFilter,
         FuelFilter $fuelFilter,
         YearFilter $yearFilter,
         KmFilter $kmFilter,
-        ColorFilter $colorFilter
+        ColorFilter $colorFilter,
+        TransmissionFilter $transmissionFilter
     )
     {
         $this->offer =  Offer::with('images');
@@ -41,6 +47,8 @@ class AdvanceSearchDataProvider
         $kmFilter
             ->applyTo($this->offer);
         $colorFilter
+            ->applyTo($this->offer);
+        $transmissionFilter
             ->applyTo($this->offer);
     }
 

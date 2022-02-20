@@ -3,28 +3,28 @@
         <h6 class="fw-bold">Трансмисия</h6>
         <div class="form-group">
             <label>
-                <input type="checkbox" class="d-none" name="transmission" value="Ръчна" @change="handleTransmission"
+                <input type="checkbox" class="d-none" name="transmission" value="1" @change="handleTransmission"
                        v-model="carTransmission"
                 />
-                <CustomCheckbox :checked-elements="carTransmission" checked-value="Ръчна"></CustomCheckbox>
+                <CustomCheckbox :checked-elements="carTransmission" checked-value="1"></CustomCheckbox>
                 <span>Ръчна</span>
             </label>
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" class="d-none" name="transmission" value="Автоматична" @change="handleTransmission"
+                <input type="checkbox" class="d-none" name="transmission" value="2" @change="handleTransmission"
                        v-model="carTransmission"
                 />
-                <CustomCheckbox :checked-elements="carTransmission" checked-value="Автоматична"></CustomCheckbox>
+                <CustomCheckbox :checked-elements="carTransmission" checked-value="2"></CustomCheckbox>
                 <span>Автоматична</span>
             </label>
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" class="d-none" name="transmission" value="Полуавтоматична" @change="handleTransmission"
+                <input type="checkbox" class="d-none" name="transmission" value="3" @change="handleTransmission"
                        v-model="carTransmission"
                 />
-                <CustomCheckbox :checked-elements="carTransmission" checked-value="Полуавтоматична"></CustomCheckbox>
+                <CustomCheckbox :checked-elements="carTransmission" checked-value="3"></CustomCheckbox>
                 <span>Полу-автоматична</span>
             </label>
         </div>
@@ -34,29 +34,30 @@
 <script>
 import {ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {isUndefined} from "lodash";
+import {isArray, isUndefined} from "lodash";
 import CustomCheckbox from "../../../components/ui/CustomCheckbox";
 
 export default {
     name: "TransmissionFilter",
     components: {CustomCheckbox},
-    setup() {
+    emits: ['updateQueryParams'],
+    setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
         let carTransmission = ref([]);
+        const transmission = route.query['transmission[]'];
 
-
-        if (!isUndefined(route.query.transmission)) {
-            //TODO: handle case when query transmission is empty string, eg. reloading without transmission value
-            carTransmission.value = route.query.transmission.split('-');
+        if (!isUndefined(transmission)) {
+            carTransmission.value.push(...isArray(transmission) ? transmission : [transmission])
         }
 
-
-        function handleTransmission() {
-            router.push({
+        async function handleTransmission() {
+            await router.push({
                 name: route.name,
-                query: {...route.query, transmission: carTransmission.value.join('-')}
+                query: {...route.query, 'transmission[]': carTransmission.value}
             });
+
+            emit('updateQueryParams');
         }
 
         return {

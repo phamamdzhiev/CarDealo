@@ -537,16 +537,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_ui_CustomCheckbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/ui/CustomCheckbox */ "./resources/js/components/ui/CustomCheckbox.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_ui_CustomCheckbox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/ui/CustomCheckbox */ "./resources/js/components/ui/CustomCheckbox.vue");
+
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
 
@@ -555,25 +575,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TransmissionFilter",
   components: {
-    CustomCheckbox: _components_ui_CustomCheckbox__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CustomCheckbox: _components_ui_CustomCheckbox__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  setup: function setup() {
-    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
-    var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRoute)();
-    var carTransmission = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+  emits: ['updateQueryParams'],
+  setup: function setup(_, _ref) {
+    var emit = _ref.emit;
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
+    var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRoute)();
+    var carTransmission = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
+    var transmission = route.query['transmission[]'];
 
-    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_1__.isUndefined)(route.query.transmission)) {
-      //TODO: handle case when query transmission is empty string, eg. reloading without transmission value
-      carTransmission.value = route.query.transmission.split('-');
+    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_2__.isUndefined)(transmission)) {
+      var _carTransmission$valu;
+
+      (_carTransmission$valu = carTransmission.value).push.apply(_carTransmission$valu, _toConsumableArray((0,lodash__WEBPACK_IMPORTED_MODULE_2__.isArray)(transmission) ? transmission : [transmission]));
     }
 
     function handleTransmission() {
-      router.push({
-        name: route.name,
-        query: _objectSpread(_objectSpread({}, route.query), {}, {
-          transmission: carTransmission.value.join('-')
-        })
-      });
+      return _handleTransmission.apply(this, arguments);
+    }
+
+    function _handleTransmission() {
+      _handleTransmission = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return router.push({
+                  name: route.name,
+                  query: _objectSpread(_objectSpread({}, route.query), {}, {
+                    'transmission[]': carTransmission.value
+                  })
+                });
+
+              case 2:
+                emit('updateQueryParams');
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _handleTransmission.apply(this, arguments);
     }
 
     return {
@@ -883,7 +929,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onUpdateQueryParams: $setup.fetchData
   }, null, 8
   /* PROPS */
-  , ["onUpdateQueryParams"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TransmissionFilter), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ColorFilter)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, " Зареждане ")) : $setup.offers.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.offers, function (offer) {
+  , ["onUpdateQueryParams"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TransmissionFilter, {
+    onUpdateQueryParams: $setup.fetchData
+  }, null, 8
+  /* PROPS */
+  , ["onUpdateQueryParams"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ColorFilter)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, " Зареждане ")) : $setup.offers.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.offers, function (offer) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_CarSingleItem, {
       offer: offer
     }, null, 8
@@ -1321,7 +1371,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "checkbox",
     "class": "d-none",
     name: "transmission",
-    value: "Ръчна",
+    value: "1",
     onChange: _cache[0] || (_cache[0] = function () {
       return $setup.handleTransmission && $setup.handleTransmission.apply($setup, arguments);
     }),
@@ -1332,14 +1382,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.carTransmission]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomCheckbox, {
     "checked-elements": $setup.carTransmission,
-    "checked-value": "Ръчна"
+    "checked-value": "1"
   }, null, 8
   /* PROPS */
   , ["checked-elements"]), _hoisted_4])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
     "class": "d-none",
     name: "transmission",
-    value: "Автоматична",
+    value: "2",
     onChange: _cache[2] || (_cache[2] = function () {
       return $setup.handleTransmission && $setup.handleTransmission.apply($setup, arguments);
     }),
@@ -1350,14 +1400,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.carTransmission]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomCheckbox, {
     "checked-elements": $setup.carTransmission,
-    "checked-value": "Автоматична"
+    "checked-value": "2"
   }, null, 8
   /* PROPS */
   , ["checked-elements"]), _hoisted_6])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
     "class": "d-none",
     name: "transmission",
-    value: "Полуавтоматична",
+    value: "3",
     onChange: _cache[4] || (_cache[4] = function () {
       return $setup.handleTransmission && $setup.handleTransmission.apply($setup, arguments);
     }),
@@ -1368,7 +1418,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.carTransmission]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomCheckbox, {
     "checked-elements": $setup.carTransmission,
-    "checked-value": "Полуавтоматична"
+    "checked-value": "3"
   }, null, 8
   /* PROPS */
   , ["checked-elements"]), _hoisted_8])])]);

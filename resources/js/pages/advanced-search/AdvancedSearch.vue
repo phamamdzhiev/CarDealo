@@ -8,7 +8,7 @@
                     <YearFilter></YearFilter>
                     <KmFilter></KmFilter>
                     <FuelFilter @updateQueryParams="fetchData"></FuelFilter>
-                    <TransmissionFilter></TransmissionFilter>
+                    <TransmissionFilter @updateQueryParams="fetchData"></TransmissionFilter>
                     <ColorFilter></ColorFilter>
                 </div>
             </div>
