@@ -22,7 +22,18 @@ const routes = [
     {
         path: "/used-cars",
         name: "used-cars",
+        meta: {
+            title: 'Разширено търсене'
+        },
         component: () => import("../pages/advanced-search/AdvancedSearch"),
+    },
+    {
+        path: "/merchants",
+        name: "Merchants",
+        meta: {
+            title: 'Автокъщи и дилъри'
+        },
+        component: () => import("../pages/merchants/Merchants"),
     },
     {
         path: "/car/:id",

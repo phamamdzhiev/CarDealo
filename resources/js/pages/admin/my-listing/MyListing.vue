@@ -24,16 +24,16 @@
                                 v-if="item.images.length > 0"
                                 width="350"
                                 class="img-fluid rounded"
-                                :src="asset('storage/' + item.images[0].image)"
+                                :src="asset(item.images[0].image)"
                                 :alt="item['title']"
                             />
-                            <img v-else :src="asset('storage/noimage.jpg')" class="img-fluid" alt="Default image">
+                            <img v-else :src="asset('noimage.jpg')"  width="350" class="img-fluid" alt="Default image">
                         </div>
                         <div class="details">
                             <h5 class="fw-bold">
                                 {{ item['title'] }}
                             </h5>
-                            <p class="text-base-color">{{ item['price'] }} лв.</p>
+                            <p class="text-base-color">{{  item['price'] === 0 ? 'По договаряне' :  item['price'] + 'лв.' }}</p>
                             <p class="text-secondary-color mb-0">Колата е нов внос, регистрирана е преди 3 месеца,
                                 напълно
                                 обслужена

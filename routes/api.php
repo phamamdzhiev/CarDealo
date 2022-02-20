@@ -19,8 +19,13 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/create', [\App\Http\Controllers\UserController::class, 'store']);
     Route::post('/update/{id}', [\App\Http\Controllers\UserController::class, 'update'])->middleware('auth:sanctum');
     Route::get('/auth/fetch', [\App\Http\Controllers\UserController::class, 'isAuthenticated']);
-    Route::patch('/edit/mobile', [\App\Http\Controllers\UserController::class, 'updateMobile'])->middleware('auth:sanctum');
-    Route::patch('/edit/password', [\App\Http\Controllers\UserController::class, 'updatePassword'])->middleware('auth:sanctum');
+});
+
+//Profile
+Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
+    Route::patch('/edit/mobile', [\App\Http\Controllers\ProfileController::class, 'updateMobile']);
+    Route::patch('/edit/password', [\App\Http\Controllers\ProfileController::class, 'updatePassword']);
+    Route::post('/upload/avatar', [\App\Http\Controllers\ProfileController::class, 'uploadAvatar']);
 });
 
 //Email
@@ -89,5 +94,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
     Route::post('/request', [\App\Http\Controllers\AuthController::class, 'requestNewPassword']);
     Route::post('/reset', [\App\Http\Controllers\AuthController::class, 'resetPassword']);
+});
+
+//Merchants
+Route::group(['prefix' => 'merchants'], function () {
+    Route::get('fetch', [\App\Http\Controllers\MerchantController::class, 'index']);
 });
 

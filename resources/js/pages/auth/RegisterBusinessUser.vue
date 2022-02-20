@@ -17,8 +17,15 @@
                                         :messages="validation.company.$errors"/>
         </div>
         <div class="form-floating form-group">
+            <!--            <cleave-->
+            <!--                class="form-control form__input"-->
+            <!--                placeholder="Адрес на автокъщата"-->
+            <!--                id="company"-->
+            <!--                v-model.lazy.trim="validation.companyAddress.$model"-->
+            <!--                :options="{prefix: 'ул'}"-->
+            <!--            />-->
             <input type="text" class="form-control form__input"
-                   placeholder="Име на фирмата"
+                   placeholder="Адрес на автокъщата"
                    id="company"
                    v-model.lazy.trim="validation.companyAddress.$model"
             />
@@ -46,11 +53,13 @@
 
 <script>
 import FromInputValidationMessage from "../../components/ui/FromInputValidationMessage";
+import Cleave from 'vue-cleave-component';
 
 export default {
     name: "RegisterBusinessUser",
     components: {
-        FromInputValidationMessage
+        FromInputValidationMessage,
+        Cleave
     },
     props: {
         validation: {
@@ -58,12 +67,9 @@ export default {
         }
     },
     data() {
-        return {
-        }
+        return {}
     },
-    methods: {
-
-    }
+    methods: {}
 }
 </script>
 

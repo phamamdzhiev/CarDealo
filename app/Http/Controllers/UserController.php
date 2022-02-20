@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreation;
-use App\Mail\EmailVerificationCode;
-use App\Models\PasswordReset;
 use App\Models\User;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
@@ -21,46 +16,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|User[]
+     * @return Collection|User[]
      */
-    public function index()
+    public function index(): Collection|array
     {
         return User::all();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(UserCreation $request)
-    {
-//        $user = User::whereEmail($request->input('email'))->first();
-//
-//        if (empty($user)) {
-//            $user = User::create([
-//                'name' => $request->name,
-//                'email' => $request->email,
-//                'mobile' => $request->mobile,
-//                'password' => Hash::make($request->password),
-//                'ip' => $request->ip()
-//            ]);
-//        }
-//
-//        Auth::login($user); // manually log the user
-//        $user->createToken('api-token')->plainTextToken;
-//
-//        return response($user);
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|User|User[]
+     * @return Collection|Model|User|User[]
      */
-    public function show($id)
+    public function show(int $id): Model|Collection|array|User
     {
         return User::findOrFail($id);
     }
@@ -68,11 +37,10 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function update($id): \Illuminate\Http\Response
+    public function update(int $id): Response
     {
         try {
             $user = User::findOrFail((int)$id);
@@ -90,82 +58,20 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         User::destroy($id);
     }
 
 
-    public function isAuthenticated(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+    public function isAuthenticated(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
     {
         if (Auth::check()) {
             return response(Auth::user());
         } else {
             return response('no user');
-        }
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function updateMobile(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-    {
-        $validator = Validator::make($request->only('mobile'), [
-            'mobile' => 'required|unique:users,mobile',
-        ], [
-            'required' => 'Номерът е задължителен',
-            'unique' => 'Този номер вече съществува'
-        ]);
-
-        if ($validator->stopOnFirstFailure()->fails()) {
-            return response(['errors' => true, 'message' => $validator->errors()], 422);
-        }
-
-        try {
-            $user = User::findOrFail(Auth::id());
-            $user->mobile = $request->input('mobile');
-            $user->save();
-
-            return response(['success' => true]);
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
-        }
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function updatePassword(Request $request)
-    {
-        $validator = Validator::make($request->only(['passwordOld', 'passwordNew']), [
-            'passwordOld' => 'required',
-            'passwordNew' => 'required|min:6|max:25',
-        ], [
-            'passwordOld.required' => 'Моля въведете старата парола',
-            'passwordNew.required' => 'Моля въведете нова парола',
-            'passwordNew.min' => 'Новата паролата трябва да бъде минимум 6 символа',
-            'passwordNew.max' => 'Новата паролата трябва да бъде максимум 25 символа'
-        ]);
-
-        if ($validator->stopOnFirstFailure()->fails()) {
-            return response(['errors' => true, 'message' => $validator->errors()], 422);
-        }
-
-        try {
-            $user = User::findOrFail(Auth::id());
-            if (Hash::check($request->input('passwordOld'), $user->password)) {
-                $user->password = Hash::make($request->input('passwordNew'));
-                $user->save();
-
-                return response(['success' => true]);
-            } else {
-                return response(['errors' => true, 'message' => ['passwordNew' => ['Старата парола не съвпада']]], 422);
-            }
-
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
         }
     }
 }

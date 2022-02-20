@@ -29,22 +29,11 @@
                 class="d-flex flex-row flex-nowrap align-items-center"
             >
                 <div
-                    @mouseover="showSubMenuVisibility('new-cars')"
-                    @mouseleave="hideSubMenuVisibility('new-cars')"
-                    class="sub__menu__wrapper"
-                >
-                    <span>Нови автомобили</span>
-                    <SubMenuHoverableItems
-                        v-show="newCarsItemShown"
-                        :subLink="newCarsSubLinks"
-                    ></SubMenuHoverableItems>
-                </div>
-                <div
                     @mouseover="showSubMenuVisibility('old-cars')"
                     @mouseleave="hideSubMenuVisibility('old-cars')"
                     class="sub__menu__wrapper"
                 >
-                    <span>Използвани автомобили</span>
+                    <span>{{ window.APP_NAME }} ОБЯВИ</span>
                     <SubMenuHoverableItems
                         v-show="oldCarsItemShown"
                         :subLink="oldCarsSubLinks"
@@ -82,42 +71,15 @@ export default {
             newCarsItemShown: false,
             oldCarsItemShown: false,
             sellCarItemShown: false,
-            newCarsSubLinks: [
-                {
-                    id: 1,
-                    link: "/test",
-                    linkText: "Търси в 'Нови коли'",
-                },
-                {
-                    id: 2,
-                    link: "/test",
-                    linkText: "Популярни марки",
-                },
-                {
-                    id: 3,
-                    link: "/тестте",
-                    linkText: "Последно качени",
-                },
-                {
-                    id: 4,
-                    link: "/тест",
-                    linkText: "Дилъри",
-                },
-            ],
             oldCarsSubLinks: [
                 {
                     id: 1,
                     link: "/usedCars",
-                    linkText: `${window.APP_NAME} употребявани коли`,
+                    linkText: `${window.APP_NAME} автомобили`,
                 },
                 {
                     id: 2,
-                    link: "/city",
-                    linkText: "Търси в твоя град",
-                },
-                {
-                    id: 2,
-                    link: "/pedal",
+                    link: "/merchants",
                     linkText: "Автокъщи",
                 },
                 {

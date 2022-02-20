@@ -154,6 +154,8 @@ export default {
             },
             companyEik: {
                 requiredIf: helpers.withMessage('ЕИК/Булстат е задължителен', requiredIf(() => registerState.is_business)),
+                minLength: helpers.withMessage('Въведете валиден ЕИК/Булстат', minLength(9)),
+                maxLength: helpers.withMessage('Въведете валиден ЕИК/Булстат', maxLength(15)),
             }
         }
 

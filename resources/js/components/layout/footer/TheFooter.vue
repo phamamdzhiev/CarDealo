@@ -6,7 +6,7 @@
                     <span><i class="bi bi-award fs-1"></i></span>
                     <div>
                         <h5 class="fw-bold">#1 в България</h5>
-                        <p class="text-normal-gray">Най-добрият Авто портал</p>
+                        <p class="text-normal-gray">Най-новият Авто портал</p>
                     </div>
                 </div>
                 <div class="item">
@@ -88,7 +88,7 @@
             </div>
             <hr />
             <div class="copyright">
-                <p class="text-normal-gray">&copy; {{ new Date().getFullYear() }} Miradi Software Ltd.</p>
+                <p class="text-normal-gray">&copy; {{ new Date().getFullYear() }} Miradi-22 Ltd.</p>
             </div>
         </div>
     </footer>
