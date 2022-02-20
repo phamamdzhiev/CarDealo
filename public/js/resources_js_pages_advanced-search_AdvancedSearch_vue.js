@@ -622,9 +622,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
 
+    function getDefaultMinYear() {
+      return 1995;
+    }
+
+    function getDefaultMaxYear() {
+      return new Date().getFullYear();
+    }
+
     return {
       yearRange: yearRange,
-      handleYearSlider: handleYearSlider
+      handleYearSlider: handleYearSlider,
+      getDefaultMinYear: getDefaultMinYear,
+      getDefaultMaxYear: getDefaultMaxYear
     };
   }
 });
@@ -1391,8 +1401,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.yearRange = $event;
     }),
-    max: 2022,
-    min: 1995,
+    max: $setup.getDefaultMaxYear(),
+    min: $setup.getDefaultMinYear(),
     step: 1,
     tooltips: false,
     lazy: false,
@@ -1400,7 +1410,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onChange: $setup.handleYearSlider
   }, null, 8
   /* PROPS */
-  , ["modelValue", "onChange"])]);
+  , ["modelValue", "max", "min", "onChange"])]);
 }
 
 /***/ }),

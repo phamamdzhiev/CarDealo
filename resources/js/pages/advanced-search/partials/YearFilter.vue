@@ -6,8 +6,8 @@
             <span>{{ yearRange[1] }} г.</span>
         </div>
         <Slider v-model="yearRange"
-                :max="2022"
-                :min="1995"
+                :max="getDefaultMaxYear()"
+                :min="getDefaultMinYear()"
                 :step="1"
                 :tooltips="false"
                 :lazy="false"
@@ -49,9 +49,21 @@ export default {
             });
         }
 
+        function getDefaultMinYear()
+        {
+            return 1995;
+        }
+
+        function getDefaultMaxYear()
+        {
+            return new Date().getFullYear();
+        }
+
         return {
             yearRange,
-            handleYearSlider
+            handleYearSlider,
+            getDefaultMinYear,
+            getDefaultMaxYear
         }
     }
 }
