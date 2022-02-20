@@ -315,6 +315,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 
@@ -326,16 +338,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRoute)();
     var carColor = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
 
-    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_1__.isUndefined)(route.query.color)) {
-      //TODO: handle case when query transmission is empty string, eg. reloading without transmission value
-      carColor.value = route.query.color.split('-');
+    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_1__.isUndefined)(route.query['color[]'])) {
+      var _carColor$value;
+
+      (_carColor$value = carColor.value).push.apply(_carColor$value, _toConsumableArray(route.query['color[]']));
     }
 
     function handleCarColor() {
       router.push({
         name: route.name,
         query: _objectSpread(_objectSpread({}, route.query), {}, {
-          color: carColor.value.join('-')
+          "color[]": carColor.value
         })
       });
     }
@@ -972,7 +985,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "checkbox",
     "class": "d-none",
     name: "color",
-    value: "Червен",
+    value: "1",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.carColor = $event;
     }),
@@ -983,7 +996,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.carColor]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['item', {
-      active: $setup.carColor.indexOf('Червен') !== -1
+      active: $setup.carColor.includes('1')
     }]),
     style: {
       "background": "red"
@@ -994,7 +1007,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "checkbox",
     "class": "d-none",
     name: "color",
-    value: "Сив",
+    value: "2",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $setup.carColor = $event;
     }),
@@ -1005,7 +1018,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.carColor]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['item', {
-      active: $setup.carColor.indexOf('Сив') !== -1
+      active: $setup.carColor.includes('2')
     }]),
     style: {
       "background": "gray"
@@ -1016,7 +1029,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "checkbox",
     "class": "d-none",
     name: "color",
-    value: "Черен",
+    value: "3",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $setup.carColor = $event;
     }),
@@ -1027,7 +1040,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.carColor]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['item', {
-      active: $setup.carColor.indexOf('Черен') !== -1
+      active: $setup.carColor.includes('3')
     }]),
     style: {
       "background": "black"

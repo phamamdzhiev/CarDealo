@@ -6,31 +6,31 @@
                 <input type="checkbox"
                        class="d-none"
                        name="color"
-                       value="Червен"
+                       value="1"
                        v-model="carColor"
                        @change="handleCarColor"
                 />
-                <div :class="['item', {active: carColor.indexOf('Червен') !== -1}]" style="background: red"></div>
+                <div :class="['item', {active: carColor.includes('1')}]" style="background: red"></div>
             </label>
             <label>
                 <input type="checkbox"
                        class="d-none"
                        name="color"
-                       value="Сив"
+                       value="2"
                        v-model="carColor"
                        @change="handleCarColor"
                 />
-                <div :class="['item', {active: carColor.indexOf('Сив') !== -1}]" style="background: gray"></div>
+                <div :class="['item', {active: carColor.includes('2')}]" style="background: gray"></div>
             </label>
             <label>
                 <input type="checkbox"
                        class="d-none"
                        name="color"
-                       value="Черен"
+                       value="3"
                        v-model="carColor"
                        @change="handleCarColor"
                 />
-                <div :class="['item', {active: carColor.indexOf('Черен') !== -1}]" style="background: black"></div>
+                <div :class="['item', {active: carColor.includes('3')}]" style="background: black"></div>
             </label>
         </div>
     </div>
@@ -49,15 +49,14 @@ export default {
         const route = useRoute();
         let carColor = ref([]);
 
-        if (!isUndefined(route.query.color)) {
-            //TODO: handle case when query transmission is empty string, eg. reloading without transmission value
-            carColor.value = route.query.color.split('-');
+        if (!isUndefined(route.query['color[]'])) {
+            carColor.value.push(...route.query['color[]']) ;
         }
 
         function handleCarColor() {
             router.push({
                 name: route.name,
-                query: {...route.query, color: carColor.value.join('-')}
+                query: {...route.query, "color[]": carColor.value}
             });
         }
 

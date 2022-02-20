@@ -3,6 +3,7 @@
 namespace App\Http\DataProviders;
 
 use App\Models\Filters\BudgetFilter;
+use App\Models\Filters\ColorFilter;
 use App\Models\Filters\FuelFilter;
 use App\Models\Filters\KmFilter;
 use App\Models\Filters\YearFilter;
@@ -25,7 +26,8 @@ class AdvanceSearchDataProvider
         BudgetFilter $budgetFilter,
         FuelFilter $fuelFilter,
         YearFilter $yearFilter,
-        KmFilter $kmFilter
+        KmFilter $kmFilter,
+        ColorFilter $colorFilter
     )
     {
         $this->offer =  Offer::with('images');
@@ -37,6 +39,8 @@ class AdvanceSearchDataProvider
         $yearFilter
             ->applyTo($this->offer);
         $kmFilter
+            ->applyTo($this->offer);
+        $colorFilter
             ->applyTo($this->offer);
     }
 
