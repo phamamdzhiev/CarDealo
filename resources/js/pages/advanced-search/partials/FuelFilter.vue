@@ -42,7 +42,8 @@ import CustomCheckbox from "../../../components/ui/CustomCheckbox";
 export default {
     name: "FuelFilter",
     components: {CustomCheckbox},
-    setup() {
+    emits: ['updateQueryParams'],
+    setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
         let carFuel = ref([]);
@@ -52,11 +53,14 @@ export default {
             carFuel.value.push(...isArray(fuel) ? fuel : [fuel])
         }
 
-        function handleFuel() {
-            router.push({
+        async function handleFuel() {
+            await router.push({
                 name: route.name,
                 query: {...route.query, 'fuel[]': carFuel.value}
             });
+
+            emit('updateQueryParams');
+
         }
 
         return {

@@ -4,10 +4,10 @@
             <div class="col-lg-3">
                 <div class="p-2 advanced-filters">
                     <h5 class="fw-bold mb-3">Търсене по филтри</h5>
-                    <BudgetFilter></BudgetFilter>
+                    <BudgetFilter @updateQueryParams="fetchData"></BudgetFilter>
                     <YearFilter></YearFilter>
                     <KmFilter></KmFilter>
-                    <FuelFilter></FuelFilter>
+                    <FuelFilter @updateQueryParams="fetchData"></FuelFilter>
                     <TransmissionFilter></TransmissionFilter>
                     <ColorFilter></ColorFilter>
                 </div>
@@ -16,7 +16,7 @@
                 <div v-if="isLoading">
                     Зареждане
                 </div>
-                <div class="d-grid" v-else-if="offers">
+                <div class="d-grid" v-else-if="offers.length > 0">
                     <CarSingleItem v-for="offer in offers" :offer="offer"></CarSingleItem>
                 </div>
                 <div v-else>Няма намерени обяви</div>
@@ -28,7 +28,7 @@
 
 <script>
 import axios from "axios";
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, ref} from "vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
 
 //Filters
@@ -38,7 +38,6 @@ import KmFilter from "./partials/KmFilter";
 import FuelFilter from "./partials/FuelFilter";
 import TransmissionFilter from "./partials/TransmissionFilter";
 import ColorFilter from "./partials/ColorFilter";
-import {useRoute, useRouter} from "vue-router";
 
 export default {
     name: "AdvancedSearch",
@@ -53,17 +52,15 @@ export default {
     },
     inject: ['window'],
     setup() {
-        let offers = ref(null);
+        let offers = ref([]);
         let isLoading = ref(false);
-        const route = useRoute();
-        const router = useRouter();
 
         async function fetchData() {
             try {
                 isLoading.value = true;
                 const res = await axios.get('/fetch/offers' + window.location.search);
                 isLoading.value = false
-                if (res.data.length > 0) {
+                if (res.data) {
                     offers.value = res.data;
                 }
             } catch (e) {
@@ -78,7 +75,8 @@ export default {
 
         return {
             offers,
-            isLoading
+            isLoading,
+            fetchData
         }
     }
 

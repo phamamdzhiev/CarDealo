@@ -16,15 +16,16 @@ export default {
     name: "Logout",
     methods: {
         async logout() {
+            this.$store.commit('sellCar/resetState');
+
             try {
                 await axios.get('/sanctum/csrf-cookie');
                 const res = await axios.post('/logout');
 
                 if (res.data.success) {
                     window.location.href = '/';
-                } else {
-                    console.log(res)
                 }
+
             } catch (e) {
                 console.log('Logout failed', e);
             }
