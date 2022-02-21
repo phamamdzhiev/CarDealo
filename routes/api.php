@@ -65,6 +65,26 @@ Route::group(['prefix' => 'offers'], function () {
         ->middleware('auth:sanctum');
 });
 
+//Messages
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/chat', [App\Http\Controllers\ChatsController::class, 'index']);
+    Route::get('/messages', [App\Http\Controllers\ChatsController::class, 'fetchMessages']);
+    Route::post('/messages/{id}', [App\Http\Controllers\ChatsController::class, 'sendMessage']);
+});
+
+//Password Request and Password Reset
+Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
+    Route::post('/request', [\App\Http\Controllers\AuthController::class, 'requestNewPassword']);
+    Route::post('/reset', [\App\Http\Controllers\AuthController::class, 'resetPassword']);
+});
+
+//Merchants
+Route::group(['prefix' => 'merchants'], function () {
+    Route::get('fetch', [\App\Http\Controllers\MerchantController::class, 'index']);
+});
+
+// No controller routes
+
 //Regions
 Route::get('fetch/regions', function () {
     $expire = \Carbon\Carbon::now()->addCentury();
@@ -83,21 +103,17 @@ Route::get('fetch/cities/{id}', function ($id) {
     ]);
 });
 
-//Messages
-Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('/chat', [App\Http\Controllers\ChatsController::class, 'index']);
-    Route::get('/messages', [App\Http\Controllers\ChatsController::class, 'fetchMessages']);
-    Route::post('/messages/{id}', [App\Http\Controllers\ChatsController::class, 'sendMessage']);
+//Popular regions
+Route::get('fetch/popular/regions', function () {
+    $expire = \Carbon\Carbon::now()->addCentury();
+    $popularRegions = \Illuminate\Support\Facades\Cache::remember('popular_regions', $expire, function () {
+        return \App\Models\Region::whereIsPopular(1)->get()->toArray();
+    });
+
+    return response()->json([
+        'success' => true,
+        'data' => $popularRegions,
+    ]);
 });
 
-//Password Request and Password Reset
-Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
-    Route::post('/request', [\App\Http\Controllers\AuthController::class, 'requestNewPassword']);
-    Route::post('/reset', [\App\Http\Controllers\AuthController::class, 'resetPassword']);
-});
-
-//Merchants
-Route::group(['prefix' => 'merchants'], function () {
-    Route::get('fetch', [\App\Http\Controllers\MerchantController::class, 'index']);
-});
 

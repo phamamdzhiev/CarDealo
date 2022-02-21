@@ -33,7 +33,7 @@
                     >
                         <optgroup label="Област">
                             <option :value="region.id" v-for="region in regions" :key="region.id">
-                                {{ region.region }}
+                                {{ region.name }}
                             </option>
                         </optgroup>
                     </select>
