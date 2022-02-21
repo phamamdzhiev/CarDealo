@@ -19,7 +19,7 @@
                 <cleave v-model.lazy.trim="v$.code.$model"
                         class="form-control form__input"
                         name="code"
-                        placeholder="6-цифрен код"
+                        placeholder="6-цифрен код*"
                         id="code"
                         :options="{blocks: [3,3]}"/>
                 <!--                <input type="text"-->
@@ -28,7 +28,10 @@
                 <!--                       id="code"-->
                 <!--                       class="form-control form__input"-->
                 <!--                />-->
-                <label for="code">6-цифрен код</label>
+                <label for="code">6-цифрен код*</label>
+                <small class="text-link-blue">
+                    <i>*Кодът е валиден 15 минути</i>
+                </small>
                 <FromInputValidationMessage v-if="v$.code.$error"
                                             :messages="v$.code.$errors"/>
             </div>
