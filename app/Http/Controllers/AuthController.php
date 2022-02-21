@@ -131,7 +131,7 @@ class AuthController extends Controller
         Auth::login($user); // manually log the user
         $user->createToken('api-token')->plainTextToken;
 
-        return response()->json(['success' => true, 'user' => $user]);
+        return response()->json(['success' => true,'user' => $user]);
     }
 
     public function logout(Request $request): JsonResponse
