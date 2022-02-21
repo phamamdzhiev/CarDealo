@@ -25,6 +25,7 @@
 <script>
     window.APP_VERSION = '{{ env('APP_VERSION') }}';
     window.APP_NAME = '{{ env('APP_NAME') }}';
+    window.APP_URL = '{{ env('APP_URL') }}';
     window.AUTH = {!! json_encode( Auth::guard('web')->user()) !!};
     window._asset = '{{ asset('') }}';
 </script>

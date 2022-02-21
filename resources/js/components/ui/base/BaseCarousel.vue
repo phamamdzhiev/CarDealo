@@ -5,7 +5,6 @@
         data-bs-ride="carousel"
     >
         <div class="carousel-inner">
-            {{setBannerAndImageHeight}}
             <div class="carousel-item active" :style="setBannerAndImageHeight">
                 <slot></slot>
             </div>
