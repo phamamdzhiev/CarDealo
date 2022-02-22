@@ -2,22 +2,24 @@ import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 //persisting states
-import { sellCarPersist } from "./persist-state/persist";
-//store modules
-import sellCar from "./sell-car/sell-car";
+import { uploadOfferPersist } from "./persist-state/persist";
 import auth from "./auth/auth-store";
+// import uploadOfferModule from "./upload-offer/upload-offer";
+import carStore from "./upload-offer/car";
+import uploadOffer from "./upload-offer/upload-offer";
 
 
 const store = createStore({
     modules: {
         auth,
-        sellCar
+        uploadOffer
     },
     plugins: [
-        createPersistedState(sellCarPersist)
+        createPersistedState(uploadOfferPersist)
     ],
 });
 
+// store.registerModule('car', carStore);
 
 
 export default store;

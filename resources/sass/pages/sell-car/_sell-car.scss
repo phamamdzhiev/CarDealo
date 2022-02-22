@@ -33,9 +33,11 @@ $ul-max-height: 300px;
             border-radius: $border-radius;
             text-align: center;
             cursor: pointer;
+
             &:not(:last-child) {
                 margin-right: 1rem;
             }
+
             @include media-breakpoint-down(sm) {
                 flex: 0 0 100%;
                 &:first-child {
@@ -51,7 +53,8 @@ $ul-max-height: 300px;
         }
     }
 
-    div#brand {
+    div#brand,
+    .options-list {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 10px;
@@ -84,6 +87,13 @@ $ul-max-height: 300px;
                 cursor: default;
                 border: 2px solid $main-color;
             }
+        }
+    }
+
+    .options-list {
+        grid-template-columns: repeat(4, 1fr);
+        .item {
+            height: 120px;
         }
     }
 
@@ -360,8 +370,10 @@ $ul-max-height: 300px;
     select.form__input {
         padding-top: 1rem;
     }
+
     .text-area-wrapper {
         position: relative;
+
         &:before {
             content: '';
             position: absolute;
@@ -374,8 +386,9 @@ $ul-max-height: 300px;
             background-color: #f2f3f7;
         }
     }
+
     textarea.form__input {
-        padding-top: 32px!important; /* height of pseudo element */
+        padding-top: 32px !important; /* height of pseudo element */
         height: 200px;
         resize: vertical;
         @include scrollbar;

@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 export default {
     namespaced: true,
@@ -21,6 +20,8 @@ export default {
             },
             //final offer
             car_offer: {
+                // step 0
+                vehicle_type: null,
                 //step 1
                 new_or_used: 1,
                 car_brand: null,
@@ -57,7 +58,7 @@ export default {
             });
 
             Object.keys(state.car_extras).forEach((key) => {
-               state.car_extras[key] = [];
+                state.car_extras[key] = [];
             });
 
             state.car_offer['car_has_price'] = true;
@@ -74,6 +75,9 @@ export default {
         },
         setStepToOne(state) {
             state.step = 1
+        },
+        setVehicleType(state, payload) {
+            state.car_offer.vehicle_type = payload;
         },
         setPopularCarBrands(state, payload) {
             state.car_popular_brands = payload;
@@ -204,6 +208,9 @@ export default {
         getStep(state) {
             return state.step;
         },
+        getVehicleType(state) {
+            return state.car_offer.vehicle_type;
+        },
         getSelectedCarBrandID(state) {
             return state.selected_brand_id;
         },
@@ -268,38 +275,38 @@ export default {
             return state.car_offer;
         },
     },
-    actions: {
-        async setCarPopularBrands(context) {
-            try {
-                context.state.loading = true;
-                const carPopularBrands = await axios.get('vehicle/fetch/popular-brands');
-                context.state.loading = false;
-                context.commit('setPopularCarBrands', carPopularBrands.data);
-            } catch (e) {
-                console.log('in popularCarBrands', e)
-            }
-        },
-
-        async setCarBrandWithModels(context, id) {
-            try {
-                context.state.loading = true;
-                const carBrandWithModels = await axios.get(`vehicle/fetch/car-models/${id}`);
-                context.state.loading = false;
-                context.commit('setCarMakeWithModels', carBrandWithModels.data);
-            } catch (e) {
-                console.log('in carBrandsWithModels', e)
-            }
-        },
-
-        async setCarExtrasApi(context) {
-            try {
-                context.state.loading = true;
-                const carExtras = await axios.get('vehicle/fetch/extras');
-                context.state.loading = false;
-                context.commit('setCarExtrasApi', carExtras.data);
-            } catch (e) {
-                console.log('in setCarExtras', e);
-            }
-        }
-    }
+    // actions: {
+    //     async setCarPopularBrands(context) {
+    //         try {
+    //             context.state.loading = true;
+    //             const carPopularBrands = await axios.get('vehicle/fetch/popular-brands');
+    //             context.state.loading = false;
+    //             context.commit('setPopularCarBrands', carPopularBrands.data);
+    //         } catch (e) {
+    //             console.log('in popularCarBrands', e)
+    //         }
+    //     },
+    //
+    //     async setCarBrandWithModels(context, id) {
+    //         try {
+    //             context.state.loading = true;
+    //             const carBrandWithModels = await axios.get(`vehicle/fetch/car-models/${id}`);
+    //             context.state.loading = false;
+    //             context.commit('setCarMakeWithModels', carBrandWithModels.data);
+    //         } catch (e) {
+    //             console.log('in carBrandsWithModels', e)
+    //         }
+    //     },
+    //
+    //     async setCarExtrasApi(context) {
+    //         try {
+    //             context.state.loading = true;
+    //             const carExtras = await axios.get('vehicle/fetch/extras');
+    //             context.state.loading = false;
+    //             context.commit('setCarExtrasApi', carExtras.data);
+    //         } catch (e) {
+    //             console.log('in setCarExtras', e);
+    //         }
+    //     }
+    // }
 }

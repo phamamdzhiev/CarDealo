@@ -1,7 +1,6 @@
 <template>
     <div class="sell-car">
         <base-card>
-            <span @click="setStepMinus" class="back__button">Назад <i class="fw-light">(Стъпка 2)</i></span>
             <TopBar/>
             <div class="question-section">
                 <h5 class="fw-bold">Година на производство?</h5>

@@ -19,7 +19,7 @@
                         <span v-else>
                            <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация</router-link>
                        </span>
-                        <base-button :link="'sell-car'" class="special">+ Публикувай</base-button>
+                        <base-button :link="'upload'" class="special">+ Публикувай</base-button>
                     </nav>
                 </div>
             </div>
@@ -91,7 +91,7 @@ export default {
             sellCarSubLinks: [
                 {
                     id: 1,
-                    link: "/sell-car",
+                    link: "/upload",
                     linkText: "Публикувай обява",
                 },
                 {

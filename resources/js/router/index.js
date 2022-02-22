@@ -42,20 +42,20 @@ const routes = [
         props: true
     },
     {
-        path: "/sell-car",
-        name: "sell.car",
+        path: "/upload",
+        name: "Upload",
         meta: {
             hideFooter: true,
             title: 'Качване на обява'
         },
-        component: () => import("../pages/sell-used-car/SellCar"),
-        beforeEnter(to, from, next) {
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
+        component: () => import("../pages/upload-offer/UploadOffer"),
+        // beforeEnter(to, from, next) {
+        //     if (store.getters['auth/GET_AUTH_USER']) {
+        //         next()
+        //     } else {
+        //         next({name: 'login'})
+        //     }
+        // }
     },
     {
         path: "/profile",
