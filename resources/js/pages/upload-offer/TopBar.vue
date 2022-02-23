@@ -1,32 +1,32 @@
 <template>
     <div class="currently__chosen my-3">
-        <span v-if="getAllData['car_brand']">
-            {{ getAllData['car_brand'] }}
+        <span v-if="getState.brand">
+            {{ getState.brand.name }}
         </span>
 
-        <span v-if="getAllData['car_model']">
-            {{ getAllData['car_model'] }}
+        <span v-if="getState.model">
+            {{ getState.model.name }}
         </span>
 
-        <span v-if="getAllData['car_year']">
-            {{ getAllData['car_year'] }}
+        <span v-if="getState.year">
+            {{ getState.year }}
         </span>
 
-        <span v-if="getAllData['car_fuel']">
-            {{ getAllData['car_fuel'] }}
-        </span>
+<!--        <span v-if="getState.engine">-->
+<!--            {{ getState.engine.name }}-->
+<!--        </span>-->
 
-        <span v-if="getAllData['car_transmission']">
-            {{ getAllData['car_transmission'] }}
-        </span>
+<!--        <span v-if="$store.getters['carOffer/getState']">-->
+<!--            {{ getState.transmission.name }}-->
+<!--        </span>-->
 
-        <span v-if="getAllData['car_hp']">
-            {{ getAllData['car_hp'] }} к.с.
-        </span>
+<!--        <span v-if="getAllData['car_hp']">-->
+<!--            {{ getAllData['car_hp'] }} к.с.-->
+<!--        </span>-->
 
-        <span v-if="getAllData['car_km']">
-            {{ getAllData['car_km'] }} км.
-        </span>
+<!--        <span v-if="getAllData['car_km']">-->
+<!--            {{ getAllData['car_km'] }} км.-->
+<!--        </span>-->
     </div>
 </template>
 
@@ -34,8 +34,8 @@
 export default {
     name: "TopBar",
     computed: {
-        getAllData() {
-            return this.$store.getters['sellCar/getAllData'];
+        getState() {
+            return this.$store.getters['uploadOffer/getState'];
         },
     }
 }

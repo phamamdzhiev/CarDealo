@@ -3,17 +3,36 @@ export default {
     state() {
         return {
             step: 1,
-            vehicleType: null,
-            vehicleCategory: null
-
+            vehicle: {
+                vehicleType: null,
+                vehicleCategory: null,
+                condition: 1,
+                brand: {
+                    name: null,
+                    id: null
+                },
+                model: {
+                    name: null,
+                    id: null
+                },
+                year: null
+            }
         }
     },
     mutations: {
-        setVehicleType(state, payload) {
-            state.vehicleType = payload;
+        resetState(state) {
+            Object.keys(state.vehicle).forEach((key) => {
+                state.vehicle[key] = {name: null, id: null};
+            });
+
+            state.step = 1;
+            state.vehicle.condition = 1;
+            state.vehicle.year = null;
+            state.vehicle.vehicleType = null
+            state.vehicle.vehicleCategory = null
         },
-        setVehicleCategory(state, payload) {
-            return state.vehicleCategory = payload;
+        setState(state, {key, value}) {
+            state.vehicle[key] = value;
         },
         setStepPlus(state) {
             state.step++
@@ -26,11 +45,8 @@ export default {
         },
     },
     getters: {
-        getVehicleType(state) {
-            return state.vehicleType;
-        },
-        getVehicleCategory(state) {
-            return state.vehicleCategory;
+        getState(state) {
+            return state.vehicle;
         },
         getStep(state) {
             return state.step

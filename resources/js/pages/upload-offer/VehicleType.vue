@@ -1,8 +1,9 @@
 <template>
     <div class="sell-car">
         <BaseCard>
+            {{ $store.getters['carOffer/getState'] }}
             <div class="question-section mb-4">
-                <Heading :title="'Вид на превозното средство?'"/>
+                <Heading title="Вид на превозното средство?"/>
                 <ul class="options-list">
                     <li
                         v-for="item in vehicleTypes"
@@ -30,6 +31,7 @@ import Heading from "./partials/Heading";
 import NextStepButton from "./partials/NextStepButton";
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {useStore} from "vuex";
 
 export default {
     name: "VehicleType",
@@ -40,6 +42,8 @@ export default {
     },
     setup() {
         const router = useRouter();
+        const store = useStore();
+
         let typeID = ref(null);
 
         let vehicleTypes = ref([
@@ -61,6 +65,7 @@ export default {
         }
 
         function setVehicleType(t) {
+            store.commit('uploadOffer/resetState');
             typeID.value = t;
         }
 

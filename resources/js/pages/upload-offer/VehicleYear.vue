@@ -1,22 +1,21 @@
 <template>
     <div class="sell-car">
         <base-card>
+            <PrevStepButton/>
             <TopBar/>
             <div class="question-section">
-                <h5 class="fw-bold">Година на производство?</h5>
+                <Heading title="Година на производство?"/>
                 <ul id="year">
                     <li v-for="year in years"
                         :key="year"
-                        :class="{ active: year === getAllData['car_year'] }"
-                        @click="setCarYear(year)"
+                        :class="{ active: parseInt(year) === getState.year }"
+                        @click="setYear(year)"
                     >
                         {{ year }}
                     </li>
                 </ul>
             </div>
-            <button @click="showStepThree" class="base-button" v-if="getAllData['car_year']">
-                Следваща стъпкa
-            </button>
+            <NextStepButton v-if="getState.year"/>
         </base-card>
     </div>
 </template>
@@ -24,13 +23,19 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import TopBar from "./TopBar";
+import NextStepButton from "./partials/NextStepButton";
+import PrevStepButton from "./partials/PrevStepButton";
+import Heading from "./partials/Heading";
 import {mapGetters, mapMutations} from "vuex";
 
 export default {
-    name: "SellCarYear",
+    name: "VehicleYear",
     components: {
         TopBar,
-        BaseCard
+        BaseCard,
+        NextStepButton,
+        PrevStepButton,
+        Heading
     },
     data() {
         return {
@@ -76,21 +81,15 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('sellCar', ['getAllData']),
+        getState() {
+            return this.$store.getters['uploadOffer/getState'];
+        }
     },
     methods: {
-        ...mapMutations('sellCar', ['setStepMinus', 'setStepPlus', 'setCarYear']),
-
-        showStepThree() {
-            if (!this.getAllData['car_year']) return;
-            this.setStepPlus();
-        },
+        ...mapMutations('uploadOffer', ['setStepPlus', 'setState']),
+        setYear(year) {
+            this.setState({key: 'year', value: parseInt(year)});
+        }
     }
 }
 </script>
-
-<style scoped>
-a {
-    display: block;
-}
-</style>

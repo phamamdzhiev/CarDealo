@@ -1,7 +1,7 @@
 <template>
-    <div @click="showPrevStep" class="back__button">
-        <span>Назад</span>
-        <i class="fw-light">(Стъпка {{ getStep - 1}})</i>
+    <div @click="showPrevStep" class="back__button mb-3">
+        <i class="bi bi-arrow-left-short"></i>
+        <i>Назад</i>
     </div>
 </template>
 
