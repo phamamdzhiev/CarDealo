@@ -1,7 +1,7 @@
 <template>
     <div>
-        <VehicleType v-if="getStep === 1"/>
-        <VehicleCategory v-if="getStep === 2"/>
+        <VehicleCategory v-if="getStep === 1"/>
+<!--        <VehicleType v-if="getStep === 1"/>-->
 <!--        <SellCarBrand v-if="getStep === 2"></SellCarBrand>-->
 <!--        <SellCarModel v-if="getStep === 3"></SellCarModel>-->
 <!--        <SellCarYear v-if="getStep === 4"></SellCarYear>-->
@@ -30,6 +30,7 @@ import SellCarFinal from "./SellCarFinal";
 
 export default {
     name: "SellCar",
+    props: ['vehicleID'],
     components: {
         BaseCard,
         VehicleType,
@@ -44,6 +45,9 @@ export default {
         OwnerDetails,
         SellCarFinal,
     },
+    mounted() {
+        this.$store.commit('uploadOffer/setVehicleType', parseInt(this.vehicleID));
+    },
     computed: {
         getStep() {
             return this.$store.getters['uploadOffer/getStep'];
@@ -56,14 +60,14 @@ export default {
         //set all brands and extras from API
         // await this.$store.dispatch('sellCar/setCarExtrasApi');
     },
-    beforeRouteLeave(to, from, next) {
-        if (this.getAllData['car_brand']) {
-            if (!window.confirm("Ако напуснете тази страница сега, възможно е да загубите информацията, която сте въвели!")) {
-                return;
-            }
-        }
-        this.setStepToOne();
-        next();
-    },
+    // beforeRouteLeave(to, from, next) {
+    //     if (this.getAllData['car_brand']) {
+    //         if (!window.confirm("Ако напуснете тази страница сега, възможно е да загубите информацията, която сте въвели!")) {
+    //             return;
+    //         }
+    //     }
+    //     this.setStepToOne();
+    //     next();
+    // },
 }
 </script>

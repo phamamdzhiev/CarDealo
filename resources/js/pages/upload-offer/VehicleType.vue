@@ -7,11 +7,11 @@
                     <li
                         v-for="item in vehicleTypes"
                         :key="item.id"
-                        :class="['item position-relative', {active: getVehicleType === item.id}]"
+                        :class="['item position-relative', {active: typeID === item.id}]"
                         @click="setVehicleType(item.id)">
                         <span
-                            v-show="getVehicleType === item.id"
-                            @click.stop="store.commit('uploadOffer/setVehicleType', null)"
+                            v-show="typeID === item.id"
+                            @click.stop="typeID = null"
                             class="position-absolute top-0 start-100 translate-middle fw-bold">
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
@@ -19,7 +19,7 @@
                     </li>
                 </ul>
             </div>
-            <NextStepButton v-if="getVehicleType" />
+            <button class="base-button" v-show="typeID !== null" @click="go">Следваща стъпка</button>
         </BaseCard>
     </div>
 </template>
@@ -28,8 +28,8 @@
 import BaseCard from "../../components/ui/base/BaseCard";
 import Heading from "./partials/Heading";
 import NextStepButton from "./partials/NextStepButton";
-import {computed, onBeforeUnmount, onMounted, ref} from "vue";
-import {useStore} from "vuex";
+import {onBeforeUnmount, onMounted, ref} from "vue";
+import {useRouter} from "vue-router";
 
 export default {
     name: "VehicleType",
@@ -39,7 +39,8 @@ export default {
         NextStepButton,
     },
     setup() {
-        const store = useStore();
+        const router = useRouter();
+        let typeID = ref(null);
 
         let vehicleTypes = ref([
             {id: 1, name: 'Автомобили'},
@@ -54,14 +55,14 @@ export default {
 
         let isLoading = ref(false);
 
-        function setVehicleType(typeID) {
-            store.commit('uploadOffer/setVehicleType', typeID);
+        function go() {
+            if (typeID.value === null) return;
+            router.push({name: 'upload.vehicle', params: {vehicleID: typeID.value}});
         }
 
-        const getVehicleType = computed(() => {
-            return store.getters['uploadOffer/getVehicleType'];
-        });
-
+        function setVehicleType(t) {
+            typeID.value = t;
+        }
 
         //hooks
         // onMounted(() => {
@@ -74,11 +75,11 @@ export default {
 
 
         return {
-            getVehicleType,
+            typeID,
             setVehicleType,
             isLoading,
             vehicleTypes,
-            store
+            go
         }
     }
 }

@@ -1,8 +1,13 @@
 <template>
     <div class="sell-car">
         <BaseCard>
+            <router-link class="back__button mb-2 d-block" :to="{name: 'upload'}">
+                <span class="fw-light">
+                    <i class="bi bi-arrow-left-short"></i>
+                    <i>Назад</i>
+                </span>
+            </router-link>
             <div class="question-section mb-4">
-                <PrevStepButton/>
                 <Heading :title="'Категория на превозното средство?'"/>
                 <ul class="options-list">
                     <li
