@@ -259,7 +259,7 @@ $ul-max-height: 300px;
 
         > div {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             @include media-breakpoint-down(sm) {
                 grid-template-columns: repeat(2, 1fr);
@@ -282,6 +282,7 @@ $ul-max-height: 300px;
 
         img {
             cursor: move;
+            border-radius: 6px;
         }
 
         .close-btn {

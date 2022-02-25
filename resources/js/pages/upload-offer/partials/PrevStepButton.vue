@@ -1,7 +1,7 @@
 <template>
     <div @click="showPrevStep" class="back__button mb-3">
         <i class="bi bi-arrow-left-short"></i>
-        <i>Назад</i>
+        <span>Назад</span>
     </div>
 </template>
 

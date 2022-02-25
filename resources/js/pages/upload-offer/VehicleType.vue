@@ -7,11 +7,11 @@
                     <li
                         v-for="item in vehicleTypes"
                         :key="item.id"
-                        :class="['item position-relative', {active: typeID === item.id}]"
-                        @click="setVehicleType(item.id)">
+                        :class="['item position-relative', {active: item.id === getState.vehicleType}]"
+                        @click="setState(item.id)">
                         <span
-                            v-show="typeID === item.id"
-                            @click.stop="typeID = null"
+                            v-show="getState.vehicleType === item.id"
+                            @click.stop="resetState"
                             class="position-absolute top-0 start-100 translate-middle fw-bold">
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
@@ -19,7 +19,7 @@
                     </li>
                 </ul>
             </div>
-            <button class="base-button" v-show="typeID !== null" @click="go">Следваща стъпка</button>
+            <button class="base-button" v-show="getState.vehicleType !== null" @click="go">Следваща стъпка</button>
         </BaseCard>
     </div>
 </template>
@@ -28,7 +28,7 @@
 import BaseCard from "../../components/ui/base/BaseCard";
 import Heading from "./partials/Heading";
 import NextStepButton from "./partials/NextStepButton";
-import {onBeforeUnmount, onMounted, ref} from "vue";
+import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 // import offerState from "../../store/upload-offer/upload-offer";
@@ -44,8 +44,6 @@ export default {
         const router = useRouter();
         const store = useStore();
 
-        let typeID = ref(null);
-
         let vehicleTypes = ref([
             {id: 1, name: 'Автомобили'},
             {id: 2, name: 'Мотори'},
@@ -59,14 +57,24 @@ export default {
 
         let isLoading = ref(false);
 
+
+        const getState = computed(() => {
+            return store.getters['uploadOffer/getVehicleState'];
+        });
+
         function go() {
-            if (typeID.value === null) return;
-            router.push({name: 'upload.vehicle', params: {vehicleID: typeID.value}});
+            if (getState.value.vehicleType === null) return;
+            router.push({name: 'upload.vehicle', params: {vehicleID: getState.value.vehicleType}});
         }
 
-        function setVehicleType(t) {
+        function resetState() {
+            console.log('it will reset state, but later :)');
             // store.commit('uploadOffer/resetState');
-            typeID.value = t;
+        }
+
+        function setState(data) {
+            // store.commit('uploadOffer/resetState');
+            store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: data});
         }
 
         //hooks
@@ -81,11 +89,12 @@ export default {
 
 
         return {
-            typeID,
-            setVehicleType,
             isLoading,
             vehicleTypes,
-            go
+            go,
+            getState,
+            setState,
+            resetState
         }
     }
 }

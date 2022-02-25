@@ -5,9 +5,9 @@ pos
 <template>
     <div class="sell-car">
         <base-card>
-            <span @click="back" class="back__button">Назад <i class="fw-light">(Стъпка 6)</i></span>
+            <PrevStepButton/>
             <div class="question-section mb-3">
-                <h5 class="fw-bold">Тук може да качите снимките на автомобила</h5>
+                <Heading title="Тук може да качите снимките на обявата"/>
                 <div id="car-images-upload">
                     <i
                         class="bi bi-info-circle-fill position-absolute"
@@ -55,6 +55,8 @@ pos
 import BaseCard from "../../components/ui/base/BaseCard";
 import draggable from 'vuedraggable';
 import ErrorDisplay from "../../components/ui/ErrorDisplay";
+import PrevStepButton from "./partials/PrevStepButton";
+import Heading from "./partials/Heading";
 import {mapGetters} from "vuex";
 import axios from "axios";
 
@@ -63,7 +65,9 @@ export default {
     components: {
         BaseCard,
         ErrorDisplay,
-        draggable
+        draggable,
+        PrevStepButton,
+        Heading
     },
     inject: ['window'],
     data() {
@@ -80,9 +84,6 @@ export default {
         ...mapGetters('sellCar', ['getAllData', 'GET_OWNER_EMAIL']),
     },
     methods: {
-        back() {
-            this.$store.commit('sellCar/setStepMinus');
-        },
         remove(index) {
             this.imageTmpUrl.splice(index, 1)
             this.images.splice(index, 1);
@@ -115,25 +116,24 @@ export default {
                 formImages.append('files[' + i + ']', file);
             }
 
-            formImages.append('offer', JSON.stringify(self.getAllData));
-            formImages.append('email', self.GET_OWNER_EMAIL);
+            formImages.append('offer', JSON.stringify(this.$store.getters['uploadOffer/getVehicleState']));
 
             const config = {
                 headers: {
                     'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
                 }
             }
-            this.isLoading = true
 
             try {
-                await axios.post('offer/create', formImages, config);
+                this.isLoading = true
+                // await axios.post('offer/create', formImages, config);
+                this.isLoading = false;
             } catch (error) {
                 this.isLoading = false;
                 this.errors = {'errors': ['Имаме проблем с качването на обявата. Опитайте отново по-късно!']}
                 throw new Error('Offer or images cannot be created or uploaded');
             }
 
-            this.isLoading = false
         },
         async uploadOffer() {
             // const lArr = this.imageTmpUrl.length
@@ -149,9 +149,9 @@ export default {
             // }
 
             // this.$store.commit('sellCar/setCarImages', this.images);
-            await this.imageUpload();
-            this.$store.commit('sellCar/resetState');
-            this.$store.commit('sellCar/setStepPlus');
+            // await this.imageUpload();
+            // this.$store.commit('uploadOffer/resetVehicleState');
+            this.$store.commit('uploadOffer/setStepPlus');
         }
     }
 }

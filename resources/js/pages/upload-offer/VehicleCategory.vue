@@ -1,10 +1,10 @@
 <template>
     <div class="sell-car">
         <BaseCard>
-            <router-link class="back__button mb-2 d-block" :to="{name: 'upload'}">
+            <router-link class="back__button mb-2 d-inline-block" :to="{name: 'upload'}">
                 <span class="fw-light">
                     <i class="bi bi-arrow-left-short"></i>
-                    <i>Назад</i>
+                    <span>Назад</span>
                 </span>
             </router-link>
             <div class="question-section mb-4">

@@ -9,6 +9,7 @@
                             name="mobile"
                             placeholder="Мобилен номер"
                             id="mobile"
+                            type="tel"
                             :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                     />
                     <!--                    <input type="text"-->

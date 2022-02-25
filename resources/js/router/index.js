@@ -48,14 +48,14 @@ const routes = [
             hideFooter: true,
             title: 'Качване на обява'
         },
-        component: () => import("../pages/upload-offer/VehicleType")
-        // beforeEnter(to, from, next) {
-        //     if (store.getters['auth/GET_AUTH_USER']) {
-        //         next()
-        //     } else {
-        //         next({name: 'login'})
-        //     }
-        // }
+        component: () => import("../pages/upload-offer/VehicleType"),
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
+        }
     },
     {
         path: '/upload/:vehicleID',
@@ -65,6 +65,13 @@ const routes = [
         meta: {
             hideFooter: true,
             title: 'Качване на обява'
+        },
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
         }
     },
     {

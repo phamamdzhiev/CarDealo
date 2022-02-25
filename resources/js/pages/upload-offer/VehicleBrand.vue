@@ -19,14 +19,14 @@
             </div>
             <div class="question-section mb-3">
                 <h5 class="fw-bold">Каква марка е превозното средство?</h5>
-                <div class="form-group">
-                    <input
-                        type="text"
-                        id="search__brand"
-                        class="form__input"
+                <div class="form-group" style="max-width: 250px;">
+                    <FormKit
+                        type="search"
                         placeholder="Търси марка"
-                        autocomplete="off"
+                        value="Apple Cider"
+                        id="search__brand"
                         v-model.trim="keyword"
+                        autocomplete="off"
                     />
                 </div>
                 <!--                <div v-if="isLoading">Зареждане...</div>-->

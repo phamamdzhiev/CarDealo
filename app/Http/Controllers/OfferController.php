@@ -37,6 +37,7 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
+        dd(json_decode($request->input('offer')), true);
         $offerData = json_decode($request->input('offer'), true);
 
         Validator::make($offerData, [

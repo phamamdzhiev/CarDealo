@@ -5,13 +5,14 @@
             <TopBar/>
             <div class="question-section">
                 <Heading :title="`Какъв модел ${getState.brand.name} продаваш?`"/>
-                <div class="form-group">
-                    <input
-                        type="text"
-                        id="search__model"
-                        class="form__input"
+                <div class="form-group" style="max-width: 250px;">
+                    <FormKit
+                        type="search"
                         :placeholder="setPlaceholder"
+                        value="Apple Cider"
+                        id="search__model"
                         v-model.trim="filteredBrandModel"
+                        autocomplete="off"
                     />
                 </div>
                 <ul id="model">

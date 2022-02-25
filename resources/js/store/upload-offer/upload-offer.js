@@ -35,7 +35,13 @@ export default {
                 },
                 hp: null,
                 cm3: null,
-                km: null
+                km: null,
+                title: null,
+                description: null,
+                price:null,
+                hasPrice: false,
+                region: null,
+                city: null
             }
         }
     },
@@ -51,6 +57,7 @@ export default {
             state.vehicle.vehicleType = null;
             state.vehicle.vehicleCategory = null;
             state.vehicle.extras = [];
+            state.vehiclehasPrice = 1;
         },
         setVehicleState(state, {key, value}) {
             state.vehicle[key] = value;
@@ -66,6 +73,9 @@ export default {
         },
     },
     getters: {
+        isEmpty(state) {
+
+        },
         getVehicleState(state) {
             return state.vehicle;
         },

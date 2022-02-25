@@ -11,9 +11,32 @@
             </div>
             <div class="question-section">
                 <Heading title="Кубатура, мощност, пробег?"/>
-                <FormField @updateField="setState" id="hp" label="Мощност (к.с)" type="number"/>
-                <FormField @updateField="setState" id="cm3" label="Кубатура" type="number"/>
-                <FormField @updateField="setState" id="km" label="Пробег (км.)" type="number"/>
+                <FormKit
+                    type="number"
+                    id="hp"
+                    name="hp"
+                    label="Мощност"
+                    validation="required|number|max:2000|min:1"
+                    help="в конски сили"
+                    v-model.lazy="hp"
+                />
+                <FormKit
+                    type="number"
+                    id="km"
+                    name="km"
+                    label="Пробег"
+                    help="в километри"
+                    validation="required|number|max:999999|min:1"
+                    v-model.lazy="km"
+                />
+                <FormKit
+                    type="number"
+                    id="cm3"
+                    name="cm3"
+                    label="Кубатура"
+                    validation="required|number|max:9999|min:1"
+                    v-model.lazy="cm3"
+                />
             </div>
 
             <!--            <div class="question-se>ction">-->
@@ -65,8 +88,6 @@
 import BaseCard from "../../../components/ui/base/BaseCard.vue";
 import TopBar from "../TopBar";
 import FromInputValidationMessage from "../../../components/ui/FromInputValidationMessage";
-import useVuelidate from '@vuelidate/core';
-import {required, integer, minValue, maxValue, helpers} from '@vuelidate/validators'
 import PrevStepButton from "../partials/PrevStepButton";
 import NextStepButton from "../partials/NextStepButton";
 import Engine from "../partials/dynamic/Engine";
@@ -93,16 +114,46 @@ export default {
         const store = useStore();
 
         const getState = computed(() => {
-            return store.getters['uploadOffer/getState'];
+            return store.getters['uploadOffer/getVehicleState'];
+        });
+
+        const hp = computed({
+            get: () => {
+                return getState.value.hp;
+            },
+            set: (val) => {
+                setState({key: 'hp', value: val})
+            }
+        });
+
+        const km = computed({
+            get: () => {
+                return getState.value.km;
+            },
+            set: (val) => {
+                setState({key: 'km', value: val})
+            }
+        });
+
+        const cm3 = computed({
+            get: () => {
+                return getState.value.cm3;
+            },
+            set: (val) => {
+                setState({key: 'cm3', value: val})
+            }
         });
 
         function setState(state) {
-            store.commit('uploadOffer/setVehicleState', {key: state.key, value: parseInt(state.value)});
+            store.commit('uploadOffer/setVehicleState', state);
         }
 
         return {
             getState,
             store,
+            hp,
+            km,
+            cm3,
             setState
         }
     }

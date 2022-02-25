@@ -12,6 +12,7 @@
                     placeholder="Мобилен номер"
                     v-model.lazy.trim="loginState.mobile"
                     id="mobileLogin"
+                    type="tel"
                     :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                 />
                 <!--                            <input type="email" class="form-control form__input"-->
@@ -98,7 +99,7 @@ export default {
         const loginValidationRules = {
             mobile: {
                 required: helpers.withMessage('Номерът е задължителен', required),
-                minLength: helpers.withMessage('Въведете валиден номер', minLength(14)),
+                minLength: helpers.withMessage('Въведете валиден номер във формат +359 08хххххххх', minLength(14)),
             },
             password: {required: helpers.withMessage('Паролата е задължителна', required)}
         }

@@ -52,7 +52,7 @@ import {ref} from "vue";
 import {useStore} from "vuex";
 
 export default {
-    name: "SellCarExtras",
+    name: "VehicleExtras",
     components: {
         TopBar,
         BaseCard,

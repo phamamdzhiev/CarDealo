@@ -1,0 +1,54 @@
+.formkit-outer {
+    margin-bottom: 0.5rem;
+}
+
+.formkit-wrapper {
+    &.disabled {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+}
+
+.formkit-input {
+    border: 0;
+    padding: 0.5rem;
+    background-color: $form-bg;
+}
+
+.formkit-label {
+    font-size: 0.9rem;
+}
+
+.formkit-message {
+    font-size: 0.8rem;
+    color: $error-red;
+}
+
+.formkit-help {
+    font-size: 0.8rem;
+    color: $normal-gray;
+}
+
+button.formkit-input[type='submit'] {
+    @include base-primary-button;
+    padding: 0.75rem 2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+#hasPrice {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.back__button {
+    span {
+        font-style: italic;
+        cursor: pointer;
+        &:hover {
+            font-weight: bold;
+            color: $main-color;
+        }
+    }
+}

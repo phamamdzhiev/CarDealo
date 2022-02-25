@@ -67,7 +67,7 @@
     <div class="container-xxl text-center py-5 my-5" v-else>
         <h4>
             Все още нямате активни обяви. Може да добавите нова обява от
-            <router-link class="text-base-color fw-bold" :to="{name: 'sell.car'}">
+            <router-link class="text-base-color fw-bold" :to="{name: 'upload'}">
                 ТУК
             </router-link>
         </h4>

@@ -7,6 +7,11 @@
  */
 
 // window.axios = require('axios');
+import axios from "axios";
+
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.baseURL = window.APP_URL + '/api/';
+axios.defaults.withCredentials = true;
 
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

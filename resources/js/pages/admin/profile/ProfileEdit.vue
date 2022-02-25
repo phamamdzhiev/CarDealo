@@ -11,6 +11,7 @@
                             name="mobile"
                             v-model.lazy.trim="mobile"
                             id="mobile"
+                            type="tel"
                             required
                             :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                         />

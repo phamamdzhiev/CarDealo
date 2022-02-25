@@ -6,9 +6,9 @@
         <VehicleYear v-if="getStep === 4"></VehicleYear>
         <component v-if="getStep === 5" :is="setComponent + 'Variant'"/>
         <VehicleExtras v-if="getStep === 6"></VehicleExtras>
-<!--        <OfferDetails v-if="getStep === 7"></OfferDetails>-->
-        <!--        <SellCarImages v-if="getStep === 8"></SellCarImages>-->
-        <!--        <SellCarFinal v-if="getStep === 9"></SellCarFinal>-->
+        <OfferDetails v-if="getStep === 7"></OfferDetails>
+        <VehicleImages v-if="getStep === 8"></VehicleImages>
+        <Success v-if="getStep === 9"></Success>
     </div>
 </template>
 
@@ -20,12 +20,10 @@ import VehicleBrand from "./VehicleBrand";
 import SellCarModel from "./cars/SellCarModel";
 import SellCarVariant from "./cars/SellCarVariant";
 import VehicleYear from "./VehicleYear";
-
-
 import VehicleExtras from "./VehicleExtras";
-import SellCarImages from "./SellCarImages";
-// import OfferDetails from "./OfferDetails";
-import SellCarFinal from "./SellCarFinal";
+import OfferDetails from "./OfferDetails";
+import VehicleImages from "./VehicleImages";
+import Success from "./Success";
 
 export default {
     name: "SellCar",
@@ -39,10 +37,9 @@ export default {
         VehicleYear,
         SellCarVariant,
         VehicleExtras,
-        // OfferDetails,
-
-        SellCarImages,
-        SellCarFinal,
+        OfferDetails,
+        VehicleImages,
+        Success,
     },
     mounted() {
         this.$store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: parseInt(this.vehicleID)});
@@ -58,7 +55,7 @@ export default {
             return this.$store.getters['uploadOffer/getStep'];
         },
         getAllData() {
-            return this.$store.getters['sellCar/getAllData'];
+            return this.$store.getters['uploadOffer/getVehicleState'];
         }
     },
     async created() {
