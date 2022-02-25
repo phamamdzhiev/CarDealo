@@ -14,10 +14,10 @@
                         v-for="item in vehicleCategories"
                         :key="item.id"
                         :class="['item position-relative', {active: getVehicleCategory === item.id}]"
-                        @click="store.commit('uploadOffer/setState', {key: 'vehicleCategory', value: item.id});">
+                        @click="store.commit('uploadOffer/setVehicleState', {key: 'vehicleCategory', value: item.id});">
                         <span
                             v-show="getVehicleCategory === item.id"
-                            @click.stop="store.commit('uploadOffer/setState', {key: 'vehicleCategory', value: null})"
+                            @click.stop="store.commit('uploadOffer/setVehicleState', {key: 'vehicleCategory', value: null})"
                             class="position-absolute top-0 start-100 translate-middle fw-bold">
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
@@ -62,7 +62,7 @@ export default {
         let isLoading = ref(false);
 
         const getVehicleCategory = computed(() => {
-            return store.getters['uploadOffer/getState'].vehicleCategory;
+            return store.getters['uploadOffer/getVehicleState'].vehicleCategory;
         });
 
         return {

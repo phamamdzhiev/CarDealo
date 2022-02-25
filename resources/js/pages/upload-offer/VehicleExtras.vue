@@ -1,87 +1,42 @@
 <template>
     <div class="sell-car">
         <base-card>
-            <span @click="setStepMinus" class="back__button">Назад <i class="fw-light">(Стъпка 4)</i></span>
+            <PrevStepButton/>
             <TopBar/>
             <div class="question-section mb-3">
-                <h5 class="fw-bold">Избери какви екстри има твоята кола</h5>
-                <nav>
-                    <ul id="car-extras-categories">
-                        <li :class="{ active: showExtraCategory === 1 }" @click="showExtraCategory = 1">Безопастност
-                        </li>
-                        <li :class="{ active: showExtraCategory === 2 }" @click="showExtraCategory = 2">Комфорт</li>
-                        <li :class="{ active: showExtraCategory === 3 }" @click="showExtraCategory = 3">Интериор</li>
-                        <li :class="{ active: showExtraCategory === 4 }" @click="showExtraCategory = 4">Ектериор</li>
-                        <li :class="{ active: showExtraCategory === 5 }" @click="showExtraCategory = 5">Защита</li>
-                        <li :class="{ active: showExtraCategory === 6 }" @click="showExtraCategory = 6">Други</li>
-                    </ul>
-                </nav>
+                <Heading title="Изберете екстри"/>
                 <ul id="extras">
-
-                    <!--<ul>-->
-                    <!--<li v-for="item in items" :class="{highlight:selected2.includes(item.id)}"-->
-                    <!--    @click="selected2.includes(item.id) ? selected2.splice(selected2.indexOf(item.id), 1) : selected2.push(item.id)">-->
-                    <!--    {{ item.id }}-->
-                    <!--</li>-->
-                    <!--</ul>-->
-                    <div v-show="showExtraCategory === 1" id="car-extra-category-1">
-                        <li
-                            v-for="item in getCarExtrasApi['car_extra_1']"
-                            :key="item.id"
-                            ref="element"
-                            :class="{ active: selectedExtras.includes(item) }"
-                            :data-extra-category="item['extra_category']"
-                            :data-extra-name="item['extra']"
-                            @click="selectedExtras.includes(item) ?
-                                    selectedExtras.splice(selectedExtras.indexOf(item), 1) :
-                                    selectedExtras.push(item)
-                                   ">
-                            {{ item.extra }}
-                        </li>
-                    </div>
-                    <div v-show="showExtraCategory === 4" id="car-extra-category-4">
-                        <li
-                            v-for="ex in getCarExtrasApi['car_extra_4']"
-                            :key="ex.id"
-                            :data-extra-name="ex.extra"
-                            ref="element"
-                            @click="addToCollection(ex)"
-                        >
-                            {{ ex.extra }}
-                        </li>
-                    </div>
+                    <li
+                        v-for="item in vehicleExtras"
+                        :key="item.id">
+                        {{ item.name }}
+                    </li>
                 </ul>
             </div>
             <div class="question-section mb-3">
-                <div class="form-floating">
-                    <select class="form-select form__input m-0" v-model="getAllData['car_color']"
-                            id="floatingSelectCarColor">
-                        <option value="Бял">Бял</option>
-                        <option value="Черен">Черен</option>
-                        <option value="Лилав">Лилал</option>
-                        <option value="Бронз">Броз</option>
-                        <option value="Металик">Металик</option>
-                    </select>
-                    <label for="floatingSelectCarColor">Моля изберете цвят</label>
-                </div>
+                <SelectField label="Цвят" id="color" :options="colors" @emitFromSelectable="setState"/>
             </div>
-            <div class="question-section">
-                <div class="form-floating">
-                    <select id="floatingSelectCarCategory" v-model="getAllData['car_category']"
-                            class="form-select form__input m-0">
-                        <option value="Ван">Ван</option>
-                        <option value="Джип">Джип</option>
-                        <option value="Кабрио">Кабрио</option>
-                        <option value="Купе">Купе</option>
-                        <option value="Седан">Седан</option>
-                        <option value="Комби">Комби</option>
-                    </select>
-                    <label for="floatingSelectCarCategory">Моля изберете категория</label>
-                </div>
+            <div class="question-section mb-3">
+                <SelectField label="Евро стандарт"
+                             id="euroStandard"
+                             :options="euroStandards"
+                             @emitFromSelectable="setState"/>
             </div>
-            <button class="base-button" @click="showStepSix" v-show="toggleNextStepButton">
-                Следваща стъпка
-            </button>
+            <!--            <div class="question-section">-->
+            <!--                <div class="form-floating">-->
+            <!--                    <select id="floatingSelectCarCategory" v-model="getAllData['car_category']"-->
+            <!--                            class="form-select form__input m-0">-->
+            <!--                        <option value="Ван">Ван</option>-->
+            <!--                        <option value="Джип">Джип</option>-->
+            <!--                        <option value="Кабрио">Кабрио</option>-->
+            <!--                        <option value="Купе">Купе</option>-->
+            <!--                        <option value="Седан">Седан</option>-->
+            <!--                        <option value="Комби">Комби</option>-->
+            <!--                    </select>-->
+            <!--                    <label for="floatingSelectCarCategory">Моля изберете категория</label>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <NextStepButton/>
         </base-card>
     </div>
 </template>
@@ -89,47 +44,91 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard.vue";
 import TopBar from "./TopBar";
-import {mapGetters, mapMutations} from "vuex";
+import PrevStepButton from "./partials/PrevStepButton";
+import NextStepButton from "./partials/NextStepButton";
+import Heading from "./partials/Heading";
+import SelectField from "../../components/ui/forms/SelectField";
+import {ref} from "vue";
+import {useStore} from "vuex";
 
 export default {
     name: "SellCarExtras",
     components: {
         TopBar,
-        BaseCard
+        BaseCard,
+        PrevStepButton,
+        NextStepButton,
+        Heading,
+        SelectField
     },
-    data() {
-        return {
-            showExtraCategory: 1,
-            selectedExtras: [],
-            extra1: [],
-            extra2: [],
-            extra3: [],
-            extra4: [],
-            extra5: [],
-            extra6: [],
+    setup() {
+        const store = useStore();
+
+        let vehicleExtras = ref([
+            {id: 1, name: "ABS"},
+            {id: 2, name: "ESP"},
+        ]);
+
+        let colors = ref([
+            {id: 1, name: 'Черен'},
+            {id: 2, name: 'Бял'},
+            {id: 3, name: 'Син'},
+            {id: 4, name: 'Лилав'},
+        ]);
+
+        let euroStandards = ref([
+            {id: 1, name: 'I'},
+            {id: 2, name: 'II'},
+            {id: 3, name: 'III'},
+            {id: 4, name: 'IV'},
+            {id: 5, name: 'V'},
+            {id: 6, name: 'VI'},
+        ]);
+
+        function setState(state) {
+            store.commit('uploadOffer/setVehicleState', {key: state.key, value: state.value});
         }
-    },
-    computed: {
-        ...mapGetters('sellCar', ['getAllData', 'getCarExtrasApi']),
 
-        toggleNextStepButton() {
-            return !!(this.selectedExtras.length > 0 &&
-                this.getAllData['car_category'] &&
-                this.getAllData['car_color']
-            );
-        },
-    },
-    methods: {
-        ...mapMutations('sellCar', ['setStepMinus', 'setCarColor', 'setCarCategory', 'setStepPlus']),
-
-        showStepSix() {
-            if (!this.toggleNextStepButton) return;
-
-            this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
-            this.setStepPlus();
-        },
-    },
+        return {
+            vehicleExtras,
+            colors,
+            setState,
+            euroStandards
+        }
+    }
 }
+// data() {
+//     return {
+//         showExtraCategory: 1,
+//         selectedExtras: [],
+//         extra1: [],
+//         extra2: [],
+//         extra3: [],
+//         extra4: [],
+//         extra5: [],
+//         extra6: [],
+//     }
+// },
+// computed: {
+//     ...mapGetters('sellCar', ['getAllData', 'getCarExtrasApi']),
+//
+//     toggleNextStepButton() {
+//         return !!(this.selectedExtras.length > 0 &&
+//             this.getAllData['car_category'] &&
+//             this.getAllData['car_color']
+//         );
+//     },
+// },
+// methods: {
+//     ...mapMutations('sellCar', ['setStepMinus', 'setCarColor', 'setCarCategory', 'setStepPlus']),
+//
+//     showStepSix() {
+//         if (!this.toggleNextStepButton) return;
+//
+//         this.$store.commit('sellCar/setCarExtras', this.selectedExtras);
+//         this.setStepPlus();
+//     },
+// },
 </script>
 
 <style scoped>

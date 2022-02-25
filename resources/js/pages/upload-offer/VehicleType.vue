@@ -1,7 +1,6 @@
 <template>
     <div class="sell-car">
         <BaseCard>
-            {{ $store.getters['carOffer/getState'] }}
             <div class="question-section mb-4">
                 <Heading title="Вид на превозното средство?"/>
                 <ul class="options-list">
@@ -32,6 +31,7 @@ import NextStepButton from "./partials/NextStepButton";
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
+// import offerState from "../../store/upload-offer/upload-offer";
 
 export default {
     name: "VehicleType",
@@ -65,13 +65,14 @@ export default {
         }
 
         function setVehicleType(t) {
-            store.commit('uploadOffer/resetState');
+            // store.commit('uploadOffer/resetState');
             typeID.value = t;
         }
 
         //hooks
         // onMounted(() => {
-        //     store.registerModule('vehicle', vehicleModule, {preserveState: true});
+        //     console.log('mounted')
+        //     store.registerModule('ooo', offerState, {preserveState: true});
         // });
         //
         // onBeforeUnmount(() => {

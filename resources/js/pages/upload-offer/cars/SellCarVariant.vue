@@ -97,12 +97,8 @@ export default {
         });
 
         function setState(state) {
-            store.commit('carOffer/setState', {key: state.id, value: state.value});
+            store.commit('uploadOffer/setVehicleState', {key: state.key, value: parseInt(state.value)});
         }
-
-        onBeforeUnmount(() => {
-            store.unregisterModule('carOffer')
-        });
 
         return {
             getState,

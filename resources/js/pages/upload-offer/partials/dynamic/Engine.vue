@@ -4,7 +4,7 @@
         <li v-for="en in engines"
             :key="en.id"
             :class="{ active: getState.engine.id === en.id}"
-            @click="store.commit('carOffer/setState', {key:'engine', value: en})">
+            @click="store.commit('uploadOffer/setVehicleState', {key:'engine', value: en})">
             {{ en.name }}
         </li>
     </ul>
@@ -29,7 +29,7 @@ export default {
         ]);
 
         const getState = computed(() => {
-            return store.getters['carOffer/getState'];
+            return store.getters['uploadOffer/getVehicleState'];
         });
 
         return {

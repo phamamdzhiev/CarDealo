@@ -4,6 +4,7 @@
                class="form-control form__input"
                :placeholder="label"
                @change="vModelEmit($event)"
+               :value="$store.getters['uploadOffer/getVehicleState'][id]"
         />
         <label :for="id">{{label}}</label>
 <!--        <FromInputValidationMessage v-if="v$.carHp.$error"-->
@@ -32,7 +33,7 @@ export default {
     },
     methods: {
         vModelEmit(e) {
-            this.$emit('updateField', {value: e.target.value, id: e.target.id});
+            this.$emit('updateField', {key: e.target.id, value: e.target.value});
         }
     }
 }

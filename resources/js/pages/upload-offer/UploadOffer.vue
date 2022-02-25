@@ -1,12 +1,12 @@
 <template>
     <div>
-        <VehicleCategory v-if="getStep === 1" />
+        <VehicleCategory v-if="getStep === 1"/>
         <VehicleBrand v-if="getStep === 2"></VehicleBrand>
         <component v-if="getStep === 3" :is="setComponent + 'Model'"/>
-        <VehicleYear v-if="getStep === 4" ></VehicleYear>
+        <VehicleYear v-if="getStep === 4"></VehicleYear>
         <component v-if="getStep === 5" :is="setComponent + 'Variant'"/>
-        <!--        <SellCarExtras v-if="getStep === 6"></SellCarExtras>-->
-        <!--        <OwnerDetails v-if="getStep === 7"></OwnerDetails>-->
+        <VehicleExtras v-if="getStep === 6"></VehicleExtras>
+<!--        <OfferDetails v-if="getStep === 7"></OfferDetails>-->
         <!--        <SellCarImages v-if="getStep === 8"></SellCarImages>-->
         <!--        <SellCarFinal v-if="getStep === 9"></SellCarFinal>-->
     </div>
@@ -18,15 +18,15 @@ import VehicleType from "./VehicleType";
 import VehicleCategory from "./VehicleCategory";
 import VehicleBrand from "./VehicleBrand";
 import SellCarModel from "./cars/SellCarModel";
-import VehicleYear from "./VehicleYear";
 import SellCarVariant from "./cars/SellCarVariant";
+import VehicleYear from "./VehicleYear";
 
 
-import SellCarExtras from "./SellCarExtras";
+import VehicleExtras from "./VehicleExtras";
 import SellCarImages from "./SellCarImages";
-import OwnerDetails from "./OwnerDetails";
+// import OfferDetails from "./OfferDetails";
 import SellCarFinal from "./SellCarFinal";
-import cars from "../../store/upload-offer/car";
+
 export default {
     name: "SellCar",
     props: ['vehicleID'],
@@ -37,23 +37,22 @@ export default {
         VehicleBrand,
         SellCarModel,
         VehicleYear,
-
         SellCarVariant,
-        SellCarExtras,
+        VehicleExtras,
+        // OfferDetails,
+
         SellCarImages,
-        OwnerDetails,
         SellCarFinal,
     },
     mounted() {
-        this.$store.commit('uploadOffer/setState', {key: 'vehicleType', value: parseInt(this.vehicleID)});
+        this.$store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: parseInt(this.vehicleID)});
     },
     computed: {
         setComponent() {
-          switch (this.$route.params.vehicleID) {
-              case '1':
-                  this.$store.registerModule('carOffer', cars);
-                  return 'SellCar';
-          }
+            switch (this.$route.params.vehicleID) {
+                case '1':
+                    return 'SellCar';
+            }
         },
         getStep() {
             return this.$store.getters['uploadOffer/getStep'];

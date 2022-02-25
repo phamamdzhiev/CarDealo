@@ -6,11 +6,3 @@ export const uploadOfferPersist = {
     ],
     storage: window.sessionStorage,
 };
-
-// export const carOfferPersist = {
-//     key: 'car',
-//     paths: [
-//         'carOffer.car'
-//     ],
-//     storage: window.sessionStorage,
-// };

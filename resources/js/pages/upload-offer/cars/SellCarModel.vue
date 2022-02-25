@@ -40,7 +40,7 @@ import Heading from "../partials/Heading";
 import NextStepButton from "../partials/NextStepButton";
 
 export default {
-    name: "VehicleModel",
+    name: "SellCarModel",
     components: {
         Heading,
         TopBar,
@@ -60,11 +60,11 @@ export default {
         ]);
 
         const getState = computed(() => {
-            return store.getters['uploadOffer/getState'];
+            return store.getters['uploadOffer/getVehicleState'];
         });
 
         function setModel(model) {
-            store.commit('uploadOffer/setState', {key: 'model', value: model})
+            store.commit('uploadOffer/setVehicleState', {key: 'model', value: model})
         }
 
         const filteredModelBySearchField = computed(() => {

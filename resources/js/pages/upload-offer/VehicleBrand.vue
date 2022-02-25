@@ -88,7 +88,7 @@ export default {
         let brandsArray = ref(null);
 
         const getState = computed(() => {
-            return store.getters['uploadOffer/getState'];
+            return store.getters['uploadOffer/getVehicleState'];
         });
 
         function showStepTwo() {
@@ -98,7 +98,7 @@ export default {
         }
 
         function setState(payload) {
-            store.commit('uploadOffer/setState', payload);
+            store.commit('uploadOffer/setVehicleState', payload);
         }
 
         //hooks

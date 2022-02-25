@@ -82,13 +82,13 @@ export default {
     },
     computed: {
         getState() {
-            return this.$store.getters['uploadOffer/getState'];
+            return this.$store.getters['uploadOffer/getVehicleState'];
         }
     },
     methods: {
-        ...mapMutations('uploadOffer', ['setStepPlus', 'setState']),
+        ...mapMutations('uploadOffer', ['setStepPlus', 'setVehicleState']),
         setYear(year) {
-            this.setState({key: 'year', value: parseInt(year)});
+            this.setVehicleState({key: 'year', value: parseInt(year)});
         }
     }
 }

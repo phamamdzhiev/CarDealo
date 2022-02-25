@@ -1,8 +1,9 @@
 <template>
     <Heading title="Трансмисия?"/>
     <ul id="transmission">
-        <li v-for="transmission in transmissions" :key="transmission.id" :class="{ active: getState.transmission.id === transmission.id}"
-            @click="store.commit('carOffer/setState', {key: 'transmission', value:transmission})">
+        <li v-for="transmission in transmissions" :key="transmission.id"
+            :class="{ active: getState.transmission.id === transmission.id}"
+            @click="store.commit('uploadOffer/setVehicleState', {key: 'transmission', value:transmission})">
             {{ transmission.name }}
         </li>
     </ul>
@@ -25,7 +26,7 @@ export default {
             {id: 3, name: 'Полу-автоматична'},
         ]);
         const getState = computed(() => {
-            return store.getters['carOffer/getState'];
+            return store.getters['uploadOffer/getVehicleState'];
         });
 
         return {

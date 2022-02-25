@@ -1,33 +1,3 @@
-export default {
-    namespaced: true,
-    state() {
-        return {
-            car: {
-                hp: null,
-                cm3: null,
-                km: null,
-                transmission: {
-                    name: null,
-                    id: null
-                },
-                engine: {
-                    name: null,
-                    id: null
-                },
-            }
-        }
-    },
-    mutations: {
-        setState(state, {key, value}) {
-            state.car[key] = value;
-        },
-    },
-    getters: {
-        getState(state) {
-            return state.car;
-        }
-    }
-}
 // export default {
 //     namespaced: true,
 //     state() {
