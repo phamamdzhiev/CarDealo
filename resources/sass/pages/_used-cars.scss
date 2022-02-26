@@ -10,10 +10,10 @@ ul.tabs-component-tabs {
         border-bottom: 2px solid transparent;
 
         &.is-active {
-            border-bottom: 2px solid $main-color;
+            border-bottom: 2px solid $primary-color;
 
             a {
-                color: $main-color;
+                color: $primary-color;
             }
         }
     }

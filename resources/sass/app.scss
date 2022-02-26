@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap');
 //bs 5
 @import "bootstrap/scss/bootstrap.scss";
 
 @import "abstracts/variables";
+//@import "abstracts/fonts";
 @import "abstracts/mixins";
 @import 'abstracts/global';
 @import "abstracts/forms";
@@ -15,7 +17,7 @@
 //pages
 @import 'pages/_home';
 @import "pages/used-cars";
-@import "pages/sell-car/sell-car";
+@import "pages/upload-offer/upload-offer";
 @import "pages/advanced-search/advanced-search";
 @import "pages/profile";
 //components
@@ -29,7 +31,7 @@ html {
 body {
     background-color: #fafafa;
     position: relative;
-    font-family: "Nunito", sans-serif;
+    font-family: $font-family;
 }
 
 #app {
@@ -39,6 +41,7 @@ body {
 a, p, h1, h2, h3, h4, h5, h6, li, button {
     color: $secondary-color;
 }
+
 //p {
 //    font-size: 1.125rem;
 //}

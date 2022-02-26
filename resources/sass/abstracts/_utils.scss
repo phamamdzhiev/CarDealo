@@ -4,27 +4,27 @@
 }
 
 .text-base-color {
-    color: $main-color;
+    color: $primary-color !important;
 }
 
 .text-secondary-color {
-    color: $secondary-color;
+    color: $secondary-color !important;
 }
 
 .text-success-color {
-    color: $success-color;
+    color: $success-color !important;
 }
 
 .text-error-color {
-    color: $error-red;
+    color: $error-color !important;
 }
 
 .text-warning-color {
-    color: $warning-color;
+    color: $warning-color !important;
 }
 
 .text-link-blue {
-    color: $link-blue;
+    color: $link-blue !important;
 
     &:hover {
         color: darken($link-blue, 5%);

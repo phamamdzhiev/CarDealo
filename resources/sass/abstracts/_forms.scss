@@ -1,3 +1,7 @@
+.form-group {
+    margin-bottom: 1rem;
+}
+
 .formkit-outer {
     margin-bottom: 0.5rem;
 }
@@ -21,7 +25,7 @@
 
 .formkit-message {
     font-size: 0.8rem;
-    color: $error-red;
+    color: $error-color;
 }
 
 .formkit-help {
@@ -48,7 +52,7 @@ button.formkit-input[type='submit'] {
         cursor: pointer;
         &:hover {
             font-weight: bold;
-            color: $main-color;
+            color: $primary-color;
         }
     }
 }

@@ -1,6 +1,6 @@
 .base-button {
     @include base-primary-button();
-    @include ripple($main-color);
+    @include ripple($primary-color);
 }
 
 .reset-btn-styles {
