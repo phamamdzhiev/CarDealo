@@ -62,6 +62,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Offer notApproved()
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereIsApproved($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereUserId($value)
+ * @property-read \App\Models\TopOffer|null $topOffers
+ * @property-read \App\Models\VipOffer|null $vipOffers
  */
 class Offer  extends Model
 {
@@ -110,5 +112,23 @@ class Offer  extends Model
     public function scopeNotApproved($query): mixed
     {
         return $query->where('is_approved', '=', 0);
+    }
+
+    //Paid Offers
+
+    /**
+     * @return BelongsTo
+     */
+    public function vipOffers(): BelongsTo
+    {
+        return $this->belongsTo(VipOffer::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function topOffers(): BelongsTo
+    {
+        return $this->belongsTo(TopOffer::class);
     }
 }

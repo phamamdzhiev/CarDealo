@@ -19,6 +19,7 @@
                     placeholder="Мобилен номер"
                     v-model.lazy.trim="registerState.mobile"
                     id="mobile"
+                    type="tel"
                     :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                 />
                 <!--                            <input type="text" class="form-control form__input"-->
@@ -154,6 +155,8 @@ export default {
             },
             companyEik: {
                 requiredIf: helpers.withMessage('ЕИК/Булстат е задължителен', requiredIf(() => registerState.is_business)),
+                minLength: helpers.withMessage('Въведете валиден ЕИК/Булстат', minLength(9)),
+                maxLength: helpers.withMessage('Въведете валиден ЕИК/Булстат', maxLength(15)),
             }
         }
 

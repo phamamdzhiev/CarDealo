@@ -48,6 +48,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \App\Models\Merchant|null $merchant
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Message[] $messages
  * @property-read int|null $messages_count
+ * @property string|null $image_path
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereImagePath($value)
  */
 class User extends Authenticatable
 {

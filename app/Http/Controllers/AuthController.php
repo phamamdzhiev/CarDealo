@@ -29,6 +29,7 @@ class AuthController extends Controller
     {
         //
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -104,37 +105,33 @@ class AuthController extends Controller
      */
     public function register(UserCreation $request): JsonResponse
     {
-        try {
-            $user = User::whereMobile($request->input('mobile'))->first();
+        $user = User::whereMobile($request->input('mobile'))->first();
 
-            if (empty($user)) {
-                $user = User::create([
-                    'name' => $request->input('names'),
-                    'email' => $request->input('email'),
-                    'mobile' => $request->input('mobile'),
-                    'password' => Hash::make($request->input('password')),
-                    'is_business' => $request->input('is_business'),
-                    'ip' => $request->ip(),
+        if (empty($user)) {
+            $user = User::create([
+                'name' => $request->input('names'),
+                'email' => $request->input('email'),
+                'mobile' => $request->input('mobile'),
+                'password' => Hash::make($request->input('password')),
+                'is_business' => $request->input('is_business'),
+                'ip' => $request->ip(),
+            ]);
+
+            if ($request->input('is_business')) {
+                Merchant::create([
+                    'user_id' => $user->id,
+                    'name' => $request->input('company'),
+                    'address' => $request->input('companyAddress'),
+                    'eik' => $request->input('companyEik'),
+                    'domain' => null
                 ]);
-
-                if ($request->input('is_business')) {
-                    Merchant::create([
-                        'user_id' => $user->id,
-                        'name' => $request->input('company'),
-                        'address' => $request->input('companyAddress'),
-                        'eik' => $request->input('companyEik'),
-                        'domain' => null
-                    ]);
-                }
             }
-
-            Auth::login($user); // manually log the user
-            $user->createToken('api-token')->plainTextToken;
-
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Error Occurs']);
         }
+
+        Auth::login($user); // manually log the user
+        $user->createToken('api-token')->plainTextToken;
+
+        return response()->json(['success' => true,'user' => $user]);
     }
 
     public function logout(Request $request): JsonResponse

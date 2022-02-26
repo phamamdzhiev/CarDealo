@@ -11,16 +11,17 @@
                             name="mobile"
                             v-model.lazy.trim="mobile"
                             id="mobile"
+                            type="tel"
                             required
                             :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
                         />
-<!--                        <input type="text" class="form-control form__input"-->
-<!--                               placeholder="Смяна на мобилен номер"-->
-<!--                               name="mobile"-->
-<!--                               v-model.lazy.trim="mobile"-->
-<!--                               id="mobile"-->
-<!--                               required-->
-<!--                        />-->
+                        <!--                        <input type="text" class="form-control form__input"-->
+                        <!--                               placeholder="Смяна на мобилен номер"-->
+                        <!--                               name="mobile"-->
+                        <!--                               v-model.lazy.trim="mobile"-->
+                        <!--                               id="mobile"-->
+                        <!--                               required-->
+                        <!--                        />-->
                         <label for="mobile">Нов мобилен номер</label>
                         <FromInputValidationMessage v-if="v$.mobile.$error"
                                                     :messages="v$.mobile.$errors"/>
@@ -64,6 +65,12 @@
                 </form>
             </div>
         </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-6">
+               <upload-avatar/>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -76,6 +83,7 @@ import PasswordVisibilityToggle from "../../../components/ui/PasswordVisibilityT
 import pswVisibilityToggleMixin from "../../../mixins/psw-toggle-visibility";
 import ErrorDisplay from "../../../components/ui/ErrorDisplay";
 import Cleave from "vue-cleave-component";
+import UploadAvatar from "./partials/UploadAvatar";
 
 export default {
     name: "ProfileEdit",
@@ -83,7 +91,8 @@ export default {
         FromInputValidationMessage,
         PasswordVisibilityToggle,
         ErrorDisplay,
-        Cleave
+        Cleave,
+        UploadAvatar
     },
     mixins: [pswVisibilityToggleMixin],
     data() {
@@ -99,8 +108,8 @@ export default {
     validations() {
         return {
             mobile: {
-                minLength: helpers.withMessage('Номерът трябва да бъде 10 цифрен', minLength(14)),
-                maxLength: helpers.withMessage('Номерът трябва да бъде 10 цифрен', maxLength(14)),
+                minLength: helpers.withMessage('Въведете валиден номер', minLength(14)),
+                maxLength: helpers.withMessage('Въведете валиден номер', maxLength(14)),
             }
 
         }
@@ -113,15 +122,16 @@ export default {
             const isFormCorrect = await this.v$.$validate();
             if (!isFormCorrect) return;
             try {
-                const res = await axios.patch('user/edit/mobile', {mobile: this.mobile});
+                const res = await axios.patch('profile/edit/mobile', {mobile: this.mobile});
                 if (res.data.success) {
-                    this.errors = null;
-                    this.mobile = null;
                     this.$toast.open({
                         message: "Успешно променихте номера!",
                         type: 'success',
-                        duration: 5000,
-                        dismissible: true
+                        duration: 3000,
+                        dismissible: true,
+                        onDismiss() {
+                            window.location.reload()
+                        }
                     })
                 }
             } catch (e) {
@@ -132,21 +142,21 @@ export default {
         },
         async handlePasswordUpdate() {
             try {
-                const res = await axios.patch('user/edit/password',
+                const res = await axios.patch('profile/edit/password',
                     {
                         passwordOld: this.passwordOld,
                         passwordNew: this.passwordNew,
                     }
                 );
                 if (res.data.success) {
-                    this.errors = null;
-                    this.passwordOld = null;
-                    this.passwordNew = null;
                     this.$toast.open({
                         message: "Успешно променихте паролата!",
                         type: 'success',
-                        duration: 5000,
-                        dismissible: true
+                        duration: 3000,
+                        dismissible: true,
+                        onDismiss() {
+                            window.location.reload()
+                        }
                     })
                 }
             } catch (e) {

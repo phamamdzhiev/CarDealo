@@ -4,10 +4,10 @@
             <router-link :to="'/car/' + offer.id">
                 <img v-if="offer.images.length > 0"
                      class="img-fluid"
-                     :src="asset('storage/' + offer.images[0].image)"
+                     :src="asset(offer.images[0].image)"
                      alt=""
                 />
-                <img v-else :src="asset('storage/noimage.jpg')" class="img-fluid" alt="Default image">
+                <img v-else :src="asset('noimage.jpg')" class="img-fluid" alt="Default image">
             </router-link>
         </div>
         <div class="vehicle-details">

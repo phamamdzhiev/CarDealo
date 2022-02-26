@@ -2,7 +2,7 @@
     <BaseCard>
         <div class="row">
             <div class="col-lg-3" style="border-right: 1px solid #c6c6c6">
-                <ul>
+                <ul class="profile-settings-menu">
                     <li class="d-flex align-items-center">
                         <span class="me-2 fs-5"><i class="bi bi-house"></i></span>
                         <router-link :to="{name: 'Profile'}">
@@ -36,9 +36,16 @@
             </div>
             <div class="col-lg-9">
                 <div v-if="$route.name === 'Profile'">
-                    <h6>Имена: {{ user.name }}</h6>
-                    <h6>Имейл: {{ user.email }}</h6>
-                    <h6>Мобилен: {{ user.mobile }}</h6>
+                    <div class="user_avatar">
+                        <img v-if="authUser.image_path" class="img-fluid rounded-circle" width="100" height="100" :src="asset('users/avatars/' + authUser.image_path)" alt="User Avatar">
+                        <img v-else class="img-fluid" width="100" height="100" :src="asset('app-images/default-avatar.png')" alt="User Avatar">
+                    </div>
+
+                    <div class="user_details">
+                        <h6>Имена: {{ authUser.name }}</h6>
+                        <h6>Имейл: {{ authUser.email }}</h6>
+                        <h6>Мобилен: {{ authUser.mobile }}</h6>
+                    </div>
                 </div>
                 <router-view v-else></router-view>
             </div>
@@ -49,6 +56,7 @@
 <script>
 import BaseCard from "../../../components/ui/base/BaseCard";
 import Logout from "../../../components/layout/header/Logout";
+import assetMixin from "../../../mixins/asset";
 
 export default {
     name: "Profile",
@@ -56,13 +64,14 @@ export default {
         BaseCard,
         Logout
     },
+    mixins: [assetMixin],
     data() {
         return {
             user: window.AUTH,
         }
     },
     computed: {
-        user() {
+        authUser() {
             return this.$store.getters['auth/GET_AUTH_USER'];
         }
     }

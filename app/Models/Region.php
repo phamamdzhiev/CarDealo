@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Region whereRegion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Region whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $is_popular
+ * @method static \Illuminate\Database\Eloquent\Builder|Region whereIsPopular($value)
  */
 class Region extends Model
 {

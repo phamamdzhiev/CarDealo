@@ -1,22 +1,13 @@
 .input__error {
-    color: $error-red;
+    color: $error-color;
     font-weight: bold;
     padding-left: 0.15rem;
 }
 
-input[type='number'] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
 
 .bi-exclamation-circle,
 .bi-exclamation-circle-fill {
-    color: $error-red;
+    color: $error-color;
 }
 
 hr {
@@ -50,7 +41,7 @@ hr {
     height: 32px !important;
     color: white !important;
     border: 2px solid white !important;
-    background-color: $main-color !important;
+    background-color: $primary-color !important;
     border-radius: 50%;
 
     &:after {

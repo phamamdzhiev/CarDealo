@@ -1,32 +1,8 @@
-// import Cookies from "js-cookie";
-
-export const sellCarPersist = {
-    key: 'sellCar',
+export const uploadOfferPersist = {
+    key: 'offer',
     paths: [
-        'sellCar.car_offer',
-        'sellCar.step',
-        'sellCar.selected_brand_id',
-        'sellCar.selected_model_id',
-        'sellCar.car_brand_with_models',
-        'sellCar.firstLoad'
+        'uploadOffer.vehicle',
+        'uploadOffer.step',
     ],
-    fetchBeforeUse: false,
     storage: window.sessionStorage,
 };
-//
-// export const persistAuthUser = {
-//     key: 'auth',
-//     paths: [
-//         'auth.is_authenticated',
-//         'auth.user'
-//     ],
-//     storage: window.sessionStorage
-// storage: {
-//     getItem: (key) => Cookies.get(key),
-//     setItem: (key, value) => Cookies.set(key, value, {
-//         expires: 1,
-//         secure: true
-//     }),
-//     removeItem: (key) => Cookies.remove(key)
-// }
-// };

@@ -22,7 +22,18 @@ const routes = [
     {
         path: "/used-cars",
         name: "used-cars",
+        meta: {
+            title: 'Разширено търсене'
+        },
         component: () => import("../pages/advanced-search/AdvancedSearch"),
+    },
+    {
+        path: "/merchants",
+        name: "Merchants",
+        meta: {
+            title: 'Автокъщи и дилъри'
+        },
+        component: () => import("../pages/merchants/Merchants"),
     },
     {
         path: "/car/:id",
@@ -31,13 +42,30 @@ const routes = [
         props: true
     },
     {
-        path: "/sell-car",
-        name: "sell.car",
+        path: "/upload",
+        name: "upload",
         meta: {
             hideFooter: true,
             title: 'Качване на обява'
         },
-        component: () => import("../pages/sell-used-car/SellCar"),
+        component: () => import("../pages/upload-offer/VehicleType"),
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
+        }
+    },
+    {
+        path: '/upload/:vehicleID',
+        name: 'upload.vehicle',
+        component: () => import('../pages/upload-offer/UploadOffer'),
+        props: true,
+        meta: {
+            hideFooter: true,
+            title: 'Качване на обява'
+        },
         beforeEnter(to, from, next) {
             if (store.getters['auth/GET_AUTH_USER']) {
                 next()
