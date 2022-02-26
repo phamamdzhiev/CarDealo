@@ -92,7 +92,7 @@ export default {
         });
 
         function showStepTwo() {
-            if (getState.brand) return;
+            if (getState.value.brand.id) return;
             store.commit('uploadOffer/setStepPlus');
             // await this.setCarBrandWithModels(this.getSelectedCarBrandID);
         }

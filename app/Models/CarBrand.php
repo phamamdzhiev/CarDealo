@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $image_name
  * @property int|null $is_popular
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CarModel[] $carModels
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\VehicleModel[] $carModels
  * @property-read int|null $car_models_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Offer[] $offers
  * @property-read int|null $offers_count
@@ -45,6 +45,6 @@ class CarBrand extends Model
 
     public function carModels(): HasMany
     {
-        return $this->hasMany(CarModel::class, 'car_brands_id');
+        return $this->hasMany(VehicleModel::class, 'car_brands_id');
     }
 }

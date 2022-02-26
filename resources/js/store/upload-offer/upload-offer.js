@@ -38,7 +38,7 @@ export default {
                 km: null,
                 title: null,
                 description: null,
-                price:null,
+                price: null,
                 hasPrice: false,
                 region: null,
                 city: null
@@ -47,17 +47,27 @@ export default {
     },
     mutations: {
         resetVehicleState(state) {
-            // Object.keys(state.vehicle).forEach((key) => {
-            //     state.vehicle[key] = {name: null, id: null};
-            // });
-            //
-            state.step = 1;
-            state.vehicle.condition = 1;
-            state.vehicle.year = null;
             state.vehicle.vehicleType = null;
             state.vehicle.vehicleCategory = null;
+            state.vehicle.condition = 1;
+            state.vehicle.brand = {name: null, id: null};
+            state.vehicle.model = {name: null, id: null};
+            state.vehicle.year = null;
             state.vehicle.extras = [];
-            state.vehiclehasPrice = 1;
+            state.vehicle.color = {name: null, id: null};
+            state.vehicle.transmission = {name: null, id: null};
+            state.vehicle.engine = {name: null, id: null};
+            state.vehicle.euroStandard = {name: null, id: null};
+            state.vehicle.hp = null;
+            state.vehicle.cm3 = null;
+            state.vehicle.km = null;
+            state.vehicle.title = null;
+            state.vehicle.description = null;
+            state.vehicle.price = null;
+            state.vehicle.hasPrice = false;
+            state.vehicle.region = null;
+            state.vehicle.city = null;
+            state.step = 1;
         },
         setVehicleState(state, {key, value}) {
             state.vehicle[key] = value;

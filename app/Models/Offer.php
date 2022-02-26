@@ -77,7 +77,7 @@ class Offer  extends Model
      */
     public function getCarBrands(): BelongsTo
     {
-        return $this->belongsTo(CarModel::class, 'car_brands_id', 'id');
+        return $this->belongsTo(VehicleModel::class, 'car_brands_id', 'id');
     }
 
     /**
