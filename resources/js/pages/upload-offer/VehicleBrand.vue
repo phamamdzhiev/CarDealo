@@ -45,7 +45,8 @@
                         <i class="bi bi-star-fill text-base-color"></i>
                         Популярни марки
                     </h6>
-                    <div id="brand">
+                    <spinner v-if="isLoading"/>
+                    <div id="brand" v-else>
                         <div v-for="brand in brandsArray" :key="brand.id" class="item"
                              @click="setState({key:'brand', value: {name: brand.name, id: brand.id}})">
                             {{ brand.name }}
@@ -80,7 +81,7 @@ export default {
     },
     setup() {
         const store = useStore();
-
+        const isLoading = ref(false);
         let popularBrands = ref(null);
 
         let searchBrands = ref(null);
@@ -113,69 +114,70 @@ export default {
             getState,
             brandsArray,
             searchBrands,
-            showStepTwo
+            showStepTwo,
+            isLoading
         }
     },
-    data() {
-        return {
-            keyword: null,
-            filterCarBrands: []
-        }
-    },
-    computed: {
-
-        // ...mapGetters('sellCar', [
-        //     'getAllData',
-        //     'getCarPopularBrands',
-        //     'isLoading',
-        //     'getSelectedCarBrandID',
-        // ])
-    },
-    watch: {
-        keyword() {
-            this.livesearchCarBrands()
-        }
-    },
-    async mounted() {
-        // await this.$store.dispatch('sellCar/setCarPopularBrands');
-    },
-    methods: {
-        ...mapMutations('sellCar', [
-                'setPopularCarBrands',
-                'setSelectedCarBrandID',
-                'setCarBrand',
-            ]
-        ),
-        ...mapActions('sellCar', ['setCarBrandWithModels']),
-
-        async livesearchCarBrands() {
-            if (this.keyword.length <= 1) {
-                this.filterCarBrands = [];
-                return;
-            }
-
-            this.setCarBrand(null);
-            try {
-                const res = await axios.get('vehicle/search/brands', {params: {keyword: this.keyword}});
-                this.filterCarBrands = res.data;
-            } catch (e) {
-                console.log('Live Search Error', e);
-            }
-        },
-
-
-        resetPreSelectedCarOptions() {
-            this.$store.commit('sellCar/resetState');
-        },
-        // selectBrand({brandName, brandID}) {
-        //     if (this.getAllData['car_brand'] !== brandName) {
-        //         this.resetPreSelectedCarOptions()
-        //     }
-        //
-        //     this.setSelectedCarBrandID(brandID);
-        //     this.setCarBrand(brandName);
-        // },
-    },
+    // data() {
+    //     return {
+    //         keyword: null,
+    //         filterCarBrands: []
+    //     }
+    // },
+    // computed: {
+    //
+    //     // ...mapGetters('sellCar', [
+    //     //     'getAllData',
+    //     //     'getCarPopularBrands',
+    //     //     'isLoading',
+    //     //     'getSelectedCarBrandID',
+    //     // ])
+    // },
+    // watch: {
+    //     keyword() {
+    //         this.livesearchCarBrands()
+    //     }
+    // },
+    // async mounted() {
+    //     // await this.$store.dispatch('sellCar/setCarPopularBrands');
+    // },
+    // methods: {
+    //     ...mapMutations('sellCar', [
+    //             'setPopularCarBrands',
+    //             'setSelectedCarBrandID',
+    //             'setCarBrand',
+    //         ]
+    //     ),
+    //     ...mapActions('sellCar', ['setCarBrandWithModels']),
+    //
+    //     async livesearchCarBrands() {
+    //         if (this.keyword.length <= 1) {
+    //             this.filterCarBrands = [];
+    //             return;
+    //         }
+    //
+    //         this.setCarBrand(null);
+    //         try {
+    //             const res = await axios.get('vehicle/search/brands', {params: {keyword: this.keyword}});
+    //             this.filterCarBrands = res.data;
+    //         } catch (e) {
+    //             console.log('Live Search Error', e);
+    //         }
+    //     },
+    //
+    //
+    //     resetPreSelectedCarOptions() {
+    //         this.$store.commit('sellCar/resetState');
+    //     },
+    //     // selectBrand({brandName, brandID}) {
+    //     //     if (this.getAllData['car_brand'] !== brandName) {
+    //     //         this.resetPreSelectedCarOptions()
+    //     //     }
+    //     //
+    //     //     this.setSelectedCarBrandID(brandID);
+    //     //     this.setCarBrand(brandName);
+    //     // },
+    // },
 }
 </script>
 

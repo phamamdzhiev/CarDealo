@@ -10,6 +10,8 @@
     {{--    BS ICONS--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {{--    Font Awesome Kit--}}
+    <script src="https://kit.fontawesome.com/f0041d2798.js" crossorigin="anonymous"></script>
 </head>
 <body>
 {{--<div class="container-xxl mt-3">--}}

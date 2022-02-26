@@ -35,12 +35,21 @@ Route::group(['prefix' => 'email', 'middleware' => 'auth:sanctum'], function () 
 });
 
 //Vehicle
-Route::group(['prefix' => 'vehicle', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/fetch/popular-brands', [\App\Http\Controllers\VehicleController::class, 'getPopularCarBrandsWithLimit']);
-    Route::get('/fetch/brands', [\App\Http\Controllers\VehicleController::class, 'getCarBrands']);
-    Route::get('/fetch/car-models/{id}', [\App\Http\Controllers\VehicleController::class, 'getBrandWithModels']);
+Route::group(['prefix' => 'vehicle/fetch'], function () {
+    Route::get('/popular-brands', [\App\Http\Controllers\VehicleController::class, 'getPopularCarBrandsWithLimit']);
+    Route::get('/brands', [\App\Http\Controllers\VehicleController::class, 'getCarBrands']);
+    Route::get('/car-models/{id}', [\App\Http\Controllers\VehicleController::class, 'getBrandWithModels']);
     Route::get('/search/brands', [\App\Http\Controllers\VehicleController::class, 'searchCarBrands']);
-    Route::get('/fetch/extras', [\App\Http\Controllers\VehicleController::class, 'getCarExtras']);
+    Route::get('/extras', [\App\Http\Controllers\VehicleController::class, 'getCarExtras']);
+    Route::get('/vehicle-types', function () {
+        return response()->json(\App\Models\VehicleCategory::all()->toArray());
+    });
+    Route::get('/vehicle-type/{id}/category', function (int $id) {
+        return response()->json(\App\Models\VehicleType::all()
+            ->where('category_id', '=', $id)
+            ->toArray()
+        );
+    });
 });
 
 //Advanced search

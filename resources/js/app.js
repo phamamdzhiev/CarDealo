@@ -1,3 +1,5 @@
+import DotsLoader from "./components/ui/DotsLoader";
+
 require('./bootstrap');
 
 import {createApp} from "vue";
@@ -15,7 +17,9 @@ import formKitConfig from "./formKitConfig";
 
 const app = createApp(App);
 
-app.component('loading-dots', AjaxLoadingSpinner);
+app.component('loading-dots', DotsLoader);
+app.component('spinner', AjaxLoadingSpinner);
+
 app.use(router);
 app.use(store);
 app.use(VueToast);

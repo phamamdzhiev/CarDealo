@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VehicleType extends Model
+class VehicleCategory extends Model
 {
     use HasFactory;
-
-    protected $table = 'vehicles_types';
+    protected $table = 'vehicles_category';
     public $timestamps = false;
 }

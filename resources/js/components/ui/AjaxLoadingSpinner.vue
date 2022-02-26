@@ -1,46 +1,44 @@
 <template>
-    <div>
-        <svg width="60" height="20" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#fff">
-            <circle cx="15" cy="15" r="15">
-                <animate attributeName="r" from="15" to="15"
-                         begin="0s" dur="0.8s"
-                         values="15;9;15" calcMode="linear"
-                         repeatCount="indefinite" />
-                <animate attributeName="fill-opacity" from="1" to="1"
-                         begin="0s" dur="0.8s"
-                         values="1;.5;1" calcMode="linear"
-                         repeatCount="indefinite" />
-            </circle>
-            <circle cx="60" cy="15" r="9" fill-opacity="0.3">
-                <animate attributeName="r" from="9" to="9"
-                         begin="0s" dur="0.8s"
-                         values="9;15;9" calcMode="linear"
-                         repeatCount="indefinite" />
-                <animate attributeName="fill-opacity" from="0.5" to="0.5"
-                         begin="0s" dur="0.8s"
-                         values=".5;1;.5" calcMode="linear"
-                         repeatCount="indefinite" />
-            </circle>
-            <circle cx="105" cy="15" r="15">
-                <animate attributeName="r" from="15" to="15"
-                         begin="0s" dur="0.8s"
-                         values="15;9;15" calcMode="linear"
-                         repeatCount="indefinite" />
-                <animate attributeName="fill-opacity" from="1" to="1"
-                         begin="0s" dur="0.8s"
-                         values="1;.5;1" calcMode="linear"
-                         repeatCount="indefinite" />
-            </circle>
-        </svg>
-    </div>
+    <div class="loader"></div>
 </template>
 
 <script>
+import assetMixin from '../../mixins/asset';
+
 export default {
-    name: "AjaxLoadingSpinner"
+    name: "AjaxLoadingSpinner",
+    mixins: [assetMixin]
 }
 </script>
 
 <style scoped>
+.loader {
+    border: 5px solid #e0e0e0;
+    border-radius: 50%;
+    border-top: 5px solid #ff7931;
+    width: 50px;
+    height: 50px;
+    margin: 1rem auto;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
 
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 </style>

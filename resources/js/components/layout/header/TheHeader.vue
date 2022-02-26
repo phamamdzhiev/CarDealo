@@ -17,7 +17,7 @@
                             </router-link>
                         </div>
                         <span v-else>
-                           <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация</router-link>
+                           <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация <i class="bi bi-door-open fs-5"></i> </router-link>
                        </span>
                         <base-button :link="'upload'" class="special">+ Публикувай</base-button>
                     </nav>
@@ -50,6 +50,11 @@
                         :subLink="sellCarSubLinks"
                     ></SubMenuHoverableItems>
                 </div>
+                <div class="sub__menu__wrapper">
+                    <router-link to="/merchants">
+                        AВТОКЪЩИ
+                    </router-link>
+                </div>
             </nav>
         </div>
     </header>
@@ -75,16 +80,37 @@ export default {
                 {
                     id: 1,
                     link: "/usedCars",
+                    icon: 'fa-car',
                     linkText: `${window.APP_NAME} автомобили`,
                 },
                 {
-                    id: 2,
-                    link: "/merchants",
-                    linkText: "Автокъщи",
+                    id: 1,
+                    link: "/usedCars",
+                    icon: 'fa-bus-simple',
+                    linkText: `${window.APP_NAME} бусове`,
+                },
+                {
+                    id: 1,
+                    link: "/usedCars",
+                    icon: 'fa-truck',
+                    linkText: `${window.APP_NAME} камиони`,
+                },
+                {
+                    id: 1,
+                    link: "/usedCars",
+                    icon: 'fa-motorcycle',
+                    linkText: `${window.APP_NAME} мотори`,
+                },
+                {
+                    id: 1,
+                    link: "/usedCars",
+                    icon: 'fa-sailboat',
+                    linkText: `${window.APP_NAME} лодки`,
                 },
                 {
                     id: 2,
                     link: "/my-listing",
+                    icon: 'fa-bars-staggered',
                     linkText: "Моите обяви",
                 },
             ],
@@ -92,16 +118,19 @@ export default {
                 {
                     id: 1,
                     link: "/upload",
+                    icon: 'fa-plus',
                     linkText: "Публикувай обява",
                 },
                 {
                     id: 2,
                     link: "/pedal",
+                    icon: "fa-network-wired",
                     linkText: "Как работи?",
                 },
                 {
                     id: 3,
                     link: "/pedal",
+                    icon: 'fa-circle-question',
                     linkText: "Често задавани въпроси",
                 },
             ],

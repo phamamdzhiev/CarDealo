@@ -1,14 +1,20 @@
 <template>
     <transition name="fade">
         <div class="sub__menu__items">
-            <router-link v-for="item in subLink" :key="item.id" :to="item.link">
-                {{ item.linkText }}
-            </router-link>
+            <ul>
+                <li v-for="item in subLink" class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :key="item.id" :to="item.link">
+                        <i v-if="item.icon" :class="`fa-solid pe-2 ${item.icon}`"></i>
+                        {{ item.linkText }}
+                    </router-link>
+                </li>
+            </ul>
         </div>
     </transition>
 </template>
 
 <script>
+import assetMixin from "../../../mixins/asset";
 export default {
     props: {
         subLink: {
@@ -16,6 +22,7 @@ export default {
             required: true,
         },
     },
+    mixins: [assetMixin]
 };
 </script>
 <style scoped>

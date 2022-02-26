@@ -12,6 +12,7 @@ import axios from "axios";
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.baseURL = window.APP_URL + '/api/';
 axios.defaults.withCredentials = true;
+axios.defaults.timeout = 5000; // abort request after 5s
 
 // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

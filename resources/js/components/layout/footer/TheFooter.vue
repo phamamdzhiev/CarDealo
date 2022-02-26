@@ -26,7 +26,9 @@
                 <div class="item">
                     <span><i class="bi bi-chat-dots fs-1"></i></span>
                     <div>
-                        <h5 class="fw-bold">Чат на живо</h5>
+                        <h5 class="fw-bold">
+                            Чат на живо
+                        </h5>
                         <p class="text-normal-gray">7 дни в седмицата</p>
                     </div>
                 </div>
@@ -57,16 +59,25 @@
                     <h6 class="fw-bold">Контакти</h6>
                     <ul>
                         <li>
-                            <a href="/">Чат на живо</a>
+                            <a href="/">
+                                <i class="fa-solid fa-comment-dots pe-1"></i>
+                                Чат на живо
+                            </a>
                         </li>
                         <li>
-                            <a href="/">Контактна форма</a>
+                            <a href="/">
+                                <i class="fa-solid fa-envelope pe-1"></i>
+                                Контактна форма</a>
                         </li>
                         <li>
-                            <a href="/">support@cardealo.com</a>
+                            <a href="/">
+                                <i class="fa-solid fa-at pe-1"></i>
+                                support@cardealo.com</a>
                         </li>
                         <li>
-                            <a href="/">Обратна връзка</a>
+                            <a href="/">
+                                <i class="fa-solid fa-comments pe-1"></i>
+                                Обратна връзка</a>
                         </li>
                     </ul>
                 </div>

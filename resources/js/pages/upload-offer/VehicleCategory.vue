@@ -9,7 +9,8 @@
             </router-link>
             <div class="question-section mb-4">
                 <Heading title="Категория на превозното средство?"/>
-                <ul class="options-list">
+                <spinner v-if="isLoading"/>
+                <ul class="options-list" v-else>
                     <li
                         v-for="item in vehicleCategories"
                         :key="item.id"
@@ -36,7 +37,9 @@ import BaseCard from "../../components/ui/base/BaseCard";
 import NextStepButton from "./partials/NextStepButton";
 import PrevStepButton from "./partials/PrevStepButton"
 import {useStore} from "vuex";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
+import axios from "axios";
+import {useRoute} from "vue-router";
 export default {
     name: "VehicleCategory",
     components: {
@@ -47,22 +50,28 @@ export default {
     },
     setup() {
         const store = useStore();
+        const route = useRoute();
 
-        let vehicleCategories = ref([
-            {id: 1, name: 'Кабрио'},
-            {id: 2, name: 'Комби'},
-            {id: 3, name: 'Ван'},
-            {id: 4, name: 'Джип'},
-            {id: 5, name: 'Хеджбек'},
-            {id: 6, name: 'Седан'},
-            {id: 7, name: 'Лимузина'},
-            {id: 8, name: 'SUV'},
-        ]);
+        const vehicleCategories = ref([]);
 
         let isLoading = ref(false);
 
         const getVehicleCategory = computed(() => {
             return store.getters['uploadOffer/getVehicleState'].vehicleCategory;
+        });
+
+        onMounted(async () => {
+            const id = route.params.vehicleID;
+            try {
+                isLoading.value = true;
+                const res = await axios.get(`/vehicle/fetch/vehicle-type/${id}/category`);
+                vehicleCategories.value = res.data;
+                isLoading.value = false;
+
+            } catch (e) {
+                isLoading.value = false;
+                console.log(e)
+            }
         });
 
         return {
@@ -75,7 +84,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-
-</style>

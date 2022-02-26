@@ -3,7 +3,8 @@
         <BaseCard>
             <div class="question-section mb-4">
                 <Heading title="Вид на превозното средство?"/>
-                <ul class="options-list">
+                <spinner v-if="isLoading"/>
+                <ul v-else class="options-list">
                     <li
                         v-for="item in vehicleTypes"
                         :key="item.id"
@@ -31,6 +32,8 @@ import NextStepButton from "./partials/NextStepButton";
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
+import axios from "axios";
+
 // import offerState from "../../store/upload-offer/upload-offer";
 
 export default {
@@ -43,20 +46,8 @@ export default {
     setup() {
         const router = useRouter();
         const store = useStore();
-
-        let vehicleTypes = ref([
-            {id: 1, name: 'Автомобили'},
-            {id: 2, name: 'Мотори'},
-            {id: 3, name: 'Бусове'},
-            {id: 4, name: 'Камиони'},
-            {id: 5, name: 'Лодки'},
-            {id: 6, name: 'Селскотопански'},
-            {id: 7, name: 'Индустриални'},
-            {id: 8, name: 'Каравени'},
-        ]);
-
-        let isLoading = ref(false);
-
+        const vehicleTypes = ref([]);
+        const isLoading = ref(false);
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
@@ -68,8 +59,7 @@ export default {
         }
 
         function resetState() {
-            console.log('it will reset state, but later :)');
-            // store.commit('uploadOffer/resetState');
+            store.commit('uploadOffer/resetVehicleState');
         }
 
         function setState(data) {
@@ -78,15 +68,20 @@ export default {
         }
 
         //hooks
-        // onMounted(() => {
-        //     console.log('mounted')
-        //     store.registerModule('ooo', offerState, {preserveState: true});
-        // });
-        //
-        // onBeforeUnmount(() => {
-        //     store.unregisterModule('vehicle')
-        // })
+        onMounted(async () => {
+            // store.registerModule('ooo', offerState, {preserveState: true});
 
+            try {
+                isLoading.value = true;
+                const res = await axios.get('/vehicle/fetch/vehicle-types');
+                vehicleTypes.value = res.data;
+                isLoading.value = false;
+
+            } catch (e) {
+                isLoading.value = false;
+                console.log(e)
+            }
+        });
 
         return {
             isLoading,
