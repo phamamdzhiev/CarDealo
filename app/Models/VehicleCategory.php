@@ -22,4 +22,5 @@ class VehicleCategory extends Model
     use HasFactory;
     protected $table = 'vehicles_category';
     public $timestamps = false;
+
 }

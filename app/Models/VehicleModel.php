@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Krlove\EloquentModelGenerator\Model\BelongsToMany;
 
 /**
  * App\Models\VehicleModel
@@ -17,14 +18,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class VehicleModel extends Model
 {
+    protected $table = 'models';
     use HasFactory;
     protected $hidden = ['created_at', 'updated_at'];
 
     /**
-     * @return BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function brands(): BelongsTo
+    public function category()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsToMany(
+            VehicleCategory::class, 'category_brand_model',
+            'model_id', 'category_id')
+            ->using(CategoryBrandModel::class);
     }
 }

@@ -30,4 +30,12 @@ class Brand extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    public function category()
+    {
+        return $this->belongsToMany(
+            VehicleCategory::class, 'category_brand_model',
+            'brand_id', 'category_id')
+            ->using(CategoryBrandModel::class);
+    }
 }

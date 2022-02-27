@@ -6,9 +6,12 @@ use App\Http\Resources\OfferResource;
 use App\Models\Brand;
 use App\Models\CarBrand;
 use App\Models\CarExtra;
+use App\Models\CategoryBrandModel;
 use App\Models\Extra;
+use App\Models\VehicleModel;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -48,29 +51,41 @@ class VehicleController extends Controller
     }
 
     /**
+     * @param $category
      * @return JsonResponse
      */
-    public function getCarBrands(): JsonResponse
+    public function getCarBrands($category): JsonResponse
     {
-
-        $expire = Carbon::now()->addMinutes(10);
-
-        $carBrands = Cache::remember('brands', $expire, function () {
-            return OfferResource::collection(Brand::all());
+        $carBrands = Cache::remember(
+            sprintf('brands_%s', $category), Carbon::now()->addMinutes(10),
+            function () use ($category){
+                return Brand::whereHas('category', function ($q) use ($category) {
+                    return $q->where('category_id', $category);
+                })->get();
         });
 
         return response()->json($carBrands);
     }
 
     /**
-     * @param $id
+     * @param $brand
+     * @param $category
      * @return JsonResponse
      */
-    public function getBrandWithModels($id): JsonResponse
+    public function getBrandWithModels($brand, $category): JsonResponse
     {
-        $carBrandWithModels = Brand::find($id)->carModels;
 
-        return response()->json($carBrandWithModels);
+        $carBrands = Cache::remember(
+            sprintf('brand_category_models_%s_%s', $category, $brand), Carbon::now()->addMinutes(10),
+            function () use ($category, $brand){
+                return VehicleModel::whereHas('category', function (Builder $q) use ($category, $brand) {
+                    return $q
+                        ->where('category_id', $category)
+                        ->where('brand_id', $brand);
+                })->get();
+            });
+
+        return response()->json($carBrands);
     }
 
     /**

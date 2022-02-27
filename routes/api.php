@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -36,11 +38,11 @@ Route::group(['prefix' => 'email', 'middleware' => 'auth:sanctum'], function () 
 
 //Vehicle
 Route::group(['prefix' => 'vehicle/fetch'], function () {
-    Route::get('/popular-brands', [\App\Http\Controllers\VehicleController::class, 'getPopularCarBrandsWithLimit']);
-    Route::get('/brands', [\App\Http\Controllers\VehicleController::class, 'getCarBrands']);
-    Route::get('/car-models/{id}', [\App\Http\Controllers\VehicleController::class, 'getBrandWithModels']);
-    Route::get('/search/brands', [\App\Http\Controllers\VehicleController::class, 'searchCarBrands']);
-    Route::get('/extras', [\App\Http\Controllers\VehicleController::class, 'getCarExtras']);
+    Route::get('/popular-brands', [VehicleController::class, 'getPopularCarBrandsWithLimit']);
+    Route::get('/brands/{category}', [VehicleController::class, 'getCarBrands']);
+    Route::get('/car-models/{brand}/{category}', [VehicleController::class, 'getBrandWithModels']);
+    Route::get('/search/brands', [VehicleController::class, 'searchCarBrands']);
+    Route::get('/extras', [VehicleController::class, 'getCarExtras']);
     Route::get('/vehicle-types', function () {
         return response()->json(\App\Models\VehicleCategory::all()->toArray());
     });
@@ -125,4 +127,7 @@ Route::get('fetch/popular/regions', function () {
     ]);
 });
 
+Route::group(['prefix' => 'fetch'], function () {
+    Route::get('category', [CategoryController::class, 'get']);
+});
 
