@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|EmailVerification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailVerification whereUserId($value)
  * @mixin \Eloquent
+ * @property int $is_used
+ * @method static \Illuminate\Database\Eloquent\Builder|EmailVerification whereIsUsed($value)
  */
 class EmailVerification extends Model
 {

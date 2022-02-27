@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int|null $asCity
  * @method static \Illuminate\Database\Eloquent\Builder|City whereAsCity($value)
+ * @property int|null $as_city
  */
 class City extends Model
 {

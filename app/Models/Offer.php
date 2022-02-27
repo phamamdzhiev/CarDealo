@@ -64,6 +64,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereUserId($value)
  * @property-read \App\Models\TopOffer|null $topOffers
  * @property-read \App\Models\VipOffer|null $vipOffers
+ * @property int $city_id
+ * @property string $condition
+ * @property int|null $has_price
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCondition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereHasPrice($value)
  */
 class Offer  extends Model
 {
