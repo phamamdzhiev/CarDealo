@@ -78,7 +78,7 @@ class VehicleController extends Controller
         $carBrands = Cache::remember(
             sprintf('brand_category_models_%s_%s', $category, $brand), Carbon::now()->addMinutes(10),
             function () use ($category, $brand){
-                return VehicleModel::whereHas('category', function (Builder $q) use ($category, $brand) {
+                return VehicleModel::whereHas('category', function (\Illuminate\Database\Eloquent\Builder $q) use ($category, $brand) {
                     return $q
                         ->where('category_id', $category)
                         ->where('brand_id', $brand);
@@ -89,14 +89,18 @@ class VehicleController extends Controller
     }
 
     /**
+     * @param $category
      * @return JsonResponse
      */
-    public function getCarExtras(): JsonResponse
+    public function getCarExtras($category): JsonResponse
     {
         $expire = Carbon::now()->addMinutes(10);
 
-        $carExtras = Cache::remember('extras', $expire, function () {
-            return Extra::all();
+        $carExtras = Cache::remember(sprintf('extras_%s', $category), $expire, function () use ($category) {
+            return Extra::whereHas('category', function (\Illuminate\Database\Eloquent\Builder $q) use ($category) {
+                return $q
+                    ->where('category_id', $category);
+            })->get();
         });
 
         return response()->json($carExtras);

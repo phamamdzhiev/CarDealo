@@ -42,7 +42,7 @@ Route::group(['prefix' => 'vehicle/fetch'], function () {
     Route::get('/brands/{category}', [VehicleController::class, 'getCarBrands']);
     Route::get('/car-models/{brand}/{category}', [VehicleController::class, 'getBrandWithModels']);
     Route::get('/search/brands', [VehicleController::class, 'searchCarBrands']);
-    Route::get('/extras', [VehicleController::class, 'getCarExtras']);
+    Route::get('/extras/category/{category}', [VehicleController::class, 'getCarExtras']);
     Route::get('/vehicle-types', function () {
         return response()->json(\App\Models\VehicleCategory::all()->toArray());
     });

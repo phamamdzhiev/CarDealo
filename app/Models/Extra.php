@@ -32,4 +32,12 @@ class Extra extends Model
     {
         return $this->belongsToMany(Offer::class)->using(VehicleExtra::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function category()
+    {
+        return $this->hasMany(CategoryExtra::class);
+    }
 }
