@@ -16,6 +16,9 @@
                             class="position-absolute top-0 start-100 translate-middle fw-bold">
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
+                        <span>
+                            <i class="fa-solid fa-car fs-3"></i>
+                        </span>
                         {{ item.name }}
                     </li>
                 </ul>
@@ -75,6 +78,7 @@ export default {
                 isLoading.value = true;
                 const res = await axios.get('/vehicle/fetch/vehicle-types');
                 vehicleTypes.value = res.data;
+                console.log(res.data)
                 isLoading.value = false;
 
             } catch (e) {
