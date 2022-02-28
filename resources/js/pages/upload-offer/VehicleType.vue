@@ -17,13 +17,13 @@
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
                         <span>
-                            <i class="fa-solid fa-car fs-3"></i>
+                            <i :class="'fa-solid fs-3 fa-' + item.slug"></i>
                         </span>
                         {{ item.name }}
                     </li>
                 </ul>
             </div>
-            <button class="base-button" v-show="getState.vehicleType !== null" @click="go">Следваща стъпка</button>
+            <button class="base-button" v-show="getState.vehicleType !== null" @click="go">Следваща стъпк </button>
         </BaseCard>
     </div>
 </template>

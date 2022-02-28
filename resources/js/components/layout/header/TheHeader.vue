@@ -73,7 +73,6 @@ export default {
     inject: ['window'],
     data() {
         return {
-            newCarsItemShown: false,
             oldCarsItemShown: false,
             sellCarItemShown: false,
             oldCarsSubLinks: [
@@ -147,9 +146,6 @@ export default {
     methods: {
         showSubMenuVisibility(param) {
             switch (param) {
-                case "new-cars":
-                    this.newCarsItemShown = true;
-                    break;
                 case "old-cars":
                     this.oldCarsItemShown = true;
                     break;
@@ -162,9 +158,6 @@ export default {
         },
         hideSubMenuVisibility(param) {
             switch (param) {
-                case "new-cars":
-                    this.newCarsItemShown = false;
-                    break;
                 case "old-cars":
                     this.oldCarsItemShown = false;
                     break;
