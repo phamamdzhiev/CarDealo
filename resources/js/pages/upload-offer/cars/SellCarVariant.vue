@@ -9,35 +9,41 @@
             <div class="question-section mb-4">
                 <Transmission/>
             </div>
-            <div class="question-section">
-                <Heading title="Кубатура, мощност, пробег?"/>
-                <FormKit
-                    type="number"
-                    id="hp"
-                    name="hp"
-                    label="Мощност"
-                    validation="required|number|max:2000|min:1"
-                    help="в конски сили"
-                    v-model.lazy="hp"
-                />
-                <FormKit
-                    type="number"
-                    id="km"
-                    name="km"
-                    label="Пробег"
-                    help="в километри"
-                    validation="required|number|max:999999|min:1"
-                    v-model.lazy="km"
-                />
-                <FormKit
-                    type="number"
-                    id="cm3"
-                    name="cm3"
-                    label="Кубатура"
-                    validation="required|number|max:9999|min:1"
-                    v-model.lazy="cm3"
-                />
-            </div>
+            <FormKit
+                type="form"
+                submit-label="Следваща стъпка"
+                @submit="submitHandler"
+            >
+                <div class="question-section">
+                    <Heading title="Кубатура, мощност, пробег?"/>
+                    <FormKit
+                        type="number"
+                        id="hp"
+                        name="hp"
+                        label="Мощност"
+                        validation="required|number|max:2000|min:1"
+                        help="в конски сили"
+                        v-model.lazy="hp"
+                    />
+                    <FormKit
+                        type="number"
+                        id="km"
+                        name="km"
+                        label="Пробег"
+                        help="в километри"
+                        validation="required|number|max:999999|min:1"
+                        v-model.lazy="km"
+                    />
+                    <FormKit
+                        type="number"
+                        id="cm3"
+                        name="cm3"
+                        label="Кубатура"
+                        validation="required|number|max:9999|min:1"
+                        v-model.lazy="cm3"
+                    />
+                </div>
+            </FormKit>
 
             <!--            <div class="question-se>ction">-->
             <!--                <div class="form-floating form-group">-->
@@ -77,8 +83,6 @@
             <!--                    />-->
             <!--                </div>-->
             <!--            </div>-->
-
-            <NextStepButton v-if="true"/>
         </base-card>
     </div>
 </template>
@@ -148,13 +152,28 @@ export default {
             store.commit('uploadOffer/setVehicleState', state);
         }
 
+        function submitHandler() {
+            if (getState.value.engine.id === null) {
+                alert('Моля изберете гориво');
+                return;
+            }
+
+            if (getState.value.transmission.id === null) {
+                alert('Моля изберете трансмисия');
+                return;
+            }
+
+            store.commit('uploadOffer/setStepPlus');
+        }
+
         return {
             getState,
             store,
             hp,
             km,
             cm3,
-            setState
+            setState,
+            submitHandler
         }
     }
     // data() {

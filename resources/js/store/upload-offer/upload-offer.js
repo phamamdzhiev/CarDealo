@@ -72,6 +72,10 @@ export default {
         setVehicleState(state, {key, value}) {
             state.vehicle[key] = value;
         },
+        setSelectedExtras(state, payload) {
+            let index = state.vehicle.extras.findIndex(obj => obj.id === payload.id);
+            index === -1 ? state.vehicle.extras.push(payload) : state.vehicle.extras.splice(index, 1);
+        },
         setStepPlus(state) {
             state.step++
         },
@@ -83,9 +87,6 @@ export default {
         },
     },
     getters: {
-        isEmpty(state) {
-
-        },
         getVehicleState(state) {
             return state.vehicle;
         },

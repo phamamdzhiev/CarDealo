@@ -11,10 +11,12 @@ import {useStore} from "vuex";
 
 export default {
     name: "NextStepButton",
-    setup() {
+    emits: ['stepUpdated'],
+    setup(_, {emit}) {
         const store = useStore();
 
         function showNextStep() {
+            emit('stepUpdated');
             store.commit('uploadOffer/setStepPlus');
         }
 

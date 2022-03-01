@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <button @click="showStepTwo" class="base-button" v-if="getState.brand">
+            <button @click="showStepTwo" class="base-button" v-if="getState.brand.id">
                 Следваща стъпка
                 <!--                <span v-if="!isLoading"></span>-->
                 <!--                <loading-dots v-else></loading-dots>-->
@@ -93,7 +93,7 @@ export default {
         });
 
         function showStepTwo() {
-            if (getState.value.brand.id !== null) return;
+            if (getState.value.brand.id === null) return;
             store.commit('uploadOffer/setStepPlus');
             // await this.setCarBrandWithModels(this.getSelectedCarBrandID);
         }

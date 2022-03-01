@@ -92,6 +92,7 @@ $ul-max-height: 300px;
 
     .options-list {
         grid-template-columns: repeat(4, 1fr);
+
         .item {
             height: 120px;
         }
@@ -176,26 +177,24 @@ $ul-max-height: 300px;
     }
 
     ul#extras {
-        > div {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            justify-content: center;
-            gap: 10px;
-        }
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        gap: 10px;
+        max-height: 320px;
+        overflow: auto;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+        overscroll-behavior: contain;
+        @include scrollbar;
 
         li {
-            background-color: #f2f3f7;
             color: $secondary-color;
             position: relative;
-            border-radius: 4px;
-            text-align: center;
-            cursor: pointer;
-            border: 2px solid transparent;
-            padding: 5px 10px;
 
-            &.active {
-                border: 2px solid forestgreen;
-                font-weight: 700;
+            label {
+                cursor: pointer;
+                font-size: 12px;
             }
         }
     }

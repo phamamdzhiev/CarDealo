@@ -174,11 +174,9 @@ export default {
 
         onMounted(() => {
             axios.get('fetch/regions').then((res) => {
-
                 res.data.data.forEach((element) => {
                     regions.value.push({ label: element.region, value: element.id });
                 });
-
             }).catch((e) => console.log(e));
         });
 

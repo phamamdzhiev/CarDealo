@@ -150,8 +150,8 @@ export default {
 
             // this.$store.commit('sellCar/setCarImages', this.images);
             // await this.imageUpload();
-            // this.$store.commit('uploadOffer/resetVehicleState');
             this.$store.commit('uploadOffer/setStepPlus');
+            // this.$store.commit('uploadOffer/resetVehicleState');
         }
     }
 }

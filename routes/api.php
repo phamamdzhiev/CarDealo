@@ -125,6 +125,15 @@ Route::get('fetch/popular/regions', function () {
     ]);
 });
 
+//Colors
+Route::get('fetch/colors', function () {
+    $expire = \Carbon\Carbon::now()->addCentury();
+    $regions = \Illuminate\Support\Facades\Cache::remember('color', $expire, function () {
+        return \App\Models\Color::all();
+    });
+    return response()->json(['success' => true, 'data' => $regions]);
+});
+
 Route::group(['prefix' => 'fetch'], function () {
     Route::get('category', [CategoryController::class, 'get']);
 });
