@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 //Protected routes
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('/my-listing', function () {
-        return 'protected';
-    });
-
     Route::post('offer/create', [\App\Http\Controllers\OfferController::class, 'store']);
     Route::delete('offer/delete/{id}', [\App\Http\Controllers\OfferController::class, 'destroy']);
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
@@ -37,10 +33,10 @@ Route::group(['prefix' => 'email', 'middleware' => 'auth:sanctum'], function () 
 });
 
 //Vehicle
-Route::group(['prefix' => 'vehicle/fetch'], function () {
-    Route::get('/popular-brands', [VehicleController::class, 'getPopularCarBrandsWithLimit']);
-    Route::get('/brands/{category}', [VehicleController::class, 'getCarBrands']);
-    Route::get('/car-models/{brand}/{category}', [VehicleController::class, 'getBrandWithModels']);
+Route::group(['prefix' => 'vehicle/fetch', 'middleware' => 'auth:sanctum'], function () {
+//    Route::get('/popular-brands', [VehicleController::class, 'getPopularCarBrandsWithLimit']);
+    Route::get('/brands/{category}/{popular?}', [VehicleController::class, 'getBrands']);
+    Route::get('/vehicle/{brand}/category/{category}', [VehicleController::class, 'getBrandWithModels']);
     Route::get('/search/brands', [VehicleController::class, 'searchCarBrands']);
     Route::get('/extras/category/{category}', [VehicleController::class, 'getCarExtras']);
     Route::get('/vehicle-types', function () {
@@ -109,8 +105,10 @@ Route::get('fetch/regions', function () {
 Route::get('fetch/cities/{id}', function ($id) {
     return response()->json([
         'success' => true,
-        'data' => \App\Models\City::where('region_id', $id)->whereNull('asCity')->get(),
-        'asCity' => \App\Models\City::where('region_id', $id)->where('asCity', 1)->get()
+        'data' => \App\Models\City::where('region_id', $id)
+            ->orderBy('as_city', 'desc')
+            ->orderBy('city')
+            ->get()
     ]);
 });
 

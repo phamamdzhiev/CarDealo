@@ -23,9 +23,7 @@
                     <FormKit
                         type="search"
                         placeholder="Търси марка"
-                        value="Apple Cider"
                         id="search__brand"
-                        v-model.trim="keyword"
                         autocomplete="off"
                     />
                 </div>
@@ -70,6 +68,7 @@ import BaseCard from "../../components/ui/base/BaseCard";
 import Heading from "./partials/Heading";
 import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
+import {useRoute} from "vue-router";
 import PrevStepButton from "./partials/PrevStepButton";
 
 export default {
@@ -81,6 +80,7 @@ export default {
     },
     setup() {
         const store = useStore();
+        const route = useRoute();
         const isLoading = ref(false);
         let popularBrands = ref(null);
 
@@ -93,7 +93,7 @@ export default {
         });
 
         function showStepTwo() {
-            if (getState.value.brand.id) return;
+            if (getState.value.brand.id !== null) return;
             store.commit('uploadOffer/setStepPlus');
             // await this.setCarBrandWithModels(this.getSelectedCarBrandID);
         }
@@ -104,7 +104,8 @@ export default {
 
         //hooks
         onMounted(() => {
-           axios.get('vehicle/fetch/popular-brands').then((res) => {
+            const vehicleID = route.params.vehicleID;
+            axios.get(`vehicle/fetch/brands/${vehicleID}/1`).then((res) => {
                brandsArray.value = res.data;
            })
         });

@@ -54,12 +54,19 @@ class VehicleController extends Controller
      * @param $category
      * @return JsonResponse
      */
-    public function getCarBrands($category): JsonResponse
+    public function getBrands($category, $popular = null): JsonResponse
     {
         $carBrands = Cache::remember(
-            sprintf('brands_%s', $category), Carbon::now()->addMinutes(10),
-            function () use ($category){
-                return Brand::whereHas('category', function ($q) use ($category) {
+            sprintf('brands_%s_%s', $category, $popular), Carbon::now()->addMinutes(10),
+            function () use ($category, $popular){
+                return Brand::whereHas('category', function ($q) use ($category, $popular) {
+                    if ($popular !== null) {
+                        /**
+                         * @var $q Builder
+                         */
+                        $q->where('brands.is_popular', '=', $popular)
+                            ->take(10);
+                    }
                     return $q->where('category_id', $category);
                 })->get();
         });

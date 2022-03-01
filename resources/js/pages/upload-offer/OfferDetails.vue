@@ -54,6 +54,7 @@
                         </template>
                     </FormKit>
                     <FormKit
+                        v-if="regions.length > 0"
                         type="select"
                         id="region"
                         name="region"
@@ -64,6 +65,7 @@
                         validation="required"
                     />
                     <FormKit
+                        v-if="cities.length > 0"
                         type="select"
                         label="Град"
                         id="city"
@@ -87,7 +89,7 @@ import TopBar from "./TopBar";
 import Heading from "./partials/Heading";
 import PrevStepButton from "./partials/PrevStepButton";
 import axios from "axios";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -103,14 +105,8 @@ export default {
     setup() {
         const store = useStore();
 
-        let regions = [
-            {value: 1, label: 'Mercury'},
-            {value: 2, label: 'Mars'}
-        ];
-        let cities = [
-            {value: 1, label: 'Uranus'},
-            {value: 2, label: 'Pluto'}
-        ]
+        const regions = ref([]);
+        const cities = ref([]);
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
@@ -155,14 +151,36 @@ export default {
             }
         });
 
+        function fetchCitiesForRegion(regionID) {
+            axios.get(`fetch/cities/${regionID}`).then((res) => {
+                res.data.data.forEach((element) => {
+                    cities.value.push({ label: element.city, value: element.id });
+                });
+
+            }).catch((e) => console.log(e));
+        }
 
         function setState(e) {
+            if (e.name === 'region') {
+                cities.value = [];
+                fetchCitiesForRegion(e.value);
+            }
             store.commit('uploadOffer/setVehicleState', {key: e.name, value: e.value});
         }
 
         function submitHandler() {
             store.commit('uploadOffer/setStepPlus');
         }
+
+        onMounted(() => {
+            axios.get('fetch/regions').then((res) => {
+
+                res.data.data.forEach((element) => {
+                    regions.value.push({ label: element.region, value: element.id });
+                });
+
+            }).catch((e) => console.log(e));
+        });
 
         const dynamicValidations = computed(() => {
             if (hasPrice.value) {

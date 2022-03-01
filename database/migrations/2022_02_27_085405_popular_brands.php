@@ -15,7 +15,7 @@ class PopularBrands extends Migration
     {
         if (!Schema::hasColumn('brands', 'is_popular')) {
             Schema::table('brands', function (Blueprint $table) {
-                $table->boolean('is_popular');
+                $table->boolean('is_popular')->default(0);
             });
         }
     }
