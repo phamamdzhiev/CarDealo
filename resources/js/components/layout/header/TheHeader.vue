@@ -63,7 +63,7 @@
 <script>
 import SubMenuHoverableItems from "../../ui/hover-menu-items/SubMenuHoverableItems";
 import BaseButton from "../../ui/base/BaseButton";
-import axios from "axios";
+import {links, subLinks} from "../../../navigation-links";
 
 export default {
     components: {
@@ -75,64 +75,8 @@ export default {
         return {
             oldCarsItemShown: false,
             sellCarItemShown: false,
-            oldCarsSubLinks: [
-                {
-                    id: 1,
-                    link: "/usedCars",
-                    icon: 'fa-car',
-                    linkText: `${window.APP_NAME} автомобили`,
-                },
-                {
-                    id: 1,
-                    link: "/usedCars",
-                    icon: 'fa-bus-simple',
-                    linkText: `${window.APP_NAME} бусове`,
-                },
-                {
-                    id: 1,
-                    link: "/usedCars",
-                    icon: 'fa-truck',
-                    linkText: `${window.APP_NAME} камиони`,
-                },
-                {
-                    id: 1,
-                    link: "/usedCars",
-                    icon: 'fa-motorcycle',
-                    linkText: `${window.APP_NAME} мотори`,
-                },
-                {
-                    id: 1,
-                    link: "/usedCars",
-                    icon: 'fa-sailboat',
-                    linkText: `${window.APP_NAME} лодки`,
-                },
-                {
-                    id: 2,
-                    link: "/my-listing",
-                    icon: 'fa-bars-staggered',
-                    linkText: "Моите обяви",
-                },
-            ],
-            sellCarSubLinks: [
-                {
-                    id: 1,
-                    link: "/upload",
-                    icon: 'fa-plus',
-                    linkText: "Публикувай обява",
-                },
-                {
-                    id: 2,
-                    link: "/pedal",
-                    icon: "fa-network-wired",
-                    linkText: "Как работи?",
-                },
-                {
-                    id: 3,
-                    link: "/pedal",
-                    icon: 'fa-circle-question',
-                    linkText: "Често задавани въпроси",
-                },
-            ],
+            oldCarsSubLinks: links,
+            sellCarSubLinks: subLinks,
         };
     },
     computed: {

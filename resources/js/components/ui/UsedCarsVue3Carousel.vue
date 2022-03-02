@@ -4,14 +4,15 @@
             :space-between="40"
             :navigation="true"
             :modules="modules">
-            <SwiperSlide v-for="item in carData" :key="item">
-                <CarSingleItem :offer="item"></CarSingleItem>
+            <SwiperSlide v-for="vehicle in vehicles" :key="vehicle">
+                {{vehicle}}
+<!--                <CarSingleItem :offer="vehicle"></CarSingleItem>-->
             </SwiperSlide>
     </Swiper>
 </template>
 
 <script>
-import CarSingleItem from "../../../components/car/CarSingleItem";
+import CarSingleItem from "../car/CarSingleItem";
 import {Swiper, SwiperSlide} from "swiper/vue";
 import {Navigation, Virtual} from "swiper";
 import 'swiper/css';
@@ -22,7 +23,12 @@ export default {
     components: {
         Swiper, SwiperSlide, CarSingleItem
     },
-    props: ['carData'],
+    props: {
+        vehicles: {
+            type: Object,
+            required: true
+        }
+    },
     setup() {
         const swiperModules = [Navigation, Virtual];
         const swiperBreakPoints = {

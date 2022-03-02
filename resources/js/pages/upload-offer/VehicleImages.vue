@@ -126,7 +126,7 @@ export default {
 
             try {
                 this.isLoading = true
-                // await axios.post('offer/create', formImages, config);
+                await axios.post('offer/create', formImages, config);
                 this.isLoading = false;
             } catch (error) {
                 this.isLoading = false;
@@ -148,9 +148,9 @@ export default {
             //     return;
             // }
 
-            // this.$store.commit('sellCar/setCarImages', this.images);
-            // await this.imageUpload();
-            this.$store.commit('uploadOffer/setStepPlus');
+            await this.imageUpload();
+            console.log(JSON.stringify(this.$store.getters['uploadOffer/getVehicleState']))
+            // this.$store.commit('uploadOffer/setStepPlus');
             // this.$store.commit('uploadOffer/resetVehicleState');
         }
     }

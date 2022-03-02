@@ -78,7 +78,6 @@ export default {
                 isLoading.value = true;
                 const res = await axios.get('/vehicle/fetch/vehicle-types');
                 vehicleTypes.value = res.data;
-                console.log(res.data)
                 isLoading.value = false;
 
             } catch (e) {
