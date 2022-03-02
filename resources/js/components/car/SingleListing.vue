@@ -78,7 +78,7 @@ import axios from "axios";
 import {onMounted, ref, inject} from "vue";
 import BaseCard from "../ui/base/BaseCard";
 import router from "../../router";
-import assetMixin from '../../mixins/asset';
+import assetMixin from '../../composables/asset';
 
 export default {
     name: "SingleListing",

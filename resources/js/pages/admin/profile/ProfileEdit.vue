@@ -80,7 +80,7 @@ import useVuelidate from '@vuelidate/core';
 import {required, maxLength, integer, helpers, minLength} from '@vuelidate/validators';
 import FromInputValidationMessage from "../../../components/ui/FromInputValidationMessage";
 import PasswordVisibilityToggle from "../../../components/ui/PasswordVisibilityToggle";
-import pswVisibilityToggleMixin from "../../../mixins/psw-toggle-visibility";
+import pswVisibilityToggleMixin from "../../../composables/psw-toggle-visibility";
 import ErrorDisplay from "../../../components/ui/ErrorDisplay";
 import Cleave from "vue-cleave-component";
 import UploadAvatar from "./partials/UploadAvatar";

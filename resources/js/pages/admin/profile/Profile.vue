@@ -56,7 +56,7 @@
 <script>
 import BaseCard from "../../../components/ui/base/BaseCard";
 import Logout from "../../../components/layout/header/Logout";
-import assetMixin from "../../../mixins/asset";
+import assetMixin from "../../../composables/asset";
 
 export default {
     name: "Profile",

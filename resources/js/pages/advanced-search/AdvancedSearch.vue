@@ -4,18 +4,20 @@
             <div class="col-lg-3">
                 <div class="p-2 advanced-filters">
                     <h5 class="fw-bold mb-3">Търсене по филтри</h5>
-                    <BudgetFilter @updateQueryParams="fetchData"></BudgetFilter>
-                    <YearFilter></YearFilter>
-                    <KmFilter></KmFilter>
-                    <FuelFilter @updateQueryParams="fetchData"></FuelFilter>
-                    <TransmissionFilter @updateQueryParams="fetchData"></TransmissionFilter>
-                    <ColorFilter></ColorFilter>
+                    <VehicleCategoryFilter @updateQueryParams="fetchData"/>
+                    <VehicleTypeFilter @updateQueryParams="fetchData"/>
+                    <BrandFilter @updateQueryParams="fetchData"/>
+                    <BudgetFilter @updateQueryParams="fetchData"/>
+                    <YearFilter @updateQueryParams="fetchData"/>
+                    <KmFilter @updateQueryParams="fetchData"/>
+                    <FuelFilter @updateQueryParams="fetchData"/>
+                    <TransmissionFilter @updateQueryParams="fetchData"/>
+                    <RegionFilter  @updateQueryParams="fetchData"/>
+                    <ColorFilter @updateQueryParams="fetchData"/>
                 </div>
             </div>
             <div class="col-lg-9 p-2">
-                <div v-if="isLoading">
-                    Зареждане
-                </div>
+                <spinner v-if="isLoading"/>
                 <div class="d-grid" v-else-if="offers.length > 0">
                     <CarSingleItem v-for="offer in offers" :offer="offer"></CarSingleItem>
                 </div>
@@ -32,23 +34,31 @@ import {onMounted, ref} from "vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
 
 //Filters
+import BrandFilter from "./partials/BrandFilter";
 import BudgetFilter from "./partials/BudgetFilter";
 import YearFilter from "./partials/YearFilter";
 import KmFilter from "./partials/KmFilter";
 import FuelFilter from "./partials/FuelFilter";
 import TransmissionFilter from "./partials/TransmissionFilter";
 import ColorFilter from "./partials/ColorFilter";
+import VehicleCategoryFilter from "./partials/VehicleCategoryFilter";
+import VehicleTypeFilter from "./partials/VehicleTypeFilter";
+import RegionFilter from "./partials/RegionFilter";
 
 export default {
     name: "AdvancedSearch",
     components: {
+        VehicleCategoryFilter,
+        VehicleTypeFilter,
+        BrandFilter,
         BudgetFilter,
         YearFilter,
         KmFilter,
         FuelFilter,
         TransmissionFilter,
         ColorFilter,
-        CarSingleItem
+        CarSingleItem,
+        RegionFilter
     },
     inject: ['window'],
     setup() {

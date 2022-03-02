@@ -78,7 +78,7 @@
 import axios from "axios";
 import {onMounted, reactive, ref, inject} from "vue";
 import BaseCard from "../../../components/ui/base/BaseCard";
-import assetMixin from '../../../mixins/asset';
+import assetMixin from '../../../composables/asset';
 
 export default {
     name: "MyListing",

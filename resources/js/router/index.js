@@ -28,8 +28,8 @@ const routes = [
         component: () => import("../pages/used-buses/UsedBuses.vue"),
     },
     {
-        path: "/used-cars",
-        name: "used-cars",
+        path: "/advanced-search",
+        name: "advanced.search",
         meta: {
             title: 'Разширено търсене'
         },

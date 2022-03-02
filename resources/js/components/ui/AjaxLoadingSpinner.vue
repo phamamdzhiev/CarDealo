@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import assetMixin from '../../mixins/asset';
+import assetMixin from '../../composables/asset';
 
 export default {
     name: "AjaxLoadingSpinner",

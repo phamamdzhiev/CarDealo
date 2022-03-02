@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import assetMixin from '../../mixins/asset';
+import assetMixin from '../../composables/asset';
 import {ref} from "vue";
 
 export default {

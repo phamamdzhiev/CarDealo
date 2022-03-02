@@ -56,3 +56,17 @@ button.formkit-input[type='submit'] {
         }
     }
 }
+
+input[type='radio'] {
+    width: 16px;
+    height: 16px;
+    border-radius: $border-radius;
+    border: 1px solid #333;
+    &:checked {
+        background-color: $primary-color;
+    }
+    &:focus {
+        border: 1px solid #333;
+        box-shadow: none;
+    }
+}

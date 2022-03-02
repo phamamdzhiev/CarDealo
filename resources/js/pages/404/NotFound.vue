@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import assetMixin from '../../mixins/asset';
+import assetMixin from '../../composables/asset';
 import BaseButton from "../../components/ui/base/BaseButton";
 export default {
     name: "NotFound",

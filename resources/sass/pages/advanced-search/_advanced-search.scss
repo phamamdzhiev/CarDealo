@@ -5,12 +5,29 @@
     padding: 1.5rem 1rem;
     margin-bottom: 20px;
 
+
     > h6 {
         margin: 0 0 1.5rem 0;
     }
 
     .advanced-filter-range-slider {
         padding: 0 0.5rem;
+    }
+
+    .formkit-outer[data-type="radio"] {
+        overflow: auto;
+        max-height: 250px;
+        margin-top: 1.2rem;
+        @include scrollbar;
+
+        label.formkit-wrapper {
+            display: flex;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            > span.formkit-label {
+                padding-left: 0.5rem;
+            }
+        }
     }
 }
 

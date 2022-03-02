@@ -1,36 +1,42 @@
 export const links = [
     {
         id: 1,
+        link: "/advanced-search",
+        icon: 'fa-magnifying-glass',
+        linkText: 'Подробно търсене',
+    },
+    {
+        id: 2,
         link: "/used/cars",
         icon: 'fa-car',
         linkText: `${window.APP_NAME} автомобили`,
     },
     {
-        id: 1,
+        id: 3,
         link: "/used/buses",
         icon: 'fa-bus-simple',
         linkText: `${window.APP_NAME} бусове`,
     },
     {
-        id: 1,
+        id: 4,
         link: "/usedCars",
         icon: 'fa-truck',
         linkText: `${window.APP_NAME} камиони`,
     },
     {
-        id: 1,
+        id: 5,
         link: "/usedCars",
         icon: 'fa-motorcycle',
         linkText: `${window.APP_NAME} мотори`,
     },
     {
-        id: 1,
+        id: 6,
         link: "/usedCars",
         icon: 'fa-sailboat',
         linkText: `${window.APP_NAME} лодки`,
     },
     {
-        id: 2,
+        id: 7,
         link: "/my-listing",
         icon: 'fa-bars-staggered',
         linkText: "Моите обяви",
