@@ -6,7 +6,13 @@
     >
         <div class="carousel-inner">
             <div class="carousel-item active" :style="setBannerAndImageHeight">
-                <slot></slot>
+                <div class="banner-heading mt-5">
+                    <div class="container">
+                        <h1 class="text-white fw-bold mb-5" style="max-width:600px;">
+                           {{heading}}
+                        </h1>
+                    </div>
+                </div>
             </div>
             <slot name="simpleSearch"></slot>
         </div>
@@ -15,6 +21,9 @@
 <script>
 export default {
     props: {
+        heading: {
+            type: String
+        },
         bannerImage: {
             type: String,
             required: true,

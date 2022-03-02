@@ -151,15 +151,6 @@ export default {
             }
         });
 
-        function fetchCitiesForRegion(regionID) {
-            axios.get(`fetch/cities/${regionID}`).then((res) => {
-                res.data.data.forEach((element) => {
-                    cities.value.push({ label: element.city, value: element.id });
-                });
-
-            }).catch((e) => console.log(e));
-        }
-
         function setState(e) {
             if (e.name === 'region') {
                 cities.value = [];
@@ -172,10 +163,19 @@ export default {
             store.commit('uploadOffer/setStepPlus');
         }
 
+        function fetchCitiesForRegion(regionID) {
+            axios.get(`fetch/cities/${regionID}`).then((res) => {
+                res.data.data.forEach((element) => {
+                    cities.value.push({ label: element.name, value: element.id });
+                });
+
+            }).catch((e) => console.log(e));
+        }
+
         onMounted(() => {
             axios.get('fetch/regions').then((res) => {
                 res.data.data.forEach((element) => {
-                    regions.value.push({ label: element.region, value: element.id });
+                    regions.value.push({ label: element.name, value: element.id });
                 });
             }).catch((e) => console.log(e));
         });

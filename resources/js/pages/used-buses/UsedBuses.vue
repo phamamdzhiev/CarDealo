@@ -3,119 +3,74 @@
         <base-carousel
             :height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
+            heading="Вашето търсене на надежден употребяван бус приключи!"
         >
-            <div class="banner-heading mt-5">
-                <div class="container">
-                    <h1 class="text-white fw-bold mb-5" style="max-width:600px;">
-                        Вашето търсене на надежден употребяван автомобил приключи!
-                    </h1>
-                </div>
-            </div>
             <template #simpleSearch>
                 <simple-search></simple-search>
             </template>
         </base-carousel>
 
-        <BaseCard>
-            <h5 class="fw-bold">Употребявани автомобили</h5>
-            <p>
-                Намерете пълен списък на сертифицирани употребявани автомобили в
-                България. Можете да изберете коли втора употреба, като приложите филтри
-                като местоположение, цена, тип каросерия, марка и т.н.
-            </p>
-        </BaseCard>
+        <Intro
+            :intro="
+            {heading: 'Употребявани бусове в България',
+            body: 'Намерете пълен списък на сертифицирани употребявани автомобили в България. Можете да изберете коли втора употреба, като приложите филтри като местоположение, цена, тип каросерия, марка и т.н.'
+            }"
+        />
 
-        <RecommendedCars></RecommendedCars>
+        <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>
 
-        <BaseCard>
-            <h5 class="fw-bold">Автомобили в България по област</h5>
-            <hr/>
-            <div v-if="cities">
-                <BaseGrid :items="cities"></BaseGrid>
-            </div>
-        </BaseCard>
+        <By :by="{heading: 'Бусове в България по област', byFeature: cities}"/>
 
-        <BudgetCars></BudgetCars>
+        <FeaturedCarouselVehicles heading="Бусове според бюджет" :props-data="budget"/>
 
-        <BodyTypeCars></BodyTypeCars>
+        <FeaturedCarouselVehicles heading="Бусове по тип на каросерията" :props-data="bodyType"/>
 
-        <BaseCard>
-            <h5 class="fw-bold">Доверени автомобили по марка</h5>
-            <hr/>
-            <div v-if="brands">
-                <BaseGrid :items="brands"></BaseGrid>
-            </div>
-        </BaseCard>
+        <By :by="{heading: 'Автомобили по марка', byFeature: brands}"/>
 
         <div class="container-xxl">
             <div class="row">
                 <div class="col-md-6 ps-0">
-                    <div class="base-card d-flex justify-content-between">
-                        <div class="py-3">
-                            <h5 class="mb-0 fw-bold">Продай своя автомобил бързо</h5>
-                            <p class="mb-0 text-normal-gray">Директно от вкъщи</p>
-                            <a href="/" class="mt-4 d-block text-link-blue">Продай своя автомобил тук</a>
-                        </div>
-                        <img
-                            width="130"
-                            height="130"
-                            src="https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/sell-car_vNZwdICyt.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796442201"
-                            alt=""
-                        />
-                    </div>
+                    <VehicleAndValuationAd
+                        sub-heading="Директно от вкъщи"
+                        heading="Продай своя автомобил бързо"
+                        :link="{linkHref: '/', linkLabel: 'Продай своя автомобил тук'}"
+                        image="https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/sell-car_vNZwdICyt.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796442201"
+                    />
                 </div>
                 <div class="col-md-6 pe-0">
-                    <div class="base-card d-flex justify-content-between">
-                        <div class="py-3">
-                            <h5 class="mb-0 fw-bold">Сравни автомобилни марки</h5>
-                            <p class="mb-0 text-normal-gray ">Избери правилният за теб сега</p>
-                            <a href="/" class="mt-4 d-block text-link-blue">Сравни автомобили тук</a>
-                        </div>
-                        <img
-                            width="130"
-                            height="130"
-                            src="https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/compare_bAgMtQMPc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796387286"
-                            alt=""
-                        />
-                    </div>
+                    <VehicleAndValuationAd
+                        sub-heading="Сравни автомобилни марки"
+                        heading="Избери правилният за теб сега"
+                        :link="{linkHref: '/', linkLabel: 'Сравни автомобили тук'}"
+                        image="https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/compare_bAgMtQMPc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796387286"
+                    />
                 </div>
             </div>
         </div>
 
-        <BaseCard>
-            <h5 class="fw-bold">Автомобили по вид на двигателя</h5>
-            <hr/>
-            <div v-if="engines">
-                <BaseGrid :items="engines"></BaseGrid>
-            </div>
-        </BaseCard>
+        <By :by="{heading: 'Автомобили вид на двигателя', byFeature: engines}"/>
     </div>
 </template>
 <script>
 import BaseCarousel from "../../components/ui/base/BaseCarousel";
-import BaseCard from "../../components/ui/base/BaseCard";
-import BaseGrid from "../../components/ui/base/BaseGrid";
-import assetMixin from '../../mixins/asset';
 import SimpleSearch from "../../components/ui/SimpleSearch";
-import RecommendedCars from "./partials/RecommendedCars";
-import BudgetCars from "./partials/BudgetCars";
-import BodyTypeCars from "./partials/BodyTypeCars";
+import VehicleAndValuationAd from "../../components/used/partials/VehicleAndValuationAd";
 import axios from "axios";
-import {onMounted, ref} from "vue";
-
+import Intro from "../../components/used/partials/Intro";
+import {onMounted, reactive, ref} from "vue";
+import By from "../../components/used/partials/By";
+import FeaturedCarouselVehicles from "../../components/used/partials/FeaturedCarouselVehicles";
 
 export default {
-    name:'usedBuses',
+    name: 'usedBuses',
     components: {
+        Intro,
+        By,
         BaseCarousel,
-        BaseCard,
-        BaseGrid,
         SimpleSearch,
-        RecommendedCars,
-        BudgetCars,
-        BodyTypeCars
+        VehicleAndValuationAd,
+        FeaturedCarouselVehicles,
     },
-    mixins: [assetMixin],
     setup() {
         const cities = ref(null);
 
@@ -131,6 +86,48 @@ export default {
             {name: 'GAs'},
             {name: 'Hibris'},
         ];
+
+        const recommended = reactive({
+            data: [
+                {name: 'Benz'},
+                {name: 'Dizel'},
+                {name: 'GAs'},
+                {name: 'Hibris'}
+            ]
+        });
+
+        const budget = reactive({
+            vehicles5000: {
+                tabName: 'до 5000лв.',
+                data: [
+                    {name: 'Benz'},
+                    {name: 'Dizel'},
+                    {name: 'GAs'},
+                    {name: 'Hibris'}
+                ]
+            },
+            vehicles10000: {
+                tabName: 'от 5000лв. до 10 000лв.',
+                data: []
+            },
+        });
+
+        const bodyType = reactive({
+            vehiclesCombi: {
+                tabName: 'Комби',
+                data: [
+                    {name: 'Benz'},
+                    {name: 'Dizel'},
+                    {name: 'GAs'},
+                    {name: 'Hibris'}
+                ]
+            },
+            vehiclesSedan: {
+                tabName: 'Седан',
+                data: []
+            },
+        });
+
 
         async function fetchPopularRegions() {
             try {
@@ -151,6 +148,9 @@ export default {
             cities,
             brands,
             engines,
+            budget,
+            bodyType,
+            recommended
         }
     }
 };

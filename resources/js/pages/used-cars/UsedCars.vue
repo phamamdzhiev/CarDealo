@@ -3,14 +3,8 @@
         <base-carousel
             :height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
+            heading="Вашето търсене на надежден употребяван автомобил приключи!"
         >
-            <div class="banner-heading mt-5">
-                <div class="container">
-                    <h1 class="text-white fw-bold mb-5" style="max-width:600px;">
-                        Вашето търсене на надежден употребяван автомобил приключи!
-                    </h1>
-                </div>
-            </div>
             <template #simpleSearch>
                 <simple-search></simple-search>
             </template>
@@ -18,27 +12,20 @@
 
         <Intro
             :intro="
-            {heading: 'Упрот',
+            {heading: 'Употребявани автомобили в България',
             body: 'Намерете пълен списък на сертифицирани употребявани автомобили в България. Можете да изберете коли втора употреба, като приложите филтри като местоположение, цена, тип каросерия, марка и т.н.'
             }"
         />
 
-        <!--recommende-->
+        <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>
 
+        <By :by="{heading: 'Автомобили в България по област', byFeature: cities}"/>
 
-        <By
-            :by="{heading: 'Автомобили в България по област BAY', byFeature: cities}"
-        />
-        <FeaturedCarouselVehicles
-            heading="Автомобили според бюджет"
-            :vehicles="budget"
-        />
+        <FeaturedCarouselVehicles heading="Автомобили според бюджет" :props-data="budget"/>
 
-        <!--        <BodyTypeCars></BodyTypeCars>-->
+        <FeaturedCarouselVehicles heading="Автомобили по тип на каросерията" :props-data="bodyType"/>
 
-        <By
-            :by="{heading: 'Доверени автомобили по марка BAY', byFeature: brands}"
-        />
+        <By :by="{heading: 'Автомобили по марка', byFeature: brands}"/>
 
         <div class="container-xxl">
             <div class="row">
@@ -61,22 +48,18 @@
             </div>
         </div>
 
-        <By
-            :by="{heading: 'Доверени по вид на двигателя', byFeature: engines}"
-        />
+        <By :by="{heading: 'Автомобили вид на двигателя', byFeature: engines}"/>
     </div>
 </template>
 <script>
 import BaseCarousel from "../../components/ui/base/BaseCarousel";
-import assetMixin from '../../mixins/asset';
 import SimpleSearch from "../../components/ui/SimpleSearch";
 import VehicleAndValuationAd from "../../components/used/partials/VehicleAndValuationAd";
 import axios from "axios";
 import Intro from "../../components/used/partials/Intro";
-import {onMounted, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import By from "../../components/used/partials/By";
 import FeaturedCarouselVehicles from "../../components/used/partials/FeaturedCarouselVehicles";
-
 
 export default {
     name: 'usedCars',
@@ -86,9 +69,8 @@ export default {
         BaseCarousel,
         SimpleSearch,
         VehicleAndValuationAd,
-        FeaturedCarouselVehicles
+        FeaturedCarouselVehicles,
     },
-    mixins: [assetMixin],
     setup() {
         const cities = ref(null);
 
@@ -105,9 +87,18 @@ export default {
             {name: 'Hibris'},
         ];
 
-        const budget = {
+        const recommended = reactive({
+            data: [
+                {name: 'Benz'},
+                {name: 'Dizel'},
+                {name: 'GAs'},
+                {name: 'Hibris'}
+            ]
+        });
+
+        const budget = reactive({
             vehicles5000: {
-                tabName: 'до 5000 лв',
+                tabName: 'до 5000лв.',
                 data: [
                     {name: 'Benz'},
                     {name: 'Dizel'},
@@ -116,15 +107,27 @@ export default {
                 ]
             },
             vehicles10000: {
-                tabName: 'до 10 000 лв',
+                tabName: 'от 5000лв. до 10 000лв.',
+                data: []
+            },
+        });
+
+        const bodyType = reactive({
+            vehiclesCombi: {
+                tabName: 'Комби',
                 data: [
-                    {name: 'Benz', id: 2},
-                    {name: 'Dizel', id: 2},
-                    {name: 'GAs', id: 2},
-                    {name: 'Hibris', id: 2}
+                    {name: 'Benz'},
+                    {name: 'Dizel'},
+                    {name: 'GAs'},
+                    {name: 'Hibris'}
                 ]
-            }
-        };
+            },
+            vehiclesSedan: {
+                tabName: 'Седан',
+                data: []
+            },
+        });
+
 
         async function fetchPopularRegions() {
             try {
@@ -145,7 +148,9 @@ export default {
             cities,
             brands,
             engines,
-            budget
+            budget,
+            bodyType,
+            recommended
         }
     }
 };
