@@ -13,12 +13,13 @@
                         <div v-for="item in singleOffer.images">
                             <img
                                  class="img-fluid"
-                                 :src="asset('storage/' + item.image)"
+                                 :src="asset(item.image)"
                                  alt=""
                             />
                         </div>
                         <h5 class="fw-bold">{{singleOffer.price}} лв.</h5>
                         <p>{{singleOffer.description}}</p>
+
                         <button class="fw-bold base-button">Виж детайли на собственика</button>
                     </div>
                 </div>
@@ -39,12 +40,13 @@
                         </h5>
                         <div>
                             <ul>
-                                <li>{{singleOffer.hp}} к.с</li>
-                                <li>{{singleOffer.transmission.name ?? ''}}</li>
-                                <li>{{singleOffer.year}}</li>
-                                <li>{{singleOffer.km}} км.</li>
-                                <li>{{singleOffer.fuel.name ?? ''}}</li>
-                                <li>{{singleOffer.user.is_business ? 'Търговец' : 'Частно лице'}}</li>
+                                <li>{{singleOffer.vehicle.hp}} к.с</li>
+                                <li>{{singleOffer.vehicle.transmission.name ?? ''}}</li>
+                                <li>{{singleOffer.vehicle.year}}</li>
+                                <li>{{singleOffer.vehicle.km}} км.</li>
+                                <li>{{singleOffer.vehicle.fuel.name ?? ''}}</li>
+                                <li>{{singleOffer.user.is_business ? 'Търговец' : 'Частно лице'}},
+                                    {{singleOffer.city.name}} ({{singleOffer.city.region.name}})</li>
                             </ul>
                         </div>
                     </div>
@@ -57,13 +59,8 @@
                             <span>Спецификации и екстри</span>
                         </h5>
                         <div>
-                            <ul>
-                                <li>2016</li>
-                                <li>203 400 км.</li>
-                                <li>Бензин</li>
-                                <li>Частно лице</li>
-                                <li>Ръчка</li>
-                                <li>105 к.с</li>
+                            <ul v-for="extra in singleOffer.vehicle.extras">
+                                <li>{{extra.name}}</li>
                             </ul>
                         </div>
                     </div>

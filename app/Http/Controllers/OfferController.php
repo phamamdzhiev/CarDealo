@@ -62,17 +62,24 @@ class OfferController extends Controller
         return $offer->with('images')->take(10)->get();
     }
 
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
     public function showSingle($id): JsonResponse
     {
         try {
-            $offer = Offer::with('images')
-                ->with('user')
-                ->findOrFail((int)$id);
-
-
             $response = [
                 'success' => true,
-                'data' => $offer
+                'data' => Offer::with('images')
+                    ->with('user:id,name,mobile')
+                    ->with('vehicle')
+                    ->with('vehicle.transmission')
+                    ->with('vehicle.fuel')
+                    ->with('vehicle.extras')
+                    ->with('city')
+                    ->with('city.region')
+                    ->findOrFail((int)$id)
             ];
         } catch (NotFoundHttpException $exception) {
             $response = [

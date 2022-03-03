@@ -95,9 +95,14 @@ class Offer  extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function vehicles(): HasOne
+    public function vehicle(): HasOne
     {
         return $this->hasOne(Vehicle::class, 'offer_id', 'id');
+    }
+
+    public function city(): HasOne
+    {
+        return $this->hasOne(City::class, 'id', 'city_id');
     }
 
     /**
