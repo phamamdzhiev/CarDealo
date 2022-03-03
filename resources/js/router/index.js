@@ -56,7 +56,7 @@ const routes = [
             hideFooter: true,
             title: 'Качване на обява'
         },
-        component: () => import("../pages/upload-offer/VehicleType"),
+        component: () => import("../pages/upload-offer/VehicleCategory"),
         beforeEnter(to, from, next) {
             if (store.getters['auth/GET_AUTH_USER']) {
                 next()

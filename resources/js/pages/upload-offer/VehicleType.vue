@@ -1,82 +1,70 @@
 <template>
     <div class="sell-car">
         <BaseCard>
+            <router-link class="back__button mb-2 d-inline-block" :to="{name: 'upload'}">
+                <span class="fw-light">
+                    <i class="bi bi-arrow-left-short"></i>
+                    <span>Назад</span>
+                </span>
+            </router-link>
             <div class="question-section mb-4">
-                <Heading title="Вид на превозното средство?"/>
+                <Heading title="Категория на превозното средство?"/>
                 <spinner v-if="isLoading"/>
-                <ul v-else class="options-list">
+                <ul class="options-list" v-else>
                     <li
                         v-for="item in vehicleTypes"
                         :key="item.id"
-                        :class="['item position-relative', {active: item.id === getState.vehicleType}]"
-                        @click="setState(item.id)">
+                        :class="['item position-relative', {active: getVehicleType === item.id}]"
+                        @click="store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: item.id});">
                         <span
-                            v-show="getState.vehicleType === item.id"
-                            @click.stop="resetState"
+                            v-show="getVehicleType === item.id"
+                            @click.stop="store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: null})"
                             class="position-absolute top-0 start-100 translate-middle fw-bold">
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
-                        <span>
-                            <i :class="'fa-solid fs-3 fa-' + item.slug"></i>
-                        </span>
                         {{ item.name }}
                     </li>
                 </ul>
             </div>
-            <button class="base-button" v-show="getState.vehicleType !== null" @click="go">Следваща стъпк </button>
+            <NextStepButton v-if="getVehicleType"/>
         </BaseCard>
     </div>
 </template>
 
 <script>
-import BaseCard from "../../components/ui/base/BaseCard";
 import Heading from "./partials/Heading";
+import BaseCard from "../../components/ui/base/BaseCard";
 import NextStepButton from "./partials/NextStepButton";
-import {computed, onBeforeUnmount, onMounted, ref} from "vue";
-import {useRouter} from "vue-router";
+import PrevStepButton from "./partials/PrevStepButton"
 import {useStore} from "vuex";
+import {computed, onMounted, ref} from "vue";
 import axios from "axios";
-
-// import offerState from "../../store/upload-offer/upload-offer";
-
+import {useRoute} from "vue-router";
 export default {
     name: "VehicleType",
     components: {
         BaseCard,
         Heading,
         NextStepButton,
+        PrevStepButton
     },
     setup() {
-        const router = useRouter();
         const store = useStore();
-        const vehicleTypes = ref([]);
-        const isLoading = ref(false);
+        const route = useRoute();
 
-        const getState = computed(() => {
-            return store.getters['uploadOffer/getVehicleState'];
+        const vehicleTypes = ref([]);
+
+        let isLoading = ref(false);
+
+        const getVehicleType = computed(() => {
+            return store.getters['uploadOffer/getVehicleState'].vehicleType;
         });
 
-        function go() {
-            if (getState.value.vehicleType === null) return;
-            router.push({name: 'upload.vehicle', params: {vehicleID: getState.value.vehicleType}});
-        }
-
-        function resetState() {
-            store.commit('uploadOffer/resetVehicleState');
-        }
-
-        function setState(data) {
-            // store.commit('uploadOffer/resetState');
-            store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: data});
-        }
-
-        //hooks
         onMounted(async () => {
-            // store.registerModule('ooo', offerState, {preserveState: true});
-
+            const id = route.params.vehicleID;
             try {
                 isLoading.value = true;
-                const res = await axios.get('/vehicle/fetch/vehicle-types');
+                const res = await axios.get(`/vehicle/fetch/vehicle-type/${id}/category`);
                 vehicleTypes.value = res.data;
                 isLoading.value = false;
 
@@ -87,13 +75,12 @@ export default {
         });
 
         return {
+            getVehicleType,
             isLoading,
             vehicleTypes,
-            go,
-            getState,
-            setState,
-            resetState
+            store
         }
     }
+
 }
 </script>

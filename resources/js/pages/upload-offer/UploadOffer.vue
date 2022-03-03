@@ -1,6 +1,6 @@
 <template>
     <div>
-        <VehicleCategory v-if="getStep === 1"/>
+        <VehicleType v-if="getStep === 1"/>
         <VehicleBrand v-if="getStep === 2"></VehicleBrand>
         <component v-if="getStep === 3" :is="setComponent + 'Model'"/>
         <VehicleYear v-if="getStep === 4"></VehicleYear>
@@ -15,7 +15,6 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard";
 import VehicleType from "./VehicleType";
-import VehicleCategory from "./VehicleCategory";
 import VehicleBrand from "./VehicleBrand";
 import SellCarModel from "./cars/SellCarModel";
 import SellCarVariant from "./cars/SellCarVariant";
@@ -31,7 +30,6 @@ export default {
     components: {
         BaseCard,
         VehicleType,
-        VehicleCategory,
         VehicleBrand,
         SellCarModel,
         VehicleYear,
