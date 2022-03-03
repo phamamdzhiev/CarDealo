@@ -12,7 +12,7 @@ class TransmissionFilter extends AbstractBaseFilter
     public function applyTo(Builder $offer): void
     {
         $offer->when(is_array($this->request->input('transmission')), function ($offer) {
-            $offer->whereIn('transmission', $this->request->input('transmission'));
+            $offer->whereIn('vehicles.transmission_id', $this->request->input('transmission'));
         });
     }
 }

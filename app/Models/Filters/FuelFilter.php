@@ -12,7 +12,7 @@ class FuelFilter extends AbstractBaseFilter
     public function applyTo(Builder $offer): void
     {
         $offer->when(is_array($this->request->input('fuel')), function ($offer) {
-            $offer->whereIn('fuel', $this->request->input('fuel'));
+            $offer->whereIn('vehicles.fuel_id', $this->request->input('fuel'));
         });
     }
 }

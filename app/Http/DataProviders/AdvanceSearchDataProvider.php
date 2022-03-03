@@ -11,6 +11,7 @@ use App\Models\Filters\YearFilter;
 use App\Models\Offer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class AdvanceSearchDataProvider
 {
@@ -36,7 +37,8 @@ class AdvanceSearchDataProvider
         TransmissionFilter $transmissionFilter
     )
     {
-        $this->offer =  Offer::with('images');
+        $this->offer =  Offer::join('vehicles', 'vehicles.offer_id', '=', 'offers.id');
+        $this->offer->join('images', 'images.offer_id', '=', 'offers.id');
 
         $budgetFilter
             ->applyTo($this->offer);
@@ -50,6 +52,8 @@ class AdvanceSearchDataProvider
             ->applyTo($this->offer);
         $transmissionFilter
             ->applyTo($this->offer);
+
+
     }
 
     /**

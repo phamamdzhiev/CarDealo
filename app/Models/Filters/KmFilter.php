@@ -12,11 +12,11 @@ class KmFilter extends AbstractBaseFilter
     public function applyTo(Builder $offer): void
     {
         $offer->when($this->request->input('kmMin'), function ($offer) {
-            $offer->where('km', '>=', $this->request->input('kmMin'));
+            $offer->where('vehicles.km', '>=', $this->request->input('kmMin'));
         });
 
         $offer->when($this->request->input('kmMax'), function ($offer) {
-            $offer->where('km', '<=', $this->request->input('kmMax'));
+            $offer->where('vehicles.km', '<=', $this->request->input('kmMax'));
         });
     }
 }
