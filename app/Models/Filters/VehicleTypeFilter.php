@@ -12,7 +12,7 @@ class VehicleTypeFilter extends AbstractBaseFilter
     public function applyTo(Builder $offer): void
     {
         $offer->when($this->request->input('type'), function ($offer) {
-            $offer->whereIn('vehicles_types.id', $this->request->input('type'));
+            $offer->where('vehicles_types.id', $this->request->input('type'));
         });
     }
 }

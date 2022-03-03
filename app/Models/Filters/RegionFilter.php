@@ -14,7 +14,7 @@ class RegionFilter extends AbstractBaseFilter
         $offer->when($this->request->input('region'), function (Builder $offer) {
             $offer
                 ->join('cities', 'cities.id', '=', 'offers.city_id')
-                ->whereIn('cities.region_id', $this->request->input('brand'));
+                ->where('cities.region_id', $this->request->input('brand'));
         });
     }
 }

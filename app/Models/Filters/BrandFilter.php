@@ -12,7 +12,7 @@ class BrandFilter extends AbstractBaseFilter
     public function applyTo(Builder $offer): void
     {
         $offer->when($this->request->input('brand'), function ($offer) {
-            $offer->whereIn('vehicles.brand_id', $this->request->input('brand'));
+            $offer->where('vehicles.brand_id', $this->request->input('brand'));
         });
     }
 }
