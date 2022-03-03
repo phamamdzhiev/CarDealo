@@ -2,9 +2,9 @@
     <div class="vehicle-singleton">
         <div class="vehicle-image-wrapper">
             <router-link :to="'/car/' + offer.id">
-                <img v-if="offer.images.length > 0"
+                <img v-if="offer.image"
                      class="img-fluid"
-                     :src="asset(offer.images[0].image)"
+                     :src="asset(offer.image)"
                      alt=""
                 />
                 <img v-else :src="asset('noimage.jpg')" class="img-fluid" alt="Default image">
