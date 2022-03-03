@@ -51,7 +51,7 @@ class OfferController extends Controller
 
             $image = ImageController::uploadImages($request, $offer->id);
 
-            //todo commit
+            DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e);

@@ -75,7 +75,7 @@ class OfferPersister
             'brand_id' => $this->data->brand->id,
             'model_id' => $this->data->model->id ?? null,
             'offer_id' => $offer->id,
-            'type_id' => $offer->vehicleType->id //todo get type
+            'type_id' => $this->data->vehicleType
         ]);
 
         /*

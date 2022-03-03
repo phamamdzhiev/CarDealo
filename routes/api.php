@@ -107,7 +107,7 @@ Route::get('fetch/cities/{id}', function ($id) {
         'success' => true,
         'data' => \App\Models\City::where('region_id', $id)
             ->orderBy('as_city', 'desc')
-            ->orderBy('city')
+            ->orderBy('name')
             ->get()
     ]);
 });
