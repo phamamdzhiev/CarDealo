@@ -12,9 +12,9 @@ use App\Models\Filters\TransmissionFilter;
 use App\Models\Filters\VehicleCategoryFilter;
 use App\Models\Filters\VehicleTypeFilter;
 use App\Models\Filters\YearFilter;
-use App\Models\Offer;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 
 class AdvanceSearchDataProvider
@@ -23,6 +23,19 @@ class AdvanceSearchDataProvider
      * @var Builder
      */
     private Builder $offer;
+
+    private array $columns = [
+        'offers.id',
+        'offers.title',
+        'offers.price',
+        'offers.description',
+        'vehicles.year',
+        'vehicles.hp',
+        'vehicles.km',
+        'vehicles.cm3',
+        'cities.name',
+        'images.image'
+    ];
 
     /**
      * @param BudgetFilter $budgetFilter
@@ -49,9 +62,13 @@ class AdvanceSearchDataProvider
         RegionFilter $regionFilter
     )
     {
-        $this->offer =  Offer::join('vehicles', 'vehicles.offer_id', '=', 'offers.id');
-        $this->offer->join('images', 'images.offer_id', '=', 'offers.id');
-        $this->offer->join('vehicles_types', 'vehicles.type_id', '=', 'vehicles_types.id');
+        $this->offer =
+            DB::table('offers')
+            ->join('vehicles', 'vehicles.offer_id', '=', 'offers.id')
+            ->join('images', 'images.offer_id', '=', 'offers.id')
+            ->join('cities', 'cities.id', '=', 'offers.city_id')
+            ->join('vehicles_types', 'vehicles.type_id', '=', 'vehicles_types.id')
+            ->select($this->columns);
 
         $budgetFilter
             ->applyTo($this->offer);

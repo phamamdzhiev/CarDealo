@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\DataPersisters\OfferPersister;
-use App\Http\Requests\OfferCreationRequest;
-use App\Models\Enums\Fuel;
-use App\Models\Enums\Transmission;
+use App\Http\DataPersisters\OfferPersister;;
 use App\Models\Offer;
-use App\Models\User;
-use Doctrine\DBAL\Query\QueryException;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-use Psy\Input\CodeArgument;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OfferController extends Controller
@@ -48,15 +41,14 @@ class OfferController extends Controller
         DB::beginTransaction();
         try {
             $offer = $persister->persist();
-
             $image = ImageController::uploadImages($request, $offer->id);
-
             DB::commit();
+            return response($image);
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
+           return response(['message' => 'Error occurs'], 500);
         }
-        return response($image);
+
     }
 
     /**
@@ -77,9 +69,6 @@ class OfferController extends Controller
                 ->with('user')
                 ->findOrFail((int)$id);
 
-            $offer = $offer->toArray();
-            $offer = Fuel::parse($offer, 'fuel');
-            $offer = Transmission::parse($offer, 'transmission');
 
             $response = [
                 'success' => true,

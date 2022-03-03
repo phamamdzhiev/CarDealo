@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Filters;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
 
 class VehicleTypeFilter extends AbstractBaseFilter
 {

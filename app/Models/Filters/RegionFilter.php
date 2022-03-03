@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Filters;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
 
 class RegionFilter extends AbstractBaseFilter
 {
@@ -13,7 +13,6 @@ class RegionFilter extends AbstractBaseFilter
     {
         $offer->when($this->request->input('region'), function (Builder $offer) {
             $offer
-                ->join('cities', 'cities.id', '=', 'offers.city_id')
                 ->where('cities.region_id', $this->request->input('brand'));
         });
     }
