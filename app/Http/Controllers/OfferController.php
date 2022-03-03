@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\DataPersisters\OfferPersister;
 use App\Http\Requests\OfferCreationRequest;
 use App\Models\Enums\Fuel;
 use App\Models\Enums\Transmission;
@@ -12,6 +13,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Psy\Input\CodeArgument;
@@ -35,38 +37,25 @@ class OfferController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, OfferPersister $persister)
     {
-        dd(json_decode($request->input('offer')), true);
         $offerData = json_decode($request->input('offer'), true);
-
-        Validator::make($offerData, [
+        /*Validator::make($offerData, [
             'new_or_used' => 'required',
             'car_brand' => 'required',
             //add rest of validations...
-        ]);
+        ]);*/
+        DB::beginTransaction();
+        try {
+            $offer = $persister->persist();
 
-        $offer = Offer::create([
-            'is_new' => $offerData['new_or_used'],
-            'car_brands_id' => 314,
-            'car_models_id' => 2038,
-            'title' => $offerData['car_offer_title'],
-            'description' => $offerData['car_offer_description'],
-            'price' => $offerData['car_price'] ?? 0,
-            'km' => $offerData['car_km'],
-            'hp' => $offerData['car_hp'],
-            'cm3' => $offerData['car_cm3'],
-            'year' => $offerData['car_year'],
-            'fuel' => $offerData['car_fuel'],
-            'transmission' => $offerData['car_transmission'],
-            'color' => 1,
-            'coupe_type' => 1,
-            'year_acquired' => 0,
-            'user_id' => \Auth::id()
-        ]);
+            $image = ImageController::uploadImages($request, $offer->id);
 
-        $image = ImageController::uploadImages($request, $offer->id);
-
+            //todo commit
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e);
+        }
         return response($image);
     }
 
