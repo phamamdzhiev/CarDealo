@@ -32,6 +32,7 @@
                 </div>
                 <div class="share-section">
                     <ul class="d-flex justify-content-between p-3">
+                        <li><i class="bi bi-eye-fill"></i> {{singleOffer.visits}}</li>
                         <li class="fs-6"><i class="bi bi-heart fs-6"></i>Добави в любими</li>
                         <li><i class="bi bi-share fs-6"></i>Сподели</li>
                         <li><i class="bi bi-flag fs-6"></i>Сигнализирай</li>
