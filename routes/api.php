@@ -1,40 +1,50 @@
 <?php
 
+use App\Http\Controllers\AdvancedSearch;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
+use App\Models\VehicleType;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 //Protected routes
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::post('offer/create', [\App\Http\Controllers\OfferController::class, 'store']);
-    Route::delete('offer/delete/{id}', [\App\Http\Controllers\OfferController::class, 'destroy']);
-    Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+    Route::post('offer/create', [OfferController::class, 'store']);
+    Route::delete('offer/delete/{id}', [OfferController::class, 'destroy']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 //User
 Route::group(['prefix' => 'user'], function () {
-    Route::post('/create', [\App\Http\Controllers\UserController::class, 'store']);
-    Route::post('/update/{id}', [\App\Http\Controllers\UserController::class, 'update'])->middleware('auth:sanctum');
-    Route::get('/auth/fetch', [\App\Http\Controllers\UserController::class, 'isAuthenticated']);
+    Route::post('/create', [UserController::class, 'store']);
+    Route::post('/update/{id}', [UserController::class, 'update'])->middleware('auth:sanctum');
+    Route::get('/auth/fetch', [UserController::class, 'isAuthenticated']);
 });
 
 //Profile
 Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
-    Route::patch('/edit/mobile', [\App\Http\Controllers\ProfileController::class, 'updateMobile']);
-    Route::patch('/edit/password', [\App\Http\Controllers\ProfileController::class, 'updatePassword']);
-    Route::post('/upload/avatar', [\App\Http\Controllers\ProfileController::class, 'uploadAvatar']);
+    Route::patch('/edit/mobile', [ProfileController::class, 'updateMobile']);
+    Route::patch('/edit/password', [ProfileController::class, 'updatePassword']);
+    Route::post('/upload/avatar', [ProfileController::class, 'uploadAvatar']);
 });
 
 //Email
 Route::group(['prefix' => 'email', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('/verify', [\App\Http\Controllers\EmailController::class, 'confirmEmail']);
-    Route::post('/generate-verification-code', [\App\Http\Controllers\EmailController::class, 'sendEmailConfirmationCode']);
+    Route::post('/verify', [EmailController::class, 'confirmEmail']);
+    Route::post('/generate-verification-code', [EmailController::class, 'sendEmailConfirmationCode']);
 });
 
 //Vehicle
 Route::group(['prefix' => 'vehicle/fetch', 'middleware' => 'auth:sanctum'], function () {
-//    Route::get('/popular-brands', [VehicleController::class, 'getPopularCarBrandsWithLimit']);
     Route::get('/brands/{category}/{popular?}', [VehicleController::class, 'getBrands']);
     Route::get('/vehicle/{brand}/category/{category}', [VehicleController::class, 'getBrandWithModels']);
     Route::get('/search/brands', [VehicleController::class, 'searchCarBrands']);
@@ -43,7 +53,7 @@ Route::group(['prefix' => 'vehicle/fetch', 'middleware' => 'auth:sanctum'], func
         return response()->json(\App\Models\VehicleCategory::all()->toArray());
     });
     Route::get('/vehicle-type/{id}/category', function (int $id) {
-        return response()->json(\App\Models\VehicleType::all()
+        return response()->json(VehicleType::all()
             ->where('category_id', '=', $id)
             ->toArray()
         );
@@ -51,24 +61,24 @@ Route::group(['prefix' => 'vehicle/fetch', 'middleware' => 'auth:sanctum'], func
 });
 
 //Advanced search
-Route::get('/fetch/offers', [\App\Http\Controllers\AdvancedSearch::class, 'fetchOffers']);
-Route::get('/fetch/offer/{id}', [\App\Http\Controllers\OfferController::class, 'showSingle']);
+Route::get('/fetch/offers', [AdvancedSearch::class, 'fetchOffers']);
+Route::get('/fetch/offer/{id}', [OfferController::class, 'showSingle']);
 
 //Client Auth
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
-    Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
 //Image
 Route::group(['prefix' => 'image', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'uploadImage']);
+    Route::post('/upload', [ImageController::class, 'uploadImage']);
 });
 
 //CarDealo used offers/cars
 Route::group(['prefix' => 'offers'], function () {
-    Route::get('/fetch/recommended', [\App\Http\Controllers\OfferController::class, 'show']);
-    Route::get('/fetch/user/listing', [\App\Http\Controllers\OfferController::class, 'userListing'])
+    Route::get('/fetch/recommended', [OfferController::class, 'show']);
+    Route::get('/fetch/user/listing', [OfferController::class, 'userListing'])
         ->middleware('auth:sanctum');
 });
 
@@ -81,58 +91,26 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 //Password Request and Password Reset
 Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
-    Route::post('/request', [\App\Http\Controllers\AuthController::class, 'requestNewPassword']);
-    Route::post('/reset', [\App\Http\Controllers\AuthController::class, 'resetPassword']);
+    Route::post('/request', [AuthController::class, 'requestNewPassword']);
+    Route::post('/reset', [AuthController::class, 'resetPassword']);
 });
 
 //Merchants
 Route::group(['prefix' => 'merchants'], function () {
-    Route::get('fetch', [\App\Http\Controllers\MerchantController::class, 'index']);
+    Route::get('fetch', [MerchantController::class, 'index']);
 });
 
-// No controller routes
 
 //Regions
-Route::get('fetch/regions', function () {
-    $expire = \Carbon\Carbon::now()->addCentury();
-    $regions = \Illuminate\Support\Facades\Cache::remember('regions', $expire, function () {
-        return \App\Models\Region::all();
-    });
-    return response()->json(['success' => true, 'data' => $regions]);
-});
+Route::get('fetch/regions', [RegionController::class, 'get']);
 
 //Cities
-Route::get('fetch/cities/{id}', function ($id) {
-    return response()->json([
-        'success' => true,
-        'data' => \App\Models\City::where('region_id', $id)
-            ->orderBy('as_city', 'desc')
-            ->orderBy('name')
-            ->get()
-    ]);
-});
+Route::get('fetch/cities/{id}', [RegionController::class, 'getCitiesInRegion']);
 
 //Popular regions
-Route::get('fetch/popular/regions', function () {
-    $expire = \Carbon\Carbon::now()->addCentury();
-    $popularRegions = \Illuminate\Support\Facades\Cache::remember('popular_regions', $expire, function () {
-        return \App\Models\Region::whereIsPopular(1)->get()->toArray();
-    });
+Route::get('fetch/popular/regions', [RegionController::class, 'popular']);
 
-    return response()->json([
-        'success' => true,
-        'data' => $popularRegions,
-    ]);
-});
-
-//Colors
-Route::get('fetch/colors', function () {
-    $expire = \Carbon\Carbon::now()->addCentury();
-    $regions = \Illuminate\Support\Facades\Cache::remember('color', $expire, function () {
-        return \App\Models\Color::all();
-    });
-    return response()->json(['success' => true, 'data' => $regions]);
-});
+Route::get('fetch/colors', [ColorController::class, 'get']);
 
 Route::group(['prefix' => 'fetch'], function () {
     Route::get('category', [CategoryController::class, 'get']);
