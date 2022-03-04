@@ -62,7 +62,7 @@ Route::group(['prefix' => 'vehicle/fetch', 'middleware' => 'auth:sanctum'], func
 
 //Advanced search
 Route::get('/fetch/offers', [AdvancedSearch::class, 'fetchOffers']);
-Route::get('/fetch/offer/{id}', [OfferController::class, 'showSingle']);
+Route::get('/fetch/offer/{uid}', [OfferController::class, 'showSingle']);
 
 //Client Auth
 Route::group(['prefix' => 'auth'], function () {

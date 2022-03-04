@@ -13,6 +13,7 @@ use App\Models\Filters\VehicleCategoryFilter;
 use App\Models\Filters\VehicleTypeFilter;
 use App\Models\Filters\YearFilter;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,7 @@ class AdvanceSearchDataProvider
     private Builder $offer;
 
     private array $columns = [
-        'offers.id',
+        'offers.uid',
         'offers.title',
         'offers.price',
         'offers.description',

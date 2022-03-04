@@ -12,6 +12,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -37,6 +38,7 @@ class OfferController extends Controller
             DB::commit();
             return response($image);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
            return response(['message' => 'Error occurs'], 500);
         }
@@ -57,7 +59,7 @@ class OfferController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function showSingle($id, Request $request): JsonResponse
+    public function showSingle($uid, Request $request): JsonResponse
     {
         try {
             /**
@@ -71,7 +73,8 @@ class OfferController extends Controller
                 ->with('vehicle.extras')
                 ->with('city')
                 ->with('city.region')
-                ->findOrFail((int)$id);
+                ->where('uid', $uid)
+                ->first();
 
             event(new OfferVisited($offer, $request->ip()));
             $response = [

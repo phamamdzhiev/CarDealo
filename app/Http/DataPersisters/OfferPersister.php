@@ -7,6 +7,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleBoat;
 use App\Models\VehicleCaravan;
 use App\Models\VehicleExtra;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\Auth;
 
 class OfferPersister
@@ -28,7 +29,7 @@ class OfferPersister
     public function __construct(OfferCreationRequest $offerCreationRequest, Auth $auth)
     {
         $this->auth = $auth;
-        $this->data = (object)$offerCreationRequest->validated();
+        $this->data = $offerCreationRequest->validated();
     }
 
     /**
@@ -37,14 +38,15 @@ class OfferPersister
     public function persist(): Offer
     {
         $offer = Offer::create([
-            'title' => $this->data->title,
-            'price' => $this->data->price,
-            'description' => $this->data->description,
+            'title' => $this->data['title'],
+            'price' => $this->data['price'],
+            'description' => $this->data['description'],
             'user_id' => $this->auth::id(),
             'is_approved' => false,
-            'city_id' => $this->data->city,
-            'condition' => $this->data->condition,
-            'has_price' => $this->data->hasPrice
+            'city_id' => $this->data['city'],
+            'condition' => $this->data['condition'],
+            'has_price' => $this->data['hasPrice'],
+            'uid' => new Expression('UUID()')
         ]);
 
         $vehicle = $this->persistVehicle($offer);
@@ -60,17 +62,17 @@ class OfferPersister
     private function persistVehicle(Offer $offer): Vehicle
     {
         $vehicle = Vehicle::create([
-            'year' => $this->data->year,
-            'hp' => $this->data->hp,
-            'km' => $this->data->km,
-            'cm3' => $this->data->cm3,
-            'fuel_id' => $this->data->engine->id,
-            'transmission_id' => $this->data->transmission->id,
-            'color_id' => $this->data->color,
-            'brand_id' => $this->data->brand->id,
-            'model_id' => $this->data->model->id ?? null,
+            'year' => $this->data['year'],
+            'hp' => $this->data['hp'],
+            'km' => $this->data['km'],
+            'cm3' => $this->data['cm3'],
+            'fuel_id' => $this->data['engine']['id'],
+            'transmission_id' => $this->data['transmission']['id'],
+            'color_id' => $this->data['color'],
+            'brand_id' => $this->data['brand']['id'],
+            'model_id' => $this->data['model']['id']?? null,
             'offer_id' => $offer->id,
-            'type_id' => $this->data->vehicleType
+            'type_id' => $this->data['vehicleType']
         ]);
 
         /*
@@ -127,8 +129,8 @@ class OfferPersister
     private function persistExtras(Vehicle $vehicle): array
     {
         $extraList = [];
-        foreach ($this->data->extras as $extraRow) {
-            $extraList[] = VehicleExtra::create(['vehicle_id' => $vehicle->id, 'extra_id' => $extraRow->id]);
+        foreach ($this->data['extras'] as $extraRow) {
+            $extraList[] = VehicleExtra::create(['vehicle_id' => $vehicle->id, 'extra_id' => $extraRow['id']]);
         }
 
         return $extraList;
