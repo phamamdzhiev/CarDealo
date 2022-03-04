@@ -19,6 +19,7 @@ class OfferVisit extends Migration
             $table->ipAddress('ip');
             $table->timestamps();
             $table->foreign('offer_id')->references('id')->on('offers');
+            $table->unique(['offer_id', 'ip']);
         });
 
         Schema::table('offers', function (Blueprint $table) {

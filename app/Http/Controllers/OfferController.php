@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OfferVisited;
 use App\Http\DataPersisters\OfferPersister;;
 
 use App\Http\Requests\OfferCreationRequest;
@@ -56,20 +57,26 @@ class OfferController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function showSingle($id): JsonResponse
+    public function showSingle($id, Request $request): JsonResponse
     {
         try {
+            /**
+             * @var $offer Offer
+             */
+            $offer = Offer::with('images')
+                ->with('user:id,name,mobile')
+                ->with('vehicle')
+                ->with('vehicle.transmission')
+                ->with('vehicle.fuel')
+                ->with('vehicle.extras')
+                ->with('city')
+                ->with('city.region')
+                ->findOrFail((int)$id);
+
+            event(new OfferVisited($offer, $request->ip()));
             $response = [
                 'success' => true,
-                'data' => Offer::with('images')
-                    ->with('user:id,name,mobile')
-                    ->with('vehicle')
-                    ->with('vehicle.transmission')
-                    ->with('vehicle.fuel')
-                    ->with('vehicle.extras')
-                    ->with('city')
-                    ->with('city.region')
-                    ->findOrFail((int)$id)
+                'data' => $offer
             ];
         } catch (NotFoundHttpException $exception) {
             $response = [
