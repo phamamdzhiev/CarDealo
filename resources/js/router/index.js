@@ -44,7 +44,7 @@ const routes = [
         component: () => import("../pages/merchants/Merchants"),
     },
     {
-        path: "/car/:id",
+        path: "/vehicle/:uid",
         name: "single-listing",
         component: () => import("../components/car/SingleListing"),
         props: true

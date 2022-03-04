@@ -1,7 +1,7 @@
 <template>
     <div class="vehicle-singleton">
         <div class="vehicle-image-wrapper">
-            <router-link :to="'/car/' + offer.uid">
+            <router-link :to="{ name: 'single-listing', params: {uid: offer.uid}}">
                 <img v-if="offer.image"
                      class="img-fluid"
                      :src="asset(offer.image)"
@@ -11,7 +11,7 @@
             </router-link>
         </div>
         <div class="vehicle-details">
-            <router-link :to="'/car/' + offer.id">
+            <router-link :to="{ name: 'single-listing', params: {uid: offer.uid}}">
                 {{ offer.title }}
             </router-link>
             <div class="price">

@@ -55,7 +55,8 @@ class OfferController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $uid
+        * @param Request $request
      * @return JsonResponse
      */
     public function showSingle($uid, Request $request): JsonResponse
