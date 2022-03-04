@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class OfferCreationRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,22 +25,32 @@ class OfferCreationRequest extends FormRequest
     public function rules()
     {
         return [
-            'new_or_used' => 'required',
-            'car_brand' => 'required',
-            'car_year' => 'required',
-            'car_model' => 'required',
-            'car_fuel' => 'required',
-            'car_transmission' => 'required',
-            'car_cm3' => 'required',
-            'car_hp' => 'required',
-            'car_extras' => 'required',
-            'car_color' => 'required',
-            'car_category' => 'required',
-            'car_offer_title' => 'required',
-            'car_price' => 'required',
-            'car_has_price' => 'required',
-            'car_offer_city' => 'required',
-            'car_offer_region' => 'required',
+            'vehicleType' => 'required',
+            'vehicleCategory' => 'required',
+            'condition' => 'required',
+            'brand.id' => 'required',
+            'year' => 'required',
+            'extras' => 'required',
+            'color' => 'required',
+            'transmission.id' => 'required',
+            'engine.id' => 'required',
+            'hp' => 'required',
+            'cm3' => 'required',
+            'km' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'hasPrice' => 'required',
+            'region' => 'required',
+            'city' => 'required',
         ];
+    }
+
+    /**
+     * @param $keys
+     * @return array|mixed
+     */
+    public function all($keys = null)
+    {
+        return json_decode($this->input('offer'), true);
     }
 }

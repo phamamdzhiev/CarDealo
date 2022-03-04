@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\DataPersisters\OfferPersister;;
+
+use App\Http\Requests\OfferCreationRequest;
 use App\Models\Offer;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,29 +22,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class OfferController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param OfferPersister $persister
+     * @return Application|ResponseFactory|Response
+     * @throws \Throwable
      */
     public function store(Request $request, OfferPersister $persister)
     {
-        $offerData = json_decode($request->input('offer'), true);
-        /*Validator::make($offerData, [
-            'new_or_used' => 'required',
-            'car_brand' => 'required',
-            //add rest of validations...
-        ]);*/
         DB::beginTransaction();
         try {
             $offer = $persister->persist();
@@ -52,12 +43,11 @@ class OfferController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param Offer $offer
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder[]
+     * @param Request $request
+     * @return array|Collection
      */
-    public function show(Offer $offer, Request $request): array|\Illuminate\Database\Eloquent\Collection
+    public function show(Offer $offer, Request $request): array|Collection
     {
         return $offer->with('images')->take(10)->get();
     }
@@ -96,7 +86,7 @@ class OfferController extends Controller
      * Display the specified resource.
      *
      * @param Offer $offer
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Offer[]
+     * @return Builder[]|Collection|Offer[]
      */
     public function showApproved(Offer $offer)
     {
@@ -108,7 +98,7 @@ class OfferController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param Offer $offer
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Offer $offer)
     {
@@ -118,7 +108,7 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return Application|ResponseFactory|Response
      * @throws Exception
      */
     public function destroy($id)

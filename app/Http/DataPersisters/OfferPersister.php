@@ -1,20 +1,16 @@
 <?php
 namespace App\Http\DataPersisters;
 
+use App\Http\Requests\OfferCreationRequest;
 use App\Models\Offer;
 use App\Models\Vehicle;
 use App\Models\VehicleBoat;
 use App\Models\VehicleCaravan;
 use App\Models\VehicleExtra;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OfferPersister
 {
-    /**
-     * @var Request
-     */
-    private $request;
     /**
      * @var Auth
      */
@@ -26,14 +22,13 @@ class OfferPersister
     private $data;
 
     /**
-     * @param Request $request
+     * @param OfferCreationRequest $offerCreationRequest
      * @param Auth $auth
      */
-    public function __construct(Request $request, Auth $auth)
+    public function __construct(OfferCreationRequest $offerCreationRequest, Auth $auth)
     {
-        $this->request = $request;
         $this->auth = $auth;
-        $this->data = json_decode($this->request->input('offer'));
+        $this->data = (object)$offerCreationRequest->validated();
     }
 
     /**
