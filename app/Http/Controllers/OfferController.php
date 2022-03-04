@@ -38,7 +38,6 @@ class OfferController extends Controller
             DB::commit();
             return response($image);
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
            return response(['message' => 'Error occurs'], 500);
         }
