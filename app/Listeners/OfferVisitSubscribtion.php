@@ -29,15 +29,18 @@ class OfferVisitSubscribtion
         $offer = $event->getOffer();
         DB::beginTransaction();
        try {
-            $visited = OfferVisit::where('offer_id', $offer->id)->where('ip', $event->getIp())->first();
-            if (empty($visited)) {
-                $visit = new OfferVisit();
-                $visit->offer_id = $offer->id;
-                $visit->ip = $event->getIp();
-                $visit->save();
-                $offer->visits += 1;
-                $offer->save();
-            }
+           //fake counter
+           $offer->visits += 1;
+           $offer->save();
+
+           //real visits by ip
+           $visited = OfferVisit::where('offer_id', $offer->id)->where('ip', $event->getIp())->first();
+           if (empty($visited)) {
+            $visit = new OfferVisit();
+            $visit->offer_id = $offer->id;
+            $visit->ip = $event->getIp();
+            $visit->save();
+           }
            DB::commit();
        } catch (\Exception $e) {
            DB::rollBack();
