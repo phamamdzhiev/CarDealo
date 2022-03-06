@@ -31,6 +31,9 @@ export default {
             sessionStorage.removeItem('offer');
             this.$router.replace({name: 'Home'})
         }
+    },
+    mounted() {
+        this.$store.commit('uploadOffer/resetVehicleState');
     }
 }
 </script>

@@ -43,8 +43,13 @@
 
                     <div class="user_details">
                         <h6>Имена: {{ authUser.name }}</h6>
-                        <h6>Имейл: {{ authUser.email }}</h6>
+                        <h6>Имейл: {{ authUser.email ? authUser.email : 'Не е посочен' }}</h6>
                         <h6>Мобилен: {{ authUser.mobile }}</h6>
+                        <h6>Брой обяви: {{ '1' }}
+                            <router-link :to="{name: 'my.listing'}">
+                                (Виж обявите)
+                            </router-link>
+                        </h6>
                     </div>
                 </div>
                 <router-view v-else></router-view>

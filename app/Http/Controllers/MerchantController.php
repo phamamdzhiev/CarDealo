@@ -19,7 +19,7 @@ class MerchantController extends Controller
     {
         return response()
             ->json(
-                ['data' => User::whereIsBusiness(1)->with('merchant')->get()]
+                ['data' => Merchant::all()->toArray()]
             );
     }
 

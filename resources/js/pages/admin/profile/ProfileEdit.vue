@@ -66,9 +66,12 @@
             </div>
         </div>
         <hr/>
-        <div class="row">
+        <div class="row" v-if="$store.getters['auth/GET_AUTH_USER'].is_business">
             <div class="col-lg-6">
-               <upload-avatar/>
+                <description/>
+            </div>
+            <div class="col-lg-6">
+                <upload-avatar/>
             </div>
         </div>
     </div>
@@ -84,6 +87,7 @@ import pswVisibilityToggleMixin from "../../../composables/psw-toggle-visibility
 import ErrorDisplay from "../../../components/ui/ErrorDisplay";
 import Cleave from "vue-cleave-component";
 import UploadAvatar from "./partials/UploadAvatar";
+import Description from "./partials/Description";
 
 export default {
     name: "ProfileEdit",
@@ -92,7 +96,8 @@ export default {
         PasswordVisibilityToggle,
         ErrorDisplay,
         Cleave,
-        UploadAvatar
+        UploadAvatar,
+        Description
     },
     mixins: [pswVisibilityToggleMixin],
     data() {

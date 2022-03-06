@@ -149,9 +149,7 @@ export default {
             // }
 
             await this.imageUpload();
-            console.log(JSON.stringify(this.$store.getters['uploadOffer/getVehicleState']))
-            // this.$store.commit('uploadOffer/setStepPlus');
-            // this.$store.commit('uploadOffer/resetVehicleState');
+            this.$store.commit('uploadOffer/setStepPlus');
         }
     }
 }

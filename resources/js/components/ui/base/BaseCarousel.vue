@@ -29,9 +29,9 @@ export default {
             required: true,
         },
         height: {
-            type: Number,
+            type: String,
             required: false,
-            default: 546,
+            default: "546",
         },
     },
     computed: {

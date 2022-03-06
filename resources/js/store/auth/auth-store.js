@@ -3,7 +3,7 @@ export default {
     state() {
         return {
             user: null,
-            is_authenticated: false
+            is_authenticated: false,
         }
     },
     mutations: {

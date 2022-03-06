@@ -29,14 +29,32 @@
             </div>
         </base-carousel>
     </div>
+    <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>
 </template>
 
 <script>
 import BaseCarousel from "../components/ui/base/BaseCarousel.vue";
+import FeaturedCarouselVehicles from "../components/used/partials/FeaturedCarouselVehicles";
+import {reactive} from "vue";
 export default {
     name: "Home",
     components: {
         BaseCarousel,
+        FeaturedCarouselVehicles
+    },
+    setup() {
+        const recommended = reactive({
+            data: [
+                {name: 'Benz'},
+                {name: 'Dizel'},
+                {name: 'GAs'},
+                {name: 'Hibris'}
+            ]
+        });
+
+        return {
+            recommended
+        }
     }
 };
 </script>
