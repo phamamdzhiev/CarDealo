@@ -136,6 +136,8 @@ export default {
 
         },
         async uploadOffer() {
+            //TODO: Uncomment before deploy
+
             // const lArr = this.imageTmpUrl.length
             // if (lArr === 0) {
             //     alert(`Моля, качете снимки`);
@@ -149,7 +151,7 @@ export default {
             // }
 
             await this.imageUpload();
-            this.$store.commit('uploadOffer/setStepPlus');
+            await this.$router.replace({name: 'upload.success', params: {success: 'yes'}})
         }
     }
 }

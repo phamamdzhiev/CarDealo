@@ -8,7 +8,6 @@
         <VehicleExtras v-if="getStep === 6"></VehicleExtras>
         <OfferDetails v-if="getStep === 7"></OfferDetails>
         <VehicleImages v-if="getStep === 8"></VehicleImages>
-        <Success v-if="getStep === 9"></Success>
     </div>
 </template>
 
@@ -40,7 +39,8 @@ export default {
         Success,
     },
     mounted() {
-        this.$store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: parseInt(this.vehicleID)});
+        console.log(this.vehicleID)
+        this.$store.commit('uploadOffer/setVehicleState', {key: 'vehicleCategory', value: parseInt(this.vehicleID)});
     },
     computed: {
         setComponent() {

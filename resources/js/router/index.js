@@ -83,6 +83,22 @@ const routes = [
         }
     },
     {
+        path: '/upload/success',
+        name: 'upload.success',
+        component: () => import('../pages/upload-offer/Success'),
+        meta: {
+            hideFooter: true,
+            title: 'Успешно качихте обява'
+        },
+        beforeEnter(to, from, next) {
+            if (to.params.success) {
+                next()
+            } else {
+                next({name: 'upload'})
+            }
+        }
+    },
+    {
         path: "/profile",
         name: "Profile",
         meta: {

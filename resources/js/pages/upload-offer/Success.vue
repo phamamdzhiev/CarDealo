@@ -5,12 +5,10 @@
                 <i class="bi bi-check-circle text-success-color" style="font-size: 5rem"></i>
                 <h3 class="mb-4">Поздраления Вие успешно качихте своята обява!</h3>
                 <div>Може да видите своите обяви от
-                    <router-link :to="{name: 'my.listing'}"
-                                 class="text-link-blue">
-                        ТУК
-                    </router-link>
+                    <button class="btn text-link-blue fw-bold p-0" @click="navigateAway('listing')">ТУК</button>
                 </div>
-                <base-button @click="navigateToHomepage" link="">Към начална страница</base-button>
+                <small>ИЛИ</small>
+                <button @click="navigateAway('home')" class="base-button d-block ripple">Към начална страница</button>
             </div>
         </base-card>
     </div>
@@ -27,9 +25,12 @@ export default {
         BaseCard,
     },
     methods: {
-        navigateToHomepage() {
-            sessionStorage.removeItem('offer');
-            this.$router.replace({name: 'Home'})
+        navigateAway(to) {
+            if (to === 'home') {
+                this.$router.replace({name: 'Home'})
+            } else if (to === 'listing') {
+                this.$router.replace({name: 'my.listing'})
+            }
         }
     },
     mounted() {
@@ -37,7 +38,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <base-carousel
-            :height="400"
+            height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
             heading="Вашето търсене на надежден употребяван автомобил приключи!"
         >

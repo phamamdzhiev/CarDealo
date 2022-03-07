@@ -15,7 +15,7 @@
                         v-for="item in vehicleTypes"
                         :key="item.id"
                         :class="['item position-relative', {active: getVehicleType === item.id}]"
-                        @click="store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: item.id});">
+                        @click="store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: parseInt(item.id)});">
                         <span
                             v-show="getVehicleType === item.id"
                             @click.stop="store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: null})"
