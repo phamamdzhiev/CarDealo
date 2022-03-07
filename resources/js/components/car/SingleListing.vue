@@ -168,7 +168,7 @@ export default {
     components: {BaseCard, Swiper, SwiperSlide},
     mixins: [assetMixin],
     props: {
-        id: String
+        uid: String
     },
     inject: ['window'],
     setup(props) {
@@ -179,7 +179,7 @@ export default {
         async function fetchSingleOffer() {
             try {
                 loading.value = true;
-                const res = await axios.get(`/fetch/offer/${props.id}`);
+                const res = await axios.get(`/fetch/offer/${props.uid}`);
                 loading.value = false;
                 if (res.data.success) {
                     singleOffer.value = res.data.data;

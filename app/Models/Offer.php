@@ -79,6 +79,10 @@ class Offer  extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'created_at'  => 'datetime:d.m.Y H:i',
+    ];
+
     /**
      * @return BelongsTo
      */
