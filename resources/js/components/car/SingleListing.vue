@@ -1,22 +1,25 @@
 <template>
     <spinner v-if="loading"/>
     <div v-else-if="singleOffer && !loading">
-        <Swiper :slides-per-view="3"
-                :navigation="true"
-        >
-            <SwiperSlide v-for="item in singleOffer.images" :key="item">
-                <img
-                    class="img-fluid"
-                    :src="asset(item.image)"
-                    alt=""
-                />
-            </SwiperSlide>
-        </Swiper>
+        <div style="overflow: hidden">
+            <Swiper :slides-per-view="3"
+                    :navigation="true"
+                    :modules="modules"
+            >
+                <SwiperSlide v-for="item in singleOffer.images" :key="item">
+                    <img
+                        class="img-fluid"
+                        :src="asset(item.image)"
+                        alt=""
+                    />
+                </SwiperSlide>
+            </Swiper>
+        </div>
         <div style="position: relative; max-width: 750px; margin: 2.5rem auto">
             <div class="gallery position-absolute">
                 <i class="fa-solid fa-image fs-4"></i>
             </div>
-            <div class="panel position-relative">
+            <div class="base-card position-relative">
 
                 <div class="offer-details px-4 pb-4 pt-5">
 
@@ -24,24 +27,16 @@
                         <h4 class="fw-bold">
                             <span>{{ singleOffer.title }}</span>
                         </h4>
-                        <h5 class="fw-bold">{{ singleOffer.price }} лв.</h5>
+                        <h5 class="fw-bold text-base-color">{{ singleOffer.price }} лв.</h5>
                         <p>{{ singleOffer.description }}</p>
 
                         <button class="fw-bold base-button">Виж детайли на собственика</button>
                     </div>
                 </div>
-                <div class="share-section">
-                    <ul class="d-flex justify-content-between p-3">
-                        <li><i class="bi bi-eye-fill"></i> {{ singleOffer.visits }}</li>
-                        <li class="fs-6"><i class="bi bi-heart fs-6"></i>Добави в любими</li>
-                        <li><i class="bi bi-share fs-6"></i>Сподели</li>
-                        <li><i class="bi bi-flag fs-6"></i>Сигнализирай</li>
-<!--                        <li><i class="bi bi-plus-lg fs-6"></i>Сравни с друга обява</li>-->
-                    </ul>
-                </div>
+                <OfferActions :visits="singleOffer.visits"></OfferActions>
             </div>
-            <div class="panel">
-                <div class="offer-details p-4">
+            <div class="base-card">
+                <div class="offer-details p-3">
                     <div class="heading">
                         <h5 class="fw-bold">
                             <span>Детайли на офертата</span>
@@ -50,39 +45,45 @@
                             <ul>
                                 <li>
                                     <span class="head">Мощност</span>
-                                    <span><i class="fa-solid fa-horse fs-6 pe-1"></i>{{
-                                            singleOffer.vehicle.hp
-                                        }} к.с</span>
+                                    <span>
+                                        <i class="fa-solid fa-horse fs-6 pe-1"></i>
+                                        {{ singleOffer.vehicle.hp }} к.с
+                                    </span>
                                 </li>
                                 <li>
                                     <span class="head">Трансмисия</span>
-                                    <span><i class="fa-solid fa-gears fs-6 pe-1"></i>
+                                    <span>
+                                        <i class="fa-solid fa-gears fs-6 pe-1"></i>
                                         {{ singleOffer.vehicle.transmission.name ?? '' }}
                                     </span>
                                 </li>
                                 <li>
                                     <span class="head">Година на производство</span>
-                                    <span><i class="fa-solid fa-calendar-days fs-6 pe-1"></i>{{
-                                            singleOffer.vehicle.year
-                                        }}</span>
+                                    <span>
+                                        <i class="fa-solid fa-calendar-days fs-6 pe-1"></i>
+                                        {{ singleOffer.vehicle.year }}
+                                    </span>
                                 </li>
                                 <li>
                                     <span class="head">Пробег</span>
-                                    <span><i class="fa-solid fa-road fs-6 pe-1"></i>{{
-                                            singleOffer.vehicle.km
-                                        }} км.</span>
+                                    <span>
+                                        <i class="fa-solid fa-road fs-6 pe-1"></i>
+                                        {{ singleOffer.vehicle.km }} км.
+                                    </span>
                                 </li>
                                 <li>
                                     <span class="head">Двигател</span>
-                                    <span><i class="fa-solid fa-gas-pump fs-6 pe-1"></i>{{
-                                            singleOffer.vehicle.fuel.name ?? ''
-                                        }}</span>
+                                    <span>
+                                        <i class="fa-solid fa-gas-pump fs-6 pe-1"></i>
+                                        {{ singleOffer.vehicle.fuel.name ?? '' }}
+                                    </span>
                                 </li>
                                 <li>
                                     <span class="head">Качена от</span>
-                                    <span><i class="fa-solid fa-user fs-6 pe-1"></i>{{
-                                            singleOffer.user.is_business ? 'Търговец' : 'Частно лице'
-                                        }}</span>
+                                    <span>
+                                        <i class="fa-solid fa-user fs-6 pe-1"></i>
+                                        {{ singleOffer.user.is_business ? 'Търговец' : 'Частно лице' }}
+                                    </span>
                                 </li>
                                 <li>
                                     <span class="head">Регион</span>
@@ -93,7 +94,7 @@
                                 <li>
                                     <span class="head">Състояние</span>
                                     <span><i class="fa-solid fa-star fs-6 pe-1"></i>
-                                        {{ singleOffer.condition }}
+                                        {{ vehicleCondition }}
                                     </span>
                                 </li>
                                 <li>
@@ -107,8 +108,8 @@
                     </div>
                 </div>
             </div>
-            <div class="panel">
-                <div class="offer-details p-4">
+            <div class="base-card">
+                <div class="offer-details p-3">
                     <div class="heading">
                         <h5 class="fw-bold">
                             <span>
@@ -131,41 +132,30 @@
                     </div>
                 </div>
             </div>
-            <div class="panel">
-                <div class="offer-details p-4">
-                    <div class="heading">
-                        <h6>
-                            <span>
-                                <i class="fa-solid fa-link fs-6 pe-1"></i>
-                            </span>
-                            <span class="fw-bold">
-                                Линк на обявата:
-                            </span>
-                            <br/>
-                            <span class="d-block mt-2 fw-light">
-                                 {{ window.APP_URL + $route.path }} -
-                                <span class="fw-bold"> <i class="fa-solid fa-copy"></i> Копирай</span>
-                            </span>
-                        </h6>
-                    </div>
-                </div>
-            </div>
+            <VehicleAndValuationAd
+                heading="Можеш и ти лесно да продадеш своя автомобил"
+                sub-heading="Директно от вкъщи"
+                image="https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/sell-car_vNZwdICyt.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796442201"
+            />
         </div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import {onMounted, ref, inject} from "vue";
+import {onMounted, ref, inject, computed} from "vue";
 import BaseCard from "../ui/base/BaseCard";
 import router from "../../router";
 import assetMixin from '../../composables/asset';
 import {Swiper, SwiperSlide} from "swiper/vue";
 import 'swiper/css';
+import OfferActions from "./partials/OfferActions";
+import VehicleAndValuationAd from "../used/partials/VehicleAndValuationAd";
+import {Navigation, Virtual} from "swiper";
 
 export default {
     name: "SingleListing",
-    components: {BaseCard, Swiper, SwiperSlide},
+    components: {BaseCard, Swiper, SwiperSlide, OfferActions, VehicleAndValuationAd},
     mixins: [assetMixin],
     props: {
         uid: String
@@ -175,6 +165,17 @@ export default {
         let singleOffer = ref(null);
         let loading = ref(false);
         const $toast = inject('$toast');
+
+        const vehicleCondition = computed(() => {
+            switch (singleOffer.value.condition) {
+                case 'NEW':
+                    return 'Нов'
+                case 'OLD':
+                    return 'Употребяван'
+                case 'PARTS':
+                    return 'На части'
+            }
+        })
 
         async function fetchSingleOffer() {
             try {
@@ -202,34 +203,40 @@ export default {
         onMounted(() => {
             fetchSingleOffer()
         });
-
+        const swiperModules = [Navigation, Virtual];
 
         return {
+            modules: swiperModules,
             singleOffer,
-            loading
+            loading,
+            vehicleCondition
         }
     }
 }
 </script>
 
 <style scoped>
-.share-section {
-    border-top: 1px solid hsla(0, 0%, 59.2%, .2);
+/*swiper*/
+.swiper-button-prev {
+    left: 1rem !important;
 }
 
-.panel {
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 4px 4px 8px 0 rgb(36 39 44 / 6%);
-    border: 1px solid #e9e9e9;
-    overflow: hidden;
-    margin-bottom: 1rem;
+.swiper-button-next {
+    right: 1rem !important;
+}
 
+.share-section {
+    border-top: 1px solid hsla(0, 0%, 59.2%, .2);
 }
 
 .base-button {
     box-shadow: 0 8px 8px 0 rgb(247 93 52 / 20%);
     max-width: 300px;
+}
+
+.base-card {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .gallery {

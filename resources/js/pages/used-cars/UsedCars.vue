@@ -33,7 +33,6 @@
                     <VehicleAndValuationAd
                         sub-heading="Директно от вкъщи"
                         heading="Продай своя автомобил бързо"
-                        :link="{linkHref: '/', linkLabel: 'Продай своя автомобил тук'}"
                         image="https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/sell-car_vNZwdICyt.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796442201"
                     />
                 </div>

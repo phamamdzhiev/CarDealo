@@ -92,7 +92,7 @@ export default {
             fieldType.value = fieldType.value === "password" ? "text" : "password";
         }
 
-        if (!isUndefined(route.redirectedFrom) && route.redirectedFrom.name === 'sell.car') {
+        if (!isUndefined(route.redirectedFrom) && (route.redirectedFrom.name === 'upload' || route.redirectedFrom.name === 'upload.vehicle')) {
             isRedirected.value = true;
         }
 

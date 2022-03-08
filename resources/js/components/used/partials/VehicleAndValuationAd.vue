@@ -1,11 +1,11 @@
 <template>
     <div class="base-card d-flex justify-content-between">
         <div class="py-3">
-            <h5 class="mb-0 fw-bold">{{heading}}</h5>
-            <p class="mb-0 text-normal-gray">{{subHeading}}</p>
-            <a :href="link.linkHref" class="mt-4 d-block text-link-blue">
-                {{link.linkLabel}}
-            </a>
+            <h5 class="mb-0 fw-bold">{{ heading }}</h5>
+            <p class="mb-0 text-normal-gray">{{ subHeading }}</p>
+            <router-link :to="{name: 'upload'}" class="mt-4 d-block text-link-blue">
+                Продай своя автомобил тук
+            </router-link>
         </div>
         <img
             width="130"
@@ -28,15 +28,9 @@ export default {
             type: String,
             required: true
         },
-        link: {
-           linkHref: {
-               type: String,
-               required: true
-           },
-            linkLabel: {
-                type: String,
-                required: true
-            }
+        linkLabel: {
+            type: String,
+            required: true
         },
         image: {
             type: String,
