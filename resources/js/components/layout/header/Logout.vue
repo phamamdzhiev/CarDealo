@@ -16,7 +16,7 @@ export default {
     name: "Logout",
     methods: {
         async logout() {
-            this.$store.commit('sellCar/resetState');
+            this.$store.commit('uploadOffer/resetVehicleState');
 
             try {
                 await axios.get('/sanctum/csrf-cookie');

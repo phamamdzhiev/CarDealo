@@ -4,15 +4,18 @@
             <div class="col-lg-3">
                 <div class="p-2 advanced-filters">
                     <h5 class="fw-bold mb-3">Търсене по филтри</h5>
-                    <VehicleCategoryFilter @updateQueryParams="fetchData"/>
-                    <VehicleTypeFilter @updateQueryParams="fetchData"/>
-                    <BrandFilter @updateQueryParams="fetchData"/>
+                    <VehicleTypeFilter :types="vehicleTypes"
+                                       @fetchCategory="fetchVehicleCategoriesAndBrands" @updateQueryParams="fetchData"/>
+                    <VehicleCategoryFilter v-if="vehicleCategories.length > 0" :categories="vehicleCategories"
+                                           @updateQueryParams="fetchData"/>
+                    <BrandFilter v-if="vehicleBrands.length > 0" :brands="vehicleBrands"
+                                 @updateQueryParams="fetchData"/>
                     <BudgetFilter @updateQueryParams="fetchData"/>
                     <YearFilter @updateQueryParams="fetchData"/>
                     <KmFilter @updateQueryParams="fetchData"/>
                     <FuelFilter @updateQueryParams="fetchData"/>
                     <TransmissionFilter @updateQueryParams="fetchData"/>
-                    <RegionFilter  @updateQueryParams="fetchData"/>
+                    <RegionFilter v-if="regions.length > 0" :regions="regions" @updateQueryParams="fetchData"/>
                     <ColorFilter @updateQueryParams="fetchData"/>
                 </div>
             </div>
@@ -44,6 +47,8 @@ import ColorFilter from "./partials/ColorFilter";
 import VehicleCategoryFilter from "./partials/VehicleCategoryFilter";
 import VehicleTypeFilter from "./partials/VehicleTypeFilter";
 import RegionFilter from "./partials/RegionFilter";
+import {useRoute} from "vue-router";
+import {isUndefined} from "lodash";
 
 export default {
     name: "AdvancedSearch",
@@ -64,6 +69,49 @@ export default {
     setup() {
         let offers = ref([]);
         let isLoading = ref(false);
+        const route = useRoute();
+        const vehicleTypes = ref([]);
+        const vehicleCategories = ref([]);
+        const vehicleBrands = ref([]);
+        const regions = ref([]);
+
+        async function fetchVehicleTypes() {
+            const res = await axios.get('vehicle/fetch/vehicle-types');
+            if (res.data) {
+                vehicleTypes.value = [];
+                res.data.forEach((element) => {
+                    vehicleTypes.value.push({label: element.name, value: element.id});
+                });
+            }
+        }
+
+        async function fetchVehicleCategoriesAndBrands(id) {
+            const res = await axios.get(`vehicle/fetch/vehicle-type/${id}/category`);
+            const res1 = await axios.get(`vehicle/fetch/brands/${id}/1`);
+            if (res1.data) {
+                vehicleBrands.value = [];
+                res1.data.forEach((element) => {
+                    vehicleBrands.value.push({label: element.name, value: element.id});
+                });
+            }
+
+            if (res.data) {
+                vehicleCategories.value = [];
+                res.data.forEach((element) => {
+                    vehicleCategories.value.push({label: element.name, value: element.id});
+                });
+            }
+        }
+
+        async function fetchRegions() {
+            const res = await axios.get('fetch/regions');
+            if (res.data.data) {
+                regions.value = [];
+                res.data.data.forEach((element) => {
+                    regions.value.push({label: element.name, value: element.id});
+                });
+            }
+        }
 
         async function fetchData() {
             try {
@@ -80,16 +128,26 @@ export default {
 
         onMounted(() => {
             fetchData();
+            fetchVehicleTypes();
+            fetchRegions();
+
+            if (!isUndefined(route.query.type)) {
+                fetchVehicleCategoriesAndBrands(route.query.type)
+            }
         });
 
 
         return {
             offers,
             isLoading,
-            fetchData
+            fetchData,
+            fetchVehicleCategoriesAndBrands,
+            vehicleTypes,
+            vehicleCategories,
+            vehicleBrands,
+            regions
         }
     }
-
 }
 </script>
 

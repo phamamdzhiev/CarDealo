@@ -4,7 +4,7 @@
         <FormKit
             type="radio"
             :options="categories"
-            @input="handleCategories"
+            @input="handleTypes"
             :value="route.query.category ? route.query.category : null"
         />
     </div>
@@ -17,18 +17,17 @@ import {ref} from "vue";
 export default {
     name: "VehicleCategoryFilter",
     emits: ['updateQueryParams'],
+    props: {
+        categories: {
+            type: Array,
+            required: true
+        }
+    },
     setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
 
-        const categories = ref([
-            {value: 1, label: 'Автомобили'},
-            {value: 2, label: 'Бусове'},
-            {value: 3, label: 'Камиони'},
-            {value: 4, label: 'Лодки'},
-        ]);
-
-        async function handleCategories(categoryID) {
+        async function handleTypes(categoryID) {
             await router.push({
                 name: route.name,
                 query: {...route.query, 'category': categoryID}
@@ -38,10 +37,13 @@ export default {
         }
 
         return {
-            handleCategories,
-            categories,
+            handleTypes,
             route
         }
     }
 }
 </script>
+
+<style scoped>
+
+</style>

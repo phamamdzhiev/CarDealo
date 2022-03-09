@@ -1,10 +1,12 @@
 <template>
     <div class="advanced-single-filter">
         <h6 class="fw-bold">Тип</h6>
+        <spinner v-if="types.length < 1"/>
         <FormKit
+            v-else
             type="radio"
             :options="types"
-            @input="handleTypes"
+            @input="handleCategories"
             :value="route.query.type ? route.query.type : null"
         />
     </div>
@@ -16,36 +18,31 @@ import {ref} from "vue";
 
 export default {
     name: "VehicleTypeFilter",
-    emits: ['updateQueryParams'],
+    emits: ['updateQueryParams', 'fetchCategory'],
+    props: {
+        types: {
+            type: Array,
+            required: true
+        }
+    },
     setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
 
-        const types = ref([
-            {value: 1, label: 'Комби'},
-            {value: 2, label: 'Седан'},
-            {value: 3, label: 'Хеджбек'},
-            {value: 4, label: 'SUV'},
-        ]);
-
-        async function handleTypes(typeID) {
+        async function handleCategories(typeID) {
             await router.push({
                 name: route.name,
                 query: {...route.query, 'type': typeID}
             });
 
             emit('updateQueryParams');
+            emit('fetchCategory', typeID);
         }
 
         return {
-            handleTypes,
-            types,
+            handleCategories,
             route
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

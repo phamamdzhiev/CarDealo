@@ -23,22 +23,15 @@ export default {
     name: "BrandFilter",
     components: {CustomCheckbox},
     emits: ['updateQueryParams'],
+    props: {
+        brands: {
+            type: Array,
+            required: true
+        }
+    },
     setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
-        const brands = ref([
-            {value: 1, label: 'BMW'},
-            {value: 2, label: 'Audi'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-            {value: 3, label: 'Skoda'},
-        ]);
 
         async function handleBrands(brandID) {
             await router.push({
@@ -50,7 +43,6 @@ export default {
         }
 
         return {
-            brands,
             handleBrands,
             route
         }
