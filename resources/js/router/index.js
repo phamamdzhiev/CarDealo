@@ -142,6 +142,37 @@ const routes = [
                 next({name: 'login'})
             }
         }
+    }, {
+        path: "/my-listing",
+        name: "my.listing",
+        component: () => import('../pages/admin/my-listing/MyListing'),
+        meta: {
+            hideFooter: true,
+            title: 'Моите обяви'
+        },
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
+        }
+    },
+    {
+        path: "/listing/:id/edit",
+        name: "edit.listing",
+        component: () => import('../pages/admin/my-listing/EditListing'),
+        meta: {
+            hideFooter: true,
+            title: 'Редакция на обява'
+        },
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/GET_AUTH_USER']) {
+                next()
+            } else {
+                next({name: 'login'})
+            }
+        }
     },
     {
         path: "/login",

@@ -120,6 +120,8 @@ export default {
                 isLoading.value = false
                 if (res.data) {
                     offers.value = res.data;
+                    console.log('Offers', offers.value);
+
                 }
             } catch (e) {
                 console.log(e, 'fetch offers failed');
