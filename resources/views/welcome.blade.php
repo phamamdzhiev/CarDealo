@@ -12,11 +12,21 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{--    Font Awesome Kit--}}
     <script src="https://kit.fontawesome.com/f0041d2798.js" crossorigin="anonymous"></script>
+    {{-- Chrisp chat --}}
+    <script type="text/javascript">window.$crisp = [];
+        window.CRISP_WEBSITE_ID = "5d194d17-d057-4284-896e-3077f71b331e";
+        (function () {
+            d = document;
+            s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = 1;
+            d.getElementsByTagName("head")[0].appendChild(s);
+        })();</script>
 </head>
 <body>
 {{--<div class="container-xxl mt-3">--}}
 {{--    <div class="alert alert-warning alert-dismissible p-2 mb-0" role="alert">--}}
-{{--        <h5 class="alert-heading mb-0">В момента се извършва поддръжка на сайт. </h5>--}}
+{{--        <h5 class="alert-heading mb-0">В момента се извършва поддръжка на сайтa. </h5>--}}
 {{--    </div>--}}
 {{--</div>--}}
 <div id="app"></div>
