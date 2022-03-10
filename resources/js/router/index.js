@@ -159,9 +159,10 @@ const routes = [
         }
     },
     {
-        path: "/listing/:id/edit",
+        path: "/listing/:uid/edit",
         name: "edit.listing",
         component: () => import('../pages/admin/my-listing/EditListing'),
+        props: true,
         meta: {
             hideFooter: true,
             title: 'Редакция на обява'

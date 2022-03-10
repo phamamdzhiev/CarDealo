@@ -207,8 +207,4 @@ export default {
 .sell-car {
     max-width: 800px;
 }
-
-input#hasPrice {
-    display: none;
-}
 </style>

@@ -29,7 +29,7 @@
                             </p>
                         </div>
                         <div class="actions text-end position-absolute bottom-0 end-0 d-flex align-items-center">
-                            <router-link class=" p-0 me-2" :to="{name: 'edit.listing', params: {id: item.id}}">
+                            <router-link class=" p-0 me-2" :to="{name: 'edit.listing', params: {uid: item.uid}}">
                                 <i class="bi bi-pencil-square text-success-color fs-4"></i>
                             </router-link>
                             <form @submit.prevent="handleDelete(item['id'], index)">
