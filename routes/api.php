@@ -54,9 +54,7 @@ Route::group(['prefix' => 'vehicle/fetch'], function () {
     Route::get('/vehicle-types', function () {
         return response()->json(\App\Models\VehicleCategory::all()->toArray());
     });
-    Route::get('/vehicle-type/{id}/category', function (int $id) {
-        return response()->json(VehicleType::where('category_id', '=', $id)->get()->toArray());
-    });
+    Route::get('/vehicle-type/{id}/category/{popular?}', [CategoryController::class, 'getTypes']);
 });
 
 //Advanced search

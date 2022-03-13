@@ -23,7 +23,7 @@
 
         <FeaturedCarouselVehicles heading="Автомобили според бюджет" :props-data="budget"/>
 
-        <FeaturedCarouselVehicles heading="Автомобили по тип на каросерията" :props-data="bodyType"/>
+        <FeaturedCarouselVehicles heading="Автомобили по тип на каросерията" :props-data="bodyType" v-if="Object.keys(bodyType).length > 0"/>
 
         <By :by="{heading: 'Автомобили по марка', byFeature: brands}"/>
 
@@ -71,6 +71,9 @@ export default {
         FeaturedCarouselVehicles,
     },
     setup() {
+
+        //change id of category here
+        const category = 1;
         const cities = ref(null);
 
         const brands = ref(null);
@@ -92,28 +95,7 @@ export default {
             },
         });
 
-        const bodyType = reactive({
-            vehiclesCombi: {
-                tabName: 'Комби',
-                params: {type: 11, limit: 10},
-                data: []
-            },
-            vehiclesSedan: {
-                tabName: 'Седан',
-                params: {type: 9, limit: 10},
-                data: []
-            },
-            vehiclesHechbek: {
-                tabName: 'Хечбек',
-                params: {type: 10, limit: 10},
-                data: []
-            },
-            vehiclesJip: {
-                tabName: 'Джип',
-                params: {type: 14, limit: 10},
-                data: []
-            }
-        });
+        const bodyType = reactive({});
 
 
         async function fetchPopularRegions() {
@@ -129,7 +111,7 @@ export default {
 
         async function fetchBrands() {
             try {
-                const res = await axios.get('vehicle/fetch/brands/1/1');
+                const res = await axios.get('vehicle/fetch/brands/' + category + '/1');
                 brands.value = res.data;
             } catch (e) {
                 console.error('Unable to fetch popular brands', e.response);
@@ -157,7 +139,7 @@ export default {
         async function fetchRecommendedOffers() {
             try {
                 const res = await axios.get(
-                    'fetch/offers', {params : {mostViewers: true, limit: 10}}
+                    'fetch/offers', {params : {mostViewers: true, limit: 10, "category": category}}
                 );
                 recommended.data = res.data;
             } catch (e) {
@@ -165,14 +147,35 @@ export default {
             }
         }
 
-        async function fetchOffersByType(tab) {
+        async function fetchOffersByType(type) {
+            let offers = {
+                tabName: type.name,
+                params: {"type": type.id, limit: 10},
+                data: []
+            };
             try {
                 const res = await axios.get(
-                    'fetch/offers', {params : bodyType[tab].params}
+                    'fetch/offers', {params : offers.params}
                 );
-                bodyType[tab].data = res.data;
+                offers.data = res.data;
+                bodyType[type.id] = offers;
             } catch (e) {
                 console.error('Unable to fetch offers by type', e.response);
+            }
+        }
+
+        async function fetchTypes() {
+            try {
+                const res = await axios.get(
+                    'vehicle/fetch/vehicle-type/'+category+'/category/1'
+                );
+
+               for (let i in res.data) {
+                   //todo handle on click
+                   fetchOffersByType(res.data[i]);
+               }
+            } catch (e) {
+                console.error('Unable to fetch types', e.response);
             }
         }
 
@@ -180,13 +183,11 @@ export default {
             fetchPopularRegions(),
             fetchBrands(),
             fetchEngines(),
-            fetchOffersByBudget("vehicles5000",  {budgetMax: 4999, limit: 10})
-            fetchOffersByBudget("vehicles10000", {budgetMin: 5000, budgetMax: 10000, limit: 10}),
+            fetchOffersByBudget("vehicles5000",  {budgetMax: 4999, limit: 10, "category": category})
+            fetchOffersByBudget("vehicles10000", {budgetMin: 5000, budgetMax: 10000, limit: 10, "category": category}),
             fetchRecommendedOffers(),
-                fetchOffersByType("vehiclesCombi"),
-                fetchOffersByType("vehiclesSedan"),
-                fetchOffersByType("vehiclesHechbek"),
-                fetchOffersByType("vehiclesJip")
+            fetchTypes()
+
         });
 
         return {

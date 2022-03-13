@@ -11,6 +11,7 @@ use App\Models\Filters\RegionFilter;
 use App\Models\Filters\TransmissionFilter;
 use App\Models\Filters\VehicleCategoryFilter;
 use App\Models\Filters\VehicleTypeFilter;
+use App\Models\Filters\VehicleTypePopular;
 use App\Models\Filters\YearFilter;
 use App\Models\Modifiers\LimitOffers;
 use App\Models\Modifiers\MostViewers;
@@ -53,6 +54,7 @@ class AdvanceSearchDataProvider
      * @param RegionFilter $regionFilter
      * @param MostViewers $mostViewers
      * @param LimitOffers $limitOffers
+     * @param VehicleTypePopular $vehicleTypePopular
      */
     public function __construct(
         BudgetFilter $budgetFilter,
@@ -66,7 +68,8 @@ class AdvanceSearchDataProvider
         BrandFilter $brandFilter,
         RegionFilter $regionFilter,
         MostViewers $mostViewers,
-        LimitOffers $limitOffers
+        LimitOffers $limitOffers,
+        VehicleTypePopular $vehicleTypePopular
     )
     {
         $this->offer =
@@ -89,6 +92,7 @@ class AdvanceSearchDataProvider
         $regionFilter->applyTo($this->offer);
         $mostViewers->applyTo($this->offer);
         $limitOffers->applyTo($this->offer);
+        $vehicleTypePopular->applyTo($this->offer);
     }
 
     /**
