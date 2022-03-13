@@ -46,7 +46,7 @@ class OfferPersister
             'city_id' => $this->data['city'],
             'condition' => $this->data['condition'],
             'has_price' => $this->data['hasPrice'],
-            'uid' => new Expression('UUID()')
+            'uid' => new Expression('uuid_v4()')
         ]);
 
         $vehicle = $this->persistVehicle($offer);
