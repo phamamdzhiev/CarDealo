@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Events\OfferVisited;
+use App\Exceptions\AuthException;
+use App\Exceptions\DeleteOfferException;
+use App\Exceptions\OfferCreationException;
+use App\Exceptions\OfferListingException;
 use App\Exceptions\OfferNotFoundException;
 use App\Exceptions\OfferUpdateFailedException;
 use App\Http\DataPersisters\OfferPersister;;
@@ -21,7 +25,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OfferController extends Controller
 {
@@ -41,7 +44,7 @@ class OfferController extends Controller
             return response($image);
         } catch (\Exception $e) {
             DB::rollBack();
-           return response(['message' => 'Error occurs'], 500);
+           throw new OfferCreationException;
         }
 
     }
@@ -131,7 +134,7 @@ class OfferController extends Controller
         $offer = Offer::findOrFail((int)$id);
 
         if (Auth::id() !== $offer->user_id) {
-            abort(401, 'Unauthorized');
+            throw new AuthException;
         }
 
         try {
@@ -141,7 +144,7 @@ class OfferController extends Controller
             $offer->delete();
             return response(['success' => true]);
         } catch (Exception $exception) {
-            throw new Exception($exception->getMessage());
+            throw new DeleteOfferException;
         }
     }
 
@@ -155,8 +158,8 @@ class OfferController extends Controller
             $offers = Offer::with('images')->where('user_id', Auth::id())->get();
             return response()->json(['success' => true, 'offers' => $offers]);
         } catch (Exception $e) {
-            Log::error('userListing Error' . $e->getMessage());
-            return response()->json(['message' => 'Error occurs', 'code' => 500], 500);
+            Log::error($e->getMessage());
+           throw new OfferListingException;
         }
     }
 }
