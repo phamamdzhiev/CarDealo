@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use App\Events\OfferVisited;
 use App\Http\DataPersisters\OfferPersister;;
 
-use App\Http\Requests\OfferCreationRequest;
+use App\Http\DataPersisters\OfferUpdate;
 use App\Models\Offer;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Query\Expression;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -56,7 +56,7 @@ class OfferController extends Controller
 
     /**
      * @param $uid
-        * @param Request $request
+     * @param Request $request
      * @return JsonResponse
      */
     public function showSingle($uid, Request $request): JsonResponse
@@ -77,19 +77,23 @@ class OfferController extends Controller
                 ->first();
 
             event(new OfferVisited($offer, $request->ip()));
-            $response = [
+            return response()->json([
                 'success' => true,
                 'data' => $offer
-            ];
+            ]);
         } catch (NotFoundHttpException $exception) {
-            $response = [
+            return response()->json([
                 'error' => true,
                 'message' => $exception->getMessage()
-            ];
+            ], 404);
+        } catch (Exception $e) {
+            Log::error('Error occurs during offer persist' . $e->getMessage());
+            return response()->json([
+                'error' => true,
+                'message' => 'Error occurs'
+            ], 500);
+
         }
-
-
-        return response()->json($response);
     }
 
     /**
@@ -104,16 +108,28 @@ class OfferController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param Offer $offer
-     * @return Response
+     * @param $uid
+     * @param OfferUpdate $offerUpdate
+     * @return Application|ResponseFactory|Response
      */
-    public function update(Request $request,$uid)
+    public function update($uid, OfferUpdate $offerUpdate)
     {
-        dump($uid);
-        dd($request->all());
+        try {
+            $offer = Offer::where('uid', $uid)->where('user_id', Auth::id())->first();
+
+            if (empty($offer)) {
+                return response(['code' => 404, 'message'   =>  'Offer not found'], 404);
+            }
+
+            if ($offerUpdate->update($offer)) {
+                return response(['code' => 200, 'message'   =>  ''], 200);
+            }
+
+            throw new Exception('Offer not update');
+        } catch (Exception $e) {
+            Log::error('Error occurs during offer update: ' . $e->getMessage());
+            return response(['code' => 500, 'message' => 'Error occurs during update'], 500);
+        }
     }
 
     /**
@@ -154,7 +170,8 @@ class OfferController extends Controller
             $offers = Offer::with('images')->where('user_id', Auth::id())->get();
             return response()->json(['success' => true, 'offers' => $offers]);
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            Log::error('userListing Error' . $e->getMessage());
+            return response()->json(['message' => 'Error occurs', 'code' => 500], 500);
         }
     }
 }

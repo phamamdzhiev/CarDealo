@@ -85,8 +85,15 @@ export default {
         });
 
         async function handleFormSubmit() {
-            const res = await axios.patch(`offer/edit/${props.uid}`, editedOfferData);
-            console.log(res, 'Edited!');
+            try {
+                const res = await axios.patch(`offer/edit/${props.uid}`, editedOfferData);
+                console.log('Edit was success');
+            } catch (e) {
+                if (e.response) {
+                    console.error(e.response.data.message);
+                }
+            }
+
         }
 
         function togglePrice() {
