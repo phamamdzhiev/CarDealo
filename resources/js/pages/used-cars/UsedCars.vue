@@ -23,7 +23,7 @@
 
         <FeaturedCarouselVehicles heading="Автомобили според бюджет" :props-data="budget"/>
 
-        <!--<FeaturedCarouselVehicles heading="Автомобили по тип на каросерията" :props-data="bodyType"/>-->
+        <FeaturedCarouselVehicles heading="Автомобили по тип на каросерията" :props-data="bodyType"/>
 
         <By :by="{heading: 'Автомобили по марка', byFeature: brands}"/>
 
@@ -95,17 +95,24 @@ export default {
         const bodyType = reactive({
             vehiclesCombi: {
                 tabName: 'Комби',
-                data: [
-                    {name: 'Benz'},
-                    {name: 'Dizel'},
-                    {name: 'GAs'},
-                    {name: 'Hibris'}
-                ]
+                params: {type: 11, limit: 10},
+                data: []
             },
             vehiclesSedan: {
                 tabName: 'Седан',
+                params: {type: 9, limit: 10},
                 data: []
             },
+            vehiclesHechbek: {
+                tabName: 'Хечбек',
+                params: {type: 10, limit: 10},
+                data: []
+            },
+            vehiclesJip: {
+                tabName: 'Джип',
+                params: {type: 14, limit: 10},
+                data: []
+            }
         });
 
 
@@ -158,13 +165,28 @@ export default {
             }
         }
 
+        async function fetchOffersByType(tab) {
+            try {
+                const res = await axios.get(
+                    'fetch/offers', {params : bodyType[tab].params}
+                );
+                bodyType[tab].data = res.data;
+            } catch (e) {
+                console.error('Unable to fetch offers by type', e.response);
+            }
+        }
+
         onMounted(() => {
             fetchPopularRegions(),
             fetchBrands(),
             fetchEngines(),
             fetchOffersByBudget("vehicles5000",  {budgetMax: 4999, limit: 10})
             fetchOffersByBudget("vehicles10000", {budgetMin: 5000, budgetMax: 10000, limit: 10}),
-            fetchRecommendedOffers()
+            fetchRecommendedOffers(),
+                fetchOffersByType("vehiclesCombi"),
+                fetchOffersByType("vehiclesSedan"),
+                fetchOffersByType("vehiclesHechbek"),
+                fetchOffersByType("vehiclesJip")
         });
 
         return {
