@@ -110,9 +110,10 @@ class OfferController extends Controller
      * @param Offer $offer
      * @return Response
      */
-    public function update(Request $request, Offer $offer)
+    public function update(Request $request,$uid)
     {
-        //
+        dump($uid);
+        dd($request->all());
     }
 
     /**

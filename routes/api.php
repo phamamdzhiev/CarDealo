@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('offer/create', [OfferController::class, 'store']);
     Route::delete('offer/delete/{id}', [OfferController::class, 'destroy']);
+    Route::patch('offer/edit/{uid}', [OfferController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
