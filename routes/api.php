@@ -46,10 +46,11 @@ Route::group(['prefix' => 'email', 'middleware' => 'auth:sanctum'], function () 
 
 //Vehicle
 Route::group(['prefix' => 'vehicle/fetch'], function () {
-    Route::get('/brands/{type}/{popular?}', [VehicleController::class, 'getBrands']);
+    Route::get('/brands/{category}/{popular?}', [VehicleController::class, 'getBrands']);
     Route::get('/vehicle/{brand}/category/{category}', [VehicleController::class, 'getBrandWithModels']);
     Route::get('/search/brands', [VehicleController::class, 'searchCarBrands']);
     Route::get('/extras/category/{category}', [VehicleController::class, 'getCarExtras']);
+    Route::get('/engines', [VehicleController::class, 'getEngines']);
     Route::get('/vehicle-types', function () {
         return response()->json(\App\Models\VehicleCategory::all()->toArray());
     });

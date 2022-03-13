@@ -73,18 +73,9 @@ export default {
     setup() {
         const cities = ref(null);
 
-        const brands = [
-            {name: 'Audi'},
-            {name: 'Ford'},
-            {name: 'Mercedes-Benz'},
-            {name: 'Kia'},
-        ];
-        const engines = [
-            {name: 'Benz'},
-            {name: 'Dizel'},
-            {name: 'GAs'},
-            {name: 'Hibris'},
-        ];
+        const brands = ref(null);
+
+        const engines = ref(null);
 
         const recommended = reactive({
             data: [
@@ -135,12 +126,32 @@ export default {
                     cities.value = res.data.data;
                 }
             } catch (e) {
-                console.log('Unable to fetch popular regions', e.response);
+                console.error('Unable to fetch popular regions', e.response);
+            }
+        }
+
+        async function fetchBrands() {
+            try {
+                const res = await axios.get('vehicle/fetch/brands/1/1');
+                brands.value = res.data;
+            } catch (e) {
+                console.error('Unable to fetch popular brands', e.response);
+            }
+        }
+
+        async function fetchEngines() {
+            try {
+                const res = await axios.get('vehicle/fetch/engines');
+                engines.value = res.data;
+            } catch (e) {
+                console.error('Unable to fetch engines', e.response);
             }
         }
 
         onMounted(() => {
-            fetchPopularRegions()
+                fetchPopularRegions(),
+                fetchBrands(),
+                fetchEngines()
         });
 
         return {

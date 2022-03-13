@@ -8,6 +8,7 @@ use App\Models\CarBrand;
 use App\Models\CarExtra;
 use App\Models\CategoryBrandModel;
 use App\Models\Extra;
+use App\Models\Fuel;
 use App\Models\VehicleModel;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -111,5 +112,17 @@ class VehicleController extends Controller
         });
 
         return response()->json($carExtras);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getEngines(): JsonResponse
+    {
+        $fuel =  Cache::rememberForever('fuel', function () {
+            return Fuel::all();
+        });
+
+        return response()->json($fuel);
     }
 }
