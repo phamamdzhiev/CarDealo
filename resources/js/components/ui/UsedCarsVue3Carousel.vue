@@ -5,8 +5,7 @@
             :navigation="true"
             :modules="modules">
             <SwiperSlide v-for="vehicle in vehicles" :key="vehicle">
-                {{vehicle}}
-<!--                <CarSingleItem :offer="vehicle"></CarSingleItem>-->
+               <CarSingleItem :offer="vehicle"></CarSingleItem>
             </SwiperSlide>
     </Swiper>
 </template>

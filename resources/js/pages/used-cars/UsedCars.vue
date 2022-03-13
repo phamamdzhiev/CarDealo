@@ -23,7 +23,7 @@
 
         <FeaturedCarouselVehicles heading="Автомобили според бюджет" :props-data="budget"/>
 
-        <FeaturedCarouselVehicles heading="Автомобили по тип на каросерията" :props-data="bodyType"/>
+        <!--<FeaturedCarouselVehicles heading="Автомобили по тип на каросерията" :props-data="bodyType"/>-->
 
         <By :by="{heading: 'Автомобили по марка', byFeature: brands}"/>
 
@@ -78,23 +78,13 @@ export default {
         const engines = ref(null);
 
         const recommended = reactive({
-            data: [
-                {name: 'Benz'},
-                {name: 'Dizel'},
-                {name: 'GAs'},
-                {name: 'Hibris'}
-            ]
+            data: []
         });
 
         const budget = reactive({
             vehicles5000: {
                 tabName: 'до 5000лв.',
-                data: [
-                    {name: 'Benz'},
-                    {name: 'Dizel'},
-                    {name: 'GAs'},
-                    {name: 'Hibris'}
-                ]
+                data: []
             },
             vehicles10000: {
                 tabName: 'от 5000лв. до 10 000лв.',
@@ -148,10 +138,33 @@ export default {
             }
         }
 
+        async function fetchOffersByBudget(tab, params) {
+            try {
+                const res = await axios.get('fetch/offers', {params : params});
+                budget[tab].data = res.data;
+            } catch (e) {
+                console.error('Unable to fetch offers by budget', e.response);
+            }
+        }
+
+        async function fetchRecommendedOffers() {
+            try {
+                const res = await axios.get(
+                    'fetch/offers', {params : {mostViewers: true, limit: 10}}
+                );
+                recommended.data = res.data;
+            } catch (e) {
+                console.error('Unable to fetch recommended offers', e.response);
+            }
+        }
+
         onMounted(() => {
-                fetchPopularRegions(),
-                fetchBrands(),
-                fetchEngines()
+            fetchPopularRegions(),
+            fetchBrands(),
+            fetchEngines(),
+            fetchOffersByBudget("vehicles5000",  {budgetMax: 4999, limit: 10})
+            fetchOffersByBudget("vehicles10000", {budgetMin: 5000, budgetMax: 10000, limit: 10}),
+            fetchRecommendedOffers()
         });
 
         return {

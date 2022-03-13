@@ -15,7 +15,6 @@ class AdvancedSearch extends Controller
         AdvanceSearchDataProvider $dataProvider
     ): JsonResponse
     {
-
         return response()->json(
             $dataProvider->getOffers()
         );
