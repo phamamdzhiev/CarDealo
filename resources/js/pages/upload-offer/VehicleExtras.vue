@@ -7,6 +7,7 @@
                 type="form"
                 submit-label="Следваща стъпка"
                 @submit="submitHandler"
+                incomplete-message="Моля, попълнете коректно всички задължителни полета"
             >
                 <div class="question-section mb-3">
                     <Heading title="Изберете екстри"/>

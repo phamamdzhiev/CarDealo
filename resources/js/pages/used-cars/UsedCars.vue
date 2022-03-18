@@ -184,13 +184,13 @@ export default {
         }
 
         onMounted(() => {
-            fetchPopularRegions(),
-                fetchBrands(),
-                fetchEngines(),
-                fetchOffersByBudget("vehicles5000", {budgetMax: 4999, limit: 10, "category": category})
-            fetchOffersByBudget("vehicles10000", {budgetMin: 5000, budgetMax: 10000, limit: 10, "category": category}),
-                fetchRecommendedOffers(),
-                fetchTypes()
+            fetchPopularRegions();
+            fetchBrands();
+            fetchEngines();
+            fetchOffersByBudget("vehicles5000", {budgetMax: 4999, limit: 10, "category": category});
+            fetchOffersByBudget("vehicles10000", {budgetMin: 5000, budgetMax: 10000, limit: 10, "category": category});
+            fetchRecommendedOffers();
+            fetchTypes()
 
         });
 

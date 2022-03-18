@@ -39,7 +39,7 @@
                     <h6 class="fw-bold">Полезни страници</h6>
                     <ul>
                         <li>
-                            <a href="/">За нас</a>
+                            <router-link :to="{name: 'contacts'}">За нас</router-link>
                         </li>
                         <li>
                             <a href="/">ЧЗВ</a>
@@ -65,19 +65,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/">
+                            <router-link :to="{name: 'contacts'}">
                                 <i class="fa-solid fa-envelope pe-1"></i>
-                                Контактна форма</a>
+                                Контактна форма
+                            </router-link>
                         </li>
                         <li>
                             <a href="/">
                                 <i class="fa-solid fa-at pe-1"></i>
                                 support@cardealo.com</a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                <i class="fa-solid fa-comments pe-1"></i>
-                                Обратна връзка</a>
                         </li>
                     </ul>
                 </div>

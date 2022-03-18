@@ -9,6 +9,7 @@
                     type="form"
                     submit-label="Следваща стъпка"
                     @submit="submitHandler"
+                    incomplete-message="Моля, попълнете коректно всички задължителни полета"
                 >
                     <FormKit
                         type="text"

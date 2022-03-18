@@ -11,6 +11,7 @@
                 type="form"
                 submit-label="Запази промените"
                 @submit="handleFormSubmit"
+                incomplete-message="Моля, попълнете коректно всички задължителни полета"
             >
                 <FormKit
                     type="text"

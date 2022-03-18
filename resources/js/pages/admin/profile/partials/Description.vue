@@ -2,6 +2,7 @@
     <FormKit
         type="form"
         submit-label="Запази"
+        incomplete-message="Моля, попълнете коректно всички задължителни полета"
     >
         <FormKit
             type="textarea"

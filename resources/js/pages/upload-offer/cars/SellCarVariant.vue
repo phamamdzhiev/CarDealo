@@ -13,6 +13,7 @@
                 type="form"
                 submit-label="Следваща стъпка"
                 @submit="submitHandler"
+                incomplete-message="Моля, попълнете коректно всички задължителни полета"
             >
                 <div class="question-section">
                     <Heading title="Кубатура, мощност, пробег?"/>
