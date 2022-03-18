@@ -29,7 +29,7 @@
             </div>
         </base-carousel>
     </div>
-    <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>
+<!--    <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>-->
 </template>
 
 <script>

@@ -135,6 +135,8 @@
             <VehicleAndValuationAd
                 heading="Можеш и ти лесно да продадеш своя автомобил"
                 sub-heading="Директно от вкъщи"
+                link-href-name="upload"
+                link-label="Продай своя автомобил тук"
                 image="https://ik.imagekit.io/gaicl5qj9hl/tr:w-130,h-130/icons/sell-car_vNZwdICyt.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643796442201"
             />
         </div>

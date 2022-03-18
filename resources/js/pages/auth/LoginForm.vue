@@ -1,7 +1,7 @@
 <template>
     <div class="base-card py-4 px-5">
         <h4 class="fw-bold">Вход</h4>
-        <p v-if="isRedirected" class="fw-bold text-warning-color">
+        <p v-if="isRedirected" class="fw-bold text-danger-color">
             <i class="bi bi-exclamation-triangle-fill"></i>
             За да качвате обяви трябва да сте логнати
         </p>

@@ -4,7 +4,7 @@
 
     .sub__nav {
         box-shadow: 0 3px 10px -10px $secondary-color;
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $super-light-gray;
     }
 
     .sub__menu__wrapper {
@@ -29,11 +29,6 @@
     #the__header {
         position: relative;
         z-index: 40;
-    }
-
-    .sub__nav {
-        box-shadow: 0 3px 10px -10px $secondary-color;
-        border-top: 1px solid $light-gray;
     }
 
     .inner__header {

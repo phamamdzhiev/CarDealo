@@ -14,7 +14,7 @@ class CategoryController extends Controller
     /**
      * @return JsonResponse
      */
-    public function get()
+    public function get(): JsonResponse
     {
         $category = Cache::remember('category', Carbon::now()->addMinutes(0), function () {
             return VehicleCategory::all();
@@ -30,7 +30,7 @@ class CategoryController extends Controller
      * @param $isPopular
      * @return JsonResponse
      */
-    public function getTypes($category, $popular)
+    public function getTypes($category, $popular = null): JsonResponse
     {
         $types = VehicleType::where('category_id', '=', $category);
 

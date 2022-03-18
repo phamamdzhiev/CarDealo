@@ -1,8 +1,23 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "../pages/Home.vue";
-import store from "../store";
+
+//partial routes
+import vehicleTypeRoutes from "./vehicle-catergory-routes";
+import footerRoutes from "./footer-routes";
+import uploadRoutes from "./upload-routes";
+import authRoutes from "./auth-routes"
+import profileRoutes from "./profile-routes";
+import advancedFilterRoutes from "./advanced-filter-routes";
+import merchantsRoutes from "./merchants-routes";
 
 const routes = [
+    ...vehicleTypeRoutes,
+    ...footerRoutes,
+    ...uploadRoutes,
+    ...profileRoutes,
+    ...authRoutes,
+    ...advancedFilterRoutes,
+    ...merchantsRoutes,
     {
         path: "/",
         name: "Home",
@@ -10,224 +25,6 @@ const routes = [
             title: 'Начало'
         },
         component: Home,
-    },
-    {
-        path: "/used/cars",
-        name: "usedCars",
-        meta: {
-            title: 'Упоребявани автомобили'
-        },
-        component: () => import("../pages/used-cars/UsedCars.vue"),
-    },
-    {
-        path: "/used/buses",
-        name: "usedBuses",
-        meta: {
-            title: 'Упоребявани бусове'
-        },
-        component: () => import("../pages/used-buses/UsedBuses.vue"),
-    },
-    {
-        path: "/advanced-search",
-        name: "advanced.search",
-        meta: {
-            title: 'Разширено търсене'
-        },
-        component: () => import("../pages/advanced-search/AdvancedSearch"),
-    },
-    {
-        path: "/merchants",
-        name: "Merchants",
-        meta: {
-            title: 'Автокъщи и дилъри'
-        },
-        component: () => import("../pages/merchants/Merchants"),
-    },
-    {
-        path: "/vehicle/:uid",
-        name: "single-listing",
-        component: () => import("../components/car/SingleListing"),
-        props: true
-    },
-    {
-        path: "/upload",
-        name: "upload",
-        meta: {
-            hideFooter: true,
-            title: 'Качване на обява'
-        },
-        component: () => import("../pages/upload-offer/VehicleCategory"),
-        beforeEnter(to, from, next) {
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
-    },
-    {
-        path: '/upload/:vehicleID',
-        name: 'upload.vehicle',
-        component: () => import('../pages/upload-offer/UploadOffer'),
-        props: true,
-        meta: {
-            hideFooter: true,
-            title: 'Качване на обява'
-        },
-        beforeEnter(to, from, next) {
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
-    },
-    {
-        path: '/upload/success',
-        name: 'upload.success',
-        component: () => import('../pages/upload-offer/Success'),
-        meta: {
-            hideFooter: true,
-            title: 'Успешно качихте обява'
-        },
-        beforeEnter(to, from, next) {
-            if (to.params.success) {
-                next()
-            } else {
-                next({name: 'upload'})
-            }
-        }
-    },
-    {
-        path: "/profile",
-        name: "Profile",
-        meta: {
-            title: 'Профил',
-        },
-        component: () => import("../pages/admin/profile/Profile"),
-        children: [
-            {
-                path: 'edit',
-                name: 'Profile.edit',
-                component: () => import('../pages/admin/profile/ProfileEdit'),
-                meta: {title: 'Редакция на профил'}
-            },
-            {
-                path: 'chat',
-                name: 'Chat',
-                component: () => import('../pages/admin/chat/ChatMessages'),
-                meta: {title: 'Съобщения'}
-            }
-        ],
-        beforeEnter(to, from, next) {
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
-    },
-    {
-        path: "/my-listing",
-        name: "my.listing",
-        component: () => import('../pages/admin/my-listing/MyListing'),
-        meta: {
-            hideFooter: true,
-            title: 'Моите обяви'
-        },
-        beforeEnter(to, from, next) {
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
-    }, {
-        path: "/my-listing",
-        name: "my.listing",
-        component: () => import('../pages/admin/my-listing/MyListing'),
-        meta: {
-            hideFooter: true,
-            title: 'Моите обяви'
-        },
-        beforeEnter(to, from, next) {
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
-    },
-    {
-        path: "/listing/:uid/edit",
-        name: "edit.listing",
-        component: () => import('../pages/admin/my-listing/EditListing'),
-        props: true,
-        meta: {
-            hideFooter: true,
-            title: 'Редакция на обява'
-        },
-        beforeEnter(to, from, next) {
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'login'})
-            }
-        }
-    },
-    {
-        path: "/login",
-        name: "login",
-        component: () => import('../pages/auth/Login'),
-        meta: {
-            hideFooter: true,
-            title: 'Вход / Регистрация'
-        },
-        beforeEnter(to, from, next) {
-            if (!store.getters['auth/GET_AUTH_USER']) {
-                next()
-            } else {
-                next({name: 'Home'})
-            }
-        }
-    },
-    {
-        path: '/request/password',
-        name: 'Request.password',
-        component: () => import("../pages/auth/password-reset/RequestNewPassword"),
-        meta: {
-            hideFooter: true,
-            title: 'Въстановяване на парола'
-        },
-        beforeEnter(to, from, next) {
-            //basically route is protected and cannot be accessed if user is already logged in...
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next({name: 'Profile'})
-            } else {
-                next();
-            }
-        }
-    },
-    {
-        path: '/reset/password',
-        name: 'Reset.password',
-        component: () => import("../pages/auth/password-reset/ResetPassword"),
-        meta: {
-            hideFooter: true,
-            title: 'Въстановяване на парола'
-        },
-        beforeEnter(to, from, next) {
-            //basically route is protected and cannot be accessed if user is already logged in...
-            if (store.getters['auth/GET_AUTH_USER']) {
-                next({name: 'Profile'})
-            } else {
-                if (to.params.token && to.params.mobile) {
-                    next();
-                } else {
-                    next({name: 'Request.password'})
-                }
-            }
-        }
     },
     {
         path: '/:pathMatch(.*)*',

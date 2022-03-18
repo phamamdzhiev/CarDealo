@@ -34,7 +34,7 @@
                             </router-link>
                             <form @submit.prevent="handleDelete(item['id'], index)">
                                 <button class="btn p-0 me-2">
-                                    <i class="bi bi-trash text-error-color fs-4"></i>
+                                    <i class="bi bi-trash text-danger-color fs-4"></i>
                                 </button>
                             </form>
                             <p class="text-secondary-color mb-0">
