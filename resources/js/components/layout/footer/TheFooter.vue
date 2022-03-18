@@ -42,7 +42,7 @@
                             <router-link :to="{name: 'contacts'}">За нас</router-link>
                         </li>
                         <li>
-                            <a href="/">ЧЗВ</a>
+                            <router-link :to="{name: 'faq'}">ЧЗВ</router-link>
                         </li>
                         <li>
                             <a href="/">Рекламирай при нас</a>
