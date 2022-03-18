@@ -5,8 +5,8 @@
         <h6 class="fw-bold">Общо обяви: {{ listing.length }}</h6>
         <div class="row">
             <div>
-                <div class="base-card" v-for="(item, index) in listing" :key="item.id">
-                    <div class="listing d-flex position-relative">
+                <div class="base-card position-relative" v-for="(item, index) in listing" :key="item.id">
+                    <div class="listing d-flex">
                         <div class="img-wrapper">
                             <img
                                 v-if="item.images.length > 0"
@@ -23,24 +23,37 @@
                                 {{ item['title'] }}
                             </h5>
                             <p class="text-base-color">
-                                {{ item['price'] === 0 ? 'По договаряне' : item['price'] + 'лв.' }}</p>
+                                {{ item['price'] === 0 ? 'По договаряне' : item['price'] + ' лв.' }}</p>
                             <p class="text-secondary-color mb-0">
                                 {{ item['description'] }}
                             </p>
                         </div>
-                        <div class="actions text-end position-absolute bottom-0 end-0 d-flex align-items-center">
-                            <router-link class=" p-0 me-2" :to="{name: 'edit.listing', params: {uid: item.uid}}">
-                                <i class="bi bi-pencil-square text-success-color fs-4"></i>
-                            </router-link>
-                            <form @submit.prevent="handleDelete(item['id'], index)">
-                                <button class="btn p-0 me-2">
-                                    <i class="bi bi-trash text-danger-color fs-4"></i>
-                                </button>
-                            </form>
-                            <p class="text-secondary-color mb-0">
-                                <i class="bi bi-eye text-secondary fs-4"></i>{{ item['visits'] }}
-                            </p>
-                        </div>
+                        <ul class="actions text-end position-absolute bottom-0 end-0 d-flex align-items-center p-2">
+                            <li>
+                                <p class="text-secondary-color mb-0 me-2" title="Преглеждания на обявата">
+                                    <i class="fa-solid fa-eye text-secondary fs-6"></i>
+                                    {{ item['visits'] }}
+                                </p>
+                            </li>
+                            <li>
+                                <router-link title="Промотирай тази обява" class="mb-0 me-2 fw-bold" to="/">
+                                    <i class="fa-solid fa-crown fs-6" style="color: #ffd43b"></i>
+                                    Промотирай
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link title="Редакция на обявата" class=" p-0 me-2" :to="{name: 'edit.listing', params: {uid: item.uid}}">
+                                    <i class="fa-solid fa-pen-to-square text-success-color fs-6"></i>
+                                </router-link>
+                            </li>
+                            <li>
+                                <form @submit.prevent="handleDelete(item['id'], index)">
+                                    <button title="Изтриване" class="btn p-0 me-2">
+                                        <i class="fa-solid fa-trash text-danger-color fs-6"></i>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -87,7 +100,7 @@ export default {
         }
 
         async function handleDelete(id, index) {
-            if (confirm('Сигурни ли сте, че искате да изтриета тази обява')) {
+            if (confirm('Сигурни ли сте, че искате да изтриете тази обява')) {
                 try {
                     const res = await axios.delete(`offer/delete/${id}`);
                     listing.value.splice(index, 1);

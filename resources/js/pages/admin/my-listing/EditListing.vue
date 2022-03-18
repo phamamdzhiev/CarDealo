@@ -1,12 +1,10 @@
 <template>
-    <div class="container-xxl mt-4">
-        <i class="fa-solid fa-arrow-left-long pe-2"></i>
-        <router-link :to="{name:'my.listing'}">Назад</router-link>
-        <h4 class="text-center mb-4"><i class="fa-solid fa-pen-to-square"></i>
-            Редакция на обява
-        </h4>
+    <div class="custom-container-sm mt-4">
+        <page-heading heading="Редакция на обява"></page-heading>
         <spinner v-if="isLoading"/>
-        <base-card v-else style="max-width: 650px; margin: auto">
+        <base-card v-else>
+            <edit-listing-images :edited-offer-data="editedOfferData"></edit-listing-images>
+            <hr/>
             <FormKit
                 type="form"
                 submit-label="Запази промените"
@@ -50,18 +48,30 @@
                     </template>
                 </FormKit>
             </FormKit>
+            <hr>
+            <router-link :to="{name: 'my.listing'}"
+                         class="fw-bold text-link-blue">
+                <i class="fa-solid fa-xmark pe-1"></i>
+                Отказ
+            </router-link>
         </base-card>
     </div>
 </template>
 
 <script>
 import BaseCard from "../../../components/ui/base/BaseCard";
+import PageHeading from "../../../components/layout/PageHeading";
+import EditListingImages from "./partials/EditListingImages";
 import axios from "axios";
 import {onMounted, ref, computed, reactive} from "vue";
 
+
 export default {
     name: "EditListing",
-    components: {BaseCard},
+    components: {
+        EditListingImages,
+        BaseCard, PageHeading,
+    },
     props: {
         uid: {
             type: String,
@@ -74,7 +84,8 @@ export default {
             title: null,
             description: null,
             price: null,
-            hasPrice: null
+            hasPrice: null,
+            images: []
         });
 
         const dynamicValidations = computed(() => {
@@ -94,7 +105,6 @@ export default {
                     console.error(e.response.data.message);
                 }
             }
-
         }
 
         function togglePrice() {
@@ -111,6 +121,7 @@ export default {
                     editedOfferData.description = res.data.data.description;
                     editedOfferData.price = res.data.data.price;
                     editedOfferData.hasPrice = res.data.data.has_price;
+                    editedOfferData.images = res.data.data.images
                 }
             } catch (e) {
                 isLoading.value = false;
@@ -127,7 +138,7 @@ export default {
             handleFormSubmit,
             dynamicValidations,
             editedOfferData,
-            togglePrice
+            togglePrice,
         }
     }
 }
