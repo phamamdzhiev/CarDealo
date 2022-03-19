@@ -95,6 +95,7 @@ Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
 //Merchants
 Route::group(['prefix' => 'merchants'], function () {
     Route::get('fetch', [MerchantController::class, 'index']);
+    Route::get('fetch/single/{id}', [MerchantController::class, 'show']);
 });
 
 

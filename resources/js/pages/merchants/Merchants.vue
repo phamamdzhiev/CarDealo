@@ -17,13 +17,13 @@
             <div v-else-if="merchants.length > 0" class="merchant d-flex align-items-center justify-content-between"
                  v-for="merchant in merchants">
                 <div class="img-wrapper me-3">
-                    <router-link to="/">
+                    <router-link :to="{name: 'Merchant.offers', params: {id: 1}}">
                         <img class="img-fluid rounded" width="100" :src="asset('app-images/avtokushta.jpg')" alt="">
                     </router-link>
                 </div>
                 <div class="details">
                     <h5 class="fw-bold">
-                        <router-link to="/">
+                        <router-link :to="{name: 'Merchant.offers', params: {id: 1}}">
                             {{ merchant.name }}
                         </router-link>
                     </h5>
@@ -32,7 +32,7 @@
                 <div class="actions">
                     <ul>
                         <li class="d-flex align-items-center">
-                            <router-link to="/">
+                            <router-link :to="{name: 'Merchant.offers', params: {id: 1}}">
                                 <span>Виж обяви</span>
                                 <i class="fa-solid fa-angle-right ps-2"></i>
                             </router-link>
