@@ -19,7 +19,7 @@ class MerchantController extends Controller
     {
         return response()
             ->json(
-                ['data' => Merchant::all()->toArray()]
+                ['data' => \DB::table('merchants')->select()->take(10)->orderByDesc('id')->get()->toArray()]
             );
     }
 

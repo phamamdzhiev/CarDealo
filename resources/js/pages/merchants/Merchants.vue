@@ -7,11 +7,12 @@
             <div class="search-merchants">
                 <FormKit
                     type="search"
-                    placeholder="Търси автокъща по име..."
+                    placeholder="Търси автокъща по име"
                     id="search__merchants"
                     autocomplete="off"
                 />
             </div>
+            <h6 class="fw-bold mt-4">Последно регистрирани</h6>
             <spinner v-if="isLoading"/>
             <div v-else-if="merchants.length > 0" class="merchant d-flex align-items-center justify-content-between"
                  v-for="merchant in merchants">

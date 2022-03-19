@@ -8,7 +8,7 @@
             <FormKit
                 type="form"
                 submit-label="Запази промените"
-                @submit="handleFormSubmit"
+                @submit="handleEditFormSubmit"
                 incomplete-message="Моля, попълнете коректно всички задължителни полета"
             >
                 <FormKit
@@ -64,7 +64,7 @@ import PageHeading from "../../../components/layout/PageHeading";
 import EditListingImages from "./partials/EditListingImages";
 import axios from "axios";
 import {onMounted, ref, computed, reactive} from "vue";
-
+import {useRouter} from "vue-router";
 
 export default {
     name: "EditListing",
@@ -79,6 +79,7 @@ export default {
         }
     },
     setup(props) {
+        const router = useRouter();
         const isLoading = ref(false);
         const editedOfferData = reactive({
             title: null,
@@ -96,11 +97,16 @@ export default {
             }
         });
 
-        async function handleFormSubmit() {
+        async function handleEditFormSubmit() {
             try {
-                const res = await axios.patch(`offer/edit/${props.uid}`, editedOfferData);
-                console.log('Edit was success');
+                isLoading.value = true;
+                const res = await axios.patch(`offer/edit/${props.uid}`, editedOfferData, {params: {editMode: true}});
+                isLoading.value = false;
+                if (res.data.success) {
+                    await router.replace({name: 'my.listing'})
+                }
             } catch (e) {
+                isLoading.value = false;
                 if (e.response) {
                     console.error(e.response.data.message);
                 }
@@ -135,7 +141,7 @@ export default {
 
         return {
             isLoading,
-            handleFormSubmit,
+            handleEditFormSubmit,
             dynamicValidations,
             editedOfferData,
             togglePrice,

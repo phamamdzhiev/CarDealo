@@ -9,12 +9,12 @@
                             Начало
                         </router-link>
                     </li>
-                    <li class="d-flex align-items-center">
-                        <span class="me-2 fs-5">
-                            <i class="bi bi-chat-dots"></i>
-                        </span>
-                        <router-link :to="{name: 'Chat'}">Съобщения</router-link>
-                    </li>
+<!--                    <li class="d-flex align-items-center">-->
+<!--                        <span class="me-2 fs-5">-->
+<!--                            <i class="bi bi-chat-dots"></i>-->
+<!--                        </span>-->
+<!--                        <router-link :to="{name: 'Chat'}">Съобщения</router-link>-->
+<!--                    </li>-->
                     <li class="d-flex align-items-center">
                         <span class="me-2 fs-5">
                             <i class="bi bi-list-task d-block-i"></i>
@@ -42,10 +42,12 @@
                     </div>
 
                     <div class="user_details">
-                        <h6>Имена: {{ authUser.name }}</h6>
-                        <h6>Имейл: {{ authUser.email ? authUser.email : 'Не е посочен' }}</h6>
-                        <h6>Мобилен: {{ authUser.mobile }}</h6>
-                        <h6>Брой обяви: {{ '1' }}
+                        <h6><span class="fw-bold">Имена:</span> {{ authUser.name }}</h6>
+                        <h6><span class="fw-bold">Имейл:</span> {{ authUser.email ? authUser.email : 'Не е посочен' }}</h6>
+                        <h6><span class="fw-bold">Мобилен:</span> {{ authUser.mobile }}</h6>
+                        <h6><span class="fw-bold">Регистриран на:</span> {{ authUser.created_at }}</h6>
+                        <h6><span class="fw-bold">Бизнес профил:</span> {{ authUser.is_business ? 'Да' : 'Не' }}</h6>
+                        <h6><span class="fw-bold">Брой обяви:</span> {{ '1' }}
                             <router-link :to="{name: 'my.listing'}">
                                 (Виж обявите)
                             </router-link>

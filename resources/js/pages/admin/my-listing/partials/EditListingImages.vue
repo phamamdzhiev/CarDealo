@@ -42,7 +42,7 @@ export default {
     props: {
         editedOfferData: {
             required: true,
-            type: Array
+            type: Object
         }
     },
     setup() {

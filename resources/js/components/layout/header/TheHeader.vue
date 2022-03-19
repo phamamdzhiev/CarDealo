@@ -44,11 +44,7 @@
                     @mouseleave="hideSubMenuVisibility('sell-car')"
                     class="sub__menu__wrapper"
                 >
-                    <span>Продай своя автомобил</span>
-                    <SubMenuHoverableItems
-                        v-show="sellCarItemShown"
-                        :subLink="sellCarSubLinks"
-                    ></SubMenuHoverableItems>
+                    <router-link :to="{name: 'upload'}" class="text-uppercase">Качи обява</router-link>
                 </div>
                 <div class="sub__menu__wrapper">
                     <router-link to="/merchants">

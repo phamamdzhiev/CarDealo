@@ -107,17 +107,23 @@ class OfferController extends Controller
      * @param $uid
      * @param OfferUpdate $offerUpdate
      * @return Application|ResponseFactory|Response
+     * @throws AuthException
+     * @throws OfferUpdateFailedException|OfferNotFoundException
      */
-    public function update($uid, OfferUpdate $offerUpdate)
+    public function update($uid, OfferUpdate $offerUpdate): Response|Application|ResponseFactory
     {
         $offer = Offer::where('uid', $uid)->where('user_id', Auth::id())->first();
+
+        if (Auth::id() !== $offer->user_id) {
+            throw new AuthException;
+        }
 
         if (empty($offer)) {
             throw new OfferNotFoundException;
         }
 
         if ($offerUpdate->update($offer)) {
-            return response(['code' => 200, 'message'   =>  ''], 200);
+            return response(['success' => true, 'message'   =>  'Offer updated successfully'], 200);
         }
 
         throw new OfferUpdateFailedException;

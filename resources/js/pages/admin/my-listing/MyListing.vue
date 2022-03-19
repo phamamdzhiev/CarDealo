@@ -3,24 +3,29 @@
     <div class="container-xxl mt-4" v-else-if="listing.length > 0">
         <h4 class="text-center"><i class="fa-solid pe-2 fa-bars-staggered"></i>Моите обяви</h4>
         <h6 class="fw-bold">Общо обяви: {{ listing.length }}</h6>
+        <!--        <h1 v-if="route.redirectedFrom.name === 'edit.listing'">EI pedal</h1>-->
         <div class="row">
             <div>
                 <div class="base-card position-relative" v-for="(item, index) in listing" :key="item.id">
                     <div class="listing d-flex">
-                        <div class="img-wrapper">
-                            <img
-                                v-if="item.images.length > 0"
-                                width="200"
-                                class="img-fluid rounded"
-                                :src="asset(item.images[0].image)"
-                                :alt="item['title']"
-                            />
-                            <img v-else :src="asset('noimage.jpg')" width="200" class="img-fluid rounded"
-                                 alt="Default image">
-                        </div>
+                        <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
+                            <div class="img-wrapper">
+                                <img
+                                    v-if="item.images.length > 0"
+                                    width="200"
+                                    class="img-fluid rounded"
+                                    :src="asset(item.images[0].image)"
+                                    :alt="item['title']"
+                                />
+                                <img v-else :src="asset('noimage.jpg')" width="200" class="img-fluid rounded"
+                                     alt="Default image">
+                            </div>
+                        </router-link>
                         <div class="details">
                             <h5 class="fw-bold">
-                                {{ item['title'] }}
+                                <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
+                                    {{ item['title'] }}
+                                </router-link>
                             </h5>
                             <p class="text-base-color">
                                 {{ item['price'] === 0 ? 'По договаряне' : item['price'] + ' лв.' }}</p>
@@ -42,7 +47,8 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link title="Редакция на обявата" class=" p-0 me-2" :to="{name: 'edit.listing', params: {uid: item.uid}}">
+                                <router-link title="Редакция на обявата" class=" p-0 me-2"
+                                             :to="{name: 'edit.listing', params: {uid: item.uid}}">
                                     <i class="fa-solid fa-pen-to-square text-success-color fs-6"></i>
                                 </router-link>
                             </li>
@@ -74,6 +80,7 @@ import axios from "axios";
 import {onMounted, ref, inject} from "vue";
 import BaseCard from "../../../components/ui/base/BaseCard";
 import assetMixin from '../../../composables/asset';
+import {onBeforeRouteUpdate} from "vue-router";
 
 export default {
     name: "MyListing",
@@ -82,8 +89,8 @@ export default {
     },
     mixins: [assetMixin],
     setup() {
-        let listing = ref([]);
-        let isloading = ref(false);
+        const listing = ref([]);
+        const isloading = ref(false);
         const $toast = inject('$toast');
 
         async function getUserListing() {
@@ -134,14 +141,16 @@ export default {
         return {
             listing,
             handleDelete,
-            isloading
+            isloading,
         }
     }
-
 }
 </script>
 <style scoped>
 .details {
     margin-left: 1rem;
+}
+.img-wrapper img:hover {
+    transform: rotate(3deg);
 }
 </style>
