@@ -15,7 +15,8 @@
                         autocomplete="off"
                     />
                 </div>
-                <ul id="model">
+                <spinner v-if="isLoading"/>
+                <ul v-else id="model">
                     <li
                         v-for="model in filteredModelBySearchField"
                         :key="model.id"
@@ -32,13 +33,14 @@
 </template>
 
 <script>
-import BaseCard from "../../../components/ui/base/BaseCard";
-import TopBar from "../TopBar";
+import BaseCard from "../../components/ui/base/BaseCard";
+import TopBar from "./TopBar";
 import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
-import PrevStepButton from "../partials/PrevStepButton";
-import Heading from "../partials/Heading";
-import NextStepButton from "../partials/NextStepButton";
+import PrevStepButton from "./partials/PrevStepButton";
+import Heading from "./partials/Heading";
+import NextStepButton from "./partials/NextStepButton";
+import axios from "axios";
 
 export default {
     name: "SellCarModel",
@@ -51,14 +53,9 @@ export default {
     },
     setup() {
         const store = useStore();
-
-        let filteredBrandModel = ref(null);
-
-        let brandModels = ref([
-            {id: 1, name: 'A3'},
-            {id: 2, name: 'A7'},
-            {id: 3, name: 'A8'},
-        ]);
+        const filteredBrandModel = ref(null);
+        const brandModels = ref([]);
+        const isLoading = ref(false);
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
@@ -78,8 +75,18 @@ export default {
             return `Търси модел ${getState.value.brand.name}`;
         });
 
-        function fetchBrandModelsAPI() {
-            console.log('Model id (VehicleMode.vue)', getState.value.brand.id);
+        async function fetchBrandModelsAPI() {
+            try {
+                isLoading.value = true;
+                const res = await axios.get(`vehicle/fetch/vehicle/${getState.value.brand.id}/category/${getState.value.vehicleCategory}`)
+                isLoading.value = false;
+                if (res.data) {
+                    brandModels.value = res.data;
+                }
+            } catch (e) {
+                isLoading.value = false;
+                console.log(e, 'cannot fetch brand models')
+            }
         }
 
         onMounted(() => {
@@ -92,7 +99,8 @@ export default {
             setModel,
             setPlaceholder,
             filteredModelBySearchField,
-            filteredBrandModel
+            filteredBrandModel,
+            isLoading
         }
     }
     // data() {

@@ -25,9 +25,10 @@
                         placeholder="Търси марка"
                         id="search__brand"
                         autocomplete="off"
+                        :delay="400"
+                        @input="handleSearchBrands"
                     />
                 </div>
-                <!--                <div v-if="isLoading">Зареждане...</div>-->
                 <div id="brand" v-if="getState.brand.id !== null">
                     <div class="item active position-relative">
                             <span
@@ -45,10 +46,19 @@
                     </h6>
                     <spinner v-if="isLoading"/>
                     <div id="brand" v-else>
-                        <div v-for="brand in brandsArray" :key="brand.id" class="item"
-                             @click="setState({key:'brand', value: {name: brand.name, id: brand.id}})">
-                            {{ brand.name }}
-                        </div>
+                        <template v-if="searchBrands">
+                            <div v-show="searchBrands.length === 0">Няма данни</div>
+                            <div v-for="brand in searchBrands " :key="brand.id" class="item"
+                                 @click="setState({key:'brand', value: {name: brand.name, id: brand.id}})">
+                                {{ brand.name }}
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div v-for="brand in popularBrands " :key="brand.id" class="item"
+                                 @click="setState({key:'brand', value: {name: brand.name, id: brand.id}})">
+                                {{ brand.name }}
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -82,11 +92,8 @@ export default {
         const store = useStore();
         const route = useRoute();
         const isLoading = ref(false);
-        let popularBrands = ref(null);
-
-        let searchBrands = ref(null);
-
-        let brandsArray = ref(null);
+        const searchBrands = ref(null);
+        const popularBrands = ref(null);
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
@@ -95,30 +102,54 @@ export default {
         function showStepTwo() {
             if (getState.value.brand.id === null) return;
             store.commit('uploadOffer/setStepPlus');
-            // await this.setCarBrandWithModels(this.getSelectedCarBrandID);
         }
 
         function setState(payload) {
             store.commit('uploadOffer/setVehicleState', payload);
         }
 
+        async function handleSearchBrands(e) {
+            if (e.length < 2) {
+                searchBrands.value = null;
+            } else {
+                try {
+                    const res = await axios.get(`vehicle/fetch/search/brands/${route.params.vehicleID}`, {params: {keyword: e}});
+                    if (res.data) {
+                        searchBrands.value = res.data;
+                    }
+                } catch (e) {
+                    console.log('Live Search Error', e);
+                }
+            }
+        }
+
+        function fetchBrands() {
+            isLoading.value = true;
+            axios.get(`vehicle/fetch/brands/${route.params.vehicleID}/1`).then((res) => {
+                isLoading.value = false;
+                if (res.data) {
+                    popularBrands.value = res.data;
+                }
+            }).catch(e => console.log(e, 'cannot fetch brands'));
+        }
+
         //hooks
         onMounted(() => {
-            const vehicleID = route.params.vehicleID;
-            axios.get(`vehicle/fetch/brands/${vehicleID}/1`).then((res) => {
-               brandsArray.value = res.data;
-           })
+            fetchBrands()
         });
 
         return {
             setState,
             getState,
-            brandsArray,
+            popularBrands,
             searchBrands,
             showStepTwo,
-            isLoading
+            isLoading,
+            handleSearchBrands
         }
-    },
+    }
+
+    ,
     // data() {
     //     return {
     //         keyword: null,
@@ -181,7 +212,3 @@ export default {
     // },
 }
 </script>
-
-<style scoped>
-
-</style>

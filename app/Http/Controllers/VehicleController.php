@@ -26,7 +26,7 @@ class VehicleController extends Controller
      * @param Request $request
      * @return Response|JsonResponse|Application|ResponseFactory
      */
-    public function searchCarBrands(Request $request): Response|JsonResponse|Application|ResponseFactory
+    public function searchCarBrands(Request $request, $vehicleTypeID): Response|JsonResponse|Application|ResponseFactory
     {
         return response()
             ->json(Brand::where('name', 'LIKE', '%' . $request->input('keyword') . '%')

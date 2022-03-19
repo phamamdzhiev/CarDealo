@@ -67,20 +67,6 @@
                     />
                 </div>
             </FormKit>
-            <!--            <div class="question-section">-->
-            <!--                <div class="form-floating">-->
-            <!--                    <select id="floatingSelectCarCategory" v-model="getAllData['car_category']"-->
-            <!--                            class="form-select form__input m-0">-->
-            <!--                        <option value="Ван">Ван</option>-->
-            <!--                        <option value="Джип">Джип</option>-->
-            <!--                        <option value="Кабрио">Кабрио</option>-->
-            <!--                        <option value="Купе">Купе</option>-->
-            <!--                        <option value="Седан">Седан</option>-->
-            <!--                        <option value="Комби">Комби</option>-->
-            <!--                    </select>-->
-            <!--                    <label for="floatingSelectCarCategory">Моля изберете категория</label>-->
-            <!--                </div>-->
-            <!--            </div>-->
         </base-card>
     </div>
 </template>
@@ -94,14 +80,12 @@ import Heading from "./partials/Heading";
 import SelectField from "../../components/ui/forms/SelectField";
 import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
-import {FormKit} from "@formkit/vue/index";
 import axios from "axios";
 import {useRoute} from "vue-router";
 
 export default {
     name: "VehicleExtras",
     components: {
-        FormKit,
         TopBar,
         BaseCard,
         PrevStepButton,
@@ -114,12 +98,10 @@ export default {
         const route = useRoute();
         const isLoading = ref(false);
         const selectedExtras = ref([]);
-
         const vehicleExtras = ref([]);
-
         const colors = ref([]);
 
-        let euroStandards = ref([
+        const euroStandards = ref([
             {value: 1, label: 'I'},
             {value: 2, label: 'II'},
             {value: 3, label: 'III'},
@@ -140,31 +122,6 @@ export default {
             store.commit('uploadOffer/setSelectedExtras', item);
         }
 
-        onMounted(() => {
-            isLoading.value = true;
-            axios.get(`vehicle/fetch/extras/category/${route.params.vehicleID}`)
-                .then((res) => {
-                    vehicleExtras.value = res.data;
-                    isLoading.value = false
-                })
-                .catch((e) => {
-                    console.log('Cannot fetch extras', e);
-                    isLoading.value = false
-                });
-
-            axios.get('fetch/colors')
-                .then((res) => {
-                    isLoading.value = false
-                    res.data.data.forEach((element) => {
-                        colors.value.push({label: element.name, value: element.id});
-                    });
-                })
-                .catch((e) => {
-                    console.log('Cannot fetch colors', e);
-                    isLoading.value = false
-                });
-        });
-
         function submitHandler() {
             if (getState.value.extras.length < 1) {
                 alert('Моля, изберете екстри');
@@ -172,6 +129,42 @@ export default {
             }
             store.commit('uploadOffer/setStepPlus');
         }
+
+        async function fetchColors() {
+            axios.get('fetch/colors')
+                .then((res) => {
+                    isLoading.value = false
+                    if (res.data) {
+                        res.data.data.forEach((element) => {
+                            colors.value.push({label: element.name, value: element.id});
+                        });
+                    }
+                })
+                .catch((e) => {
+                    console.log('Cannot fetch colors', e);
+                    isLoading.value = false
+                });
+        }
+
+        function fetchExtras() {
+            isLoading.value = true;
+            axios.get(`vehicle/fetch/extras/category/${route.params.vehicleID}`)
+                .then((res) => {
+                    isLoading.value = false
+                    if (res.data) {
+                        vehicleExtras.value = res.data;
+                    }
+                })
+                .catch((e) => {
+                    isLoading.value = false
+                    console.log('Cannot fetch extras', e);
+                });
+        }
+
+        onMounted(() => {
+            fetchExtras();
+            fetchColors();
+        });
 
         return {
             vehicleExtras,

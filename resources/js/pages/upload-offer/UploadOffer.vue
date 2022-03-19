@@ -1,13 +1,13 @@
 <template>
     <div>
         <VehicleType v-if="getStep === 1"/>
-        <VehicleBrand v-if="getStep === 2"></VehicleBrand>
-        <component v-if="getStep === 3" :is="setComponent + 'Model'"/>
-        <VehicleYear v-if="getStep === 4"></VehicleYear>
+        <VehicleBrand v-if="getStep === 2"/>
+        <VehicleModel v-if="getStep === 3"/>
+        <VehicleYear v-if="getStep === 4"/>
         <component v-if="getStep === 5" :is="setComponent + 'Variant'"/>
-        <VehicleExtras v-if="getStep === 6"></VehicleExtras>
-        <OfferDetails v-if="getStep === 7"></OfferDetails>
-        <VehicleImages v-if="getStep === 8"></VehicleImages>
+        <VehicleExtras v-if="getStep === 6"/>
+        <OfferDetails v-if="getStep === 7"/>
+        <VehicleImages v-if="getStep === 8"/>
     </div>
 </template>
 
@@ -15,7 +15,7 @@
 import BaseCard from "../../components/ui/base/BaseCard";
 import VehicleType from "./VehicleType";
 import VehicleBrand from "./VehicleBrand";
-import SellCarModel from "./cars/SellCarModel";
+import VehicleModel from "./VehicleModel";
 import SellCarVariant from "./cars/SellCarVariant";
 import VehicleYear from "./VehicleYear";
 import VehicleExtras from "./VehicleExtras";
@@ -30,7 +30,7 @@ export default {
         BaseCard,
         VehicleType,
         VehicleBrand,
-        SellCarModel,
+        VehicleModel,
         VehicleYear,
         SellCarVariant,
         VehicleExtras,
