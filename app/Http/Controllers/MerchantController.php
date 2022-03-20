@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\MerchantOffersListingException;
 use App\Models\Merchant;
+use App\Models\Repository\OfferRepository;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,14 +26,20 @@ class MerchantController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return Response
+     * @param $id
+     * @return JsonResponse
      */
     public function show($id)
     {
-        dd($id);
+        try {
+            $offerRepository = new OfferRepository();
+            $offers = $offerRepository->getSingleOfferQuery()
+                ->where('merchants.id', $id)
+                ->get();
+            return response()->json($offers);
+        } catch (\Exception $e) {
+            throw new MerchantOffersListingException;
+        }
     }
 
     /**

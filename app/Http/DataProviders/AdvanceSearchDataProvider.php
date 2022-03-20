@@ -15,6 +15,7 @@ use App\Models\Filters\VehicleTypePopular;
 use App\Models\Filters\YearFilter;
 use App\Models\Modifiers\LimitOffers;
 use App\Models\Modifiers\MostViewers;
+use App\Models\Repository\OfferRepository;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
@@ -27,19 +28,6 @@ class AdvanceSearchDataProvider
      * @var Builder
      */
     private Builder $offer;
-
-    private array $columns = [
-        'offers.uid',
-        'offers.title',
-        'offers.price',
-        'offers.description',
-        'vehicles.year',
-        'vehicles.hp',
-        'vehicles.km',
-        'vehicles.cm3',
-        'cities.name',
-        'images.image'
-    ];
 
     /**
      * @param BudgetFilter $budgetFilter
@@ -72,13 +60,8 @@ class AdvanceSearchDataProvider
         VehicleTypePopular $vehicleTypePopular
     )
     {
-        $this->offer =
-            DB::table('offers')
-            ->join('vehicles', 'vehicles.offer_id', '=', 'offers.id')
-            ->join('images', 'images.offer_id', '=', 'offers.id')
-            ->join('cities', 'cities.id', '=', 'offers.city_id')
-            ->join('vehicles_types', 'vehicles.type_id', '=', 'vehicles_types.id')
-            ->select($this->columns);
+        $offerRepository = new OfferRepository();
+        $this->offer = $offerRepository->getSingleOfferQuery();
 
         $budgetFilter->applyTo($this->offer);
         $fuelFilter->applyTo($this->offer);
