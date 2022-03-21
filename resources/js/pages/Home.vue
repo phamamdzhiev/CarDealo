@@ -1,6 +1,9 @@
 <template>
     <div class="home">
-        <base-carousel :bannerImage="'https://stimg.cardekho.com/images/uploadimages/1640343008219/Home-Page-Banner---1686x540.jpg'">
+        <base-carousel
+            :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/compare-cars.jpg'"
+            height="450"
+        >
             <div class="container-xxl">
                 <div class="form__wrapper">
                     <h3 class="text-capitalize mb-4">Намери твоят автомобил</h3>
@@ -29,16 +32,50 @@
             </div>
         </base-carousel>
     </div>
-<!--    <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>-->
+
+    <div class="base-card custom-container-lg py-4" style="margin-top: -2.275rem; position: relative;z-index: 5000">
+        <h4 class="fw-bold mb-4"><i class="fa-solid fa-magnifying-glass pe-2"></i>Търсене на талига</h4>
+        <div class="d-grid" id="simple_search">
+            <FormKit
+                type="select"
+                id="mock"
+                label="Тип на превозното средство"
+                name="small_country"
+                :options="['Авомобил', 'Лодка', 'Мотор']"
+            />
+            <FormKit
+                disabled
+                type="select"
+                id="mock"
+                label="Марка на превозното средство"
+                name="small_country"
+                :options="['Модел']"
+            />
+            <FormKit
+                disabled
+                type="select"
+                id="mock"
+                label="Модел на превозното средство"
+                name="small_country"
+                :options="['Модел']"
+            />
+        </div>
+    </div>
+
+
+    <!--    <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>-->
 </template>
 
 <script>
 import BaseCarousel from "../components/ui/base/BaseCarousel.vue";
 import FeaturedCarouselVehicles from "../components/used/partials/FeaturedCarouselVehicles";
 import {reactive} from "vue";
+import BaseCard from "../components/ui/base/BaseCard";
+
 export default {
     name: "Home",
     components: {
+        BaseCard,
         BaseCarousel,
         FeaturedCarouselVehicles
     },
@@ -58,3 +95,10 @@ export default {
     }
 };
 </script>
+<style scoped>
+
+#simple_search {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px
+}
+</style>
