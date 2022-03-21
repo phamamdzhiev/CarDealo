@@ -37,7 +37,18 @@
     window.AUTH = {!! json_encode( Auth::guard('web')->user()) !!};
     window._asset = '{{ asset('') }}';
 </script>
-<script defer src="{{ asset('js/app.js') }}"></script>
+@if(env('IS_SITE_ACCESSIBLE'))
+    <script defer src="{{ asset('js/app.js') }}"></script>
+@else
+    <div style="text-align: center; margin-top: 75px;">
+        <h2 style="font-weight: bold;">
+            Сайтът в момента е в профилактика
+        </h2>
+        <h3>
+            Моля, оптайте по-късно
+        </h3>
+    </div>
+@endif
 <script defer type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?forceLang=bg&theme=grey&tracking=1&always=1&noGeoIp=1&hideDetailsBtn=1&remember=365"></script>
 </body>

@@ -1,5 +1,5 @@
 <template>
-    <div class="sell-car">
+    <div class="sell-car custom-container-md">
         <base-card>
             <PrevStepButton/>
             <TopBar/>
@@ -78,6 +78,7 @@ import PrevStepButton from "./partials/PrevStepButton";
 import NextStepButton from "./partials/NextStepButton";
 import Heading from "./partials/Heading";
 import SelectField from "../../components/ui/forms/SelectField";
+import {fetchColors} from "../../composables/fetchColorAJAX";
 import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
 import axios from "axios";
@@ -99,7 +100,7 @@ export default {
         const isLoading = ref(false);
         const selectedExtras = ref([]);
         const vehicleExtras = ref([]);
-        const colors = ref([]);
+        const {colors} = fetchColors();
 
         const euroStandards = ref([
             {value: 1, label: 'I'},
@@ -130,22 +131,6 @@ export default {
             store.commit('uploadOffer/setStepPlus');
         }
 
-        async function fetchColors() {
-            axios.get('fetch/colors')
-                .then((res) => {
-                    isLoading.value = false
-                    if (res.data) {
-                        res.data.data.forEach((element) => {
-                            colors.value.push({label: element.name, value: element.id});
-                        });
-                    }
-                })
-                .catch((e) => {
-                    console.log('Cannot fetch colors', e);
-                    isLoading.value = false
-                });
-        }
-
         function fetchExtras() {
             isLoading.value = true;
             axios.get(`vehicle/fetch/extras/category/${route.params.vehicleID}`)
@@ -163,7 +148,6 @@ export default {
 
         onMounted(() => {
             fetchExtras();
-            fetchColors();
         });
 
         return {
@@ -212,10 +196,3 @@ export default {
 //     },
 // },
 </script>
-
-<style scoped>
-.sell-car {
-    max-width: 800px;
-}
-</style>
-

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exceptions\MerchantOffersListingException;
 use App\Models\Merchant;
 use App\Models\Repository\OfferRepository;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -33,10 +32,12 @@ class MerchantController extends Controller
     {
         try {
             $offerRepository = new OfferRepository();
+            $merchant = Merchant::findOrFail($id);
             $offers = $offerRepository->getSingleOfferQuery()
                 ->where('merchants.id', $id)
-                ->get();
-            return response()->json($offers);
+                ->get()
+                ->toArray();
+            return response()->json(['success' => true, 'offers' => $offers, 'merchant' => $merchant]);
         } catch (\Exception $e) {
             throw new MerchantOffersListingException;
         }

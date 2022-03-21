@@ -89,8 +89,9 @@ import FromInputValidationMessage from "../../components/ui/FromInputValidationM
 import TopBar from "./TopBar";
 import Heading from "./partials/Heading";
 import PrevStepButton from "./partials/PrevStepButton";
+import {fetchRegions} from "../../composables/fetchRegionsAJAX";
 import axios from "axios";
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -105,8 +106,7 @@ export default {
     },
     setup() {
         const store = useStore();
-
-        const regions = ref([]);
+        const {regions} = fetchRegions();
         const cities = ref([]);
 
         const getState = computed(() => {
@@ -172,14 +172,6 @@ export default {
 
             }).catch((e) => console.log(e));
         }
-
-        onMounted(() => {
-            axios.get('fetch/regions').then((res) => {
-                res.data.data.forEach((element) => {
-                    regions.value.push({ label: element.name, value: element.id });
-                });
-            }).catch((e) => console.log(e));
-        });
 
         const dynamicValidations = computed(() => {
             if (hasPrice.value) {

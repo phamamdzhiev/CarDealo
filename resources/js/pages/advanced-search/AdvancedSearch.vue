@@ -47,6 +47,7 @@ import ColorFilter from "./partials/ColorFilter";
 import VehicleCategoryFilter from "./partials/VehicleCategoryFilter";
 import VehicleTypeFilter from "./partials/VehicleTypeFilter";
 import RegionFilter from "./partials/RegionFilter";
+import {fetchRegions} from "../../composables/fetchRegionsAJAX";
 import {useRoute} from "vue-router";
 import {isUndefined} from "lodash";
 
@@ -67,13 +68,13 @@ export default {
     },
     inject: ['window'],
     setup() {
-        let offers = ref([]);
-        let isLoading = ref(false);
+        const offers = ref([]);
+        const isLoading = ref(false);
         const route = useRoute();
         const vehicleTypes = ref([]);
         const vehicleCategories = ref([]);
         const vehicleBrands = ref([]);
-        const regions = ref([]);
+        const {regions} = fetchRegions()
 
         async function fetchVehicleTypes() {
             const res = await axios.get('vehicle/fetch/vehicle-types');
@@ -103,16 +104,6 @@ export default {
             }
         }
 
-        async function fetchRegions() {
-            const res = await axios.get('fetch/regions');
-            if (res.data.data) {
-                regions.value = [];
-                res.data.data.forEach((element) => {
-                    regions.value.push({label: element.name, value: element.id});
-                });
-            }
-        }
-
         async function fetchData() {
             try {
                 isLoading.value = true;
@@ -131,8 +122,6 @@ export default {
         onMounted(() => {
             fetchData();
             fetchVehicleTypes();
-            fetchRegions();
-
             if (!isUndefined(route.query.type)) {
                 fetchVehicleCategoriesAndBrands(route.query.type)
             }

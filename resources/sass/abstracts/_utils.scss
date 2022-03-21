@@ -32,26 +32,29 @@
 }
 
 .custom-container-xs {
-    max-width: 500px;
-    margin: auto;
+    max-width: 500px !important;
 }
 
 .custom-container-sm {
-    max-width: 700px;
-    margin: auto;
+    max-width: 700px !important;
 }
 
 .custom-container-md {
-    max-width: 900px;
-    margin: auto;
+    max-width: 900px !important;
 }
 
 .custom-container-lg {
-    max-width: 1100px;
-    margin: auto;
+    max-width: 1100px !important;
 }
 
 .custom-container-xl {
-    max-width: 1300px;
-    margin: auto;
+    max-width: 1300px !important;
+}
+
+.custom-container-xs,
+.custom-container-sm,
+.custom-container-md,
+.custom-container-lg,
+.custom-container-xl {
+    margin: auto !important;
 }

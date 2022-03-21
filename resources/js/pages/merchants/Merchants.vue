@@ -4,13 +4,10 @@
     <div class="container-xxl">
         <div class="merchants-list">
             <h4 class="fw-bold">Автокъщи</h4>
-            <div class="search-merchants">
-                <FormKit
-                    type="search"
-                    placeholder="Търси автокъща по име"
-                    id="search__merchants"
-                    autocomplete="off"
-                />
+            <div class="row">
+                <div class="col-4">
+                    <merchants-filter/>
+                </div>
             </div>
             <h6 class="fw-bold mt-4">Последно регистрирани</h6>
             <spinner v-if="isLoading"/>
@@ -49,12 +46,13 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import BaseCarousel from "../../components/ui/base/BaseCarousel";
 import assetMixin from "../../composables/asset";
-import login from "../auth/Login";
+import MerchantsFilter from "./MerchantsFilter";
 
 export default {
     name: "Merchants.vue",
     components: {
-        BaseCarousel
+        BaseCarousel,
+        MerchantsFilter
     },
     mixins: [assetMixin],
     setup() {
