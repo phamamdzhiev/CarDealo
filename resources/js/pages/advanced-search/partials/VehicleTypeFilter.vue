@@ -32,7 +32,7 @@ export default {
         async function handleCategories(typeID) {
             await router.push({
                 name: route.name,
-                query: {...route.query, 'type': typeID}
+                query: {...route.query, type: typeID}
             });
 
             emit('updateQueryParams');

@@ -7,6 +7,7 @@
             <base-card>
                 <h4 class="text-center" v-if="merchant.offers.length < 1">
                     Няма намерени обяви за този търговец
+                    <i class="fa-solid fa-face-frown ps-1"></i>
                 </h4>
                 <div v-else class="d-grid" id="merchant-offers-wrapper">
                     <template v-for="m in merchant.offers" :key="m.uid">

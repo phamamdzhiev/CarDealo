@@ -4,7 +4,10 @@
         <spinner v-if="regions.length < 1"/>
         <FormKit
             v-else
-            type="radio"
+            type="select"
+            id="regions"
+            name="regions"
+            placeholder="Моля изберете Област"
             :options="regions"
             @input="handleRegions"
             :value="route.query.region ? route.query.region : null"
@@ -14,31 +17,23 @@
 
 <script>
 import {useRoute, useRouter} from "vue-router";
+
 import {ref} from "vue";
 import {isUndefined} from "lodash";
+import {useFetcher} from "../../../composables/fetcher";
 
 export default {
     name: "RegionFilter",
     emits: ['updateQueryParams'],
-    props: {
-        regions: {
-            type: Array,
-            required: true
-        }
-    },
     setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
-
-        //
-        // if (!isUndefined(route.query['region'])) {
-        //
-        // }
+        const {fetch} = useFetcher('fetch/regions');
 
         async function handleRegions(regionID) {
             await router.push({
                 name: route.name,
-                query: {...route.query, 'region': regionID}
+                query: {...route.query, region: regionID}
             });
 
             emit('updateQueryParams');
@@ -46,12 +41,9 @@ export default {
 
         return {
             handleRegions,
-            route
+            route,
+            regions: fetch
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -5,11 +5,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\FuelController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\TransmissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Models\VehicleType;
@@ -100,17 +102,20 @@ Route::group(['prefix' => 'merchants'], function () {
 
 
 //Regions
-Route::get('fetch/regions', [RegionController::class, 'get']);
 
-//Cities
-Route::get('fetch/cities/{id}', [RegionController::class, 'getCitiesInRegion']);
-
-//Popular regions
-Route::get('fetch/popular/regions', [RegionController::class, 'popular']);
-
-Route::get('fetch/colors', [ColorController::class, 'get']);
 
 Route::group(['prefix' => 'fetch'], function () {
     Route::get('category', [CategoryController::class, 'get']);
+    Route::get('/regions', [RegionController::class, 'get']);
+    //Popular regions
+    Route::get('/popular/regions', [RegionController::class, 'popular']);
+    //Cities
+    Route::get('/cities/{id}', [RegionController::class, 'getCitiesInRegion']);
+    //Colors
+    Route::get('/colors', [ColorController::class, 'get']);
+    //Fuels
+    Route::get('/fuels', [FuelController::class, 'get']);
+    //Transmissions
+    Route::get('/transmissions', [TransmissionController::class, 'get']);
 });
 

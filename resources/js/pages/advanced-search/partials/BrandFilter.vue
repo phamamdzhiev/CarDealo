@@ -36,7 +36,7 @@ export default {
         async function handleBrands(brandID) {
             await router.push({
                 name: route.name,
-                query: {...route.query, 'brand': brandID}
+                query: {...route.query, brand: brandID}
             });
 
             emit('updateQueryParams');

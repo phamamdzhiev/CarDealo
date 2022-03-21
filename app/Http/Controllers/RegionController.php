@@ -16,11 +16,12 @@ class RegionController extends Controller
     public function get(): JsonResponse
     {
         $regions = Cache::rememberForever('regions', function () {
-            return Region::all();
+            return Region::all()->toArray();
         });
 
-        return response()->json(['success' => true, 'data' => $regions]);
+        return response()->json($regions);
     }
+
     /**
      * @return JsonResponse
      */

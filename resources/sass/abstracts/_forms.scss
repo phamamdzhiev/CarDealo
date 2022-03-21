@@ -57,7 +57,8 @@ button.formkit-input[type='submit'] {
     }
 }
 
-input[type='radio'] {
+input[type='radio'],
+input[type='checkbox']{
     width: 16px;
     height: 16px;
     border-radius: $border-radius;
@@ -69,4 +70,8 @@ input[type='radio'] {
         border: 1px solid #333;
         box-shadow: none;
     }
+}
+
+input[type='radio'] {
+    border-radius: 50%;
 }

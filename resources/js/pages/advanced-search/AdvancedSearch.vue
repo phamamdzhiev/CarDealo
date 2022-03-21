@@ -15,8 +15,8 @@
                     <KmFilter @updateQueryParams="fetchData"/>
                     <FuelFilter @updateQueryParams="fetchData"/>
                     <TransmissionFilter @updateQueryParams="fetchData"/>
-                    <RegionFilter v-if="regions.length > 0" :regions="regions" @updateQueryParams="fetchData"/>
                     <ColorFilter @updateQueryParams="fetchData"/>
+                    <RegionFilter @updateQueryParams="fetchData"/>
                 </div>
             </div>
             <div class="col-lg-9 p-2">
@@ -47,7 +47,6 @@ import ColorFilter from "./partials/ColorFilter";
 import VehicleCategoryFilter from "./partials/VehicleCategoryFilter";
 import VehicleTypeFilter from "./partials/VehicleTypeFilter";
 import RegionFilter from "./partials/RegionFilter";
-import {fetchRegions} from "../../composables/fetchRegionsAJAX";
 import {useRoute} from "vue-router";
 import {isUndefined} from "lodash";
 
@@ -74,7 +73,6 @@ export default {
         const vehicleTypes = ref([]);
         const vehicleCategories = ref([]);
         const vehicleBrands = ref([]);
-        const {regions} = fetchRegions()
 
         async function fetchVehicleTypes() {
             const res = await axios.get('vehicle/fetch/vehicle-types');
@@ -135,8 +133,7 @@ export default {
             fetchVehicleCategoriesAndBrands,
             vehicleTypes,
             vehicleCategories,
-            vehicleBrands,
-            regions
+            vehicleBrands
         }
     }
 }

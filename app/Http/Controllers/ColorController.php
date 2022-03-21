@@ -11,12 +11,12 @@ class ColorController extends Controller
     /**
      * @return JsonResponse
      */
-    public function get()
+    public function get(): JsonResponse
     {
-        $colors = Cache::rememberForever('colors',  function () {
-            return Color::all();
+        $colors = Cache::rememberForever('colors', function () {
+            return Color::all()->toArray();
         });
 
-        return response()->json(['success' => true, 'data' => $colors]);
+        return response()->json($colors);
     }
 }

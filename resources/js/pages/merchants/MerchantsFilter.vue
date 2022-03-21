@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div v-if="regions.length > 0">
         <FormKit
-            v-if="regions.length > 0"
             type="select"
             id="color"
             name="color"
@@ -13,15 +12,15 @@
 </template>
 
 <script>
-import {fetchRegions} from "../../composables/fetchRegionsAJAX";
+import {useFetcher} from "../../composables/fetcher";
 
 export default {
     name: "MerchantsFilter",
     setup() {
-        const { regions } = fetchRegions()
+        const {fetch} = useFetcher('fetch/regions')
 
         return {
-            regions
+            regions: fetch
         }
     }
 
