@@ -14,7 +14,6 @@
                     </div>
                 </div>
             </div>
-            <slot name="simpleSearch"></slot>
         </div>
     </div>
 </template>

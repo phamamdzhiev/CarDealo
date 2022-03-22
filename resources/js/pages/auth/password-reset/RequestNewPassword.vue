@@ -1,41 +1,38 @@
 <template>
-    <base-card>
-        <div>
-            <h5 class="fw-bold text-center mb-4">Възстановяване на забравена парола</h5>
-            <form @submit.prevent="handlePasswordRequest">
-                <div class="form-floating form-group mb-0">
-                    <cleave v-model.lazy.trim="state.mobile"
-                            class="form-control form__input"
-                            name="mobile"
-                            placeholder="Мобилен номер"
-                            id="mobile"
-                            type="tel"
-                            :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
-                    />
-                    <!--                    <input type="text"-->
-<!--                           placeholder="Мобилен номер"-->
-<!--                           v-model.lazy.trim="state.mobile"-->
-<!--                           id="mobile"-->
-<!--                           class="form-control form__input"-->
-<!--                    />-->
-                    <label for="mobile">Мобилен номер</label>
-                </div>
-                <FromInputValidationMessage v-if="v$.mobile.$error"
-                                            :messages="v$.mobile.$errors"/>
-                <button class="base-button ripple">
-                    <loading-dots v-if="isLoading"></loading-dots>
-                    <span v-else>Въстановяване на парола</span>
-                </button>
-            </form>
-        </div>
-    </base-card>
+    <div class="base-card custom-container-xs">
+        <h5 class="fw-bold text-center mb-4">Възстановяване на забравена парола</h5>
+        <form @submit.prevent="handlePasswordRequest">
+            <div class="form-floating form-group mb-0">
+                <cleave v-model.lazy.trim="state.mobile"
+                        class="form-control form__input"
+                        name="mobile"
+                        placeholder="Мобилен номер"
+                        id="mobile"
+                        type="tel"
+                        :options="{prefix: '+359', blocks: [4, 3, 4, 3]}"
+                />
+                <!--                    <input type="text"-->
+                <!--                           placeholder="Мобилен номер"-->
+                <!--                           v-model.lazy.trim="state.mobile"-->
+                <!--                           id="mobile"-->
+                <!--                           class="form-control form__input"-->
+                <!--                    />-->
+                <label for="mobile">Мобилен номер</label>
+            </div>
+            <FromInputValidationMessage v-if="v$.mobile.$error"
+                                        :messages="v$.mobile.$errors"/>
+            <button class="base-button ripple">
+                <loading-dots v-if="isLoading"></loading-dots>
+                <span v-else>Въстановяване на парола</span>
+            </button>
+        </form>
+    </div>
 </template>
 
 <script>
-import BaseCard from "../../../components/ui/base/BaseCard";
 import {reactive, ref} from "vue";
 import {useRouter} from "vue-router";
-import {helpers, required, integer, minLength} from "@vuelidate/validators";
+import {helpers, required, minLength} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import FromInputValidationMessage from "../../../components/ui/FromInputValidationMessage";
 import axios from "axios";
@@ -44,16 +41,15 @@ import Cleave from 'vue-cleave-component';
 export default {
     name: "RequestNewPassword",
     components: {
-        BaseCard,
         FromInputValidationMessage,
         Cleave
     },
     setup() {
         const router = useRouter();
-        let state = reactive({
+        const state = reactive({
             mobile: null
         });
-        let isLoading = ref(false);
+        const isLoading = ref(false);
         const mobileFieldRules = {
             mobile: {
                 required: helpers.withMessage('Полето е задължително', required),
@@ -93,11 +89,6 @@ export default {
 </script>
 
 <style scoped>
-.base-card {
-    max-width: 500px;
-    margin: 1rem auto;
-}
-
 .disabled {
     pointer-events: none;
     opacity: 0.7;

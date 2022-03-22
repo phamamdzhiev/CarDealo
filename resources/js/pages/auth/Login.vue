@@ -1,15 +1,13 @@
 <template>
-    <div class="container-xxl">
-        <div style="max-width: 700px; margin: auto">
-            <Tabs>
-                <Tab name="Вход">
-                    <LoginForm/>
-                </Tab>
-                <Tab name="Регистрация">
-                    <RegisterForm/>
-                </Tab>
-            </Tabs>
-        </div>
+    <div class="custom-container-sm">
+        <Tabs>
+            <Tab name="Вход">
+                <LoginForm/>
+            </Tab>
+            <Tab name="Регистрация">
+                <RegisterForm/>
+            </Tab>
+        </Tabs>
     </div>
 </template>
 

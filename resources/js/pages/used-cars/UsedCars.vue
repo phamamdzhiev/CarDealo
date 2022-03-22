@@ -4,12 +4,8 @@
             height="400"
             :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/used-car-hero-img.jpg'"
             heading="Вашето търсене на надежден употребяван автомобил приключи!"
-        >
-            <template #simpleSearch>
-                <simple-search></simple-search>
-            </template>
-        </base-carousel>
-
+        />
+        <simple-search heading="Търсене на автомобили"/>
         <Intro
             :intro="
             {heading: 'Употребявани автомобили в България',
@@ -56,23 +52,22 @@
 </template>
 <script>
 import BaseCarousel from "../../components/ui/base/BaseCarousel";
-import SimpleSearch from "../../components/ui/SimpleSearch";
 import VehicleAndValuationAd from "../../components/used/partials/VehicleAndValuationAd";
 import axios from "axios";
 import Intro from "../../components/used/partials/Intro";
 import {onMounted, reactive, ref} from "vue";
 import By from "../../components/used/partials/By";
 import FeaturedCarouselVehicles from "../../components/used/partials/FeaturedCarouselVehicles";
-
+import SimpleSearch from "../../components/simple-search/SimpleSearch";
 export default {
     name: 'usedCars',
     components: {
         Intro,
         By,
         BaseCarousel,
-        SimpleSearch,
         VehicleAndValuationAd,
         FeaturedCarouselVehicles,
+        SimpleSearch
     },
     setup() {
 
@@ -176,7 +171,7 @@ export default {
 
                 for (let i in res.data) {
                     //todo handle on click
-                    fetchOffersByType(res.data[i]);
+                    await fetchOffersByType(res.data[i]);
                 }
             } catch (e) {
                 console.error('Unable to fetch types', e.response);

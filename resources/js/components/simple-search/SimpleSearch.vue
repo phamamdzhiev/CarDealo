@@ -1,5 +1,5 @@
 <template>
-    <div class="base-card custom-container-lg py-4 bg-white shadow-lg">
+    <div class="base-card custom-container-lg py-4 bg-white shadow mb-5">
         <h4 class="fw-bold mb-4">
             <i class="fa-solid fa-magnifying-glass pe-2"></i>
             {{ heading }}
