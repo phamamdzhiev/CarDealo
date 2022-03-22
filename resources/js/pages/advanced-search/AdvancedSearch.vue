@@ -4,12 +4,9 @@
             <div class="col-lg-3">
                 <div class="p-2 advanced-filters">
                     <h5 class="fw-bold mb-3">Търсене по филтри</h5>
-                    <VehicleTypeFilter :types="vehicleTypes"
-                                       @fetchCategory="fetchVehicleCategoriesAndBrands" @updateQueryParams="fetchData"/>
-                    <VehicleCategoryFilter v-if="vehicleCategories.length > 0" :categories="vehicleCategories"
-                                           @updateQueryParams="fetchData"/>
-                    <BrandFilter v-if="vehicleBrands.length > 0" :brands="vehicleBrands"
-                                 @updateQueryParams="fetchData"/>
+                    <VehicleTypeFilter @fetchCategory="fetchVehicleCategoriesAndBrands" @updateQueryParams="fetchData"/>
+                    <VehicleCategoryFilter v-if="vehicleTypeID" :typeID="vehicleTypeID" @updateQueryParams="fetchData"/>
+                    <BrandFilter  v-if="vehicleTypeID" :typeID="vehicleTypeID" @updateQueryParams="fetchData"/>
                     <BudgetFilter @updateQueryParams="fetchData"/>
                     <YearFilter @updateQueryParams="fetchData"/>
                     <KmFilter @updateQueryParams="fetchData"/>
@@ -47,7 +44,6 @@ import ColorFilter from "./partials/ColorFilter";
 import VehicleCategoryFilter from "./partials/VehicleCategoryFilter";
 import VehicleTypeFilter from "./partials/VehicleTypeFilter";
 import RegionFilter from "./partials/RegionFilter";
-import {useFetcher} from "../../composables/fetcher";
 import {useRoute} from "vue-router";
 import {isUndefined} from "lodash";
 
@@ -71,36 +67,25 @@ export default {
         const offers = ref([]);
         const isLoading = ref(false);
         const route = useRoute();
-        const {fetch} = useFetcher('vehicle/fetch/vehicle-types');
-        const vehicleCategories = ref([]);
-        const vehicleBrands = ref([]);
+        const vehicleTypeID = ref(null);
 
-        // async function fetchVehicleTypes() {
-        //     const res = await axios.get('');
-        //     if (res.data) {
-        //         vehicleTypes.value = [];
-        //         res.data.forEach((element) => {
-        //             vehicleTypes.value.push({label: element.name, value: element.id});
-        //         });
-        //     }
-        // }
-
-        async function fetchVehicleCategoriesAndBrands(id) {
-            const res = await axios.get(`vehicle/fetch/vehicle-type/${id}/category`);
-            const res1 = await axios.get(`vehicle/fetch/brands/${id}/1`);
-            if (res1.data) {
-                vehicleBrands.value = [];
-                res1.data.forEach((element) => {
-                    vehicleBrands.value.push({label: element.name, value: element.id});
-                });
-            }
-
-            if (res.data) {
-                vehicleCategories.value = [];
-                res.data.forEach((element) => {
-                    vehicleCategories.value.push({label: element.name, value: element.id});
-                });
-            }
+        function fetchVehicleCategoriesAndBrands(typeID) {
+            vehicleTypeID.value = typeID;
+            // const res = await axios.get(`vehicle/fetch/vehicle-type/${typeID}/category`);
+            // const res1 = await axios.get(`vehicle/fetch/brands/${typeID}/1`);
+            // if (res1.data) {
+            //     vehicleBrands.value = [];
+            //     res1.data.forEach((element) => {
+            //         vehicleBrands.value.push({label: element.name, value: element.id});
+            //     });
+            // }
+            //
+            // if (res.data) {
+            //     vehicleCategories.value = [];
+            //     res.data.forEach((element) => {
+            //         vehicleCategories.value.push({label: element.name, value: element.id});
+            //     });
+            // }
         }
 
         async function fetchData() {
@@ -110,8 +95,6 @@ export default {
                 isLoading.value = false
                 if (res.data) {
                     offers.value = res.data;
-                    console.log('Offers', offers.value);
-
                 }
             } catch (e) {
                 console.log(e, 'fetch offers failed');
@@ -131,9 +114,7 @@ export default {
             isLoading,
             fetchData,
             fetchVehicleCategoriesAndBrands,
-            vehicleTypes: fetch,
-            vehicleCategories,
-            vehicleBrands
+            vehicleTypeID
         }
     }
 }

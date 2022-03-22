@@ -8,6 +8,7 @@ export function useFetcher(url) {
     isLoading.value = true;
     axios.get(url).then((res) => {
         isLoading.value = false;
+        // fetch.value = [];
         res.data.forEach((element) => {
             fetch.value.push({label: element.name, value: element.id});
         });

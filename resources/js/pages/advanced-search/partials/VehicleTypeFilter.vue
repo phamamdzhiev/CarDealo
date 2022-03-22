@@ -7,32 +7,27 @@
             type="radio"
             :options="types"
             @input="handleCategories"
-            :value="route.query.type ? route.query.type : null"
+            :value="route.query.type ? route.query.type : '1'"
         />
     </div>
 </template>
 
 <script>
 import {useRoute, useRouter} from "vue-router";
-import {ref} from "vue";
+import {useFetcher} from "../../../composables/fetcher";
 
 export default {
     name: "VehicleTypeFilter",
     emits: ['updateQueryParams', 'fetchCategory'],
-    props: {
-        types: {
-            type: Array,
-            required: true
-        }
-    },
     setup(_, {emit}) {
         const router = useRouter();
         const route = useRoute();
+        const {fetch} = useFetcher('vehicle/fetch/vehicle-types');
 
         async function handleCategories(typeID) {
             await router.push({
                 name: route.name,
-                query: {...route.query, type: typeID}
+                query: {type: typeID}
             });
 
             emit('updateQueryParams');
@@ -41,6 +36,7 @@ export default {
 
         return {
             handleCategories,
+            types: fetch,
             route
         }
     }

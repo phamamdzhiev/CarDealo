@@ -60,10 +60,7 @@
                 placeholder="Изберете гориво"
                 :options="fuels"
             />
-            <router-link style="justify-self: flex-start" class="d-inline align-self-center fw-bold text-link-blue"
-                         :to="{name: 'advanced.search'}">
-                Подробно търсене
-            </router-link>
+            <advanced-search-router-link/>
             <button class="base-button mt-0" @click="handleSimpleSearch">
                 <i class="fa-solid fa-magnifying-glass pe-1"></i>
                 Търси
@@ -77,9 +74,13 @@ import {useFetcher} from "../../composables/fetcher";
 import {years} from "../../helpers/years";
 import {reactive, ref} from "vue";
 import {useRouter} from "vue-router";
+import AdvancedSearchRouterLink from "../../pages/advanced-search/partials/AdvancedSearchRouterLink";
 
 export default {
     name: "SimpleSearch",
+    components: {
+        AdvancedSearchRouterLink
+    },
     props: {
         heading: {
             type: String,
@@ -145,6 +146,12 @@ export default {
 }
 </script>
 <style scoped>
+.advanced-search-link {
+    align-self: center;
+    display: inline;
+    justify-self: flex-start;
+}
+
 .base-card {
     margin-top: -2.275rem;
     position: relative;
