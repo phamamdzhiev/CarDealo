@@ -47,6 +47,7 @@ import ColorFilter from "./partials/ColorFilter";
 import VehicleCategoryFilter from "./partials/VehicleCategoryFilter";
 import VehicleTypeFilter from "./partials/VehicleTypeFilter";
 import RegionFilter from "./partials/RegionFilter";
+import {useFetcher} from "../../composables/fetcher";
 import {useRoute} from "vue-router";
 import {isUndefined} from "lodash";
 
@@ -70,19 +71,19 @@ export default {
         const offers = ref([]);
         const isLoading = ref(false);
         const route = useRoute();
-        const vehicleTypes = ref([]);
+        const {fetch} = useFetcher('vehicle/fetch/vehicle-types');
         const vehicleCategories = ref([]);
         const vehicleBrands = ref([]);
 
-        async function fetchVehicleTypes() {
-            const res = await axios.get('vehicle/fetch/vehicle-types');
-            if (res.data) {
-                vehicleTypes.value = [];
-                res.data.forEach((element) => {
-                    vehicleTypes.value.push({label: element.name, value: element.id});
-                });
-            }
-        }
+        // async function fetchVehicleTypes() {
+        //     const res = await axios.get('');
+        //     if (res.data) {
+        //         vehicleTypes.value = [];
+        //         res.data.forEach((element) => {
+        //             vehicleTypes.value.push({label: element.name, value: element.id});
+        //         });
+        //     }
+        // }
 
         async function fetchVehicleCategoriesAndBrands(id) {
             const res = await axios.get(`vehicle/fetch/vehicle-type/${id}/category`);
@@ -119,7 +120,6 @@ export default {
 
         onMounted(() => {
             fetchData();
-            fetchVehicleTypes();
             if (!isUndefined(route.query.type)) {
                 fetchVehicleCategoriesAndBrands(route.query.type)
             }
@@ -131,7 +131,7 @@ export default {
             isLoading,
             fetchData,
             fetchVehicleCategoriesAndBrands,
-            vehicleTypes,
+            vehicleTypes: fetch,
             vehicleCategories,
             vehicleBrands
         }

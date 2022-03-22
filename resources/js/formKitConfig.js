@@ -2,7 +2,7 @@ export default {
     config: {
         classes: {
             label: 'control-label fw-bold',
-            input: 'form-control',
+            input: 'form-control fw-bold',
         }
     },
     messages: {
