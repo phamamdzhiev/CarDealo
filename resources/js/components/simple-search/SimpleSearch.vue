@@ -6,37 +6,26 @@
         </h4>
         <div class="d-grid" id="simple_search">
             <FormKit
-                v-if="vehicleTypes.length > 0"
                 v-model="searchQuery.type"
                 type="select"
                 name="type"
-                :options="vehicleTypes"
+                :options="vehicleTypes.length > 0 ? vehicleTypes : ['Тип']"
                 @input="handleVehicleBrands"
             />
             <FormKit
-                v-if="brands.length > 0"
                 v-model="searchQuery.brand"
                 type="select"
                 name="brand"
                 placeholder="Изберете марка"
-                :options="brands"
+                :options="brands.length > 0 ? brands : ['Марка']"
                 @input="handleVehicleModels"
             />
             <FormKit
-                v-if="models.length > 0"
                 v-model="searchQuery.model"
                 type="select"
                 name="models"
                 placeholder="Изберете модел"
-                :options="models"
-            />
-            <FormKit
-                v-else
-                disabled
-                type="select"
-                name="models"
-                placeholder="Изберете модел"
-                :options="['Модели']"
+                :options="models.length > 0 ? models : ['Модел']"
             />
             <FormKit
                 type="select"
@@ -45,20 +34,18 @@
                 :options="years"
             />
             <FormKit
-                v-if="transmissions.length > 0"
                 type="select"
                 v-model="searchQuery.transmission"
                 name="transmission"
                 placeholder="Изберете трансмисия"
-                :options="transmissions"
+                :options="transmissions.length > 0 ? transmissions : ['Трансмисия']"
             />
             <FormKit
-                v-if="fuels.length > 0"
                 v-model="searchQuery.fuel"
                 type="select"
                 name="fuel"
                 placeholder="Изберете гориво"
-                :options="fuels"
+                :options="fuels.length > 0 ? fuels : ['Гориво']"
             />
             <advanced-search-router-link/>
             <button class="base-button mt-0" @click="handleSimpleSearch">
@@ -72,7 +59,7 @@
 <script>
 import {useFetcher} from "../../composables/fetcher";
 import {years} from "../../helpers/years";
-import {reactive, ref} from "vue";
+import {reactive, ref, computed} from "vue";
 import {useRouter} from "vue-router";
 import AdvancedSearchRouterLink from "../../pages/advanced-search/partials/AdvancedSearchRouterLink";
 
@@ -97,6 +84,14 @@ export default {
         const vehicleType = ref('1'); // 1 is for vehicle type Cars
         const models = ref([]);
         const router = useRouter();
+
+        const loadingFinish = computed(() => {
+            return vehicleTypes.value.length < 0 &&
+                brands.value.length > 0 &&
+                transmissions.value.length > 0 &&
+                fuels.value.length > 0;
+        });
+
 
         const searchQuery = reactive({
             type: '1',
@@ -130,6 +125,7 @@ export default {
         }
 
         return {
+            loadingFinish,
             vehicleTypes,
             brands,
             models,

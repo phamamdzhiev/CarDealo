@@ -1,9 +1,9 @@
 export default {
     config: {
-        classes: {
-            label: 'control-label fw-bold',
-            input: 'form-control fw-bold',
-        }
+        // classes: {
+        //     label: 'control-label fw-bold',
+        //     input: 'form-control fw-bold',
+        // }
     },
     messages: {
         en: {
