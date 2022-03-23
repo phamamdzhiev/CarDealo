@@ -1,7 +1,7 @@
 export const links = [
     {
         id: 1,
-        link: "/advanced-search?type=1",
+        link: "/advanced-filters",
         icon: 'fa-magnifying-glass',
         linkText: 'Подробно търсене',
     },

@@ -1,48 +1,38 @@
 <template>
-    <div class="advanced-single-filter">
-        <h6 class="fw-bold">Област</h6>
-        <spinner v-if="regions.length < 1"/>
-        <FormKit
-            v-else
-            type="select"
-            id="regions"
-            name="regions"
-            placeholder="Моля изберете Област"
-            :options="regions"
-            @input="handleRegions"
-            :value="route.query.region ? route.query.region : null"
-        />
-    </div>
+    <FormKit
+        type="select"
+        id="regions"
+        name="regions"
+        label="Регион"
+        v-model="region"
+        placeholder="Изберете регион"
+        :options="regions.length > 0 ? regions : ['Изберете регион']"
+    />
 </template>
 
 <script>
-import {useRoute, useRouter} from "vue-router";
-
-import {ref} from "vue";
-import {isUndefined} from "lodash";
+import {computed} from 'vue';
 import {useFetcher} from "../../../composables/fetcher";
+import {useStore} from "vuex";
 
 export default {
     name: "RegionFilter",
-    emits: ['updateQueryParams'],
-    setup(_, {emit}) {
-        const router = useRouter();
-        const route = useRoute();
-        const {fetch} = useFetcher('fetch/regions');
+    setup() {
+        const store = useStore();
+        const {fetch: regions} = useFetcher('fetch/regions');
 
-        async function handleRegions(regionID) {
-            await router.push({
-                name: route.name,
-                query: {...route.query, region: regionID}
-            });
-
-            emit('updateQueryParams');
-        }
+        const region = computed({
+            get() {
+                return store.getters['advancedFilters/getFilters']['region'];
+            },
+            set(value) {
+                store.commit('advancedFilters/setFilters', {filter: 'region', value: value});
+            }
+        });
 
         return {
-            handleRegions,
-            route,
-            regions: fetch
+            regions,
+            region
         }
     }
 }

@@ -6,6 +6,7 @@
             >
                 <div class="fs-4 logo">
                     <router-link to="/">{{ window.APP_NAME }}</router-link>
+                    <i class="bi bi-suit-heart ps-4 fs-4"></i>
                 </div>
                 <div>
                     <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">

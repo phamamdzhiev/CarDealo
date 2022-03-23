@@ -6,3 +6,11 @@ export const uploadOfferPersist = {
     ],
     storage: window.sessionStorage,
 };
+
+export const advancedFiltersPersist = {
+    key: 'filters',
+    paths: [
+        'advancedFilters.filters',
+    ],
+    storage: window.sessionStorage,
+};

@@ -1,65 +1,55 @@
 <template>
-    <div class="advanced-single-filter">
-        <h6 class="fw-bold">Цвят</h6>
-        <spinner v-if="colors.length < 1"/>
-        <FormKit
-            v-else
-            type="select"
-            id="color"
-            name="color"
-            :value="route.query.color ? route.query.color : null"
-            placeholder="Моля изберете Цвят"
-            :options="colors"
-            @input="handleCarColor"
-        />
-    </div>
+    <FormKit
+        type="select"
+        id="colors"
+        name="color"
+        label="Цвят"
+        placeholder="Изберете цвят"
+        :options="colors.length > 0 ? colors : ['Изберете цвят']"
+        v-model="color"
+    />
 </template>
 
 <script>
-import {useRoute, useRouter} from "vue-router";
+import {useStore} from "vuex";
+import {computed} from "vue";
 import {useFetcher} from "../../../composables/fetcher";
 
 export default {
     name: "ColorFilter",
-    emits: ['updateQueryParams'],
-    setup(_, {emit}) {
-        const router = useRouter();
-        const route = useRoute();
-        const {fetch} = useFetcher('fetch/colors');
+    setup() {
+        const store = useStore();
+        const {fetch: colors} = useFetcher('fetch/colors');
 
-        function handleCarColor(colorValue) {
-            router.push({
-                name: route.name,
-                query: {...route.query, color: colorValue}
-            });
-            emit('updateQueryParams');
-        }
+        /*
+         Keeping this here for later
+         */
+
+        // const getFilters = computed(() => {
+        //     const obj = store.getters['advancedFilters/getFilters'];
+        //
+        //     Object.keys(obj).forEach(el => {
+        //         if (obj[el] === null) {
+        //             delete obj[el];
+        //         }
+        //     });
+        //
+        //     return obj;
+        // });
+
+        const color = computed({
+            get() {
+                return store.getters['advancedFilters/getFilters']['color'];
+            },
+            set(value) {
+                store.commit('advancedFilters/setFilters', {filter: 'color', value: value});
+            }
+        });
 
         return {
-            route,
-            colors: fetch,
-            handleCarColor,
+            colors,
+            color,
         }
     }
 }
 </script>
-<style scoped>
-label {
-    height: 38px;
-    width: 38px;
-    margin-right: 10px;
-    border-radius: 12px;
-}
-
-.item {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-}
-
-.item.active {
-    outline: 2px solid black;
-    outline-offset: 3px;
-}
-
-</style>

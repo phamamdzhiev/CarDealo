@@ -1,43 +1,39 @@
 <template>
-    <div class="advanced-single-filter">
-        <h6 class="fw-bold">Тип</h6>
-        <spinner v-if="types.length < 1"/>
-        <FormKit
-            v-else
-            type="radio"
-            :options="types"
-            @input="handleCategories"
-            :value="route.query.type ? route.query.type : '1'"
-        />
-    </div>
+    <FormKit
+        type="select"
+        id="type"
+        name="type"
+        label="Тип"
+        placeholder="Изберете тип"
+        v-model="type"
+        :options="types.length > 0 ? types : ['Изберете тип']"
+    />
 </template>
 
 <script>
-import {useRoute, useRouter} from "vue-router";
+import {useStore} from "vuex";
+import {computed} from "vue";
 import {useFetcher} from "../../../composables/fetcher";
 
 export default {
     name: "VehicleTypeFilter",
-    emits: ['updateQueryParams', 'fetchCategory'],
-    setup(_, {emit}) {
-        const router = useRouter();
-        const route = useRoute();
-        const {fetch} = useFetcher('vehicle/fetch/vehicle-types');
+    setup() {
+        const store = useStore();
+        const {fetch: types} = useFetcher('vehicle/fetch/vehicle-types');
 
-        async function handleCategories(typeID) {
-            await router.push({
-                name: route.name,
-                query: {type: typeID}
-            });
-
-            emit('updateQueryParams');
-            emit('fetchCategory', typeID);
-        }
+        const type = computed({
+            get() {
+                return store.getters['advancedFilters/getFilters']['type'];
+            },
+            set(value) {
+                store.commit('advancedFilters/resetFilter');
+                store.commit('advancedFilters/setFilters', {filter: 'type', value: value});
+            }
+        });
 
         return {
-            handleCategories,
-            types: fetch,
-            route
+            types,
+            type
         }
     }
 }

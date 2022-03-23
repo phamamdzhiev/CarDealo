@@ -5,83 +5,64 @@
             Подробно търсене
         </h4>
         <div class="advance-search-wrapper">
-            <FormKit
-                type="select"
-                name="type"
-                label="Тип"
-                :options="['ts']"
-            />
+            <vehicle-type-filter/>
             <FormKit
                 type="select"
                 name="type"
                 label="Състояние"
                 :options="['Употребяван', 'Нов', 'На части']"
             />
-            <FormKit
-                type="select"
-                name="type"
-                label="Марка"
-                :options="['ts']"
-            />
+            <brand-filter/>
         </div>
         <hr>
         <div class="advance-search-wrapper">
-            <FormKit
-                type="select"
-                name="type"
-                label="Модел"
-                :options="['ts']"
-            />
-            <FormKit
-                type="select"
-                name="type"
-                label="Категория"
-                :options="['ts']"
-            />
-            <FormKit
-                type="select"
-                name="type"
-                label="Гориво"
-                :options="['ts']"
-            />
-            <FormKit
-                type="select"
-                name="type"
-                label="Трансмисия"
-                :options="['ts']"
-            />
-            <FormKit
-                type="select"
-                name="type"
-                label="Цвят"
-                :options="['ts']"
-            />
-            <FormKit
-                type="select"
-                name="type"
-                label="Област"
-                :options="['ts']"
-            />
-            <FormKit
-                type="select"
-                name="type"
-                label="Град"
-                :options="['ts']"
-            />
-            <FormKit
-                type="select"
-                name="type"
-                label="Качена от"
-                :options="['ts']"
-            />
-            <button class="base-button">Търси</button>
+            <model-filter/>
+            <vehicle-category-filter/>
+            <fuel-filter/>
+            <transmission-filter/>
+            <color-filter/>
+            <region-filter/>
+            <year-filter/>
+            <budget-filter/>
+            <km-filter/>
+            <city-filter/>
+            <submit-search/>
         </div>
     </div>
 </template>
 
 <script>
+import FuelFilter from "./partials/FuelFilter";
+import RegionFilter from "./partials/RegionFilter";
+import ColorFilter from "./partials/ColorFilter";
+import VehicleTypeFilter from "./partials/VehicleTypeFilter";
+import TransmissionFilter from "./partials/TransmissionFilter";
+import BrandFilter from "./partials/BrandFilter";
+import VehicleCategoryFilter from "./partials/VehicleCategoryFilter";
+import ModelFilter from "./partials/ModelFilter";
+import YearFilter from "./partials/YearFilter";
+import BudgetFilter from "./partials/BudgetFilter";
+import KmFilter from "./partials/KmFilter";
+import CityFilter from "./partials/CityFilter";
+import SubmitSearch from "./partials/SubmitSearch";
+
 export default {
-    name: "AdvancedSearchNew"
+    name: "AdvancedSearchNew",
+    components: {
+        CityFilter,
+        KmFilter,
+        YearFilter,
+        ModelFilter,
+        VehicleCategoryFilter,
+        BrandFilter,
+        FuelFilter,
+        RegionFilter,
+        ColorFilter,
+        VehicleTypeFilter,
+        TransmissionFilter,
+        BudgetFilter,
+        SubmitSearch
+    }
 }
 </script>
 

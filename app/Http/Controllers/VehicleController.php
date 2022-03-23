@@ -82,6 +82,7 @@ class VehicleController extends Controller
      */
     public function getBrandWithModels($brand, $category): JsonResponse
     {
+        //TODO category_id should be actually type_id
 
         $carBrands = Cache::remember(
             sprintf('brand_category_models_%s_%s', $category, $brand), Carbon::now()->addMinutes(10),

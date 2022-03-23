@@ -43,12 +43,11 @@ class RegionController extends Controller
      */
     public function getCitiesInRegion($id): JsonResponse
     {
-        return response()->json([
-            'success' => true,
-            'data' => City::where('region_id', $id)
-                ->orderBy('as_city', 'desc')
-                ->orderBy('name')
-                ->get()
-        ]);
+        $cities = City::where('region_id', $id)
+            ->orderBy('as_city', 'desc')
+            ->orderBy('name')
+            ->get();
+
+        return response()->json($cities);
     }
 }
