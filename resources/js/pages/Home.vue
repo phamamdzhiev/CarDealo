@@ -5,37 +5,37 @@
             height="450"
         />
     </div>
-    <simple-search heading="Бързо търсене"/>
-    <!--    <FeaturedCarouselVehicles heading="Препоръчани автомобили" :props-data="recommended"/>-->
+   <div class="container-xxl">
+       <simple-search heading="Бързо търсене"/>
+       <page-heading heading="Последно добавени"/>
+       <base-card>
+           <used-cars-vue3-carousel v-if="data.length > 0" :vehicles="data"/>
+       </base-card>
+   </div>
 </template>
 
 <script>
-import BaseCarousel from "../components/ui/base/BaseCarousel.vue";
-import FeaturedCarouselVehicles from "../components/used/partials/FeaturedCarouselVehicles";
-import {reactive} from "vue";
 import BaseCard from "../components/ui/base/BaseCard";
+import BaseCarousel from "../components/ui/base/BaseCarousel.vue";
 import SimpleSearch from "../components/simple-search/SimpleSearch";
+import {axiosFetcher} from "../helpers/axiosFetcher";
+import UsedCarsVue3Carousel from "../components/ui/UsedCarsVue3Carousel";
+import PageHeading from "../components/layout/PageHeading";
 
 export default {
     name: "Home",
     components: {
-        BaseCard,
         BaseCarousel,
-        FeaturedCarouselVehicles,
-        SimpleSearch
+        SimpleSearch,
+        UsedCarsVue3Carousel,
+        BaseCard,
+        PageHeading
     },
     setup() {
-        const recommended = reactive({
-            data: [
-                {name: 'Benz'},
-                {name: 'Dizel'},
-                {name: 'GAs'},
-                {name: 'Hibris'}
-            ]
-        });
+        const {data} = axiosFetcher('/fetch/offers');
 
         return {
-            recommended
+            data
         }
     }
 };

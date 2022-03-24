@@ -36,11 +36,6 @@
             </div>
             <div class="col-lg-9">
                 <div v-if="$route.name === 'Profile'">
-                    <div class="user_avatar">
-                        <img v-if="authUser.image_path" class="img-fluid rounded-circle" width="100" height="100" :src="asset('users/avatars/' + authUser.image_path)" alt="User Avatar">
-                        <img v-else class="img-fluid" width="100" height="100" :src="asset('app-images/default-avatar.png')" alt="User Avatar">
-                    </div>
-
                     <div class="user_details">
                         <h6><span class="fw-bold">Имена:</span> {{ authUser.name }}</h6>
                         <h6><span class="fw-bold">Имейл:</span> {{ authUser.email ? authUser.email : 'Не е посочен' }}</h6>

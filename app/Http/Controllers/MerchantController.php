@@ -18,10 +18,8 @@ class MerchantController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()
-            ->json(
-                ['data' => \DB::table('merchants')->select()->take(10)->orderByDesc('id')->get()->toArray()]
-            );
+        $merchants = \DB::table('merchants')->select()->take(10)->orderByDesc('id')->get()->toArray();
+        return response()->json($merchants);
     }
 
     /**
@@ -37,7 +35,7 @@ class MerchantController extends Controller
                 ->where('merchants.id', $id)
                 ->get()
                 ->toArray();
-            return response()->json(['success' => true, 'offers' => $offers, 'merchant' => $merchant]);
+            return response()->json(['offers' => $offers, 'merchant' => $merchant]);
         } catch (\Exception $e) {
             throw new MerchantOffersListingException;
         }

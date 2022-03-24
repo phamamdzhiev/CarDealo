@@ -1,7 +1,7 @@
 <template>
     <div class="container-xxl">
-        <div class="row">
-            <div class="col-lg-6 col-sm-12">
+        <tabs>
+            <tab name="Смяна на мобилен номер">
                 <form @submit.prevent="handleMobileUpdate">
                     <h6 class="fw-bold">Смяна на мобилен номер</h6>
                     <div class="form-floating form-group">
@@ -28,8 +28,8 @@
                         <button class="btn base-button">Запази</button>
                     </div>
                 </form>
-            </div>
-            <div class="col-lg-6 col-sm-12">
+            </tab>
+            <tab name="Смяна на парола">
                 <form @submit.prevent="handlePasswordUpdate">
                     <h6 class="fw-bold">Промени парола</h6>
                     <div class="form-floating form-group">
@@ -63,17 +63,12 @@
                     <button class="btn base-button">Запази</button>
 
                 </form>
-            </div>
-        </div>
-        <hr/>
-        <div class="row" v-if="$store.getters['auth/GET_AUTH_USER'].is_business">
-            <div class="col-lg-6">
+            </tab>
+            <tab name="Добавяне на описание и снимка" v-if="$store.getters['auth/GET_AUTH_USER'].is_business">
                 <description/>
-            </div>
-            <div class="col-lg-6">
                 <upload-avatar/>
-            </div>
-        </div>
+            </tab>
+        </tabs>
     </div>
 </template>
 
@@ -88,6 +83,7 @@ import ErrorDisplay from "../../../components/ui/ErrorDisplay";
 import Cleave from "vue-cleave-component";
 import UploadAvatar from "./partials/UploadAvatar";
 import Description from "./partials/Description";
+import {Tabs, Tab} from "vue3-tabs-component";
 
 export default {
     name: "ProfileEdit",
@@ -97,7 +93,9 @@ export default {
         ErrorDisplay,
         Cleave,
         UploadAvatar,
-        Description
+        Description,
+        Tabs,
+        Tab
     },
     mixins: [pswVisibilityToggleMixin],
     data() {

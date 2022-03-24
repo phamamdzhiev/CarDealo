@@ -42,11 +42,10 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
-import axios from "axios";
 import BaseCarousel from "../../components/ui/base/BaseCarousel";
 import assetMixin from "../../composables/asset";
 import MerchantsFilter from "./MerchantsFilter";
+import {axiosFetcher} from "../../helpers/axiosFetcher";
 
 export default {
     name: "Merchants.vue",
@@ -56,24 +55,7 @@ export default {
     },
     mixins: [assetMixin],
     setup() {
-        const merchants = ref([]);
-        const isLoading = ref(false);
-
-        async function fetchMerchants() {
-            try {
-                isLoading.value = true;
-                const res = await axios.get('merchants/fetch');
-                merchants.value = res.data.data;
-                isLoading.value = false;
-            } catch (e) {
-                isLoading.value = false;
-                console.log(e, 'Cannot fetch Merchant')
-            }
-        }
-
-        onMounted(() => {
-            fetchMerchants()
-        })
+        const {data: merchants, isLoading} = axiosFetcher('merchants/fetch');
 
         return {
             merchants,

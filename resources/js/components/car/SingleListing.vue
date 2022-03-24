@@ -147,7 +147,6 @@
 import axios from "axios";
 import {onMounted, ref, inject, computed} from "vue";
 import BaseCard from "../ui/base/BaseCard";
-import router from "../../router";
 import assetMixin from '../../composables/asset';
 import {Swiper, SwiperSlide} from "swiper/vue";
 import 'swiper/css';

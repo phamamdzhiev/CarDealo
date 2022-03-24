@@ -3,12 +3,13 @@
         <spinner v-if="Object.keys(merchant).length < 1"></spinner>
         <div v-else class="custom-container-md">
             <page-heading :heading="merchant.details.name"/>
-
             <base-card>
-                <h4 class="text-center" v-if="merchant.offers.length < 1">
-                    Няма намерени обяви за този търговец
-                    <i class="fa-solid fa-face-frown ps-1"></i>
-                </h4>
+                <div v-if="merchant.offers.length < 1">
+                    <h4 class="text-center">
+                        Няма намерени обяви за този търговец
+                        <i class="fa-solid fa-face-frown ps-1"></i>
+                    </h4>
+                </div>
                 <div v-else class="d-grid" id="merchant-offers-wrapper">
                     <template v-for="m in merchant.offers" :key="m.uid">
                         <car-single-item :offer="m"/>
@@ -37,9 +38,10 @@ export default {
     },
     setup(props) {
         const merchant = reactive({});
+
         async function fetchSingleMerchant() {
             const res = await axios.get(`merchants/fetch/single/${props.id}`);
-            if (res.data.success) {
+            if (res.data) {
                 Object.assign(merchant, {offers: res.data.offers, details: res.data.merchant})
             }
         }
@@ -49,7 +51,7 @@ export default {
         });
 
         return {
-            merchant,
+            merchant
         }
     }
 }

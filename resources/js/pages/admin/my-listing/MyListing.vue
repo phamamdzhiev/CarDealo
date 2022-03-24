@@ -40,12 +40,12 @@
                                     {{ item['visits'] }}
                                 </p>
                             </li>
-                            <li>
-                                <router-link title="Промотирай тази обява" class="mb-0 me-2 fw-bold" to="/">
-                                    <i class="fa-solid fa-crown fs-6" style="color: #ffd43b"></i>
-                                    Промотирай
-                                </router-link>
-                            </li>
+<!--                            <li>-->
+<!--                                <router-link title="Промотирай тази обява" class="mb-0 me-2 fw-bold" to="/">-->
+<!--                                    <i class="fa-solid fa-crown fs-6" style="color: #ffd43b"></i>-->
+<!--                                    Промотирай-->
+<!--                                </router-link>-->
+<!--                            </li>-->
                             <li>
                                 <router-link title="Редакция на обявата" class=" p-0 me-2"
                                              :to="{name: 'edit.listing', params: {uid: item.uid}}">

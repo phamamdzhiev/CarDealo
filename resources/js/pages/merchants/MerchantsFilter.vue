@@ -1,14 +1,12 @@
 <template>
-    <div v-if="regions.length > 0">
-        <FormKit
-            type="select"
-            id="color"
-            name="color"
-            label="Филтрирай по област"
-            placeholder="Моля изберете Област"
-            :options="regions"
-        />
-    </div>
+    <FormKit
+        type="select"
+        id="region"
+        name="region"
+        label="Филтрирай по регион"
+        placeholder="Моля изберете регион"
+        :options="regions.length > 0 ? regions : ['Филтрирай по регион']"
+    />
 </template>
 
 <script>
@@ -17,13 +15,11 @@ import {useFetcher} from "../../composables/fetcher";
 export default {
     name: "MerchantsFilter",
     setup() {
-        const {fetch} = useFetcher('fetch/regions')
+        const {fetch: regions} = useFetcher('fetch/regions')
 
         return {
-            regions: fetch
+            regions
         }
     }
-
-
 }
 </script>
