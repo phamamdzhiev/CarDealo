@@ -6,14 +6,19 @@
                 <Heading title="Състояние?"/>
                 <ul id="new__or__used">
                     <li :class="{ active: getState.condition === 1}"
-                        @click="setState({key: 'condition', value: 1})">
+                        @click="setState({key: 'condition', value: 1})"
+                    >
                         Употребяван
                     </li>
                     <li :class="{ active: getState.condition === 2 }"
-                        @click="setState({key: 'condition', value: 2})">Нов
+                        @click="setState({key: 'condition', value: 2})"
+                    >
+                        Нов
                     </li>
                     <li :class="{ active: getState.condition === 3 }"
-                        @click="setState({key: 'condition', value: 3})">На части
+                        @click="setState({key: 'condition', value: 3})"
+                    >
+                        На части
                     </li>
                 </ul>
             </div>
@@ -62,47 +67,41 @@
                     </div>
                 </div>
             </div>
-            <button @click="showStepTwo" class="base-button" v-if="getState.brand.id">
+            <next-step-button v-if="getState.brand.id">
                 Следваща стъпка
-                <!--                <span v-if="!isLoading"></span>-->
-                <!--                <loading-dots v-else></loading-dots>-->
-            </button>
+            </next-step-button>
         </base-card>
     </div>
 </template>
 
 <script>
-import {mapActions, mapGetters, mapMutations} from "vuex";
 import axios from "axios";
 import BaseCard from "../../components/ui/base/BaseCard";
 import Heading from "./partials/Heading";
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 import PrevStepButton from "./partials/PrevStepButton";
+import NextStepButton from "./partials/NextStepButton";
+import {axiosFetcher} from "../../helpers/axiosFetcher";
 
 export default {
     name: "SellCarBrand",
     components: {
         Heading,
         BaseCard,
-        PrevStepButton
+        PrevStepButton,
+        NextStepButton
     },
     setup() {
         const store = useStore();
         const route = useRoute();
-        const isLoading = ref(false);
         const searchBrands = ref(null);
-        const popularBrands = ref(null);
+        const {isLoading, data: popularBrands} = axiosFetcher(`vehicle/fetch/brands/${route.params.vehicleID}/1`)
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
         });
-
-        function showStepTwo() {
-            if (getState.value.brand.id === null) return;
-            store.commit('uploadOffer/setStepPlus');
-        }
 
         function setState(payload) {
             store.commit('uploadOffer/setVehicleState', payload);
@@ -123,92 +122,14 @@ export default {
             }
         }
 
-        function fetchBrands() {
-            isLoading.value = true;
-            axios.get(`vehicle/fetch/brands/${route.params.vehicleID}/1`).then((res) => {
-                isLoading.value = false;
-                if (res.data) {
-                    popularBrands.value = res.data;
-                }
-            }).catch(e => console.log(e, 'cannot fetch brands'));
-        }
-
-        //hooks
-        onMounted(() => {
-            fetchBrands()
-        });
-
         return {
             setState,
             getState,
             popularBrands,
             searchBrands,
-            showStepTwo,
             isLoading,
             handleSearchBrands
         }
     }
-
-    ,
-    // data() {
-    //     return {
-    //         keyword: null,
-    //         filterCarBrands: []
-    //     }
-    // },
-    // computed: {
-    //
-    //     // ...mapGetters('sellCar', [
-    //     //     'getAllData',
-    //     //     'getCarPopularBrands',
-    //     //     'isLoading',
-    //     //     'getSelectedCarBrandID',
-    //     // ])
-    // },
-    // watch: {
-    //     keyword() {
-    //         this.livesearchCarBrands()
-    //     }
-    // },
-    // async mounted() {
-    //     // await this.$store.dispatch('sellCar/setCarPopularBrands');
-    // },
-    // methods: {
-    //     ...mapMutations('sellCar', [
-    //             'setPopularCarBrands',
-    //             'setSelectedCarBrandID',
-    //             'setCarBrand',
-    //         ]
-    //     ),
-    //     ...mapActions('sellCar', ['setCarBrandWithModels']),
-    //
-    //     async livesearchCarBrands() {
-    //         if (this.keyword.length <= 1) {
-    //             this.filterCarBrands = [];
-    //             return;
-    //         }
-    //
-    //         this.setCarBrand(null);
-    //         try {
-    //             const res = await axios.get('vehicle/search/brands', {params: {keyword: this.keyword}});
-    //             this.filterCarBrands = res.data;
-    //         } catch (e) {
-    //             console.log('Live Search Error', e);
-    //         }
-    //     },
-    //
-    //
-    //     resetPreSelectedCarOptions() {
-    //         this.$store.commit('sellCar/resetState');
-    //     },
-    //     // selectBrand({brandName, brandID}) {
-    //     //     if (this.getAllData['car_brand'] !== brandName) {
-    //     //         this.resetPreSelectedCarOptions()
-    //     //     }
-    //     //
-    //     //     this.setSelectedCarBrandID(brandID);
-    //     //     this.setCarBrand(brandName);
-    //     // },
-    // },
 }
 </script>

@@ -8,7 +8,7 @@
                 <ul id="year">
                     <li v-for="year in years"
                         :key="year"
-                        :class="{ active: parseInt(year) === getState.year }"
+                        :class="{ active: year === getState.year }"
                         @click="setYear(year)"
                     >
                         {{ year }}
@@ -26,7 +26,8 @@ import TopBar from "./TopBar";
 import NextStepButton from "./partials/NextStepButton";
 import PrevStepButton from "./partials/PrevStepButton";
 import Heading from "./partials/Heading";
-import {mapGetters, mapMutations} from "vuex";
+import {mapMutations} from "vuex";
+import {years} from "../../helpers/years";
 
 export default {
     name: "VehicleYear",
@@ -39,45 +40,7 @@ export default {
     },
     data() {
         return {
-            years: [
-                '2022',
-                '2021',
-                '2019',
-                '2018',
-                '2017',
-                '2016',
-                '2015',
-                '2014',
-                '2013',
-                '2012',
-                '2011',
-                '2010',
-                '2009',
-                '2008',
-                '2007',
-                '2006',
-                '2005',
-                '2004',
-                '2003',
-                '2002',
-                '2001',
-                '2000',
-                '1999',
-                '1998',
-                '1997',
-                '1996',
-                '1995',
-                '1994',
-                '1993',
-                '1992',
-                '1991',
-                '1990',
-                '1989',
-                '1988',
-                '1987',
-                '1986',
-                '1985',
-            ]
+            years
         }
     },
     computed: {
@@ -88,7 +51,7 @@ export default {
     methods: {
         ...mapMutations('uploadOffer', ['setStepPlus', 'setVehicleState']),
         setYear(year) {
-            this.setVehicleState({key: 'year', value: parseInt(year)});
+            this.setVehicleState({key: 'year', value: year});
         }
     }
 }

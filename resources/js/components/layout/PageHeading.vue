@@ -1,5 +1,5 @@
 <template>
-   <div class="container-xxl my-3">
+   <div class="container-xxl my-3 px-0">
        <h4 class="fw-bold">{{ heading }}</h4>
    </div>
 </template>

@@ -9,7 +9,6 @@
                     <FormKit
                         type="search"
                         :placeholder="setPlaceholder"
-                        value="Apple Cider"
                         id="search__model"
                         v-model.trim="filteredBrandModel"
                         autocomplete="off"
@@ -27,7 +26,7 @@
                     </li>
                 </ul>
             </div>
-            <NextStepButton v-if="getState.model.id"/>
+            <next-step-button v-if="getState.model.id"/>
         </base-card>
     </div>
 </template>
@@ -35,12 +34,12 @@
 <script>
 import BaseCard from "../../components/ui/base/BaseCard";
 import TopBar from "./TopBar";
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {useStore} from "vuex";
 import PrevStepButton from "./partials/PrevStepButton";
 import Heading from "./partials/Heading";
 import NextStepButton from "./partials/NextStepButton";
-import axios from "axios";
+import {axiosFetcher} from "../../helpers/axiosFetcher";
 
 export default {
     name: "SellCarModel",
@@ -54,12 +53,12 @@ export default {
     setup() {
         const store = useStore();
         const filteredBrandModel = ref(null);
-        const brandModels = ref([]);
-        const isLoading = ref(false);
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
         });
+
+        const {isLoading, data: brandModels} = axiosFetcher(`vehicle/fetch/vehicle/${getState.value.brand.id}/category/${getState.value.vehicleCategory}`);
 
         function setModel(model) {
             store.commit('uploadOffer/setVehicleState', {key: 'model', value: model})
@@ -75,23 +74,6 @@ export default {
             return `Търси модел ${getState.value.brand.name}`;
         });
 
-        async function fetchBrandModelsAPI() {
-            try {
-                isLoading.value = true;
-                const res = await axios.get(`vehicle/fetch/vehicle/${getState.value.brand.id}/category/${getState.value.vehicleCategory}`)
-                isLoading.value = false;
-                if (res.data) {
-                    brandModels.value = res.data;
-                }
-            } catch (e) {
-                isLoading.value = false;
-                console.log(e, 'cannot fetch brand models')
-            }
-        }
-
-        onMounted(() => {
-            fetchBrandModelsAPI()
-        });
 
         return {
             getState,
@@ -103,39 +85,7 @@ export default {
             isLoading
         }
     }
-    // data() {
-    //     return {
-    //         search: null,
-    //     };
-    // },
-    // methods: {
-    //     ...mapMutations('sellCar', ["setStepMinus", "setStepPlus", "setCarModel", "setSelectedCarModelID"]),
-    //
-    //     showStepFour() {
-    //         if (!this.getAllData['car_model']) return;
-    //         this.setStepPlus();
-    //     },
-    //
-    // },
-    //
-    // computed: {
-    //     ...mapGetters('sellCar', ["getAllData", "getCarBrandWithModels"]),
-    //
-    //
-    //
-    //     filteredCarModelBySearchField() {
-    //         if (this.search) {
-    //             // this.setCarModel(null);
-    //             this.search = this.search.toLowerCase();
-    //             return this.getCarBrandWithModels.filter((model) =>
-    //                 model.name.toLowerCase().includes(this.search)
-    //             );
-    //         } else {
-    //             return this.getCarBrandWithModels;
-    //         }
-    //     },
-    // },
-};
+}
 </script>
 
 <style scoped>

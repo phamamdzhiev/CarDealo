@@ -18,7 +18,6 @@
                         label="Заглавие на обявата"
                         validation="required|length:10,100"
                         v-model.lazy.trim="title"
-                        :errors="[]"
                     />
                     <FormKit
                         type="textarea"
@@ -47,32 +46,25 @@
                         type="checkbox"
                         name="hasPrice"
                         id="hasPrice"
-                    >
-                        <template #label="context">
-                            <i v-if="hasPrice" class="bi bi-check-square fs-6"></i>
-                            <i v-else class="bi bi-square fs-6"></i>
-                            <span class="ps-1" style="cursor:pointer; user-select:none;">По договаряне?</span>
-                        </template>
-                    </FormKit>
+                        label="По договаряне?"
+                    />
                     <FormKit
-                        v-if="regions.length > 0"
                         type="select"
                         id="region"
                         name="region"
                         label="Област"
                         placeholder="Моля изберете област"
-                        :options="regions"
+                        :options="regions.length > 0 ? regions : ['Изберете област']"
                         @change="setState($event.target)"
                         validation="required"
                     />
                     <FormKit
-                        v-if="cities.length > 0"
                         type="select"
                         label="Град"
                         id="city"
                         name="city"
                         placeholder="Моля изберете град"
-                        :options="cities"
+                        :options="cities.length > 0 ? cities : ['Изберете град']"
                         @change="setState($event.target)"
                         validation="required"
                     />
@@ -89,10 +81,10 @@ import FromInputValidationMessage from "../../components/ui/FromInputValidationM
 import TopBar from "./TopBar";
 import Heading from "./partials/Heading";
 import PrevStepButton from "./partials/PrevStepButton";
-import {fetchRegions} from "../../composables/fetchRegionsAJAX";
 import axios from "axios";
 import {computed, ref} from "vue";
 import {useStore} from "vuex";
+import {useFetcher} from "../../composables/fetcher";
 
 export default {
     name: "OfferDetails",
@@ -106,7 +98,7 @@ export default {
     },
     setup() {
         const store = useStore();
-        const {regions} = fetchRegions();
+        const {fetch:regions} = useFetcher('fetch/regions');
         const cities = ref([]);
 
         const getState = computed(() => {

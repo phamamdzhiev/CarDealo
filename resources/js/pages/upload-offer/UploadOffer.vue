@@ -39,7 +39,6 @@ export default {
         Success,
     },
     mounted() {
-        console.log(this.vehicleID)
         this.$store.commit('uploadOffer/setVehicleState', {key: 'vehicleCategory', value: parseInt(this.vehicleID)});
     },
     computed: {

@@ -1,66 +1,57 @@
 <template>
     <spinner v-if="isloading"/>
     <div class="container-xxl mt-4" v-else-if="listing.length > 0">
-        <h4 class="text-center"><i class="fa-solid pe-2 fa-bars-staggered"></i>Моите обяви</h4>
-        <h6 class="fw-bold">Общо обяви: {{ listing.length }}</h6>
-        <!--        <h1 v-if="route.redirectedFrom.name === 'edit.listing'">EI pedal</h1>-->
-        <div class="row">
-            <div>
-                <div class="base-card position-relative" v-for="(item, index) in listing" :key="item.id">
-                    <div class="listing d-flex">
-                        <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
-                            <div class="img-wrapper">
-                                <img
-                                    v-if="item.images.length > 0"
-                                    width="200"
-                                    class="img-fluid rounded"
-                                    :src="asset(item.images[0].image)"
-                                    :alt="item['title']"
-                                />
-                                <img v-else :src="asset('noimage.jpg')" width="200" class="img-fluid rounded"
-                                     alt="Default image">
-                            </div>
-                        </router-link>
-                        <div class="details">
-                            <h5 class="fw-bold">
-                                <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
-                                    {{ item['title'] }}
-                                </router-link>
-                            </h5>
-                            <p class="text-base-color">
-                                {{ item['price'] === 0 ? 'По договаряне' : item['price'] + ' лв.' }}</p>
-                            <p class="text-secondary-color mb-0">
-                                {{ item['description'] }}
-                            </p>
+        <div class="custom-container-md">
+            <page-heading heading="Моите обяви"/>
+            <h6 class="fw-bold">Общо обяви: {{ listing.length }}</h6>
+            <div class="base-card position-relative" v-for="(item, index) in listing" :key="item.id">
+                <div class="listing d-flex">
+                    <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
+                        <div class="img-wrapper">
+                            <img
+                                v-if="item.images.length > 0"
+                                width="200"
+                                class="img-fluid rounded"
+                                :src="asset(item.images[0].image)"
+                                :alt="item['title']"
+                            />
+                            <img v-else :src="asset('noimage.jpg')" width="200" class="img-fluid rounded"
+                                 alt="Default image">
                         </div>
-                        <ul class="actions text-end position-absolute bottom-0 end-0 d-flex align-items-center p-2">
-                            <li>
-                                <p class="text-secondary-color mb-0 me-2" title="Преглеждания на обявата">
-                                    <i class="fa-solid fa-eye text-secondary fs-6"></i>
-                                    {{ item['visits'] }}
-                                </p>
-                            </li>
-<!--                            <li>-->
-<!--                                <router-link title="Промотирай тази обява" class="mb-0 me-2 fw-bold" to="/">-->
-<!--                                    <i class="fa-solid fa-crown fs-6" style="color: #ffd43b"></i>-->
-<!--                                    Промотирай-->
-<!--                                </router-link>-->
-<!--                            </li>-->
-                            <li>
-                                <router-link title="Редакция на обявата" class=" p-0 me-2"
-                                             :to="{name: 'edit.listing', params: {uid: item.uid}}">
-                                    <i class="fa-solid fa-pen-to-square text-success-color fs-6"></i>
-                                </router-link>
-                            </li>
-                            <li>
-                                <form @submit.prevent="handleDelete(item['id'], index)">
-                                    <button title="Изтриване" class="btn p-0 me-2">
-                                        <i class="fa-solid fa-trash text-danger-color fs-6"></i>
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
+                    </router-link>
+                    <div class="details">
+                        <h5 class="fw-bold">
+                            <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
+                                {{ item['title'] }}
+                            </router-link>
+                        </h5>
+                        <p class="text-base-color">
+                            {{ item['price'] === 0 ? 'По договаряне' : item['price'] + ' лв.' }}</p>
+                        <p class="text-secondary-color mb-0">
+                            {{ item['description'] }}
+                        </p>
                     </div>
+                    <ul class="actions text-end position-absolute bottom-0 end-0 d-flex align-items-center p-2">
+                        <li>
+                            <p class="text-secondary-color mb-0 me-2" title="Преглеждания на обявата">
+                                <i class="fa-solid fa-eye text-secondary fs-6"></i>
+                                {{ item['visits'] }}
+                            </p>
+                        </li>
+                        <li>
+                            <router-link title="Редакция на обявата" class=" p-0 me-2"
+                                         :to="{name: 'edit.listing', params: {uid: item.uid}}">
+                                <i class="fa-solid fa-pen-to-square text-success-color fs-6"></i>
+                            </router-link>
+                        </li>
+                        <li>
+                            <form @submit.prevent="handleDelete(item['id'], index)">
+                                <button title="Изтриване" class="btn p-0 me-2">
+                                    <i class="fa-solid fa-trash text-danger-color fs-6"></i>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -80,12 +71,12 @@ import axios from "axios";
 import {onMounted, ref, inject} from "vue";
 import BaseCard from "../../../components/ui/base/BaseCard";
 import assetMixin from '../../../composables/asset';
-import {onBeforeRouteUpdate} from "vue-router";
-
+import PageHeading from "../../../components/layout/PageHeading";
 export default {
     name: "MyListing",
     components: {
-        BaseCard
+        BaseCard,
+        PageHeading
     },
     mixins: [assetMixin],
     setup() {
@@ -150,6 +141,7 @@ export default {
 .details {
     margin-left: 1rem;
 }
+
 .img-wrapper img:hover {
     transform: rotate(3deg);
 }

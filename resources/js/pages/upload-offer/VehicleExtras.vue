@@ -12,56 +12,55 @@
                 <div class="question-section mb-3">
                     <Heading title="Изберете екстри"/>
 
-                    <spinner v-if="isLoading"/>
-                    <ul id="extras" v-else>
-                        <li
-                            v-for="item in vehicleExtras"
-                            :key="item.id">
-                            <label :for="item.name">
-                            <span class="pe-1">
-                                <i :class="['bi fs-6',
-                                {'bi-square': getState.extras.findIndex(obj => obj.id === item.id) === -1,
-                                 'bi-check-square-fill text-base-color':  getState.extras.findIndex(obj => obj.id === item.id) > -1
-                                }]"></i>
-                            </span>
-                                <span>
-                                {{ item.name }}
-                            </span>
-                                <template class="d-none">
-                                    <FormKit
-                                        @change="setExtras(item)"
-                                        type="checkbox"
-                                        :label="item.name"
-                                        name="extras"
-                                        :id="item.name"
-                                    />
-                                </template>
-                            </label>
-                        </li>
-                    </ul>
+                    <spinner v-if="vehicleExtras.length < 1"/>
+                    <FormKit
+                        v-else
+                        type="checkbox"
+                        :options="vehicleExtras"
+                        name="extras"
+                        id="extra"
+                    />
+<!--                    <ul id="extras" v-else>-->
+<!--                        <li-->
+<!--                            v-for="item in vehicleExtras"-->
+<!--                            :key="item.id">-->
+<!--                            <label :for="item.name">-->
+<!--                            <span class="pe-1">-->
+<!--                                <i :class="['bi fs-6',-->
+<!--                                {'bi-square': getState.extras.findIndex(obj => obj.id === item.id) === -1,-->
+<!--                                 'bi-check-square-fill text-base-color':  getState.extras.findIndex(obj => obj.id === item.id) > -1-->
+<!--                                }]"></i>-->
+<!--                            </span>-->
+<!--                                <span>-->
+<!--                                {{ item.name }}-->
+<!--                            </span>-->
+<!--                                <template class="d-none">-->
+<!--                                 -->
+<!--                                </template>-->
+<!--                            </label>-->
+<!--                        </li>-->
+<!--                    </ul>-->
                 </div>
                 <div class="question-section mb-3">
                     <FormKit
-                        v-if="colors.length > 0"
                         type="select"
                         id="color"
                         name="color"
                         label="Цвят"
                         placeholder="Моля изберете Цвят"
-                        :options="colors"
+                        :options="colors.length > 0 ? colors : ['Цвят']"
                         @change="setState($event.target)"
                         validation="required"
                     />
                 </div>
                 <div class="question-section mb-3">
                     <FormKit
-                        v-if="euroStandards.length > 0"
                         type="select"
                         id="euro-standard"
                         name="euro-standard"
                         label="Евро стандарт"
                         placeholder="Моля изберете Евро стандарт"
-                        :options="euroStandards"
+                        :options="euroStandards.length > 0 ? euroStandards : ['Евро стандарт']"
                         @change="setState($event.target)"
                         validation="required"
                     />
@@ -78,11 +77,10 @@ import PrevStepButton from "./partials/PrevStepButton";
 import NextStepButton from "./partials/NextStepButton";
 import Heading from "./partials/Heading";
 import SelectField from "../../components/ui/forms/SelectField";
-import {fetchColors} from "../../composables/fetchColorAJAX";
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {useStore} from "vuex";
-import axios from "axios";
 import {useRoute} from "vue-router";
+import {useFetcher} from "../../composables/fetcher";
 
 export default {
     name: "VehicleExtras",
@@ -99,8 +97,7 @@ export default {
         const route = useRoute();
         const isLoading = ref(false);
         const selectedExtras = ref([]);
-        const vehicleExtras = ref([]);
-        const {colors} = fetchColors();
+        const {fetch: colors} = useFetcher('fetch/colors');
 
         const euroStandards = ref([
             {value: 1, label: 'I'},
@@ -131,24 +128,7 @@ export default {
             store.commit('uploadOffer/setStepPlus');
         }
 
-        function fetchExtras() {
-            isLoading.value = true;
-            axios.get(`vehicle/fetch/extras/category/${route.params.vehicleID}`)
-                .then((res) => {
-                    isLoading.value = false
-                    if (res.data) {
-                        vehicleExtras.value = res.data;
-                    }
-                })
-                .catch((e) => {
-                    isLoading.value = false
-                    console.log('Cannot fetch extras', e);
-                });
-        }
-
-        onMounted(() => {
-            fetchExtras();
-        });
+        const {fetch: vehicleExtras} = useFetcher(`vehicle/fetch/extras/category/${route.params.vehicleID}`);
 
         return {
             vehicleExtras,
