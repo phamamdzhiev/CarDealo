@@ -2,34 +2,11 @@
     <footer v-show="!$route.meta['hideFooter']">
         <div class="container">
             <div class="d-grid valuables">
-                <div class="item">
-                    <span><i class="bi bi-award fs-1"></i></span>
+                <div class="item" v-for="valuable in valuables" :key="valuable.id">
+                    <span><i :class="`bi bi-${valuable.icon} fs-1`"></i></span>
                     <div>
-                        <h5 class="fw-bold">#1 в България</h5>
-                        <p class="text-normal-gray">Най-новият Авто портал</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <span><i class="bi bi-percent fs-1"></i></span>
-                    <div>
-                        <h5 class="fw-bold">Оферти</h5>
-                        <p class="text-normal-gray">Намирате автомобил изгодно</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <span><i class="bi bi-shield-check fs-1"></i></span>
-                    <div>
-                        <h5 class="fw-bold">Сравнете коли</h5>
-                        <p class="text-normal-gray">Избирате правилният модел</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <span><i class="bi bi-chat-dots fs-1"></i></span>
-                    <div>
-                        <h5 class="fw-bold">
-                            Чат на живо
-                        </h5>
-                        <p class="text-normal-gray">7 дни в седмицата</p>
+                        <h5 class="fw-bold">{{valuable.title}}</h5>
+                        <p class="text-normal-gray">{{valuable.subTitle}}</p>
                     </div>
                 </div>
             </div>
@@ -95,7 +72,7 @@
             </div>
             <hr />
             <div class="copyright">
-                <p class="text-normal-gray">&copy; {{ new Date().getFullYear() }} Miradi-22 Ltd.</p>
+                <p class="text-normal-gray">Copywrite &copy; {{ new Date().getFullYear() }} Miradi-22 Ltd.</p>
             </div>
         </div>
     </footer>
@@ -103,6 +80,18 @@
 
 <script>
 export default {
-    name: "TheFooter"
+    name: "TheFooter",
+    setup() {
+        const valuables = [
+            {id: 1, title: '#1 в България', subTitle: 'Най-новият Авто портал', icon: 'award'},
+            {id: 2, title: 'Оферти', subTitle: 'Намирате автомобил изгодно', icon: 'percent'},
+            {id: 3, title: 'Сравнете коли', subTitle: 'Избирате правилният модел', icon: 'shield-check'},
+            {id: 4, title: 'Чат на живо', subTitle: '7 дни в седмицата', icon: 'chat-dots'},
+        ];
+
+        return {
+            valuables
+        }
+    }
 }
 </script>
