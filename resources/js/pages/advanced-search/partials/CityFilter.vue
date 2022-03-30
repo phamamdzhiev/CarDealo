@@ -30,9 +30,15 @@ export default {
         });
 
         const cities = computed(() => {
-            const {fetch} = useFetcher(`fetch/cities/${store.getters["advancedFilters/getFilters"]['region']}`);
+            if (store.getters["advancedFilters/getFilters"]['region'] === '') {
+                return [];
+            }
+
+            const {fetch} = useFetcher('get.region.cities', [store.getters["advancedFilters/getFilters"]['region']]);
             return fetch.value
         });
+
+        console.log(cities.value, 'cities')
 
         return {
             cities,

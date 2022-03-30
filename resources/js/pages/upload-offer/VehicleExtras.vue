@@ -97,7 +97,7 @@ export default {
         const route = useRoute();
         const isLoading = ref(false);
         const selectedExtras = ref([]);
-        const {fetch: colors} = useFetcher('fetch/colors');
+        const {fetch: colors} = useFetcher('get.colors');
 
         const euroStandards = ref([
             {value: 1, label: 'I'},
@@ -128,7 +128,8 @@ export default {
             store.commit('uploadOffer/setStepPlus');
         }
 
-        const {fetch: vehicleExtras} = useFetcher(`vehicle/fetch/extras/category/${route.params.vehicleID}`);
+        // const {fetch: vehicleExtras} = useFetcher(`vehicle/fetch/extras/category/${route.params.vehicleID}`);
+        const {fetch: vehicleExtras} = useFetcher('get.extras', [route.params.vehicleID]);
 
         return {
             vehicleExtras,

@@ -19,7 +19,7 @@ export default {
     name: "VehicleTypeFilter",
     setup() {
         const store = useStore();
-        const {fetch: types} = useFetcher('vehicle/fetch/vehicle-types');
+        const {fetch: types} = useFetcher('get.categories');
 
         const type = computed({
             get() {

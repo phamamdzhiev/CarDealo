@@ -1,10 +1,10 @@
 <template>
     <div class="app-content">
-       <div v-cloak class="v-cloak--hidden">
-           <the-header></the-header>
-           <router-view></router-view>
-           <the-footer></the-footer>
-       </div>
+        <div v-cloak class="v-cloak--hidden">
+            <the-header></the-header>
+            <router-view></router-view>
+            <the-footer></the-footer>
+        </div>
     </div>
 </template>
 <script>
@@ -32,7 +32,7 @@ export default {
 };
 </script>
 <style>
-[v-cloak] .v-cloak--hidden{
+[v-cloak] .v-cloak--hidden {
     display: none;
 }
 

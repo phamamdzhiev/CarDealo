@@ -29,7 +29,8 @@ export default {
             }
         });
         const categories = computed(() => {
-            const {fetch} = useFetcher(`vehicle/fetch/vehicle-type/${store.getters['advancedFilters/getFilters']['type']}/category`)
+            // const {fetch} = useFetcher(`vehicle/fetch/vehicle-type/${store.getters['advancedFilters/getFilters']['type']}/category`)
+            const {fetch} = useFetcher('get.types', [store.getters['advancedFilters/getFilters']['type']])
             return fetch.value;
         });
 

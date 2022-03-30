@@ -98,7 +98,7 @@ export default {
     },
     setup() {
         const store = useStore();
-        const {fetch:regions} = useFetcher('fetch/regions');
+        const {fetch:regions} = useFetcher('get.regions');
         const cities = ref([]);
 
         const getState = computed(() => {

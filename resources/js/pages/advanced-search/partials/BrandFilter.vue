@@ -31,7 +31,8 @@ export default {
 
 
         const brands = computed(() => {
-            const {fetch} = useFetcher(`vehicle/fetch/brands/${store.getters['advancedFilters/getFilters']['type']}`);
+            // const {fetch} = useFetcher(`vehicle/fetch/brands/${store.getters['advancedFilters/getFilters']['type']}`);
+            const {fetch} = useFetcher('get.brands', [store.getters['advancedFilters/getFilters']['type']]);
             return fetch.value;
         });
 

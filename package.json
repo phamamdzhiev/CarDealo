@@ -30,6 +30,7 @@
         "firebase": "^9.6.1",
         "js-cookie": "^3.0.1",
         "laravel-echo": "^1.11.3",
+        "nprogress": "^0.2.0",
         "pusher-js": "^7.0.6",
         "swiper": "^8.0.0",
         "vue": "^3.2.26",

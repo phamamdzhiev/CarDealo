@@ -15,7 +15,7 @@ import {useFetcher} from "../../composables/fetcher";
 export default {
     name: "MerchantsFilter",
     setup() {
-        const {fetch: regions} = useFetcher('fetch/regions')
+        const {fetch: regions} = useFetcher('get.regions')
 
         return {
             regions

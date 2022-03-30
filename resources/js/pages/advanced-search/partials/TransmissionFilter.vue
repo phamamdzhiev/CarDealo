@@ -19,7 +19,7 @@ export default {
     name: "TransmissionFilter",
     setup() {
         const store = useStore();
-        const {fetch: transmissions} = useFetcher('fetch/transmissions');
+        const {fetch: transmissions} = useFetcher('get.transmissions');
 
         const transmission = computed({
             get() {

@@ -19,7 +19,7 @@ export default {
     name: "RegionFilter",
     setup() {
         const store = useStore();
-        const {fetch: regions} = useFetcher('fetch/regions');
+        const {fetch: regions} = useFetcher('get.regions');
 
         const region = computed({
             get() {

@@ -76,11 +76,12 @@ export default {
         }
     },
     setup() {
-        const {fetch: vehicleTypes} = useFetcher('vehicle/fetch/vehicle-types');
+       const {fetch: vehicleTypes} = useFetcher('get.categories');
         // onload fetch always data for cars by default
-        const {fetch: brands} = useFetcher('vehicle/fetch/brands/1');
-        const {fetch: transmissions} = useFetcher('fetch/transmissions');
-        const {fetch: fuels} = useFetcher('fetch/fuels');
+        // const {fetch: brands} = useFetcher('vehicle/fetch/brands/1');
+        const {fetch: brands} = useFetcher('get.brands', [1]);
+        const {fetch: transmissions} = useFetcher('get.transmissions');
+        const {fetch: fuels} = useFetcher('get.fuels');
         const vehicleType = ref('1'); // 1 is for vehicle type Cars
         const models = ref([]);
         const router = useRouter();
@@ -104,13 +105,18 @@ export default {
 
         function handleVehicleBrands(typeID) {
             models.value = [];
-            const {fetch} = useFetcher(`vehicle/fetch/brands/${typeID}`);
+            // const {fetch} = useFetcher(`vehicle/fetch/brands/${typeID}`);
+            const {fetch} = useFetcher('get.brands', [typeID]);
             brands.value = fetch.value
             vehicleType.value = typeID;
         }
 
         function handleVehicleModels(brandID) {
-            const {fetch} = useFetcher(`vehicle/fetch/vehicle/${brandID}/category/${vehicleType.value}`);
+            if (brandID === '') {
+                return [];
+            }
+            // const {fetch} = useFetcher(`vehicle/fetch/vehicle/${brandID}/category/${vehicleType.value}`);
+            const {fetch} = useFetcher('get.brand.models', [brandID, vehicleType.value]);
             models.value = fetch.value
         }
 

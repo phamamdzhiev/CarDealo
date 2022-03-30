@@ -19,7 +19,7 @@ export default {
     name: "ColorFilter",
     setup() {
         const store = useStore();
-        const {fetch: colors} = useFetcher('fetch/colors');
+        const {fetch: colors} = useFetcher('get.colors');
 
         /*
          Keeping this here for later

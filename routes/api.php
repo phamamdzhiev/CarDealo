@@ -53,9 +53,6 @@ Route::group(['prefix' => 'vehicle/fetch'], function () {
     Route::get('/search/brands/{vehicleTypeID}', [VehicleController::class, 'searchCarBrands'])->name('live.search.brands');
     Route::get('/extras/category/{category}', [VehicleController::class, 'getCarExtras'])->name('get.extras');
     Route::get('/engines', [VehicleController::class, 'getEngines'])->name('get.engines');
-    Route::get('/vehicle-types', function () {
-        return response()->json(\App\Models\VehicleCategory::all()->toArray());
-    });
     Route::get('/vehicle-type/{id}/category/{popular?}', [CategoryController::class, 'getTypes'])->name('get.types');
 });
 

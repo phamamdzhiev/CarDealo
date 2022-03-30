@@ -30,7 +30,14 @@ export default {
         });
 
         const models = computed(() => {
-            const {fetch} = useFetcher(`vehicle/fetch/vehicle/${store.getters['advancedFilters/getFilters']['brand']}/category/${store.getters['advancedFilters/getFilters']['type']}`);
+            if (store.getters['advancedFilters/getFilters']['brand'] === '') {
+
+            }
+            console.log('model filter',);
+            const {fetch} = useFetcher('get.brand.models',
+                [store.getters['advancedFilters/getFilters']['brand'], store.getters['advancedFilters/getFilters']['type']]
+            );
+
             return fetch.value;
         });
 

@@ -19,7 +19,7 @@ export default {
     name: "FuelFilter",
     setup() {
         const store = useStore();
-        const {fetch: fuels} = useFetcher('fetch/fuels');
+        const {fetch: fuels} = useFetcher('get.fuels');
 
         const fuel = computed({
             get() {
