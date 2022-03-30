@@ -1,13 +1,14 @@
-import DotsLoader from "./components/ui/DotsLoader";
 
 require('./bootstrap');
 
 import {createApp} from "vue";
 
+import DotsLoader from "./components/ui/DotsLoader";
 import App from './App.vue';
 import store from './store/index';
 import router from "./router";
-
+import {ZiggyVue} from 'ziggy';
+import {Ziggy} from './ziggy'
 import AjaxLoadingSpinner from "./components/ui/AjaxLoadingSpinner.vue";
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
@@ -24,5 +25,6 @@ app.use(router);
 app.use(store);
 app.use(VueToast);
 app.use(plugin, defaultConfig(formKitConfig));
+app.use(ZiggyVue, Ziggy);
 app.provide('window', window);
 app.mount('#app');

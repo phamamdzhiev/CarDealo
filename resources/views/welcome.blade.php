@@ -40,6 +40,7 @@
     window.AUTH = {!! json_encode( Auth::guard('web')->user()) !!};
     window._asset = '{{ asset('') }}';
 </script>
+
 @if(env('IS_SITE_ACCESSIBLE'))
     <script defer src="{{ asset('js/app.js') }}"></script>
 @else
