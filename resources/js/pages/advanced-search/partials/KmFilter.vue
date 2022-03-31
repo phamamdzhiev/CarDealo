@@ -1,58 +1,56 @@
 <template>
-    <div class="advanced-single-filter">
-        <h6 class="fw-bold">Пробег</h6>
-        <div class="fw-bold text-base-color mb-3 text-center">
-            <span>{{ kmRange[0] }} км. - </span>
-            <span>{{ kmRange[1] }} км.</span>
-        </div>
-        <Slider v-model="kmRange"
-                :max="200000"
-                :min="0"
-                :step="5000"
-                :tooltips="false"
-                :lazy="false"
-                class="advanced-filter-range-slider"
-                @change="handleKmSlider"
-        >
-        </Slider>
-    </div>
+    <FormKit
+        type="number"
+        placeholder="Моля въведете минимален пробег"
+        help="в лева"
+        label="Пробег от"
+        name="kmMin"
+        step="1"
+        v-model.lazy="kmMin"
+    />
+    <FormKit
+        type="number"
+        placeholder="Моля въведете максимален пробег"
+        help="в лева"
+        label="Пробег до"
+        name="kmMax"
+        step="1"
+        v-model.lazy="kmMax"
+    />
 </template>
 
 <script>
-import Slider from '@vueform/slider';
-import '@vueform/slider/themes/default.css';
-import {onMounted, reactive, ref} from "vue";
-import {useRoute, useRouter} from "vue-router";
-import {isUndefined} from "lodash";
+import {computed} from "vue";
+import {useStore} from "vuex";
 
 export default {
-    name: "YearFilter",
-    components: {
-        Slider
-    },
+    name: "KmFilter",
     setup() {
-        const router = useRouter();
-        const route = useRoute();
-        let kmRange = ref([]);
+        const store = useStore();
 
-        kmRange.value[0] = isUndefined(route.query.kmMin) ? 0 : route.query.kmMin;
-        kmRange.value[1] = isUndefined(route.query.kmMax) ? 200000 : route.query.kmMax;
+        const kmMin = computed({
+            get: () => {
+                return store.getters['advancedFilters/getFilters']['kmMin'];
+            },
+            set: (val) => {
+                store.commit('advancedFilters/setFilters', {filter: 'kmMin', value: val});
+            }
+        });
 
-        function handleKmSlider() {
-            router.push({
-                name: route.name,
-                query: {
-                    ...route.query,
-                    kmMin: kmRange.value[0],
-                    kmMax: kmRange.value[1]
-                }
-            });
-        }
+        const kmMax = computed({
+            get: () => {
+                return store.getters['advancedFilters/getFilters']['kmMax'];
+            },
+            set: (val) => {
+                store.commit('advancedFilters/setFilters', {filter: 'kmMax', value: val});
+            }
+        });
 
         return {
-            kmRange,
-            handleKmSlider
+            kmMin,
+            kmMax
         }
     }
+
 }
 </script>

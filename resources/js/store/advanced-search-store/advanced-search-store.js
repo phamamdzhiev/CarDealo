@@ -13,7 +13,11 @@ export default {
                 brand: '',
                 model: '',
                 yearMin: '',
-                yearMax: ''
+                yearMax: '',
+                budgetMin: '',
+                budgetMax: '',
+                kmMin: '',
+                kmMax: ''
             }
         }
     },
@@ -32,6 +36,10 @@ export default {
             state.filters.transmission = '';
             state.filters.yearMin = '';
             state.filters.yearMax = '';
+            state.filters.budgetMin = '';
+            state.filters.budgetMax = '';
+            state.filters.kmMin = '';
+            state.filters.kmMax = '';
         }
     },
     getters: {

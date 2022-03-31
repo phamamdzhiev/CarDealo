@@ -1,69 +1,54 @@
 <template>
-    <div class="advanced-single-filter">
-        <h6 class="fw-bold">Бюджет</h6>
-        <div class="fw-bold text-base-color mb-3 text-center">
-            <span>{{ budgetRange[0] }} лв. - </span>
-            <span>{{ budgetRange[1] }}{{ sign }} лв.</span>
-        </div>
-        <Slider v-model="budgetRange"
-                :max="20000"
-                :step="500"
-                :tooltips="false"
-                :lazy="false"
-                class="advanced-filter-range-slider"
-                @change="handleBudgetSlider"
-        >
-        </Slider>
-    </div>
+    <FormKit
+        type="number"
+        placeholder="Моля въведете минимален бюджет"
+        help="в лева"
+        label="Бюджет от"
+        name="budgetMin"
+        step="1"
+        v-model.lazy="budgetMin"
+    />
+    <FormKit
+        type="number"
+        placeholder="Моля въведете максимален бюджет"
+        help="в лева"
+        label="Бюджет до"
+        name="budgetMax"
+        step="1"
+        v-model.lazy="budgetMax"
+    />
 </template>
 
 <script>
-import Slider from '@vueform/slider';
-import '@vueform/slider/themes/default.css';
-import {ref} from "vue";
-import {useRoute, useRouter} from "vue-router";
-import {isUndefined} from "lodash";
+import {computed} from "vue";
+import {useStore} from "vuex";
 
 export default {
     name: "BudgetFilter",
-    components: {
-        Slider
-    },
-    emits: ['updateQueryParams'],
-    setup(_, {emit}) {
-        const router = useRouter();
-        const route = useRoute();
-        let budgetRange = ref([]);
+    setup() {
+        const store = useStore();
 
-        budgetRange.value[0] = isUndefined(route.query.budgetMin) ? 0 : route.query.budgetMin;
-        budgetRange.value[1] = isUndefined(route.query.budgetMax) ? 20000 : route.query.budgetMax;
-        let sign = ref(isUndefined(route.query.budgetMax) ? '+' : '');
-
-        async function handleBudgetSlider() {
-            if (budgetRange.value[1] < 20000) {
-                sign.value = null;
-            } else {
-                sign.value = '+';
+        const budgetMin = computed({
+            get: () => {
+                return store.getters['advancedFilters/getFilters']['budgetMin'];
+            },
+            set: (val) => {
+                store.commit('advancedFilters/setFilters', {filter: 'budgetMin', value: val});
             }
+        });
 
-            await router.push(
-                {
-                    name: route.name,
-                    query: {
-                        ...route.query,
-                        budgetMin: budgetRange.value[0],
-                        budgetMax: budgetRange.value[1]
-                    }
-                }
-            );
-
-            emit('updateQueryParams');
-        }
+        const budgetMax = computed({
+            get: () => {
+                return store.getters['advancedFilters/getFilters']['budgetMax'];
+            },
+            set: (val) => {
+                store.commit('advancedFilters/setFilters', {filter: 'budgetMax', value: val});
+            }
+        });
 
         return {
-            budgetRange,
-            sign,
-            handleBudgetSlider
+            budgetMin,
+            budgetMax
         }
     }
 }

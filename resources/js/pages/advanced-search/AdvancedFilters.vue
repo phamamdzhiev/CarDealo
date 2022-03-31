@@ -9,15 +9,18 @@
         </div>
         <hr>
         <div class="advanced-search-wrapper" id="secondary-filters">
-            <condition-filter/>
+            <budget-filter/>
             <vehicle-category-filter/>
+            <km-filter/>
+            <condition-filter/>
             <color-filter/>
             <region-filter/>
-            <budget-filter/>
-            <km-filter/>
             <city-filter/>
         </div>
-        <submit-search/>
+        <div class="d-flex flex-nowrap align-items-center">
+            <submit-search/>
+            <clear-filters/>
+        </div>
     </div>
 </template>
 
@@ -31,6 +34,7 @@ import KmFilter from "./partials/KmFilter";
 import CityFilter from "./partials/CityFilter";
 import SubmitSearch from "./partials/SubmitSearch";
 import PopularSearchFilters from "../../components/simple-search/PopularSearchFilters";
+import ClearFilters from "./partials/ClearFilters";
 
 export default {
     name: "AdvancedSearchNew",
@@ -43,7 +47,8 @@ export default {
         BudgetFilter,
         PopularSearchFilters,
         ConditionFilter,
-        SubmitSearch
+        SubmitSearch,
+        ClearFilters
     }
 }
 </script>
