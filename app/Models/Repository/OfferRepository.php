@@ -28,6 +28,11 @@ class OfferRepository
         return DB::table('offers')
                 ->join('vehicles', 'vehicles.offer_id', '=', 'offers.id')
                 ->join('images', 'images.offer_id', '=', 'offers.id')
+            /**
+             * Vanko tyk slojih where, shototo inache hvash vsichki snimki i vav FO mi vrushta edna obqva po nqkolko puti cikala,
+             * ne znam dali tyk trqbvashe da se sloji no ROBOTI, za sq. Ako nes go opravi pls.
+             */
+                        ->where('images.is_main', '=', 1)
                 ->join('cities', 'cities.id', '=', 'offers.city_id')
                 ->join('vehicles_types', 'vehicles.type_id', '=', 'vehicles_types.id')
                 ->join('merchants', 'merchants.user_id', '=', 'offers.user_id')

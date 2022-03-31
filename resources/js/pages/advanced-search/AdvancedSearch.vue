@@ -3,7 +3,9 @@
         <router-link class="mb-4 d-inline-block" :to="{name: 'advanced.filters'}">Коригирай търсенето</router-link>
         <spinner v-if="isLoading"/>
         <div class="d-grid" v-else-if="offers.length > 0">
-            <CarSingleItem v-for="offer in offers" :offer="offer"></CarSingleItem>
+            <template v-for="offer in offers" :key="offer.uid">
+                <CarSingleItem :offer="offer"></CarSingleItem>
+            </template>
         </div>
         <div v-else>Няма намерени обяви</div>
     </div>
@@ -54,6 +56,7 @@ export default {
                 isLoading.value = false
                 if (res.data) {
                     offers.value = res.data;
+                    offers.value.forEach(e => console.log(e));
                 }
             } catch (e) {
                 console.log(e, 'fetch offers failed');

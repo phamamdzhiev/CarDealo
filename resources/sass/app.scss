@@ -24,6 +24,19 @@
 @import "components/vehicle-singleton";
 @import "components/simple-search";
 
+:root {
+    //Formkit vars
+    --fk-max-width-input: 100% !important;
+    --fk-bg-submit: #FF4739 !important;
+    --fk-bg-submit-hover: #ec3529 !important;
+    --fk-font-size-button: 15px !important;
+    --fk-border-radius: 5px !important;
+    --fk-color-border-focus: #FF4739 !important;
+    --fk-bg-button: #FF4739 !important;
+    //Swiper
+    --swiper-theme-color: #FF4739 !important;
+}
+
 html {
     @include scrollbar
 }
@@ -57,4 +70,19 @@ a {
     }
 }
 
+//ngprogress
+#nprogress .bar {
+    background-color: $primary-color !important;
+    height: 3px !important;
+    top: 1px !important;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: $primary-color !important;
+    border-left-color: $primary-color !important;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color;
+}
 

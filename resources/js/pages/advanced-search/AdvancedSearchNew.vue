@@ -26,8 +26,8 @@
             <budget-filter/>
             <km-filter/>
             <city-filter/>
-            <submit-search/>
         </div>
+            <submit-search/>
     </div>
 </template>
 
