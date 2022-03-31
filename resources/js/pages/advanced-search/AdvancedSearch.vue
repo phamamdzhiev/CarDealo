@@ -56,7 +56,6 @@ export default {
                 isLoading.value = false
                 if (res.data) {
                     offers.value = res.data;
-                    offers.value.forEach(e => console.log(e));
                 }
             } catch (e) {
                 console.log(e, 'fetch offers failed');

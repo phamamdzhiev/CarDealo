@@ -18,7 +18,7 @@
 import BaseCard from "../components/ui/base/BaseCard";
 import BaseCarousel from "../components/ui/base/BaseCarousel.vue";
 import SimpleSearch from "../components/simple-search/SimpleSearch";
-import {axiosFetcher} from "../helpers/axiosFetcher";
+import {useFetcher} from "../composables/fetcher";
 import UsedCarsVue3Carousel from "../components/ui/UsedCarsVue3Carousel";
 import PageHeading from "../components/layout/PageHeading";
 
@@ -32,7 +32,7 @@ export default {
         PageHeading
     },
     setup() {
-        const {data} = axiosFetcher('/fetch/offers');
+        const {fetch: data} = useFetcher('get.offers', null, false);
 
         return {
             data

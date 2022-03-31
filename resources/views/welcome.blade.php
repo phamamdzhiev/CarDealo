@@ -30,7 +30,6 @@
     <strong>We're sorry but the site doesn't work properly without JavaScript enabled. Please enable it to
         continue.</strong>
 </noscript>
-@routes
 {{--<div class="container-xxl mt-3">--}}
 {{--    <div class="alert alert-warning alert-dismissible p-2 mb-0" role="alert">--}}
 {{--        <h5 class="alert-heading mb-0">В момента се извършва поддръжка на сайтa. </h5>--}}

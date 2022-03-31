@@ -185,7 +185,6 @@ export default {
                 loading.value = false;
                 if (res.data.success) {
                     singleOffer.value = res.data.data;
-                    console.log(singleOffer.value)
                 }
             } catch (e) {
                 loading.value = false;

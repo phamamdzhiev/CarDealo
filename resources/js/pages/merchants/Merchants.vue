@@ -45,7 +45,7 @@
 import BaseCarousel from "../../components/ui/base/BaseCarousel";
 import assetMixin from "../../composables/asset";
 import MerchantsFilter from "./MerchantsFilter";
-import {axiosFetcher} from "../../helpers/axiosFetcher";
+import {useFetcher} from "../../composables/fetcher";
 
 export default {
     name: "Merchants.vue",
@@ -55,7 +55,7 @@ export default {
     },
     mixins: [assetMixin],
     setup() {
-        const {data: merchants, isLoading} = axiosFetcher('merchants/fetch');
+        const {fetch: merchants, isLoading} = useFetcher('get.merchants', null, false);
 
         return {
             merchants,

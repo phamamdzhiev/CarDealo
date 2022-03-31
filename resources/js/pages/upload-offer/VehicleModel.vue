@@ -39,7 +39,7 @@ import {useStore} from "vuex";
 import PrevStepButton from "./partials/PrevStepButton";
 import Heading from "./partials/Heading";
 import NextStepButton from "./partials/NextStepButton";
-import {axiosFetcher} from "../../helpers/axiosFetcher";
+import {useFetcher} from "../../composables/fetcher";
 
 export default {
     name: "SellCarModel",
@@ -58,7 +58,10 @@ export default {
             return store.getters['uploadOffer/getVehicleState'];
         });
 
-        const {isLoading, data: brandModels} = axiosFetcher(`vehicle/fetch/vehicle/${getState.value.brand.id}/category/${getState.value.vehicleCategory}`);
+        const {
+            isLoading,
+            fetch: brandModels
+        } = useFetcher('get.brand.models', [getState.value.brand.id, getState.value.vehicleCategory], false);
 
         function setModel(model) {
             store.commit('uploadOffer/setVehicleState', {key: 'model', value: model})

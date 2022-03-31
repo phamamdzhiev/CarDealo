@@ -1,13 +1,15 @@
 import axios from "axios";
 import {ref} from 'vue';
+import route from 'ziggy';
+import { Ziggy } from './ziggy';
 
-export function useFetcher(routeName, params = null, speacial = true) {
+export function useFetcher(routeName, params = null, formKit = true) {
     let urlBuilder;
 
     if (params) {
-        urlBuilder = route(routeName, params);
+        urlBuilder = route(routeName, params, undefined, Ziggy);
     } else {
-        urlBuilder = route(routeName);
+        urlBuilder = route(routeName, undefined, undefined, Ziggy);
     }
 
     const fetch = ref([]);
@@ -17,7 +19,7 @@ export function useFetcher(routeName, params = null, speacial = true) {
     axios.get(urlBuilder).then((res) => {
         isLoading.value = false;
         if (res.data) {
-            if (speacial) {
+            if (formKit) {
                 res.data.forEach((element) => {
                     fetch.value.push({label: element.name, value: element.id});
                 });

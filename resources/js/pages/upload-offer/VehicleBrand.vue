@@ -83,7 +83,7 @@ import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 import PrevStepButton from "./partials/PrevStepButton";
 import NextStepButton from "./partials/NextStepButton";
-import {axiosFetcher} from "../../helpers/axiosFetcher";
+import {useFetcher} from "../../composables/fetcher";
 
 export default {
     name: "SellCarBrand",
@@ -97,7 +97,7 @@ export default {
         const store = useStore();
         const route = useRoute();
         const searchBrands = ref(null);
-        const {isLoading, data: popularBrands} = axiosFetcher(`vehicle/fetch/brands/${route.params.vehicleID}/1`)
+        const {isLoading, fetch: popularBrands} = useFetcher('get.brands', [route.params.vehicleID, 1], false);
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];

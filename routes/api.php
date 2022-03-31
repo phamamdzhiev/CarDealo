@@ -58,7 +58,7 @@ Route::group(['prefix' => 'vehicle/fetch'], function () {
 
 //Advanced search
 Route::get('/fetch/offers', [AdvancedSearch::class, 'fetchOffers'])->name('get.offers');
-Route::get('/fetch/offer/{uid}', [OfferController::class, 'showSingle'])->name('get.offers');
+Route::get('/fetch/offer/{uid}', [OfferController::class, 'showSingle'])->name('get.offer');
 
 //Client Auth
 Route::group(['prefix' => 'auth'], function () {

@@ -41,7 +41,7 @@ import NextStepButton from "./partials/NextStepButton";
 import {computed} from "vue";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
-import {axiosFetcher} from "../../helpers/axiosFetcher";
+import {useFetcher} from "../../composables/fetcher";
 
 // import offerState from "../../store/upload-offer/upload-offer";
 
@@ -55,7 +55,7 @@ export default {
     setup() {
         const router = useRouter();
         const store = useStore();
-        const {data: vehicleCategories} = axiosFetcher('vehicle/fetch/vehicle-types'); // this api endpoint should be renamed
+        const {fetch: vehicleCategories} = useFetcher('get.categories', null, false);
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
