@@ -112,3 +112,4 @@ Route::group(['prefix' => 'fetch'], function () {
     Route::get('/transmissions', [TransmissionController::class, 'get'])->name('get.transmissions');
 });
 
+Route::post('send/contact/message', [\App\Http\Controllers\ContactController::class, 'store'])->name('send.message');

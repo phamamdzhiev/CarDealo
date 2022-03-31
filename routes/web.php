@@ -29,7 +29,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
     Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users');
     Route::get('/logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('admin.logout');
 });
-
+//Route::get('/hash', function () {
+//    return Hash::make('pedal');
+//});
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
+
+
+

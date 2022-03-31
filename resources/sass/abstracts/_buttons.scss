@@ -3,6 +3,10 @@
     @include ripple($primary-color);
 }
 
+.secondary-button {
+    @include secondary-button();
+}
+
 .reset-btn-styles {
     padding: 0;
     margin: 0;
