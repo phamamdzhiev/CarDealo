@@ -11,8 +11,13 @@ export default {
         const router = useRouter();
 
         async function handleSearch() {
-            await router.push({name: 'advanced.search'});
+            await router.push({name: 'offers.showcase'});
         }
+
+        // async function handleSimpleSearch() {
+        //     let data = Object.fromEntries(Object.entries(searchQuery).filter(([k, v]) => v !== null))
+        //     await router.push({name: 'offers.showcase', query: data});
+        // }
 
         return {
             handleSearch

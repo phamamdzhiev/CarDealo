@@ -12,13 +12,14 @@
 
 <script>
 import {useFetcher} from "../../../composables/fetcher";
-import {computed} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {useStore} from "vuex";
 
 export default {
     name: "VehicleCategoryFilter",
     setup() {
         const store = useStore();
+        const categories = ref([]);
 
         const category = computed({
             get() {
@@ -28,12 +29,19 @@ export default {
                 store.commit('advancedFilters/setFilters', {filter: 'category', value: value});
             }
         });
-        const categories = computed(() => {
-            // const {fetch} = useFetcher(`vehicle/fetch/vehicle-type/${store.getters['advancedFilters/getFilters']['type']}/category`)
-            const {fetch} = useFetcher('get.types', [store.getters['advancedFilters/getFilters']['type']])
-            return fetch.value;
+
+        watch(() => store.getters['advancedFilters/getFilters']['type'], (val) => {
+            fetchCategories(val)
         });
 
+        function fetchCategories(val) {
+            const {fetch} = useFetcher('get.types', [val])
+            categories.value = fetch.value;
+        }
+
+        onMounted(() => {
+            fetchCategories(store.getters['advancedFilters/getFilters']['type'])
+        })
 
         return {
             categories,

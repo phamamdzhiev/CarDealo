@@ -12,13 +12,14 @@
 
 <script>
 import {useFetcher} from "../../../composables/fetcher";
-import {computed} from 'vue';
+import {computed, onMounted, ref, watch} from 'vue';
 import {useStore} from "vuex";
 
 export default {
     name: "BrandFilter",
     setup() {
         const store = useStore();
+        const brands = ref([]);
 
         const brand = computed({
             get() {
@@ -29,12 +30,22 @@ export default {
             }
         });
 
-
-        const brands = computed(() => {
-            // const {fetch} = useFetcher(`vehicle/fetch/brands/${store.getters['advancedFilters/getFilters']['type']}`);
-            const {fetch} = useFetcher('get.brands', [store.getters['advancedFilters/getFilters']['type']]);
-            return fetch.value;
+        watch(() => store.getters['advancedFilters/getFilters']['type'], (val) => {
+            if (val !== '') {
+                fetchBrands(val)
+            }
         });
+
+        function fetchBrands(val) {
+            const {fetch} = useFetcher('get.brands', [val]);
+            brands.value = fetch.value;
+        }
+
+        onMounted(() => {
+            if (store.getters['advancedFilters/getFilters']['type'] !== '') {
+                fetchBrands(store.getters['advancedFilters/getFilters']['type'])
+            }
+        })
 
         return {
             brands,

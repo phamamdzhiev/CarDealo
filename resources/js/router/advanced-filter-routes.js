@@ -1,11 +1,11 @@
 export default [
     {
-        path: "/advanced-search",
-        name: "advanced.search",
+        path: "/offers-showcase",
+        name: "offers.showcase",
         meta: {
-            title: 'Разширено търсене'
+            title: 'Обяви'
         },
-        component: () => import("../pages/advanced-search/AdvancedSearch"),
+        component: () => import("../pages/advanced-search/OffersShowcase"),
     },
     {
         path: "/advanced-filters",
@@ -13,7 +13,7 @@ export default [
         meta: {
             title: 'Подробно търсене'
         },
-        component: () => import("../pages/advanced-search/AdvancedSearchNew"),
+        component: () => import("../pages/advanced-search/AdvancedFilters"),
     },
     {
         path: "/vehicle/:uid",

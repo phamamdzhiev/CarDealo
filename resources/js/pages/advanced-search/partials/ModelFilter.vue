@@ -12,13 +12,14 @@
 
 <script>
 import {useFetcher} from "../../../composables/fetcher";
-import {computed} from 'vue';
+import {computed, ref, watch} from 'vue';
 import {useStore} from "vuex";
 
 export default {
     name: "ModelFilter",
     setup() {
         const store = useStore();
+        const models = ref([]);
 
         const model = computed({
             get() {
@@ -29,17 +30,18 @@ export default {
             }
         });
 
-        const models = computed(() => {
-            if (store.getters['advancedFilters/getFilters']['brand'] === '') {
-
+        watch(() => store.getters['advancedFilters/getFilters']['brand'], (val) => {
+            if (val !== '') {
+                fetchModel(val)
             }
-            console.log('model filter',);
-            const {fetch} = useFetcher('get.brand.models',
-                [store.getters['advancedFilters/getFilters']['brand'], store.getters['advancedFilters/getFilters']['type']]
-            );
-
-            return fetch.value;
         });
+
+        function fetchModel(val) {
+            const {fetch} = useFetcher('get.brand.models',
+                [val, store.getters['advancedFilters/getFilters']['type']]
+            );
+            models.value = fetch.value
+        }
 
         return {
             models,

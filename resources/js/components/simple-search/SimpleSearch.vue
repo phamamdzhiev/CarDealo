@@ -1,72 +1,28 @@
 <template>
-    <div class="base-card custom-container-lg py-4 bg-white shadow mb-5">
+    <div class="base-card  py-4 bg-white shadow mb-5">
         <h4 class="fw-bold mb-4">
             <i class="fa-solid fa-magnifying-glass pe-2"></i>
             {{ heading }}
         </h4>
         <div class="d-grid" id="simple_search">
-            <FormKit
-                v-model="searchQuery.type"
-                type="select"
-                name="type"
-                :options="vehicleTypes.length > 0 ? vehicleTypes : ['Тип']"
-                @input="handleVehicleBrands"
-            />
-            <FormKit
-                v-model="searchQuery.brand"
-                type="select"
-                name="brand"
-                placeholder="Изберете марка"
-                :options="brands.length > 0 ? brands : ['Марка']"
-                @input="handleVehicleModels"
-            />
-            <FormKit
-                v-model="searchQuery.model"
-                type="select"
-                name="models"
-                placeholder="Изберете модел"
-                :options="models.length > 0 ? models : ['Модел']"
-            />
-            <FormKit
-                type="select"
-                v-model="searchQuery.yearMin"
-                placeholder="Година на регистрация след"
-                :options="years"
-            />
-            <FormKit
-                type="select"
-                v-model="searchQuery.transmission"
-                name="transmission"
-                placeholder="Изберете трансмисия"
-                :options="transmissions.length > 0 ? transmissions : ['Трансмисия']"
-            />
-            <FormKit
-                v-model="searchQuery.fuel"
-                type="select"
-                name="fuel"
-                placeholder="Изберете гориво"
-                :options="fuels.length > 0 ? fuels : ['Гориво']"
-            />
+            <popular-search-filters/>
             <advanced-search-router-link/>
-            <button class="base-button mt-0" @click="handleSimpleSearch">
-                <i class="fa-solid fa-magnifying-glass pe-1"></i>
-                Търси
-            </button>
+            <submit-search/>
         </div>
     </div>
 </template>
 
 <script>
-import {useFetcher} from "../../composables/fetcher";
-import {years} from "../../helpers/years";
-import {reactive, ref, computed} from "vue";
-import {useRouter} from "vue-router";
 import AdvancedSearchRouterLink from "../../pages/advanced-search/partials/AdvancedSearchRouterLink";
+import PopularSearchFilters from "./PopularSearchFilters";
+import SubmitSearch from "../../pages/advanced-search/partials/SubmitSearch";
 
 export default {
     name: "SimpleSearch",
     components: {
-        AdvancedSearchRouterLink
+        AdvancedSearchRouterLink,
+        PopularSearchFilters,
+        SubmitSearch
     },
     props: {
         heading: {
@@ -74,77 +30,7 @@ export default {
             required: false,
             default: "Търсене"
         }
-    },
-    setup() {
-       const {fetch: vehicleTypes} = useFetcher('get.categories');
-        // onload fetch always data for cars by default
-        // const {fetch: brands} = useFetcher('vehicle/fetch/brands/1');
-        const {fetch: brands} = useFetcher('get.brands', [1]);
-        const {fetch: transmissions} = useFetcher('get.transmissions');
-        const {fetch: fuels} = useFetcher('get.fuels');
-        const vehicleType = ref('1'); // 1 is for vehicle type Cars
-        const models = ref([]);
-        const router = useRouter();
-
-        const loadingFinish = computed(() => {
-            return vehicleTypes.value.length < 0 &&
-                brands.value.length > 0 &&
-                transmissions.value.length > 0 &&
-                fuels.value.length > 0;
-        });
-
-
-        const searchQuery = reactive({
-            type: '1',
-            brand: null,
-            model: null,
-            yearMin: null,
-            fuel: null,
-            transmission: null
-        });
-
-        function handleVehicleBrands(typeID) {
-            models.value = [];
-            // const {fetch} = useFetcher(`vehicle/fetch/brands/${typeID}`);
-            const {fetch} = useFetcher('get.brands', [typeID]);
-            brands.value = fetch.value
-            vehicleType.value = typeID;
-        }
-
-        function handleVehicleModels(brandID) {
-            if (brandID === '') {
-                return [];
-            }
-            // const {fetch} = useFetcher(`vehicle/fetch/vehicle/${brandID}/category/${vehicleType.value}`);
-            const {fetch} = useFetcher('get.brand.models', [brandID, vehicleType.value]);
-            models.value = fetch.value
-        }
-
-        async function handleSimpleSearch() {
-            Object.keys(searchQuery).forEach(key => {
-                if (searchQuery[key] === null) {
-                    delete searchQuery[key];
-                }
-            });
-
-            await router.push({name: 'advanced.search', query: searchQuery});
-        }
-
-        return {
-            loadingFinish,
-            vehicleTypes,
-            brands,
-            models,
-            handleVehicleBrands,
-            handleVehicleModels,
-            transmissions,
-            handleSimpleSearch,
-            fuels,
-            years,
-            searchQuery: searchQuery
-        }
     }
-
 }
 </script>
 <style scoped>

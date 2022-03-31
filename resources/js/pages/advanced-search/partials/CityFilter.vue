@@ -13,12 +13,13 @@
 <script>
 import {useStore} from "vuex";
 import {useFetcher} from "../../../composables/fetcher";
-import {computed} from "vue";
+import {computed, watch, ref, onMounted} from "vue";
 
 export default {
     name: "CityFilter",
     setup() {
         const store = useStore();
+        const cities = ref([]);
 
         const city = computed({
             get() {
@@ -29,16 +30,22 @@ export default {
             }
         });
 
-        const cities = computed(() => {
-            if (store.getters["advancedFilters/getFilters"]['region'] === '') {
-                return [];
+        watch(() => store.getters["advancedFilters/getFilters"]['region'], (val) => {
+            if (val !== '') {
+                fetchCities(val)
             }
-
-            const {fetch} = useFetcher('get.region.cities', [store.getters["advancedFilters/getFilters"]['region']]);
-            return fetch.value
         });
 
-        console.log(cities.value, 'cities')
+        function fetchCities(val) {
+            const {fetch} = useFetcher('get.region.cities', [val]);
+            cities.value = fetch.value;
+        }
+
+        onMounted(() => {
+            if (store.getters["advancedFilters/getFilters"]['region'] !== '') {
+                fetchCities(store.getters["advancedFilters/getFilters"]['region'])
+            }
+        });
 
         return {
             cities,

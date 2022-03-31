@@ -1,6 +1,9 @@
 <template>
     <div class="container-xxl py-3">
-        <router-link class="mb-4 d-inline-block" :to="{name: 'advanced.filters'}">Коригирай търсенето</router-link>
+        <router-link class="mb-4 d-inline-block" :to="{name: 'advanced.filters'}">
+            <i class="fa-brands fa-searchengin fs-5"></i>
+            Коригирай търсенето
+        </router-link>
         <spinner v-if="isLoading"/>
         <div class="d-grid" v-else-if="offers.length > 0">
             <template v-for="offer in offers" :key="offer.uid">
@@ -13,13 +16,12 @@
 
 <script>
 import axios from "axios";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
 import {useRoute} from "vue-router";
-import {isUndefined} from "lodash";
 
 export default {
-    name: "AdvancedSearch",
+    name: "OffersShowcase",
     components: {
         CarSingleItem,
     },
@@ -28,26 +30,10 @@ export default {
         const offers = ref([]);
         const isLoading = ref(false);
         const route = useRoute();
-        const vehicleTypeID = ref(null);
 
-        function fetchVehicleCategoriesAndBrands(typeID) {
-            vehicleTypeID.value = typeID;
-            // const res = await axios.get(`vehicle/fetch/vehicle-type/${typeID}/category`);
-            // const res1 = await axios.get(`vehicle/fetch/brands/${typeID}/1`);
-            // if (res1.data) {
-            //     vehicleBrands.value = [];
-            //     res1.data.forEach((element) => {
-            //         vehicleBrands.value.push({label: element.name, value: element.id});
-            //     });
-            // }
-            //
-            // if (res.data) {
-            //     vehicleCategories.value = [];
-            //     res.data.forEach((element) => {
-            //         vehicleCategories.value.push({label: element.name, value: element.id});
-            //     });
-            // }
-        }
+        watch(() => route.query, () => {
+            fetchData()
+        });
 
         async function fetchData() {
             try {
@@ -64,9 +50,6 @@ export default {
 
         onMounted(() => {
             fetchData();
-            if (!isUndefined(route.query.type)) {
-                fetchVehicleCategoriesAndBrands(route.query.type)
-            }
         });
 
 
@@ -74,8 +57,6 @@ export default {
             offers,
             isLoading,
             fetchData,
-            fetchVehicleCategoriesAndBrands,
-            vehicleTypeID
         }
     }
 }
