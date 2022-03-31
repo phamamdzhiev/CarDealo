@@ -11,7 +11,9 @@ export default {
                 color: '',
                 transmission: '',
                 brand: '',
-                model: ''
+                model: '',
+                yearMin: '',
+                yearMax: ''
             }
         }
     },
@@ -28,6 +30,8 @@ export default {
             state.filters.fuel = '';
             state.filters.color = '';
             state.filters.transmission = '';
+            state.filters.yearMin = '';
+            state.filters.yearMax = '';
         }
     },
     getters: {
