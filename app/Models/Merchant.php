@@ -30,8 +30,5 @@ class Merchant extends Model
     use HasFactory;
 
     protected $table = 'merchants';
-
-    public $timestamps = false;
-
     protected $guarded = [];
 }

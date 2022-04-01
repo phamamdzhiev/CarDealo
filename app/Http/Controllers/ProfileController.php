@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\AuthException;
+use App\Models\Merchant;
 use App\Models\User;
 use Exception as ExceptionAlias;
 use Illuminate\Contracts\Foundation\Application;
@@ -10,7 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use function Symfony\Component\Translation\t;
 
 class ProfileController extends Controller
 {
@@ -78,8 +82,54 @@ class ProfileController extends Controller
         }
     }
 
-    public function uploadAvatar()
+    public function uploadAvatar(Request $request)
     {
+        $requestUser = json_decode($request->input('user'));
 
+        if (Auth::id() !== $requestUser->id) {
+            throw new AuthException;
+        }
+
+        $merchant = Merchant::whereUserId($requestUser->id)->first();
+
+        if ($request->hasFile('avatar')) {
+            try {
+                if (isset($merchant->image)) {
+                    Storage::delete($merchant->image);
+                }
+
+                $file = $request->file('avatar');
+                $fileName = $file->store('merchants-avatars');
+
+                $merchant->image = $fileName;
+                $merchant->save();
+
+                return response()->json(['success' => true]);
+            } catch (\Exception $e) {
+                throw new \Exception($e->getMessage());
+            }
+        }
+    }
+
+    public function updateDescription(Request $request) {
+        $requestUser = $request->input('user');
+        $description = $request->input('description');
+
+        $request->validate(['description' => 'max:750']);
+
+        if (Auth::id() !== $requestUser['id']) {
+            throw new AuthException;
+        }
+
+        $merchant = Merchant::whereUserId($requestUser['id'])->first();
+
+        try {
+            $merchant->description = $description;
+            $merchant->save();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 }

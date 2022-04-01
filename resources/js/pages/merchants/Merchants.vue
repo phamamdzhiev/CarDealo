@@ -15,7 +15,8 @@
                  v-for="merchant in merchants">
                 <div class="img-wrapper me-3">
                     <router-link :to="{name: 'Merchant.offers', params: {id: merchant.id}}">
-                        <img class="img-fluid rounded" width="100" :src="asset('app-images/avtokushta.jpg')" alt="">
+                        <img v-if="merchant.image" :src="asset(merchant.image)"  class="img-fluid shadow-sm rounded" width="100" alt="Merchant Avatar">
+                        <img v-else :src="asset('noimage.jpg')" class="img-fluid shadow-sm rounded" width="100" alt="Default Merchant Avatar">
                     </router-link>
                 </div>
                 <div class="details">

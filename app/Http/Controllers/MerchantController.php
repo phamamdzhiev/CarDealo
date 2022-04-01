@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\MerchantOffersListingException;
 use App\Models\Merchant;
 use App\Models\Repository\OfferRepository;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,6 +40,13 @@ class MerchantController extends Controller
         } catch (\Exception $e) {
             throw new MerchantOffersListingException;
         }
+    }
+
+    public function getAuthMerchant(): JsonResponse
+    {
+        $userMerchant = User::findOrFail(\Auth::id())->merchant()->first();
+
+        return \response()->json($userMerchant);
     }
 
     /**

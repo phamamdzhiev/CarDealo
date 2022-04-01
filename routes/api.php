@@ -38,6 +38,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function (
     Route::patch('/edit/mobile', [ProfileController::class, 'updateMobile'])->name('edit.mobile');
     Route::patch('/edit/password', [ProfileController::class, 'updatePassword'])->name('edit.password');
     Route::post('/upload/avatar', [ProfileController::class, 'uploadAvatar'])->name('upload.avatar');
+    Route::post('/upload/description', [ProfileController::class, 'updateDescription'])->name('upload.description');
 });
 
 //Email
@@ -95,6 +96,7 @@ Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
 Route::group(['prefix' => 'merchants'], function () {
     Route::get('fetch', [MerchantController::class, 'index'])->name('get.merchants');
     Route::get('fetch/single/{id}', [MerchantController::class, 'show'])->name('get.merchant');
+    Route::get('fetch/auth/merchant', [MerchantController::class, 'getAuthMerchant'])->name('get.auth.merchant');
 });
 
 Route::group(['prefix' => 'fetch'], function () {

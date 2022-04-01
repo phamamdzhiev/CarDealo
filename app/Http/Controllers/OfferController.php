@@ -112,7 +112,7 @@ class OfferController extends Controller
      */
     public function update($uid, OfferUpdate $offerUpdate): Response|Application|ResponseFactory
     {
-        $offer = Offer::where('uid', $uid)->where('user_id', Auth::id())->first();
+        $offer = Offer::where('uid','=', $uid)->where('user_id', '=',Auth::id())->first();
 
         if (Auth::id() !== $offer->user_id) {
             throw new AuthException;

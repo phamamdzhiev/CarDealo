@@ -4,6 +4,7 @@
         <div v-else class="custom-container-md">
             <page-heading :heading="merchant.details.name"/>
             <base-card>
+                Описание <span class="fw-bold d-block mb-5">{{merchant.details.description}}</span>
                 <div v-if="merchant.offers.length < 1">
                     <h4 class="text-center">
                         Няма намерени обяви за този търговец

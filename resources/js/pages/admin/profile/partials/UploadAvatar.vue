@@ -1,5 +1,5 @@
 <template>
-    <FormKit type="form" submit-label="Качи снимка" @submit="submitHandler">
+    <FormKit type="form" submit-label="Качи снимка" id="upload-avatar-form" accept="" @submit="submitHandler">
         <FormKit type="file" label="Качване на лого/аватар"
                  accept=".png,.jpg,.jpeg"
                  name="avatar"
@@ -11,14 +11,20 @@
 </template>
 
 <script>
-import {ref, inject} from 'vue';
+import {ref, inject, computed} from 'vue';
 import axios from "axios";
+import {useStore} from "vuex";
 
 export default {
     name: "UploadAvatar",
     setup() {
         const previewAvatar = ref(null);
         const $toast = inject('$toast');
+        const store = useStore();
+
+        const user = computed(() => {
+            return store.getters['auth/GET_AUTH_USER'];
+        })
 
         function createPreviewAvatar(data) {
             const avatar = data[0];
@@ -38,8 +44,8 @@ export default {
             }
 
             try {
-                const res = await axios.post('', data, config);
-                if (res.data) {
+                const res = await axios.post('profile/upload/avatar', data, config);
+                if (res.data.success) {
                     previewAvatar.value = null;
 
                     $toast.open({
@@ -47,6 +53,9 @@ export default {
                         type: 'success',
                         dismissible: true,
                         duration: 4000,
+                        onDismiss: () => {
+                            // window.location.reload()
+                        }
                     });
                 }
             } catch (e) {
@@ -59,7 +68,6 @@ export default {
                 });
             }
         }
-
         function submitHandler(data) {
             const avatar = data.avatar;
 
@@ -72,7 +80,13 @@ export default {
                 }
 
                 const formData = new FormData();
-                formData.append('avatar', avatar);
+
+                formData.append('user', JSON.stringify(user.value));
+
+                avatar.forEach((fileItem)=> {
+                    formData.append('avatar', fileItem.file);
+                })
+
 
                 uploadAvatar(formData);
             }
@@ -81,7 +95,7 @@ export default {
         return {
             submitHandler,
             previewAvatar,
-            createPreviewAvatar
+            createPreviewAvatar,
         }
     }
 }
