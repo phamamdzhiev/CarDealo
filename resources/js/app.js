@@ -1,4 +1,3 @@
-
 require('./bootstrap');
 
 import {createApp} from "vue";
@@ -15,6 +14,7 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import {plugin, defaultConfig} from '@formkit/vue'
 import formKitConfig from "./formKitConfig";
 import '@formkit/themes/genesis';
+
 
 const app = createApp(App);
 

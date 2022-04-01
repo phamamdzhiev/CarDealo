@@ -10,6 +10,8 @@
                 <img v-else :src="asset('noimage.jpg')" class="img-fluid" alt="Default image">
             </router-link>
         </div>
+        <add-favorites :offer="offer"/>
+
         <div class="vehicle-details">
             <router-link :to="{ name: 'single-listing', params: {uid: offer.uid}}">
                 {{ offer.title }}
@@ -29,11 +31,15 @@
 <script>
 import assetMixin from '../../composables/asset';
 import {ref} from "vue";
+import AddFavorites from "./partials/AddFavorites";
 
 export default {
     name: "CarSingleItem",
     mixins: [assetMixin],
     props: ['offer'],
+    components: {
+        AddFavorites
+    },
     computed: {
         formatPrice() {
             return this.offer.price === 0 ? 'По договаряне' : this.offer.price + ' лв.'

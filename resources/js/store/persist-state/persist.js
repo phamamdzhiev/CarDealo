@@ -14,3 +14,11 @@ export const advancedFiltersPersist = {
     ],
     storage: window.sessionStorage,
 };
+
+export const favoriteStorePersist = {
+    key: 'favorites',
+    paths: [
+        'favoriteStore.favorites',
+    ],
+    storage: window.localStorage,
+};

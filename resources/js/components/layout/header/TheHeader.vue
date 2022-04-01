@@ -6,7 +6,6 @@
             >
                 <div class="fs-4 logo">
                     <router-link to="/">{{ window.APP_NAME }}</router-link>
-                    <i class="bi bi-suit-heart ps-4 fs-4"></i>
                 </div>
                 <div>
                     <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">
@@ -21,6 +20,8 @@
                            <router-link :to="{name: 'login'}" class="me-3">Вход / Регистрация <i class="bi bi-door-open fs-5"></i> </router-link>
                        </span>
                         <base-button :link="'upload'" class="special">+ Публикувай</base-button>
+                        <show-favorite-offers/>
+
                     </nav>
                 </div>
             </div>
@@ -61,11 +62,13 @@
 import SubMenuHoverableItems from "../../ui/hover-menu-items/SubMenuHoverableItems";
 import BaseButton from "../../ui/base/BaseButton";
 import {links, subLinks} from "../../../navigation-links";
+import ShowFavoriteOffers from "./partials/ShowFavoriteOffers";
 
 export default {
     components: {
         SubMenuHoverableItems,
         BaseButton,
+        ShowFavoriteOffers
     },
     inject: ['window'],
     data() {

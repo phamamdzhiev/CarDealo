@@ -33,7 +33,7 @@
                         <button class="fw-bold base-button">Виж детайли на собственика</button>
                     </div>
                 </div>
-                <OfferActions :visits="singleOffer.visits"></OfferActions>
+                <OfferActions :offer="singleOffer"></OfferActions>
             </div>
             <div class="base-card">
                 <div class="offer-details p-3">

@@ -7,6 +7,9 @@
         <spinner v-if="isLoading"/>
         <div class="d-grid" v-else-if="offers.length > 0">
             <template v-for="offer in offers" :key="offer.uid">
+                <pre>
+                    {{offer}}
+                </pre>
                 <CarSingleItem :offer="offer"></CarSingleItem>
             </template>
         </div>

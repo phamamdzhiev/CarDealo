@@ -3,43 +3,44 @@
         <ul class="d-flex justify-content-between px-1 pt-2 pb-0">
             <li>
                 <i class="bi bi-eye fs-6 pe-1"></i>
-                {{ visits }}
+                {{ offer.visits }}
             </li>
-            <li @click="addToFavorites">
-                <i class="bi bi-heart fs-6 pe-1"></i>
-                Добави в любими
+            <li>
+                <add-favorites :offer="offer"/>
+
             </li>
             <li @click="shareOffer">
                 <i class="bi bi-share fs-6 pe-1"></i>
                 Сподели
             </li>
-            <li @click="reportOffer">
-                <i class="bi bi-flag fs-6 pe-1"></i>
-                Сигнализирай
-            </li>
+            <fraud :offer="offer"/>
             <!-- <li><i class="bi bi-plus-lg fs-6"></i>Сравни с друга обява</li>-->
         </ul>
     </div>
 </template>
 
 <script>
+import Fraud from "./Fraud";
+import AddFavorites from "./AddFavorites";
+
 export default {
     name: "OfferActions",
-    props: ['visits'],
-    setup() {
-        function addToFavorites() {
+    props: {
+        offer: {
+            type: Object,
+            required: true
         }
-
+    },
+    components: {
+        Fraud,
+        AddFavorites
+    },
+    setup() {
         function shareOffer() {
         }
 
-        function reportOffer() {
-        }
-
         return {
-            addToFavorites,
             shareOffer,
-            reportOffer
         }
     }
 }

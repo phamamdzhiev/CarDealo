@@ -1,6 +1,6 @@
 <template>
     <teleport to="#app">
-        <div class="modall" role="dialog" id="static">
+        <div class="modall shadow-lg" role="dialog" id="static">
             <div class="modal-mask">
                 <div class="modal-dialg">
                     <div class="modal-top">
@@ -39,6 +39,10 @@ export default {
     width: 100%;
     height: 100%;
 
+}
+.modal-body {
+    width: 320px;
+    margin: auto;
 }
 
 .modal-dialg {
