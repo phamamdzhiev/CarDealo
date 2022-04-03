@@ -7,13 +7,13 @@
             </li>
             <li>
                 <add-favorites :offer="offer"/>
-
             </li>
             <li @click="shareOffer">
-                <i class="bi bi-share fs-6 pe-1"></i>
-                Сподели
+                <sharerer/>
             </li>
-            <fraud :offer="offer"/>
+            <li>
+                <fraud :offer="offer"/>
+            </li>
             <!-- <li><i class="bi bi-plus-lg fs-6"></i>Сравни с друга обява</li>-->
         </ul>
     </div>
@@ -22,6 +22,7 @@
 <script>
 import Fraud from "./Fraud";
 import AddFavorites from "./AddFavorites";
+import Sharerer from "./Sharerer";
 
 export default {
     name: "OfferActions",
@@ -33,7 +34,8 @@ export default {
     },
     components: {
         Fraud,
-        AddFavorites
+        AddFavorites,
+        Sharerer
     },
     setup() {
         function shareOffer() {

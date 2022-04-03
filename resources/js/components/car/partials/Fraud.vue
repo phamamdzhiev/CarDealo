@@ -1,10 +1,8 @@
 <template>
-    <li @click="showModal">
-       <router-link to="#" class="fw-normal">
-           <i class="bi bi-flag fs-6 pe-1"></i>
-           Сигнализирай
-       </router-link>
-    </li>
+    <div class="fw-normal" @click="showModal">
+        <i class="bi bi-flag fs-6 pe-1"></i>
+        Сигнализирай
+    </div>
     <base-modal
         v-if="isShown"
         @close-modal="closeModal"
