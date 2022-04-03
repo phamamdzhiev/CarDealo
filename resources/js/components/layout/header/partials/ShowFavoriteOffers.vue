@@ -4,7 +4,10 @@
         <sub class="fw-bold">{{ favOffers.length }}</sub>
         <template v-if="isShown">
             <teleport to="#app">
-                <favorite-offers-modal :offers="favOffers"/>
+                <favorite-offers-modal
+                    @remove-offer-from-favorite="removeFromFavorite"
+                    @close-modal="showFavoriteModal"
+                    :offers="favOffers"/>
             </teleport>
         </template>
     </div>
@@ -23,21 +26,33 @@ export default {
     setup() {
         const store = useStore();
         const isShown = ref(false);
+
         const favOffers = computed(() => {
             return store.getters['favoriteStore/getFavorite']
         });
 
         function showFavoriteModal() {
-            console.log(
-                isShown.value
-            )
             isShown.value = !isShown.value;
+        }
+
+        const localStorageOffers = computed(() => {
+            return store.getters['favoriteStore/getFavorite'];
+        });
+
+        function removeFromFavorite(id) {
+            // const index =
+            //     JSON.parse(localStorageOffers.value).findIndex(e => e.id === id);
+            // console.log(
+            //     'Remove from list with id => ', id
+            // )
+            // store.commit('favoriteStore/removeFavorite', index);
         }
 
         return {
             favOffers,
             showFavoriteModal,
-            isShown
+            isShown,
+            removeFromFavorite
         }
     }
 }

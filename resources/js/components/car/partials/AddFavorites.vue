@@ -1,9 +1,9 @@
 <template>
     <div @click="addToFavorites">
-        <router-link to="#" class="fw-normal">
-            <i :class="['bi fs-6 pe-1', {'bi-heart-fill text-base-color':isFavorite, 'bi-heart': !isFavorite}]"></i>
+        <i :class="['bi fs-6 pe-1', {'bi-heart-fill text-base-color':isFavorite, 'bi-heart': !isFavorite}]"></i>
+        <span v-if="$route.name === 'single-listing'">
             {{ isFavorite ? 'Премахни от любими' : 'Добави в любими' }}
-        </router-link>
+        </span>
     </div>
 </template>
 

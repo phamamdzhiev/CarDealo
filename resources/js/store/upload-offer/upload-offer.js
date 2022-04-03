@@ -73,8 +73,7 @@ export default {
             state.vehicle[key] = value;
         },
         setSelectedExtras(state, payload) {
-            let index = state.vehicle.extras.findIndex(obj => obj.id === payload.id);
-            index === -1 ? state.vehicle.extras.push(payload) : state.vehicle.extras.splice(index, 1);
+            state.vehicle.extras = payload;
         },
         setStepPlus(state) {
             state.step++

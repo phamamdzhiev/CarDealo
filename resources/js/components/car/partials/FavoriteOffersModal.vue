@@ -1,14 +1,20 @@
 <template>
     <div id="favorite-offers-modal" class="position-absolute min-vh-100">
-        <div v-for="offer in offers" :key="JSON.parse(offer).id" class="d-flex p-3 mb-4 align-items-center shadow">
-            <div></div>
-            <div>
-                <ul>
-                    <li>{{ JSON.parse(offer).price }}</li>
-                    <li>{{ JSON.parse(offer).fuel }}</li>
-                    <li>{{ JSON.parse(offer).transmission }}</li>
-                </ul>
-            </div>
+        <div @click="closeModal" class="d-block text-center fs-4 fw-bold mt-4">
+            X
+        </div>
+        <div v-for="offer in offers" class="d-flex p-3 mb-4 align-items-center shadow">
+            <div>{{JSON.parse(offer)}}</div>
+<!--            <div>-->
+<!--                <ul>-->
+<!--                    <li>{{ JSON.parse(offer).price }}</li>-->
+<!--                    <li>{{ JSON.parse(offer).fuel }}</li>-->
+<!--                    <li>{{ JSON.parse(offer).transmission }}</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div @click="removeFromFavorite(JSON.parse(offer).id)" class="d-block text-center fs-4 fw-bold mt-4">-->
+<!--                X-->
+<!--            </div>-->
         </div>
     </div>
 </template>
@@ -22,6 +28,21 @@ export default {
             require: true
         }
     },
+    setup(_, {emit}) {
+
+        function closeModal() {
+            emit('close-modal');
+        }
+
+        function removeFromFavorite(id) {
+            emit('remove-offer-from-favorite',id);
+        }
+
+        return {
+            closeModal,
+            removeFromFavorite
+        }
+    }
 }
 </script>
 

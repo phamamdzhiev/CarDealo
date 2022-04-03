@@ -37,6 +37,11 @@
     font-weight: bold;
 }
 
+ul.formkit-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 button.formkit-input[type='submit'] {
     @include base-primary-button;
     padding: 0.75rem 2rem;
@@ -54,6 +59,7 @@ button.formkit-input[type='submit'] {
     span {
         font-style: italic;
         cursor: pointer;
+
         &:hover {
             font-weight: bold;
             color: $primary-color;
@@ -62,14 +68,16 @@ button.formkit-input[type='submit'] {
 }
 
 input[type='radio'],
-input[type='checkbox']{
+input[type='checkbox'] {
     width: 16px;
     height: 16px;
     border-radius: $border-radius;
     border: 1px solid #333;
+
     &:checked {
         background-color: $primary-color;
     }
+
     &:focus {
         border: 1px solid #333;
         box-shadow: none;

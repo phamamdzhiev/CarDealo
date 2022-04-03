@@ -157,12 +157,8 @@ export default {
         }
 
         function fetchCitiesForRegion(regionID) {
-            axios.get(`fetch/cities/${regionID}`).then((res) => {
-                res.data.data.forEach((element) => {
-                    cities.value.push({ label: element.name, value: element.id });
-                });
-
-            }).catch((e) => console.log(e));
+            const {fetch} = useFetcher('get.region.cities', [regionID]);
+            cities.value = fetch.value;
         }
 
         const dynamicValidations = computed(() => {
