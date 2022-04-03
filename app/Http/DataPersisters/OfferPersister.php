@@ -128,11 +128,14 @@ class OfferPersister
      */
     private function persistExtras(Vehicle $vehicle): array
     {
-        $extraList = [];
-        foreach ($this->data['extras'] as $extraRow) {
-            $extraList[] = VehicleExtra::create(['vehicle_id' => $vehicle->id, 'extra_id' => $extraRow['id']]);
-        }
+        if (isset($this->data['extras'])) {
+            $extraList = [];
+            foreach ($this->data['extras'] as $extraRow) {
+                $extraList[] = VehicleExtra::create(['vehicle_id' => $vehicle->id, 'extra_id' => $extraRow]);
+            }
 
-        return $extraList;
+            return $extraList;
+        }
+        
     }
 }
