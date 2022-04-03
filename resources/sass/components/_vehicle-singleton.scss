@@ -2,9 +2,11 @@
     border-radius: $border-radius;
     box-shadow: $box-shadow;
     overflow: hidden;
-    user-select:none;
+    user-select: none;
     max-width: 320px;
     margin: auto;
+    background-color: white;
+
 
     .vehicle-image-wrapper {
         //outline: 2px solid blue;
@@ -19,6 +21,7 @@
     .vehicle-details {
         padding: 1rem 0.75rem;
         text-align: left;
+
         > a {
             white-space: nowrap;
             max-width: 230px;

@@ -1,5 +1,5 @@
 <template>
-    <footer v-show="!$route.meta['hideFooter']">
+    <footer v-show="!$route.meta['hideFooter']" class="shadow">
         <div class="container">
             <div class="d-grid valuables">
                 <div class="item" v-for="valuable in valuables" :key="valuable.id">
