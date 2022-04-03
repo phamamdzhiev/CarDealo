@@ -36,6 +36,7 @@ class OfferRepository
                 ->join('cities', 'cities.id', '=', 'offers.city_id')
                 ->join('vehicles_types', 'vehicles.type_id', '=', 'vehicles_types.id')
                 ->join('merchants', 'merchants.user_id', '=', 'offers.user_id')
+                ->orderBy('offers.created_at', 'desc')
                 ->select($columns);
     }
 }
