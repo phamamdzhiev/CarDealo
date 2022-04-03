@@ -3,10 +3,11 @@
         <div class="modall shadow-lg" role="dialog" id="static">
             <div class="modal-mask">
                 <div class="modal-dialg">
-                    <div class="modal-top">
-                        <button @click="$emit('close-modal')">X</button>
-                    </div>
+
                     <div class="modal-content">
+                        <div class="modal-top">
+                            <button id="dismiss" @click="$emit('close-modal')">X</button>
+                        </div>
                         <div class="modal-body">
                             <slot></slot>
                         </div>
@@ -32,6 +33,16 @@ export default {
     bottom: 0;
     position: fixed;
     z-index: 5000;
+}
+
+#dismiss {
+    background-color: transparent;
+    font-weight: bold;
+    color: #0D1C39;
+    border: 0;
+    margin-top: 7px;
+    margin-left: 7px;
+    font-size: 17px;
 }
 
 .modal-mask {

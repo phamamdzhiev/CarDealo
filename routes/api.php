@@ -115,3 +115,4 @@ Route::group(['prefix' => 'fetch'], function () {
 });
 
 Route::post('send/contact/message', [\App\Http\Controllers\ContactController::class, 'store'])->name('send.message');
+Route::post('send/fraud/message', [\App\Http\Controllers\FraudController::class, 'store'])->name('send.fraud.message');
