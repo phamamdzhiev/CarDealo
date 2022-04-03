@@ -42,7 +42,8 @@ class OfferCreationRequest extends FormRequest
             'hasPrice' => 'required',
             'region' => 'required',
             'city' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'model.id' => 'required'
         ];
     }
 
