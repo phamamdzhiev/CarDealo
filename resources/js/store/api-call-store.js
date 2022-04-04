@@ -7,7 +7,8 @@ export default {
     },
     mutations: {
         setLazyLoadOffersShowcase(state, payload) {
-            state.lazyLoadOffersShowcase.push(...payload);
+            // state.lazyLoadOffersShowcase.push(...payload);
+            state.lazyLoadOffersShowcase=payload;
         }
     },
     getters: {

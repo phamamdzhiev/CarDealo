@@ -17,9 +17,106 @@
                     <CarSingleItem :offer="offer"></CarSingleItem>
                     <CarSingleItem :offer="offer"></CarSingleItem>
                     <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
                 </template>
             </div>
-            <observer @intersect="fetchData"/>
+            <Pagination :data="offers" @pagination-change-page="fetchData" />
+<!--            <observer @intersect="fetchData"/>-->
             <spinner v-if="isLoading"/>
         </template>
         <div v-else>Няма намерени обяви</div>
@@ -47,16 +144,19 @@ export default {
         const route = useRoute();
         const store = useStore();
 
-        watch(() => route.query, () => {
-            fetchData()
-        });
+        // watch(() => route.query, () => {
+        //     fetchData()
+        // });
 
         const apiCallStore = computed(() => {
             return store.getters['apicallstore/getLazyLoadOffersShowcase'];
         });
 
 
-        async function fetchData() {
+        async function fetchData(page = 1) {
+            console.log(
+                page
+            )
             try {
                 isLoading.value = true;
                 const res = await axios.get('/fetch/offers' + window.location.search);
@@ -71,9 +171,9 @@ export default {
         }
 
         onMounted(() => {
-            if (apiCallStore.value.length === 0) {
+            // if (apiCallStore.value.length === 0) {
                 fetchData();
-            }
+            // }
 
         });
 
