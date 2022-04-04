@@ -14,12 +14,13 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import {plugin, defaultConfig} from '@formkit/vue'
 import formKitConfig from "./formKitConfig";
 import '@formkit/themes/genesis';
-
+import LaravelVuePagination from "laravel-vue-pagination";
 
 const app = createApp(App);
 
 app.component('loading-dots', DotsLoader);
 app.component('spinner', AjaxLoadingSpinner);
+app.component('Pagination', LaravelVuePagination);
 
 // app.use(ZiggyVue, Ziggy)
 app.use(router);
