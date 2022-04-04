@@ -7,6 +7,7 @@ import auth from "./auth/auth-store";
 import uploadOffer from "./upload-offer/upload-offer";
 import advancedFilters from "./advanced-search-store/advanced-search-store";
 import favoriteStore from "./favorites-store/favorites-store";
+import apicallstore from "./api-call-store";
 
 
 const store = createStore({
@@ -14,7 +15,8 @@ const store = createStore({
         auth,
         uploadOffer,
         advancedFilters,
-        favoriteStore
+        favoriteStore,
+        apicallstore
     },
     plugins: [
         createPersistedState(uploadOfferPersist),

@@ -37,10 +37,17 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        } else {
+            return {top: 0}
+        }
+    },
     routes,
 });
 
-NProgress.configure({ showSpinner: true });
+NProgress.configure({showSpinner: true});
 
 router.beforeResolve((to, from, next) => {
     // If this isn't an initial page load.

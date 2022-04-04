@@ -4,39 +4,57 @@
             <i class="fa-brands fa-searchengin fs-5"></i>
             Коригирай търсенето
         </router-link>
-        <spinner v-if="isLoading"/>
-        <div class="d-grid" v-else-if="offers.length > 0">
-            <template v-for="offer in offers" :key="offer.uid">
-                <pre>
-                    {{offer}}
-                </pre>
-                <CarSingleItem :offer="offer"></CarSingleItem>
-            </template>
-        </div>
+        <template v-if="offers.length > 0">
+            <div class="d-grid">
+                <template v-for="(offer, i) in offers" :key="offer.uid">
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                    <CarSingleItem :offer="offer"></CarSingleItem>
+                </template>
+            </div>
+            <observer @intersect="fetchData"/>
+            <spinner v-if="isLoading"/>
+        </template>
         <div v-else>Няма намерени обяви</div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import {onMounted, ref, watch} from "vue";
+import {onMounted, ref, watch, computed} from "vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
 import {useRoute} from "vue-router";
+import Observer from "../../components/ui/base/Observer";
+import {useStore} from "vuex";
 
 export default {
     name: "OffersShowcase",
     components: {
         CarSingleItem,
+        Observer
     },
     inject: ['window'],
     setup() {
-        const offers = ref([]);
+        // const offers = ref([]);
         const isLoading = ref(false);
         const route = useRoute();
+        const store = useStore();
 
         watch(() => route.query, () => {
             fetchData()
         });
+
+        const apiCallStore = computed(() => {
+            return store.getters['apicallstore/getLazyLoadOffersShowcase'];
+        });
+
 
         async function fetchData() {
             try {
@@ -44,7 +62,8 @@ export default {
                 const res = await axios.get('/fetch/offers' + window.location.search);
                 isLoading.value = false
                 if (res.data) {
-                    offers.value = res.data;
+                    store.commit('apicallstore/setLazyLoadOffersShowcase', res.data);
+                    // offers.value.push(...res.data);
                 }
             } catch (e) {
                 console.log(e, 'fetch offers failed');
@@ -52,12 +71,15 @@ export default {
         }
 
         onMounted(() => {
-            fetchData();
+            if (apiCallStore.value.length === 0) {
+                fetchData();
+            }
+
         });
 
 
         return {
-            offers,
+            offers: apiCallStore,
             isLoading,
             fetchData,
         }

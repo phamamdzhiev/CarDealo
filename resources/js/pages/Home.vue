@@ -5,13 +5,13 @@
             height="450"
         />
     </div>
-   <div class="container-xxl">
-       <simple-search heading="Бързо търсене"/>
-       <page-heading heading="Последно добавени"/>
-       <base-card>
-           <used-cars-vue3-carousel v-if="data.length > 0" :vehicles="data"/>
-       </base-card>
-   </div>
+    <div class="container-xxl">
+        <simple-search heading="Бързо търсене"/>
+        <page-heading heading="Последно добавени"/>
+        <base-card>
+            <used-cars-vue3-carousel v-if="data.length > 0" :vehicles="data"/>
+        </base-card>
+    </div>
 </template>
 
 <script>
