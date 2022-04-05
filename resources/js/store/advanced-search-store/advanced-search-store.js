@@ -17,7 +17,9 @@ export default {
                 budgetMin: '',
                 budgetMax: '',
                 kmMin: '',
-                kmMax: ''
+                kmMax: '',
+                sortBy: '',
+                uploadedBy: ''
             }
         }
     },
@@ -40,6 +42,8 @@ export default {
             state.filters.budgetMax = '';
             state.filters.kmMin = '';
             state.filters.kmMax = '';
+            state.filters.sortBy = '';
+            state.filters.uploadedBy = '';
         }
     },
     getters: {

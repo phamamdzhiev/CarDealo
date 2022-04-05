@@ -30,7 +30,7 @@
                         <h5 class="fw-bold text-base-color">{{ singleOffer.price }} лв.</h5>
                         <p>{{ singleOffer.description }}</p>
 
-                        <button class="fw-bold base-button">Виж детайли на собственика</button>
+                       <show-owner-details :offer="singleOffer"/>
                     </div>
                 </div>
                 <OfferActions :offer="singleOffer"></OfferActions>
@@ -152,11 +152,12 @@ import {Swiper, SwiperSlide} from "swiper/vue";
 import 'swiper/css';
 import OfferActions from "./partials/OfferActions";
 import VehicleAndValuationAd from "../used/partials/VehicleAndValuationAd";
+import ShowOwnerDetails from "./partials/ShowOwnerDetails";
 import {Navigation, Virtual} from "swiper";
 
 export default {
     name: "SingleListing",
-    components: {BaseCard, Swiper, SwiperSlide, OfferActions, VehicleAndValuationAd},
+    components: {BaseCard, Swiper, SwiperSlide, OfferActions, VehicleAndValuationAd, ShowOwnerDetails},
     mixins: [assetMixin],
     props: {
         uid: String
@@ -227,11 +228,6 @@ export default {
 
 .share-section {
     border-top: 1px solid hsla(0, 0%, 59.2%, .2);
-}
-
-.base-button {
-    box-shadow: 0 8px 8px 0 rgb(247 93 52 / 20%);
-    max-width: 300px;
 }
 
 .base-card {

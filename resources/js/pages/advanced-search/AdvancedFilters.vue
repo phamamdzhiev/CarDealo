@@ -16,6 +16,8 @@
             <color-filter/>
             <region-filter/>
             <city-filter/>
+            <sort-by-filter/>
+            <uploaded-by/>
         </div>
         <div class="d-flex flex-nowrap align-items-center">
             <submit-search/>
@@ -35,6 +37,8 @@ import CityFilter from "./partials/CityFilter";
 import SubmitSearch from "./partials/SubmitSearch";
 import PopularSearchFilters from "../../components/simple-search/PopularSearchFilters";
 import ClearFilters from "./partials/ClearFilters";
+import SortByFilter from "./partials/SortByFilter";
+import UploadedBy from "./partials/UploadedBy";
 
 export default {
     name: "AdvancedSearchNew",
@@ -48,7 +52,9 @@ export default {
         PopularSearchFilters,
         ConditionFilter,
         SubmitSearch,
-        ClearFilters
+        ClearFilters,
+        SortByFilter,
+        UploadedBy
     }
 }
 </script>
