@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|VehicleCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|VehicleCategory whereName($value)
  * @mixin \Eloquent
+ * @property string $slug
+ * @method static \Illuminate\Database\Eloquent\Builder|VehicleCategory whereSlug($value)
  */
 class VehicleCategory extends Model
 {

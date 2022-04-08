@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Brand whereIsPopular($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Brand whereName($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\VehicleCategory[] $category
+ * @property-read int|null $category_count
  */
 class Brand extends Model
 {

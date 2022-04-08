@@ -9,7 +9,9 @@ use App\Exceptions\OfferCreationException;
 use App\Exceptions\OfferListingException;
 use App\Exceptions\OfferNotFoundException;
 use App\Exceptions\OfferUpdateFailedException;
-use App\Http\DataPersisters\OfferPersister;;
+use App\Http\DataPersisters\OfferPersister;
+
+;
 
 use App\Http\DataPersisters\OfferUpdate;
 use App\Models\Offer;
@@ -44,7 +46,7 @@ class OfferController extends Controller
             return response($image);
         } catch (\Exception $e) {
             DB::rollBack();
-           throw new OfferCreationException;
+            throw new OfferCreationException;
         }
 
     }
@@ -112,7 +114,10 @@ class OfferController extends Controller
      */
     public function update($uid, OfferUpdate $offerUpdate): Response|Application|ResponseFactory
     {
-        $offer = Offer::where('uid','=', $uid)->where('user_id', '=',Auth::id())->first();
+        $offer = DB::table('offers')
+            ->where('uid', '=', $uid)
+            ->where('user_id', '=', Auth::id())
+            ->first();
 
         if (Auth::id() !== $offer->user_id) {
             throw new AuthException;
@@ -123,7 +128,7 @@ class OfferController extends Controller
         }
 
         if ($offerUpdate->update($offer)) {
-            return response(['success' => true, 'message'   =>  'Offer updated successfully'], 200);
+            return response(['success' => true, 'message' => 'Offer updated successfully'], 200);
         }
 
         throw new OfferUpdateFailedException;
@@ -137,7 +142,9 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        $offer = Offer::findOrFail((int)$id);
+        $offer = DB::table('offers')
+            ->where('id', '=', $id)
+            ->first();
 
         if (Auth::id() !== $offer->user_id) {
             throw new AuthException;
@@ -165,7 +172,7 @@ class OfferController extends Controller
             return response()->json(['success' => true, 'offers' => $offers]);
         } catch (Exception $e) {
             Log::error($e->getMessage());
-           throw new OfferListingException;
+            throw new OfferListingException;
         }
     }
 }

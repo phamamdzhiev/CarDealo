@@ -24,6 +24,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereUserId($value)
  * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $description
+ * @property string|null $image
+ * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereUpdatedAt($value)
  */
 class Merchant extends Model
 {

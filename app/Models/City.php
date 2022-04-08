@@ -27,6 +27,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int|null $asCity
  * @method static \Illuminate\Database\Eloquent\Builder|City whereAsCity($value)
  * @property int|null $as_city
+ * @property string $name
+ * @property-read \App\Models\Region $region
+ * @method static \Illuminate\Database\Eloquent\Builder|City whereName($value)
  */
 class City extends Model
 {

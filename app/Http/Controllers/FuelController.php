@@ -10,7 +10,7 @@ class FuelController extends Controller
     public function get(): \Illuminate\Http\JsonResponse
     {
         $fuels = Cache::rememberForever('fuels',  function () {
-            return Fuel::all()->toArray();
+            return \DB::table('fuels')->get()->toArray();
         });
 
         return response()->json($fuels);

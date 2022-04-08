@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int|null $is_popular
  * @method static \Illuminate\Database\Eloquent\Builder|Region whereIsPopular($value)
+ * @property string $name
+ * @method static \Illuminate\Database\Eloquent\Builder|Region whereName($value)
  */
 class Region extends Model
 {

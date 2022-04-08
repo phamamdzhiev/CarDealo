@@ -19,7 +19,13 @@ class MerchantController extends Controller
      */
     public function index(): JsonResponse
     {
-        $merchants = \DB::table('merchants')->select()->take(10)->orderByDesc('id')->get()->toArray();
+        $merchants = \DB::table('merchants')
+            ->select()
+            ->take(10)
+            ->orderByDesc('id')
+            ->get()
+            ->toArray();
+
         return response()->json($merchants);
     }
 

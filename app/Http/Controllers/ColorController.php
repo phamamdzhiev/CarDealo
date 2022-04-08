@@ -14,7 +14,7 @@ class ColorController extends Controller
     public function get(): JsonResponse
     {
         $colors = Cache::rememberForever('colors', function () {
-            return Color::all()->toArray();
+            return \DB::table('colors')->get()->toArray();
         });
 
         return response()->json($colors);

@@ -71,6 +71,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCondition($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Offer whereHasPrice($value)
+ * @property int $visits
+ * @property string $uid
+ * @property-read \App\Models\City|null $city
+ * @property-read \App\Models\Vehicle|null $vehicle
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereUid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereVisits($value)
  */
 class Offer  extends Model
 {

@@ -16,6 +16,7 @@ use App\Models\Filters\YearFilter;
 use App\Models\Modifiers\LimitOffers;
 use App\Models\Modifiers\MostViewers;
 use App\Models\Repository\OfferRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Collection;
@@ -79,10 +80,10 @@ class AdvanceSearchDataProvider
     }
 
     /**
-     * @return Collection
+     * @return LengthAwarePaginator
      */
-    public function getOffers(): Collection
+    public function getOffers(): LengthAwarePaginator
     {
-        return $this->offer->get();
+        return $this->offer->paginate(50);
     }
 }

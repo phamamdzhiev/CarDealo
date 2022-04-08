@@ -63,7 +63,7 @@ hr {
 
 select, input {
     &[disabled] {
-        opacity: 0.6!important;
+        opacity: 0.6 !important;
     }
 }
 
@@ -71,5 +71,38 @@ select, input {
     &:focus {
         box-shadow: 0 0 0 0.10rem rgba(255, 71, 57, 1);
         border-color: rgb(255, 71, 57);
+    }
+}
+
+//paginator
+ul.pagination {
+    justify-content: center;
+    margin-top: 3rem;
+
+    li.page-item {
+        margin: 0 5px;
+        display: block;
+        a.page-link {
+            border-radius: 50%;
+            color: $primary-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            font-size: 15px;
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        &.active {
+            a.page-link {
+                background-color: $primary-color;
+                border-color: $primary-color;
+                color: white;
+            }
+        }
     }
 }

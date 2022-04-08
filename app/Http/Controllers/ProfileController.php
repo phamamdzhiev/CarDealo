@@ -90,7 +90,9 @@ class ProfileController extends Controller
             throw new AuthException;
         }
 
-        $merchant = Merchant::whereUserId($requestUser->id)->first();
+        $merchant = \DB::table('merchants')
+            ->where('user_id', '=', $requestUser->id)
+            ->first();
 
         if ($request->hasFile('avatar')) {
             try {
@@ -121,7 +123,9 @@ class ProfileController extends Controller
             throw new AuthException;
         }
 
-        $merchant = Merchant::whereUserId($requestUser['id'])->first();
+        $merchant = \DB::table('merchants')
+            ->where('user_id', '=', $requestUser['id'])
+            ->first();
 
         try {
             $merchant->description = $description;

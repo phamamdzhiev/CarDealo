@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Extra whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Extra whereName($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CategoryExtra[] $category
+ * @property-read int|null $category_count
  */
 class Extra extends Model
 {

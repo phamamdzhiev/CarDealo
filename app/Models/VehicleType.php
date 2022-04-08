@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|VehicleType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|VehicleType whereName($value)
  * @mixin \Eloquent
+ * @property int $is_popular
+ * @method static \Illuminate\Database\Eloquent\Builder|VehicleType whereIsPopular($value)
  */
 class VehicleType extends Model
 {
