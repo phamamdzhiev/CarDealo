@@ -16,7 +16,11 @@ import BaseCard from "../../components/ui/base/BaseCard";
 import VehicleType from "./VehicleType";
 import VehicleBrand from "./VehicleBrand";
 import VehicleModel from "./VehicleModel";
-import SellCarVariant from "./cars/SellCarVariant";
+import SellCarVariant from "./variants/SellCarVariant";
+import SellBusVariant from "./variants/SellBusVariant";
+import SellBoatVariant from "./variants/SellBoatVariant";
+import SellMotoVariant from "./variants/SellMotoVariant";
+import SellTruckVariant from "./variants/SellTruckVariant";
 import VehicleYear from "./VehicleYear";
 import VehicleExtras from "./VehicleExtras";
 import OfferDetails from "./OfferDetails";
@@ -37,6 +41,10 @@ export default {
         OfferDetails,
         VehicleImages,
         Success,
+        SellBusVariant,
+        SellBoatVariant,
+        SellMotoVariant,
+        SellTruckVariant
     },
     mounted() {
         this.$store.commit('uploadOffer/setVehicleState', {key: 'vehicleCategory', value: parseInt(this.vehicleID)});
@@ -46,6 +54,14 @@ export default {
             switch (this.$route.params.vehicleID) {
                 case '1':
                     return 'SellCar';
+                case '2':
+                    return 'SellBus';
+                case '3':
+                    return 'SellTruck';
+                case '4':
+                    return 'SellMoto';
+                case '5':
+                    return 'SellBoat';
             }
         },
         getStep() {

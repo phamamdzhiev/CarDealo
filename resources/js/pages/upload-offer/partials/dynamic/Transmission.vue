@@ -1,43 +1,45 @@
 <template>
-    <Heading title="Трансмисия?"/>
-    <ul id="transmission">
-        <li v-for="transmission in transmissions" :key="transmission.id"
-            :class="{ active: getState.transmission.id === transmission.id}"
-            @click="store.commit('uploadOffer/setVehicleState', {key: 'transmission', value:transmission})">
-            {{ transmission.name }}
-        </li>
-    </ul>
+    <FormKit
+        type="select"
+        :options="transmissions.length > 0 ? transmissions : ['']"
+        id="transmissions"
+        name="transmissions"
+        label="Трансмисия"
+        :placeholder="transmissions.length > 0 ? 'Моля изберете трансмисия' : 'Зареждане...'"
+        v-model="transmission"
+    />
 </template>
 
 <script>
-import Heading from "../Heading";
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import {useStore} from "vuex";
+import {useFetcher} from "../../../../composables/fetcher";
+
 export default {
     name: "Transmission",
-    components: {
-        Heading
-    },
     setup() {
         const store = useStore();
-        const transmissions = ref([
-            {id: 1, name: 'Ръчна'},
-            {id: 2, name: 'Автоматична'},
-            {id: 3, name: 'Полу-автоматична'},
-        ]);
+        const {fetch: transmissions} = useFetcher('get.transmissions');
+
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
+        });
+
+        const transmission = computed({
+            get() {
+                return getState.value.transmission;
+            },
+            set(value) {
+                store.commit('uploadOffer/setVehicleState', {key: 'transmission', value});
+            }
         });
 
         return {
             getState,
             transmissions,
+            transmission,
             store
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

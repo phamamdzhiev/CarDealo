@@ -21,14 +21,8 @@ export default {
                     name: null,
                     id: null
                 },
-                transmission: {
-                    name: null,
-                    id: null
-                },
-                engine: {
-                    name: null,
-                    id: null
-                },
+                transmission: null,
+                engine: null,
                 euroStandard: {
                     name: null,
                     id: null
@@ -41,7 +35,18 @@ export default {
                 price: null,
                 hasPrice: false,
                 region: null,
-                city: null
+                city: null,
+                аxis: null,
+                load: null,
+                width: null,
+                length: null,
+                workingHours: null,
+                wade: null,
+                heating: null,
+                wc: null,
+                material: null,
+                cooling: null,
+                engineType: null,
             }
         }
     },
@@ -55,8 +60,8 @@ export default {
             state.vehicle.year = null;
             state.vehicle.extras = [];
             state.vehicle.color = {name: null, id: null};
-            state.vehicle.transmission = {name: null, id: null};
-            state.vehicle.engine = {name: null, id: null};
+            state.vehicle.transmission = null;
+            state.vehicle.engine = null;
             state.vehicle.euroStandard = {name: null, id: null};
             state.vehicle.hp = null;
             state.vehicle.cm3 = null;
@@ -67,6 +72,17 @@ export default {
             state.vehicle.hasPrice = false;
             state.vehicle.region = null;
             state.vehicle.city = null;
+            state.vehicle.axis = null;
+            state.vehicle.load = null;
+            state.vehicle.width = null;
+            state.vehicle.length = null;
+            state.vehicle.workingHours = null;
+            state.vehicle.wade = null;
+            state.vehicle.heating = null;
+            state.vehicle.wc = null;
+            state.vehicle.material = null;
+            state.vehicle.cooling = null;
+            state.vehicle.engineType = null;
             state.step = 1;
         },
         setVehicleState(state, {key, value}) {

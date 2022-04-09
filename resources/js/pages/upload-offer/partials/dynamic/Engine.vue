@@ -1,46 +1,45 @@
 <template>
-    <Heading title="Двигател?"/>
-    <ul id="fuel">
-        <li v-for="en in engines"
-            :key="en.id"
-            :class="{ active: getState.engine.id === en.id}"
-            @click="store.commit('uploadOffer/setVehicleState', {key:'engine', value: en})">
-            {{ en.name }}
-        </li>
-    </ul>
+    <FormKit
+        type="select"
+        :options="engines.length > 0 ? engines : ['']"
+        id="engines"
+        name="engines"
+        label="Двигател"
+        :placeholder="engines.length > 0 ? 'Моля изберете двигател' : 'Зареждане...'"
+        v-model="engine"
+    />
 </template>
 
 <script>
 import {useStore} from "vuex";
-import {computed, ref} from "vue";
-import Heading from "../Heading";
+import {computed} from "vue";
+import {useFetcher} from "../../../../composables/fetcher";
 
 export default {
     name: "ChooseEngine",
-    components: {
-      Heading
-    },
     setup() {
         const store = useStore();
-        const engines = ref([
-            {id: 1, name: 'Бензинов'},
-            {id: 2, name: 'Дизелов'},
-            {id: 3, name: 'Хибриден'},
-        ]);
+        const {fetch: engines} = useFetcher('get.engines')
 
         const getState = computed(() => {
             return store.getters['uploadOffer/getVehicleState'];
         });
 
+        const engine = computed({
+            get() {
+                return getState.value.engine;
+            },
+            set(value) {
+                store.commit('uploadOffer/setVehicleState', {key: 'engine', value});
+            }
+        });
+
         return {
             engines,
             getState,
-            store
+            store,
+            engine
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

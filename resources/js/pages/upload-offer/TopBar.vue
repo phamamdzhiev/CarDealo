@@ -12,21 +12,21 @@
             {{ getState.year }}
         </span>
 
-        <span v-if="getState.engine">
-            {{ getState.engine.name }}
-        </span>
+<!--        <span v-if="getState.engine">-->
+<!--            {{ getState.engine.name }}-->
+<!--        </span>-->
 
-        <span v-if="getState.transmission">
-            {{ getState.transmission.name }}
-        </span>
+<!--        <span v-if="getState.transmission">-->
+<!--            {{ getState.transmission.name }}-->
+<!--        </span>-->
 
-        <span v-if="getState.hp">
-            {{ getState.hp }} к.с
-        </span>
+<!--        <span v-if="getState.hp">-->
+<!--            {{ getState.hp }} к.с-->
+<!--        </span>-->
 
-        <span v-if="getState.km">
-            {{ getState.km }} км.
-        </span>
+<!--        <span v-if="getState.km">-->
+<!--            {{ getState.km }} км.-->
+<!--        </span>-->
     </div>
 </template>
 
