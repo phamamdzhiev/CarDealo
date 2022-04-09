@@ -84,6 +84,6 @@ class AdvanceSearchDataProvider
      */
     public function getOffers(): LengthAwarePaginator
     {
-        return $this->offer->paginate(50);
+        return $this->offer->paginate(1);
     }
 }

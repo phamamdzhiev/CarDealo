@@ -2,10 +2,58 @@
     <transition name="fade">
         <div class="sub__menu__items">
             <ul>
-                <li v-for="item in subLink" class="d-flex align-items-center flex-nowrap px-2">
-                    <router-link :key="item.id" :to="item.link">
-                        <i v-if="item.icon" :class="`fa-solid pe-2 ${item.icon}`"></i>
-                        {{ item.linkText }}
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'advanced.filters'}">
+                        <i class="fa-solid pe-2 fa-magnifying-glass"></i>
+                        Подробно търсене
+                    </router-link>
+                </li>
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'offers.showcase', query: {type: 1}}">
+                        <i class="fa-solid pe-2 fa-car"></i>
+                        {{ window.APP_NAME }} автомобили
+                    </router-link>
+                </li>
+
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'offers.showcase', query: {type: 2}}">
+                        <i class="fa-solid pe-2 fa-bus-simple"></i>
+                        {{ window.APP_NAME }} бусове
+                    </router-link>
+                </li>
+
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'offers.showcase', query: {type: 3}}">
+                        <i class="fa-solid pe-2 fa-truck"></i>
+                        {{ window.APP_NAME }} камиони
+                    </router-link>
+                </li>
+
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'offers.showcase', query: {type: 4}}">
+                        <i class="fa-solid pe-2 fa-motorcycle"></i>
+                        {{ window.APP_NAME }} мотори
+                    </router-link>
+                </li>
+
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'offers.showcase', query: {type: 5}}">
+                        <i class="fa-solid pe-2 fa-sailboat"></i>
+                        {{ window.APP_NAME }} лодки
+                    </router-link>
+                </li>
+
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'offers.showcase'}">
+                        <i class="fa-solid pe-2 fa-border-all"></i>
+                        Всички обяви
+                    </router-link>
+                </li>
+
+                <li class="d-flex align-items-center flex-nowrap px-2">
+                    <router-link :to="{name: 'my.listing'}">
+                        <i class="fa-solid pe-2 fa-bars-staggered"></i>
+                        Моите обяви
                     </router-link>
                 </li>
             </ul>
@@ -15,13 +63,9 @@
 
 <script>
 import assetMixin from "../../../composables/asset";
+
 export default {
-    props: {
-        subLink: {
-            type: Array,
-            required: true,
-        },
-    },
+    inject: ['window'],
     mixins: [assetMixin]
 };
 </script>

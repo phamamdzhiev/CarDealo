@@ -4,20 +4,23 @@
 
 <script>
 import {useRouter} from "vue-router";
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
 
 export default {
     name: "SubmitSearch",
     setup() {
         const router = useRouter();
+        const store = useStore();
+
+        const queryParamFilters = computed(() => {
+            return store.getters['advancedFilters/getFilters'];
+        })
 
         async function handleSearch() {
-            await router.push({name: 'offers.showcase'});
+            let data = Object.fromEntries(Object.entries(queryParamFilters.value).filter(([k, v]) => v !== ""))
+            await router.push({name: 'offers.showcase', query: data});
         }
-
-        // async function handleSimpleSearch() {
-        //     let data = Object.fromEntries(Object.entries(searchQuery).filter(([k, v]) => v !== null))
-        //     await router.push({name: 'offers.showcase', query: data});
-        // }
 
         return {
             handleSearch

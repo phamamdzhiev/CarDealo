@@ -11,57 +11,49 @@
                     <CarSingleItem :offer="offer"></CarSingleItem>
                 </template>
             </div>
-<!--            <observer @intersect="fetchData"/>-->
+            <!--            <observer @intersect="fetchData"/>-->
         </template>
         <div v-else>Няма намерени обяви</div>
-        <Pagination v-if="offers" :data="offers" @pagination-change-page="fetchData" />
+        <Pagination v-if="offers" :data="offers" @pagination-change-page="fetchData"/>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import {onMounted, ref, watch, computed, inject} from "vue";
+import {onMounted, ref, watch} from "vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
 import {useRoute, useRouter} from "vue-router";
-import Observer from "../../components/ui/base/Observer";
-import {useStore} from "vuex";
+// import Observer from "../../components/ui/base/Observer";
 
 export default {
     name: "OffersShowcase",
     components: {
         CarSingleItem,
-        Observer,
     },
     setup() {
-        // const offers = ref([]);
         const isLoading = ref(false);
         const route = useRoute();
         const router = useRouter();
-        const store = useStore();
         const offers = ref(null)
 
-        // watch(() => route.query, () => {
-        //     fetchData()
-        // });
-
-        const window = inject('window');
-        const apiCallStore = computed(() => {
-            return store.getters['apicallstore/getLazyLoadOffersShowcase'];
+        watch(() => route.query.type,() => {
+            fetchData()
         });
 
-        console.log(apiCallStore.value)
-
-
         async function fetchData(page = 1) {
-            await router.push({name:'offers.showcase', query: {...route.query, page: page}});
+            const params = {
+                ...route.query,
+                page
+            }
+
+            await router.push({name: 'offers.showcase', query: params});
 
             try {
                 isLoading.value = true;
-                const res = await axios.get('/fetch/offers?page=' + page + '&' + window.location.search);
+                const res =
+                    await axios.get('/fetch/offers', {params});
                 isLoading.value = false
                 if (res.data) {
-                    console.log(res.data)
-                    // store.commit('apicallstore/setLazyLoadOffersShowcase', res.data);
                     offers.value = res.data;
                 }
             } catch (e) {
@@ -70,10 +62,7 @@ export default {
         }
 
         onMounted(() => {
-            // if (apiCallStore.value.length === 0) {
-                fetchData();
-            // }
-
+            fetchData();
         });
 
 

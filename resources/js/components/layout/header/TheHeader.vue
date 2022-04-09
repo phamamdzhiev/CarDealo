@@ -27,58 +27,23 @@
             </div>
         </div>
         <div class="container-xxl sub__nav">
-            <nav
-                class="d-flex flex-row flex-nowrap align-items-center"
-            >
-                <div
-                    @mouseover="showSubMenuVisibility('old-cars')"
-                    @mouseleave="hideSubMenuVisibility('old-cars')"
-                    class="sub__menu__wrapper"
-                >
-                    <span>{{ window.APP_NAME }} ОБЯВИ</span>
-                    <SubMenuHoverableItems
-                        v-show="oldCarsItemShown"
-                        :subLink="oldCarsSubLinks"
-                    ></SubMenuHoverableItems>
-                </div>
-                <div
-                    @mouseover="showSubMenuVisibility('sell-car')"
-                    @mouseleave="hideSubMenuVisibility('sell-car')"
-                    class="sub__menu__wrapper"
-                >
-                    <router-link :to="{name: 'upload'}" class="text-uppercase">Качи обява</router-link>
-                </div>
-                <div class="sub__menu__wrapper">
-                    <router-link to="/merchants">
-                        AВТОКЪЩИ
-                    </router-link>
-                </div>
-            </nav>
+            <navigation/>
         </div>
     </header>
 </template>
 
 <script>
-import SubMenuHoverableItems from "../../ui/hover-menu-items/SubMenuHoverableItems";
 import BaseButton from "../../ui/base/BaseButton";
-import {links, subLinks} from "../../../navigation-links";
 import ShowFavoriteOffers from "./partials/ShowFavoriteOffers";
+import Navigation from "./partials/Navigation";
 
 export default {
     components: {
-        SubMenuHoverableItems,
         BaseButton,
-        ShowFavoriteOffers
+        ShowFavoriteOffers,
+        Navigation
     },
     inject: ['window'],
-    data() {
-        return {
-            oldCarsItemShown: false,
-            sellCarItemShown: false,
-            oldCarsSubLinks: links,
-            sellCarSubLinks: subLinks,
-        };
-    },
     computed: {
         getUser() {
             return this.$store.getters['auth/GET_AUTH_USER'];
@@ -86,33 +51,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('auth/SET_USER_AUTH_ASYNC', window.AUTH);
-    },
-    methods: {
-        showSubMenuVisibility(param) {
-            switch (param) {
-                case "old-cars":
-                    this.oldCarsItemShown = true;
-                    break;
-                case "sell-car":
-                    this.sellCarItemShown = true;
-                    break;
-                default:
-                    break;
-            }
-        },
-        hideSubMenuVisibility(param) {
-            switch (param) {
-                case "old-cars":
-                    this.oldCarsItemShown = false;
-                    break;
-                case "sell-car":
-                    this.sellCarItemShown = false;
-                    break;
-                default:
-                    break;
-            }
-        },
-    },
+    }
 };
 </script>
 

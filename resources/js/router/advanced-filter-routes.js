@@ -2,6 +2,7 @@ export default [
     {
         path: "/offers-showcase",
         name: "offers.showcase",
+        props: true,
         meta: {
             title: 'Обяви'
         },
