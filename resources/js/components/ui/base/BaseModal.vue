@@ -37,7 +37,6 @@ export default {
 
 #dismiss {
     background-color: transparent;
-    font-weight: bold;
     color: #0D1C39;
     border: 0;
     margin-top: 7px;

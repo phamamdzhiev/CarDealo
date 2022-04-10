@@ -2,7 +2,7 @@
     <div class="d-grid">
         <div class="items" v-for="item in items" :key="item">
             <!-- <img width="100" :src="'https://ik.imagekit.io/gaicl5qj9hl/' + index.img"/> -->
-            <p class="fw-bold fs-6 m-0">{{ item.name }}</p>
+            <p class="fs-6 m-0">{{ item.name }}</p>
         </div>
     </div>
 </template>

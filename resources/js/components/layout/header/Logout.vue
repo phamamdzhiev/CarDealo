@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="logout">
-        <button class="reset-btn-styles text-danger-color fw-bold d-flex align-items-center">
+        <button class="reset-btn-styles text-danger-color d-flex align-items-center">
             <span>Изход</span>
             <span class="ms-2">
                 <i class="bi bi-box-arrow-right fs-5 d-block-i"></i>

@@ -1,6 +1,6 @@
 <template>
     <BaseCard>
-        <h5 class="fw-bold">{{ heading }}</h5>
+        <h5>{{ heading }}</h5>
         <Tabs :options="{ useUrlFragment: false }" v-if="Object.keys(propsData).length > 1">
             <Tab v-for="item in propsData" :name="item.tabName">
                 <UsedCarsVue3Carousel :vehicles="item.data"></UsedCarsVue3Carousel>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="showSuccessMessage">
-            <h5 class="text-center text-success-color fw-bold">
+            <h5 class="text-center text-success-color">
                 <i class="fa-solid fa-thumbs-up"></i>
                 Вие успешно изпратихте Вашето съощения, очаквайте скоро да се свържем с Вас!
             </h5>
@@ -20,7 +20,7 @@
                 @submit="submitHandler"
                 incomplete-message="Моля, попълнете коректно всички задължителни полета"
             >
-                <h5 class="fw-bold mb-3">
+                <h5 class="mb-3">
                     <i class="fa-solid fa-envelope-open-text pe-1"></i>
                     Форма за запитвания, препоръки и мнение
                 </h5>

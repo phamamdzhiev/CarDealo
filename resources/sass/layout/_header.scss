@@ -10,13 +10,14 @@
     .sub__menu__wrapper {
         position: relative;
         margin-right: 2rem;
+        font-size: 15px;
     }
 
     .sub__menu__wrapper > span {
         display: block;
         padding: 15px 0;
         text-transform: uppercase;
-        font-weight: 700;
+        //font-weight: 700;
         cursor: pointer;
         border-top: 2px solid transparent;
         border-bottom: 2px solid transparent;
@@ -44,7 +45,7 @@
         display: block;
         padding: 15px 0;
         text-transform: uppercase;
-        font-weight: 700;
+        //font-weight: 700;
         cursor: pointer;
         border-top: 2px solid transparent;
         border-bottom: 2px solid transparent;

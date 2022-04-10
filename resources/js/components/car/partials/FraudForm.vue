@@ -1,6 +1,6 @@
 <template>
     <div v-if="isSubmit">
-        <h5 class="text-center fw-bold mb-3">
+        <h5 class="text-center mb-3">
             Благодарим Ви за обратната връзка!
         </h5>
     </div>

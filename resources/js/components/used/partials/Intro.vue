@@ -1,6 +1,6 @@
 <template>
     <BaseCard>
-        <h5 class="fw-bold">{{ intro.heading }}</h5>
+        <h5>{{ intro.heading }}</h5>
         <p>{{ intro.body }}</p>
     </BaseCard>
 </template>

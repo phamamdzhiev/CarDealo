@@ -1,6 +1,6 @@
 <template>
     <div class="base-card  py-4 bg-white shadow mb-5">
-        <h4 class="fw-bold mb-4">
+        <h4 class="mb-4">
             <i class="fa-solid fa-magnifying-glass pe-2"></i>
             {{ heading }}
         </h4>
@@ -41,7 +41,7 @@ export default {
 }
 
 .base-card {
-    margin-top: -2.275rem;
+    margin-top: -4.275rem;
     position: relative;
     z-index: 5000;
 }

@@ -1,6 +1,6 @@
 <template>
     <BaseCard>
-        <h5 class="fw-bold">{{ by.heading }}</h5>
+        <h5>{{ by.heading }}</h5>
         <hr/>
         <div v-if="by.byFeature">
             <BaseGrid :items="by.byFeature"></BaseGrid>

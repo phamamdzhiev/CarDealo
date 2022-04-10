@@ -3,7 +3,7 @@
         <tabs>
             <tab name="Смяна на мобилен номер">
                 <form @submit.prevent="handleMobileUpdate">
-                    <h6 class="fw-bold">Смяна на мобилен номер</h6>
+                    <h6>Смяна на мобилен номер</h6>
                     <div class="form-floating form-group">
                         <cleave
                             class="form-control form__input"
@@ -31,7 +31,7 @@
             </tab>
             <tab name="Смяна на парола">
                 <form @submit.prevent="handlePasswordUpdate">
-                    <h6 class="fw-bold">Промени парола</h6>
+                    <h6>Промени парола</h6>
                     <div class="form-floating form-group">
                         <input :type="fieldType" class="form-control form__input"
                                placeholder="Стара парола"

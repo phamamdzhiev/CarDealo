@@ -22,14 +22,13 @@
             <div class="base-card position-relative">
 
                 <div class="offer-details px-4 pb-4 pt-5">
-
                     <div class="heading">
-                        <h4 class="fw-bold">
+                        <h4>
                             <span>{{ singleOffer.title }}</span>
                         </h4>
                     </div>
 
-                    <h5 class="fw-bold text-base-color">{{ singleOffer.price }} лв.</h5>
+                    <h5 class="text-base-color">{{ singleOffer.price }} лв.</h5>
                     <show-owner-details :offer="singleOffer"/>
                 </div>
                 <OfferActions :offer="singleOffer"></OfferActions>
@@ -37,7 +36,7 @@
             <div class="base-card">
                 <div class="offer-details p-3">
                     <div class="heading">
-                        <h5 class="fw-bold">
+                        <h5>
                             Описание
                         </h5>
                     </div>
@@ -48,7 +47,7 @@
             <div class="base-card">
                 <div class="offer-details p-3">
                     <div class="heading">
-                        <h5 class="fw-bold">
+                        <h5>
                             <span>Детайли на офертата</span>
                         </h5>
                         <div class="vehicle-overview">
@@ -121,7 +120,7 @@
             <div class="base-card">
                 <div class="offer-details p-3">
                     <div class="heading">
-                        <h5 class="fw-bold">
+                        <h5>
                             <span>
                                 <i class="fa-solid fa-sparkles fs-5"></i>
                             </span>

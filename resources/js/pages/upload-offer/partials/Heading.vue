@@ -1,5 +1,5 @@
 <template>
-    <h5 class="fw-bold">{{title}}</h5>
+    <h5>{{title}}</h5>
 </template>
 
 <script>

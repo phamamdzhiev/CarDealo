@@ -66,8 +66,8 @@ class OfferPersister
             'hp' => $this->data['hp'],
             'km' => $this->data['km'],
             'cm3' => $this->data['cm3'],
-            'fuel_id' => $this->data['engine']['id'],
-            'transmission_id' => $this->data['transmission']['id'],
+            'fuel_id' => $this->data['engine'],
+            'transmission_id' => $this->data['transmission'],
             'color_id' => $this->data['color'],
             'brand_id' => $this->data['brand']['id'],
             'model_id' => $this->data['model']['id']?? null,
@@ -136,6 +136,6 @@ class OfferPersister
 
             return $extraList;
         }
-        
+
     }
 }

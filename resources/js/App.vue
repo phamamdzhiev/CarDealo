@@ -48,7 +48,7 @@ header {
 a {
     text-decoration: none;
     color: #2c3e50;
-    font-weight: 700;
+    /*font-weight: 700;*/
 }
 
 a:hover,

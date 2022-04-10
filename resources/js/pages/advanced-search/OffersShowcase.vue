@@ -1,6 +1,6 @@
 <template>
     <div class="container-xxl py-3">
-        <router-link class="mb-4 d-inline-block" :to="{name: 'advanced.filters'}">
+        <router-link class="mb-4 d-inline-block" to="/advanced-filters">
             <i class="fa-brands fa-searchengin fs-5"></i>
             Коригирай търсенето
         </router-link>
@@ -20,7 +20,7 @@
 
 <script>
 import axios from "axios";
-import {onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import CarSingleItem from "../../components/car/CarSingleItem";
 import {useRoute, useRouter} from "vue-router";
 // import Observer from "../../components/ui/base/Observer";
@@ -36,8 +36,8 @@ export default {
         const router = useRouter();
         const offers = ref(null)
 
-        watch(() => route.query.type,() => {
-            fetchData()
+        watch(() => route.query.category, () => {
+            fetchData() //don't pass page param so that it goes always to page 1 when categories are changes
         });
 
         async function fetchData(page = 1) {
@@ -62,7 +62,7 @@ export default {
         }
 
         onMounted(() => {
-            fetchData();
+            fetchData(route.query.page);
         });
 
 

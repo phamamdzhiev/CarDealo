@@ -5,7 +5,7 @@
                  class="d-flex justify-content-center align-items-center flex-column"
                  :style="{ backgroundImage: 'url(' + asset('storage/404_page.png') + ')'}">
                 <div class="text-end">
-                    <h1 class="text-base-color fw-bold">Ооопс...</h1>
+                    <h1 class="text-base-color">Ооопс...</h1>
                     <p class="text-secondary-color fs-4 mb-5">
                         Изглежда не можем да намерим страницата, която търсите.
                     </p>

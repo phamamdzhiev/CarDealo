@@ -3,8 +3,8 @@ export default {
     state() {
         return {
             filters: {
-                type: "1",// by default load cars
-                category: '',
+                category: "1",// by default load cars
+                type: '',
                 region: '',
                 city: '',
                 fuel: '',
@@ -30,7 +30,7 @@ export default {
         resetFilter(state) {
             state.filters.brand = '';
             state.filters.model = '';
-            state.filters.category = '';
+            state.filters.type = '';
             state.filters.region = '';
             state.filters.city = '';
             state.filters.fuel = '';

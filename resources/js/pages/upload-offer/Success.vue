@@ -5,7 +5,7 @@
                 <i class="bi bi-check-circle text-success-color" style="font-size: 5rem"></i>
                 <h3 class="mb-4">Поздраления Вие успешно качихте своята обява!</h3>
                 <div>Може да видите своите обяви от
-                    <button class="btn text-link-blue fw-bold p-0" @click="navigateAway('listing')">ТУК</button>
+                    <button class="btn text-link-blue p-0" @click="navigateAway('listing')">ТУК</button>
                 </div>
                 <small>ИЛИ</small>
                 <button @click="navigateAway('home')" class="base-button d-block ripple">Към начална страница</button>

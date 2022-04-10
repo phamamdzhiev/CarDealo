@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <base-carousel
-            :bannerImage="'https://stimg.cardekho.com/pwa/img/bgimg/compare-cars.jpg'"
+            :bannerImage="'https://www.carmax.com/home/images/home/hero/lycg-xl.jpg'"
             height="450"
         />
     </div>

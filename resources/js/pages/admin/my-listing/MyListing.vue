@@ -3,7 +3,7 @@
     <div class="container-xxl mt-4" v-else-if="listing.length > 0">
         <div class="custom-container-md">
             <page-heading heading="Моите обяви"/>
-            <h6 class="fw-bold">Общо обяви: {{ listing.length }}</h6>
+            <h6>Общо обяви: {{ listing.length }}</h6>
             <div class="base-card position-relative" v-for="(item, index) in listing" :key="item.id">
                 <div class="listing d-flex">
                     <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
@@ -20,7 +20,7 @@
                         </div>
                     </router-link>
                     <div class="details">
-                        <h5 class="fw-bold">
+                        <h5>
                             <router-link :to="{ name: 'single-listing', params: {uid: item.uid}}">
                                 {{ item['title'] }}
                             </router-link>
@@ -59,7 +59,7 @@
     <div class="container-xxl text-center py-5 my-5" v-else>
         <h4>
             Все още нямате активни обяви. Може да добавите нова обява от
-            <router-link class="text-base-color fw-bold" :to="{name: 'upload'}">
+            <router-link class="text-base-color" :to="{name: 'upload'}">
                 ТУК
             </router-link>
         </h4>

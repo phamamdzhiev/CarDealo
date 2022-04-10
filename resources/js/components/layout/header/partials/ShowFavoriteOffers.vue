@@ -1,7 +1,7 @@
 <template>
     <div class="d-inline-block" v-if="favOffers.length > 0" title="Любими обяви" @click="showFavoriteModal">
         <i class="bi bi-suit-heart-fill text-base-color ps-4 fs-4"></i>
-        <sub class="fw-bold">{{ favOffers.length }}</sub>
+        <sub>{{ favOffers.length }}</sub>
         <template v-if="isShown">
             <teleport to="#app">
                 <favorite-offers-modal

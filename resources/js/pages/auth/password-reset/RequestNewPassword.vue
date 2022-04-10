@@ -1,6 +1,6 @@
 <template>
     <div class="base-card custom-container-xs">
-        <h5 class="fw-bold text-center mb-4">Възстановяване на забравена парола</h5>
+        <h5 class="text-center mb-4">Възстановяване на забравена парола</h5>
         <form @submit.prevent="handlePasswordRequest">
             <div class="form-floating form-group mb-0">
                 <cleave v-model.lazy.trim="state.mobile"

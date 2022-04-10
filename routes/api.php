@@ -70,6 +70,7 @@ Route::group(['prefix' => 'auth'], function () {
 //Image
 Route::group(['prefix' => 'image', 'middleware' => 'auth:sanctum'], function () {
     Route::post('/upload', [ImageController::class, 'uploadImage'])->name('image.upload');
+    Route::delete('/destroy', [ImageController::class, 'destroy'])->name('image.destroy');
 });
 
 //CarDealo used offers/cars

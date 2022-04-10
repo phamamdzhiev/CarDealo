@@ -1,6 +1,6 @@
 <template>
     <div id="favorite-offers-modal" class="position-absolute min-vh-100">
-        <div @click="closeModal" class="d-block text-center fs-4 fw-bold mt-4">
+        <div @click="closeModal" class="d-block text-center fs-4 mt-4">
             X
         </div>
         <div v-for="offer in offers" class="d-flex p-3 mb-4 align-items-center shadow">

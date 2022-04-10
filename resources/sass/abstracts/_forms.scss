@@ -34,7 +34,6 @@
 }
 
 [data-type="button"] .formkit-input {
-    font-weight: bold;
 }
 
 ul.formkit-options {
@@ -45,7 +44,6 @@ ul.formkit-options {
 button.formkit-input[type='submit'] {
     @include base-primary-button;
     padding: 0.75rem 2rem;
-    font-weight: bold;
     margin-top: 1rem;
 }
 
@@ -61,7 +59,6 @@ button.formkit-input[type='submit'] {
         cursor: pointer;
 
         &:hover {
-            font-weight: bold;
             color: $primary-color;
         }
     }

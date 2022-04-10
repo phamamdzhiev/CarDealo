@@ -23,7 +23,7 @@
                 </ul>
             </div>
             <div class="question-section mb-3">
-                <h5 class="fw-bold">Каква марка е превозното средство?</h5>
+                <h5>Каква марка е превозното средство?</h5>
                 <div class="form-group" style="max-width: 250px;">
                     <FormKit
                         type="search"
@@ -38,7 +38,7 @@
                     <div class="item active position-relative">
                             <span
                                 @click.stop="setState({key: 'brand', value: {name: null, id: null}})"
-                                class="position-absolute top-0 start-100 translate-middle fw-bold">
+                                class="position-absolute top-0 start-100 translate-middle">
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
                         {{ getState.brand.name }}

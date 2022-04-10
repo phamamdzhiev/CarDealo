@@ -9,35 +9,35 @@
                     </router-link>
                 </li>
                 <li class="d-flex align-items-center flex-nowrap px-2">
-                    <router-link :to="{name: 'offers.showcase', query: {type: 1}}">
+                    <router-link :to="{name: 'offers.showcase', query: {category: 1}}">
                         <i class="fa-solid pe-2 fa-car"></i>
                         {{ window.APP_NAME }} автомобили
                     </router-link>
                 </li>
 
                 <li class="d-flex align-items-center flex-nowrap px-2">
-                    <router-link :to="{name: 'offers.showcase', query: {type: 2}}">
+                    <router-link :to="{name: 'offers.showcase', query: {category: 2}}">
                         <i class="fa-solid pe-2 fa-bus-simple"></i>
                         {{ window.APP_NAME }} бусове
                     </router-link>
                 </li>
 
                 <li class="d-flex align-items-center flex-nowrap px-2">
-                    <router-link :to="{name: 'offers.showcase', query: {type: 3}}">
+                    <router-link :to="{name: 'offers.showcase', query: {category: 3}}">
                         <i class="fa-solid pe-2 fa-truck"></i>
                         {{ window.APP_NAME }} камиони
                     </router-link>
                 </li>
 
                 <li class="d-flex align-items-center flex-nowrap px-2">
-                    <router-link :to="{name: 'offers.showcase', query: {type: 4}}">
+                    <router-link :to="{name: 'offers.showcase', query: {category: 4}}">
                         <i class="fa-solid pe-2 fa-motorcycle"></i>
                         {{ window.APP_NAME }} мотори
                     </router-link>
                 </li>
 
                 <li class="d-flex align-items-center flex-nowrap px-2">
-                    <router-link :to="{name: 'offers.showcase', query: {type: 5}}">
+                    <router-link :to="{name: 'offers.showcase', query: {category: 5}}">
                         <i class="fa-solid pe-2 fa-sailboat"></i>
                         {{ window.APP_NAME }} лодки
                     </router-link>

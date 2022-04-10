@@ -1,5 +1,5 @@
 <template>
-    <div style="overflow: hidden" class="mb-4">
+    <div style="overflow: hidden" class="mb-4 p-2">
         <Swiper :slides-per-view="3"
                 :space-between="20"
                 :navigation="true"
@@ -8,17 +8,24 @@
                 <div id="swiper-img-wrapper" class="position-relative top-50 ">
                     <img class="img-fluid rounded" :src="asset(img.image)" alt="Offer images">
                     <div id="delete-action"
-                         @click="handleDeleteImage"
+                         @click="handleDeleteImage(img)"
                          class="position-absolute top-50 start-50 translate-middle">
                         <i class="fa-solid fa-trash-can fs-2 text-danger-color"></i>
                     </div>
                 </div>
             </SwiperSlide>
         </Swiper>
-        <p class="fw-bold text-link-blue m-0 mt-3" id="add-more-images">
-            <i class="fas fa-plus-circle pe-1"></i>
-            Добавяне на снимки
-        </p>
+        <div class="mt-3" id="upload-img-wrapper">
+            <FormKit type="form" submit-label="Качване на снимки"
+                     @submit="submitHandler">
+                <FormKit type="file" accept=".png,.jpg,.jpeg"
+                         help="Позволени формати .png,.jpg,.jpeg"
+                         label="Качване на снимка"
+                         multiple
+                         name="uploadListingImages"
+                />
+            </FormKit>
+        </div>
     </div>
 </template>
 
@@ -28,7 +35,8 @@ import {Swiper, SwiperSlide} from "swiper/vue";
 import {Navigation, Virtual} from "swiper";
 import 'swiper/css';
 import 'swiper/css/navigation';
-
+import axios from "axios";
+import {inject} from "vue";
 
 export default {
     name: "EditListingImages",
@@ -48,21 +56,56 @@ export default {
     setup() {
         const swiperModules = [Navigation, Virtual];
 
-        async function handleDeleteImage() {
+        const window = inject('window');
+
+        async function handleDeleteImage(img) {
             if (confirm('Сигурни ли сте, че искате да изтриете тази снимка')) {
-                alert('OK')
+                const imgID = img.id;
+
+                const res = await axios.delete('image/destroy', {params: {id: imgID, userID: window.AUTH.id}});
+
+                if (res.data.success) {
+                    window.location.reload();
+                }
             }
+        }
+
+        async function submitHandler(data) {
+            const body = new FormData()
+
+            const config = {
+                headers: {
+                    'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
+                }
+            }
+
+            data.uploadListingImages.forEach((fileItem) => {
+                body.append('uploadListingImages', fileItem.file)
+            })
+
+            await axios.post('offer/create', {
+                body
+            }, config);
         }
 
         return {
             modules: swiperModules,
-            handleDeleteImage
+            handleDeleteImage,
+            submitHandler
         }
 
     }
 }
 </script>
 <style scoped>
+.formkit-outer {
+    margin: 0 !important;
+}
+
+#upload-img-wrapper {
+    max-width: 350px;
+}
+
 #swiper-img-wrapper {
     margin: auto;
 }
@@ -91,12 +134,15 @@ export default {
     z-index: 2;
     box-shadow: 0 4px 8px 0 rgb(36 39 44 / 10%), 0 2px 2px 0 rgb(36 39 44 / 10%);
 }
+
 .fa-trash-can:hover {
     opacity: 0.9;
 }
+
 #add-more-images {
     cursor: pointer;
 }
+
 #add-more-images:hover {
     opacity: 0.8;
 }

@@ -5,7 +5,7 @@
                 <div class="item" v-for="valuable in valuables" :key="valuable.id">
                     <span><i :class="`bi bi-${valuable.icon} fs-1`"></i></span>
                     <div>
-                        <h5 class="fw-bold">{{valuable.title}}</h5>
+                        <h5>{{valuable.title}}</h5>
                         <p class="text-normal-gray">{{valuable.subTitle}}</p>
                     </div>
                 </div>
@@ -13,7 +13,7 @@
             <hr />
             <div class="d-grid footer-link-sections">
                 <div class="item">
-                    <h6 class="fw-bold">Полезни страници</h6>
+                    <h6>Полезни страници</h6>
                     <ul>
                         <li>
                             <router-link :to="{name: 'contacts'}">За нас</router-link>
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
                 <div class="item">
-                    <h6 class="fw-bold">Контакти</h6>
+                    <h6>Контакти</h6>
                     <ul>
                         <li>
                             <a href="/">
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
                 <div class="item">
-                    <h6 class="fw-bold">Последвайте ни</h6>
+                    <h6>Последвайте ни</h6>
                     <ul class="d-flex flex-nowrap">
                         <li class="me-2">
                             <a href="/">

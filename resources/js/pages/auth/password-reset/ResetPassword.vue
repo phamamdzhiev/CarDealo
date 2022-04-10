@@ -1,6 +1,6 @@
 <template>
     <base-card>
-        <h5 class="fw-bold text-center mb-4">Възстановяване на забравена парола</h5>
+        <h5 class="text-center mb-4">Възстановяване на забравена парола</h5>
         <form @submit.prevent="handlePasswordReset">
             <div class="form-floating form-group">
                 <input :type="fieldType"

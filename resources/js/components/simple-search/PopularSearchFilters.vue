@@ -1,5 +1,5 @@
 <template>
-    <vehicle-type-filter/>
+    <vehicle-category-filter/>
     <brand-filter/>
     <model-filter/>
     <year-filter/>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import VehicleTypeFilter from "../../pages/advanced-search/partials/VehicleTypeFilter";
+import VehicleCategoryFilter from "../../pages/advanced-search/partials/VehicleCategoryFilter";
 import BrandFilter from "../../pages/advanced-search/partials/BrandFilter";
 import ModelFilter from "../../pages/advanced-search/partials/ModelFilter";
 import YearFilter from "../../pages/advanced-search/partials/YearFilter";
@@ -18,7 +18,7 @@ import FuelFilter from "../../pages/advanced-search/partials/FuelFilter";
 export default {
     name: "PopularSearchFilters",
     components: {
-        VehicleTypeFilter,
+        VehicleCategoryFilter,
         BrandFilter,
         ModelFilter,
         YearFilter,

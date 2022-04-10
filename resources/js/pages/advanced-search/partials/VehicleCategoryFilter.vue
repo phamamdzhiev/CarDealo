@@ -1,51 +1,39 @@
 <template>
     <FormKit
         type="select"
-        id="categories"
-        name="categories"
+        id="type"
+        name="type"
         label="Категория"
         placeholder="Изберете категория"
-        :options="categories.length > 0 ? categories : ['Изберете категория']"
-        v-model="category"
+        v-model="type"
+        :options="types.length > 0 ? types : ['Изберете категория']"
     />
 </template>
 
 <script>
-import {useFetcher} from "../../../composables/fetcher";
-import {computed, onMounted, ref, watch} from "vue";
 import {useStore} from "vuex";
+import {computed} from "vue";
+import {useFetcher} from "../../../composables/fetcher";
 
 export default {
-    name: "VehicleCategoryFilter",
+    name: "VehicleTypeFilter",
     setup() {
         const store = useStore();
-        const categories = ref([]);
+        const {fetch: types} = useFetcher('get.categories');
 
-        const category = computed({
+        const type = computed({
             get() {
                 return store.getters['advancedFilters/getFilters']['category'];
             },
             set(value) {
+                store.commit('advancedFilters/resetFilter');
                 store.commit('advancedFilters/setFilters', {filter: 'category', value: value});
             }
         });
 
-        watch(() => store.getters['advancedFilters/getFilters']['type'], (val) => {
-            fetchCategories(val)
-        });
-
-        function fetchCategories(val) {
-            const {fetch} = useFetcher('get.types', [val])
-            categories.value = fetch.value;
-        }
-
-        onMounted(() => {
-            fetchCategories(store.getters['advancedFilters/getFilters']['type'])
-        })
-
         return {
-            categories,
-            category
+            types,
+            type
         }
     }
 }

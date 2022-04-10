@@ -19,7 +19,7 @@
                         <span
                             v-show="getVehicleType === item.id"
                             @click.stop="store.commit('uploadOffer/setVehicleState', {key: 'vehicleType', value: null})"
-                            class="position-absolute top-0 start-100 translate-middle fw-bold">
+                            class="position-absolute top-0 start-100 translate-middle">
                                 <i class="bi bi-x-circle-fill fs-6 bg-white"></i>
                             </span>
                         {{ item.name }}

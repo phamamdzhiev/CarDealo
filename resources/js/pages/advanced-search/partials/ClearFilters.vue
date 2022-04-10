@@ -27,7 +27,6 @@ export default {
 button#clear-filters {
     background-color: white;
     border: 0;
-    font-weight: bold;
     color: #0D1C39;
     margin-bottom: 10px;
     margin-left: 15px;

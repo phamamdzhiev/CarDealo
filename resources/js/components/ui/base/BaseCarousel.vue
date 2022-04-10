@@ -8,7 +8,7 @@
             <div class="carousel-item active" :style="setBannerAndImageHeight">
                 <div class="banner-heading mt-5">
                     <div class="container">
-                        <h1 class="text-white fw-bold mb-5" style="max-width:600px;">
+                        <h1 class="text-white mb-5" style="max-width:600px;">
                            {{heading}}
                         </h1>
                     </div>

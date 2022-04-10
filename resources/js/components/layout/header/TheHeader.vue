@@ -5,11 +5,13 @@
                 class="d-flex flex-row flex-nowrap align-items-center justify-content-between inner__header"
             >
                 <div class="fs-4 logo">
-                    <router-link to="/">{{ window.APP_NAME }}</router-link>
+                    <router-link to="/">
+                        <img src="https://stimg.cardekho.com/pwa/img/Desktop-logo.svg" alt="">
+                    </router-link>
                 </div>
                 <div>
                     <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">
-                        <div v-if="getUser" class="fw-bold me-3">
+                        <div v-if="getUser" class="me-3">
                             Здравейте, {{ getUser.name }}!
                             <router-link :to="{name:'Profile'}" class="d-flex flex-nowrap align-items-center">
                                 <i class="bi bi-person-circle fs-6"></i>
@@ -36,6 +38,7 @@
 import BaseButton from "../../ui/base/BaseButton";
 import ShowFavoriteOffers from "./partials/ShowFavoriteOffers";
 import Navigation from "./partials/Navigation";
+import assetMixin from "../../../composables/asset"
 
 export default {
     components: {
@@ -44,6 +47,7 @@ export default {
         Navigation
     },
     inject: ['window'],
+    mixins: [assetMixin],
     computed: {
         getUser() {
             return this.$store.getters['auth/GET_AUTH_USER'];

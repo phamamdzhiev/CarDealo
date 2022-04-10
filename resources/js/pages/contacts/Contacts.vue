@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-xs-12 mb-3">
                     <div>
-                        <p class="fw-bold mb-0">
+                        <p class="mb-0">
                             <i class="fa-solid fa-envelope"></i>
                             Email
                         </p>

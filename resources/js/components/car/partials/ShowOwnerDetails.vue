@@ -1,16 +1,16 @@
 <template>
-    <button class="fw-bold base-button" @click="showModal">Виж детайли на собственика</button>
+    <button class="base-button" @click="showModal">Виж детайли на собственика</button>
     <base-modal
         v-if="isShown"
         @close-modal="closeModal"
     >
-        <h5 class="fw-bold mb-4">Контакти със собсветника</h5>
+        <h5 class="mb-4">Контакти със собсветника</h5>
         <ul>
             <li class="fs-5 mb-3" v-if="offer.user.name">
                 <span class="pe-2">
                     <i class="fa-solid fa-user pe-1"></i>
                 </span>
-               <span class="fw-bold">
+               <span>
                     {{ offer.user.name }}
                </span>
             </li>
@@ -18,7 +18,7 @@
                 <span class="pe-2">
                    <i class="fa-solid fa-mobile-screen-button pe-1"></i>
                 </span>
-                <span class="fw-bold">
+                <span>
                     <a :href="`tel:${offer.user.mobile}`">
                         {{ offer.user.mobile }}
                     </a>

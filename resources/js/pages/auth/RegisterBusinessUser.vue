@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h6 class="fw-bold">Данни за автокъщата</h6>
+        <h6>Данни за автокъщата</h6>
         <div class="form-floating form-group">
             <input type="text" class="form-control form__input"
                    placeholder="Име на автокъщата"

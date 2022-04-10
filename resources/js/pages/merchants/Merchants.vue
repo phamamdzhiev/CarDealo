@@ -3,13 +3,13 @@
                    height="350"></base-carousel>
     <div class="container-xxl">
         <div class="merchants-list">
-            <h4 class="fw-bold">Автокъщи</h4>
+            <h4>Автокъщи</h4>
             <div class="row">
                 <div class="col-4">
                     <merchants-filter/>
                 </div>
             </div>
-            <h6 class="fw-bold mt-4">Последно регистрирани</h6>
+            <h6 class="mt-4">Последно регистрирани</h6>
             <spinner v-if="isLoading"/>
             <div v-else-if="merchants.length > 0" class="merchant d-flex align-items-center justify-content-between"
                  v-for="merchant in merchants">
@@ -20,7 +20,7 @@
                     </router-link>
                 </div>
                 <div class="details">
-                    <h5 class="fw-bold">
+                    <h5>
                         <router-link :to="{name: 'Merchant.offers', params: {id: merchant.id}}">
                             {{ merchant.name }}
                         </router-link>

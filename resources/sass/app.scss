@@ -42,13 +42,16 @@ html {
 }
 
 body {
-    background-color: #f7f7f7 ;
+    background-color: #f6f6f6;
     position: relative;
     font-family: $font-family;
 }
 
-#app {
-    background-color: #f7f7f7 ;
+footer {
+    background-image: url("https://carro.sg/assets/img/leap/subs_choose_leap_bg_20200302.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
 }
 
 a, p, h1, h2, h3, h4, h5, h6, li, button {

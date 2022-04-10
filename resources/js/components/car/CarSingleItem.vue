@@ -7,7 +7,10 @@
                      :src="asset(offer.image)"
                      alt=""
                 />
-                <img v-else :src="asset('noimage.jpg')" class="img-fluid" alt="Default image">
+                <img v-else :src="asset('noimage.jpg')"
+                     class="img-fluid"
+                     alt="Default image"
+                >
             </router-link>
         </div>
         <add-favorites :offer="offer"/>
@@ -47,3 +50,7 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+</style>

@@ -36,21 +36,17 @@
                 />
                 <FormKit
                     type="checkbox"
+                    label="По договаряне?"
                     v-model="editedOfferData.hasPrice"
                     @change="togglePrice"
                     name="hasPrice"
                     id="hasPrice"
-                >
-                    <template #label="context">
-                        <i v-if="editedOfferData.hasPrice" class="bi bi-check-square fs-6"></i>
-                        <i v-else class="bi bi-square fs-6"></i>
-                        <span class="ps-1" style="cursor:pointer; user-select:none;">По договаряне?</span>
-                    </template>
-                </FormKit>
+                />
             </FormKit>
             <hr>
+            {{editedOfferData.hasPrice}}
             <router-link :to="{name: 'my.listing'}"
-                         class="fw-bold text-link-blue">
+                         class="text-link-blue">
                 <i class="fa-solid fa-xmark pe-1"></i>
                 Отказ
             </router-link>

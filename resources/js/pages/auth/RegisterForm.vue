@@ -1,6 +1,6 @@
 <template>
     <div class="base-card py-4 px-5">
-        <h4 class="fw-bold">Регистрация</h4>
+        <h4>Регистрация</h4>
         <form @submit.prevent="handleRegister">
             <div class="form-floating form-group">
                 <input type="text" class="form-control form__input"
@@ -54,7 +54,7 @@
                                           @click="switchVisibility"></PasswordVisibilityToggle>
             </div>
             <div
-                class="d-flex justify-content-end align-items-center fw-bold"
+                class="d-flex justify-content-end align-items-center"
                 @click="updateAccount"
                 style="cursor:pointer;user-select: none;max-width: max-content;margin: 0 0 0 auto;">
                 Регистрация като автокъща?

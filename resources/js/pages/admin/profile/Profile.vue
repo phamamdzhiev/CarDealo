@@ -37,12 +37,12 @@
             <div class="col-lg-9">
                 <div v-if="$route.name === 'Profile'">
                     <div class="user_details">
-                        <h6><span class="fw-bold">Имена:</span> {{ authUser.name }}</h6>
-                        <h6><span class="fw-bold">Имейл:</span> {{ authUser.email ? authUser.email : 'Не е посочен' }}
+                        <h6><span>Имена:</span> {{ authUser.name }}</h6>
+                        <h6><span>Имейл:</span> {{ authUser.email ? authUser.email : 'Не е посочен' }}
                         </h6>
-                        <h6><span class="fw-bold">Мобилен:</span> {{ authUser.mobile }}</h6>
-                        <h6><span class="fw-bold">Регистриран на:</span> {{ authUser.created_at }}</h6>
-                        <h6><span class="fw-bold">Бизнес профил:</span> {{ authUser.is_business ? 'Да' : 'Не' }}</h6>
+                        <h6><span>Мобилен:</span> {{ authUser.mobile }}</h6>
+                        <h6><span>Регистриран на:</span> {{ authUser.created_at }}</h6>
+                        <h6><span>Бизнес профил:</span> {{ authUser.is_business ? 'Да' : 'Не' }}</h6>
                     </div>
                 </div>
                 <router-view v-else></router-view>

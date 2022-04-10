@@ -5,7 +5,7 @@ $ul-max-height: 300px;
     margin: auto;
 
     span.back__button {
-        font-weight: 700;
+        //font-weight: 700;
 
         &:hover {
             cursor: pointer;
@@ -25,7 +25,7 @@ $ul-max-height: 300px;
 
         li {
             flex: 1 0 auto;
-            font-weight: 700;
+            //font-weight: 700;
             background-color: white;
             color: $secondary-color;
             padding: 0.5rem 1.75rem;
@@ -70,7 +70,7 @@ $ul-max-height: 300px;
             justify-content: center;
             text-align: center;
             padding: 5px;
-            font-weight: 700;
+            //font-weight: 700;
             height: 90px;
             border: 2px solid transparent;
             border-radius: 4px;
@@ -271,7 +271,7 @@ $ul-max-height: 300px;
                 background-color: $primary-color;
                 color: $secondary-color;
                 text-align: center;
-                font-weight: 700;
+                //font-weight: 700;
                 font-size: 15px;
                 overflow: hidden;
                 border-top-right-radius: 8px;
@@ -307,7 +307,6 @@ $ul-max-height: 300px;
             user-select: none;
 
             &.checked {
-                font-weight: bold;
 
                 &::before {
                     background: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="4 3 9 9" fill="currentColor" class="bi bi-check"> <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/> </svg>') no-repeat;
@@ -402,7 +401,7 @@ $ul-max-height: 300px;
             border-radius: 100em;
             padding: 3px 12px;
             box-shadow: $box-shadow-large;
-            font-weight: 700;
+            //font-weight: 700;
             font-size: 0.775rem;
             margin-right: 5px;
             margin-bottom: 5px;
