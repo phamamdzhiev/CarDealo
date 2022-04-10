@@ -1,5 +1,6 @@
 <template>
-    <router-link class="fw-bold text-link-blue advanced-search-link" :to="{name: 'advanced.filters', query: {type: defaultType}}">
+    <router-link class="fw-bold text-link-blue advanced-search-link"
+                 :to="{name: 'advanced.filters'}">
         Подробно търсене
     </router-link>
 </template>

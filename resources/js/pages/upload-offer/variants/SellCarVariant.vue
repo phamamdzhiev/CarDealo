@@ -1,5 +1,5 @@
 <template>
-  <base-variant temp="cars">
+  <base-variant>
       <Engine/>
       <Transmission/>
       <Hp/>

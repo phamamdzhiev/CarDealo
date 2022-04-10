@@ -5,8 +5,9 @@
         <Hp/>
         <Cm/>
         <Km/>
-        <EngineType/>
-        <Cooling/>
+        <Length/>
+        <WC/>
+        <Heating/>
     </base-variant>
 </template>
 
@@ -17,19 +18,25 @@ import Transmission from "../partials/dynamic/Transmission";
 import Hp from "../partials/dynamic/Hp";
 import Cm from "../partials/dynamic/Cm"
 import Km from "../partials/dynamic/Km"
-import Cooling from "../partials/dynamic/Cooling";
-import EngineType from "../partials/dynamic/EngineType";
+import Load from "../partials/dynamic/Load"
+import Axis from "../partials/dynamic/Axis"
+import WC from "../partials/dynamic/WC"
+import Length from "../partials/dynamic/Length";
+import Heating from "../partials/dynamic/Heating"
 
 export default {
-    name: "SellMotoVariant",
+    name: "SellCaravanVariant",
     components: {
         Engine,
         Transmission,
         Hp,
         Cm,
         Km,
-        Cooling,
-        EngineType,
+        Load,
+        Axis,
+        WC,
+        Length,
+        Heating,
         BaseVariant
     }
 }

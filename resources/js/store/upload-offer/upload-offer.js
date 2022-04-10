@@ -47,6 +47,7 @@ export default {
                 material: null,
                 cooling: null,
                 engineType: null,
+                seats: null,
             }
         }
     },
@@ -83,6 +84,7 @@ export default {
             state.vehicle.material = null;
             state.vehicle.cooling = null;
             state.vehicle.engineType = null;
+            state.vehicle.seats = null;
             state.step = 1;
         },
         setVehicleState(state, {key, value}) {

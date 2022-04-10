@@ -1,11 +1,11 @@
 <template>
     <FormKit
         type="select"
-        :options="engines.length > 0 ? engines : ['']"
+        :options="engines.length > 0 ? engines : ['Моля изберете двигател']"
         id="engines"
         name="engines"
         label="Двигател"
-        :placeholder="engines.length > 0 ? 'Моля изберете двигател' : 'Зареждане...'"
+        placeholder="Моля изберете двигател"
         v-model="engine"
     />
 </template>

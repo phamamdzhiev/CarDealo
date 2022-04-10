@@ -1,12 +1,12 @@
 <template>
     <FormKit
         type="select"
-        :options="transmissions.length > 0 ? transmissions : ['']"
         id="transmissions"
         name="transmissions"
         label="Трансмисия"
-        :placeholder="transmissions.length > 0 ? 'Моля изберете трансмисия' : 'Зареждане...'"
+        placeholder="Моля изберете трансмисия"
         v-model="transmission"
+        :options="transmissions.length > 0 ? transmissions : ['Моля изберете трансмисия']"
     />
 </template>
 

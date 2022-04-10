@@ -1,6 +1,5 @@
 <template>
     <div class="sell-car">
-        <h1>{{temp}}</h1>
         <base-card>
             <PrevStepButton/>
             <TopBar/>
@@ -27,7 +26,6 @@ export default {
         PrevStepButton,
         TopBar
     },
-    props: ['temp'],
     methods: {
         submitHandler() {
             this.$store.commit('uploadOffer/setStepPlus');

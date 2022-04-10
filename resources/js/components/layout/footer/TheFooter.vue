@@ -21,15 +21,15 @@
                         <li>
                             <router-link :to="{name: 'faq'}">ЧЗВ</router-link>
                         </li>
-                        <li>
-                            <a href="/">Рекламирай при нас</a>
-                        </li>
-                        <li>
-                            <a href="/">Условия на ползване</a>
-                        </li>
-                        <li>
-                            <a href="/">Политика на поверителност</a>
-                        </li>
+<!--                        <li>-->
+<!--                            <a href="/">Рекламирай при нас</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="/">Условия на ползване</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="/">Политика на поверителност</a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
                 <div class="item">
@@ -85,7 +85,7 @@ export default {
         const valuables = [
             {id: 1, title: '#1 в България', subTitle: 'Най-новият Авто портал', icon: 'award'},
             {id: 2, title: 'Оферти', subTitle: 'Намирате автомобил изгодно', icon: 'percent'},
-            {id: 3, title: 'Сравнете коли', subTitle: 'Избирате правилният модел', icon: 'shield-check'},
+            // {id: 3, title: 'Сравнете коли', subTitle: 'Избирате правилният модел', icon: 'shield-check'},
             {id: 4, title: 'Чат на живо', subTitle: '7 дни в седмицата', icon: 'chat-dots'},
         ];
 

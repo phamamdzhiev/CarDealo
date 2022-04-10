@@ -1,10 +1,11 @@
 <template>
-    <base-variant temp="busove">
+    <base-variant>
         <Engine/>
         <Transmission/>
         <Hp/>
         <Cm/>
         <Km/>
+        <SeatsNumber/>
         <Axis/>
         <Load/>
     </base-variant>
@@ -19,6 +20,7 @@ import Cm from "../partials/dynamic/Cm"
 import Km from "../partials/dynamic/Km"
 import Load from "../partials/dynamic/Load"
 import Axis from "../partials/dynamic/Axis"
+import SeatsNumber from "../partials/dynamic/SeatsNumber";
 
 export default {
     name: "SellBusVariant",
@@ -30,6 +32,7 @@ export default {
         Km,
         Load,
         Axis,
+        SeatsNumber,
         BaseVariant
     }
 }

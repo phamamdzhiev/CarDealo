@@ -1,33 +1,29 @@
 <template>
     <FormKit
         type="number"
-        id="width"
-        name="width"
-        label="Ширина"
+        id="seats"
+        name="seats"
+        label="Брой места"
         validation="number"
-        v-model.lazy="width"
+        v-model.lazy="seats"
     />
 </template>
 
 <script>
 export default {
-    name: "Width",
+    name: "SeatsNumber",
     computed: {
         getState() {
             return this.$store.getters['uploadOffer/getVehicleState'];
         },
-        width: {
+        seats: {
             get() {
-                return this.getState.width;
+                return this.getState.seats;
             },
             set(value) {
-                this.$store.commit('uploadOffer/setVehicleState', {key: 'width', value});
+                this.$store.commit('uploadOffer/setVehicleState', {key: 'seats', value});
             }
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

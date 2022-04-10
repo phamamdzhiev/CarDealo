@@ -27,13 +27,23 @@
                         <h4 class="fw-bold">
                             <span>{{ singleOffer.title }}</span>
                         </h4>
-                        <h5 class="fw-bold text-base-color">{{ singleOffer.price }} лв.</h5>
-                        <p>{{ singleOffer.description }}</p>
-
-                       <show-owner-details :offer="singleOffer"/>
                     </div>
+
+                    <h5 class="fw-bold text-base-color">{{ singleOffer.price }} лв.</h5>
+                    <show-owner-details :offer="singleOffer"/>
                 </div>
                 <OfferActions :offer="singleOffer"></OfferActions>
+            </div>
+            <div class="base-card">
+                <div class="offer-details p-3">
+                    <div class="heading">
+                        <h5 class="fw-bold">
+                            Описание
+                        </h5>
+                    </div>
+
+                    <p class="m-0">{{ singleOffer.description }}</p>
+                </div>
             </div>
             <div class="base-card">
                 <div class="offer-details p-3">

@@ -21,6 +21,7 @@ import SellBusVariant from "./variants/SellBusVariant";
 import SellBoatVariant from "./variants/SellBoatVariant";
 import SellMotoVariant from "./variants/SellMotoVariant";
 import SellTruckVariant from "./variants/SellTruckVariant";
+import SellCaravanVariant from "./variants/SellCaravanVariant";
 import VehicleYear from "./VehicleYear";
 import VehicleExtras from "./VehicleExtras";
 import OfferDetails from "./OfferDetails";
@@ -37,6 +38,7 @@ export default {
         VehicleModel,
         VehicleYear,
         SellCarVariant,
+        SellCaravanVariant,
         VehicleExtras,
         OfferDetails,
         VehicleImages,
@@ -44,7 +46,7 @@ export default {
         SellBusVariant,
         SellBoatVariant,
         SellMotoVariant,
-        SellTruckVariant
+        SellTruckVariant,
     },
     mounted() {
         this.$store.commit('uploadOffer/setVehicleState', {key: 'vehicleCategory', value: parseInt(this.vehicleID)});
@@ -61,6 +63,8 @@ export default {
                 case '4':
                     return 'SellMoto';
                 case '5':
+                    return 'SellCaravan';
+                case '6':
                     return 'SellBoat';
             }
         },

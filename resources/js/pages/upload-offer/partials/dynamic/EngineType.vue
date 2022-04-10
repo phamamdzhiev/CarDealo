@@ -6,6 +6,7 @@
         name="engineType"
         label="Вид на двигателя"
         placeholder="Вид на двигателя"
+        validation="required"
         v-model.lazy="engineType"
     />
 </template>
@@ -16,8 +17,9 @@ export default {
     data() {
         return {
             options: [
-                {value: 1, label: 'Двутактов'},
-                {value: 2, label: 'Четиритактов'}
+                {value: 1, label: 'Няма'},
+                {value: 2, label: 'Двутактов'},
+                {value: 3, label: 'Четиритактов'}
             ]
         }
 

@@ -1,5 +1,5 @@
 <template>
-    <base-variant temp="kamiion">
+    <base-variant>
         <Engine/>
         <Transmission/>
         <Hp/>
