@@ -11,7 +11,6 @@
             >
                 <div class="question-section mb-3">
                     <Heading title="Изберете екстри"/>
-{{setExtras}}
                     <spinner v-if="vehicleExtras.length < 1"/>
                     <FormKit
                         v-else

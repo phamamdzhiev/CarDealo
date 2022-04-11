@@ -6,7 +6,7 @@
             >
                 <div class="fs-4 logo">
                     <router-link to="/">
-                        <img src="https://stimg.cardekho.com/pwa/img/Desktop-logo.svg" alt="">
+                        <img class="img-fluid" width="135" :src="asset('app-images/logo/Most-cars1.png')" alt="MostCars Logo">
                     </router-link>
                 </div>
                 <div>

@@ -1,6 +1,6 @@
 <template>
     <div class="container-xxl py-3">
-        <router-link class="mb-4 d-inline-block" to="/advanced-filters">
+        <router-link class="mb-4 d-inline-block" :to="{ name: 'advanced.filters' }">
             <i class="fa-brands fa-searchengin fs-5"></i>
             Коригирай търсенето
         </router-link>
@@ -46,7 +46,9 @@ export default {
                 page
             }
 
-            await router.push({name: 'offers.showcase', query: params});
+            // const a = await router.push({name: 'offers.showcase', query: params});
+            // console.log(isNavigationFailure(a));
+            // await router.replace({query: params});
 
             try {
                 isLoading.value = true;
@@ -62,7 +64,7 @@ export default {
         }
 
         onMounted(() => {
-            fetchData(route.query.page);
+            fetchData();
         });
 
 

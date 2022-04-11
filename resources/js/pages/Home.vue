@@ -1,8 +1,7 @@
 <template>
     <div class="home">
         <base-carousel
-            :bannerImage="'https://www.carmax.com/home/images/home/hero/lycg-xl.jpg'"
-            height="450"
+            :bannerImage="asset('app-images/main-banner.png')"
         />
     </div>
     <div class="container-xxl">
@@ -21,6 +20,7 @@ import SimpleSearch from "../components/simple-search/SimpleSearch";
 import {useFetcher} from "../composables/fetcher";
 import UsedCarsVue3Carousel from "../components/ui/UsedCarsVue3Carousel";
 import PageHeading from "../components/layout/PageHeading";
+import assetMixin from "../composables/asset"
 
 export default {
     name: "Home",
@@ -31,6 +31,7 @@ export default {
         BaseCard,
         PageHeading
     },
+    mixins: [assetMixin],
     setup() {
         const {fetch: data} = useFetcher('get.offers', null, false);
 
@@ -40,3 +41,9 @@ export default {
     }
 };
 </script>
+<style scoped>
+.home {
+    max-width: 1540px;
+    margin: auto;
+}
+</style>

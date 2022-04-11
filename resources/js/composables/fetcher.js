@@ -1,7 +1,8 @@
 import axios from "axios";
 import {ref} from 'vue';
 import route from 'ziggy';
-import { Ziggy } from './ziggy';
+import {Ziggy} from './ziggy';
+// import {useStore} from "vuex";
 
 export function useFetcher(routeName, params = null, formKit = true) {
     let urlBuilder;
@@ -14,11 +15,16 @@ export function useFetcher(routeName, params = null, formKit = true) {
 
     const fetch = ref([]);
     const isLoading = ref(false);
+    // const store = useStore();
 
     isLoading.value = true;
     axios.get(urlBuilder).then((res) => {
         isLoading.value = false;
         if (res.data) {
+            // store.commit('advancedFilters/setPreserver',
+            //     {options: 'get.fuels', value: res.data}
+            // );
+
             if (formKit) {
                 res.data.forEach((element) => {
                     fetch.value.push({label: element.name, value: element.id});

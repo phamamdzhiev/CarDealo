@@ -13,13 +13,13 @@ export default {
         const router = useRouter();
         const store = useStore();
 
-        const queryParamFilters = computed(() => {
-            return store.getters['advancedFilters/getFilters'];
+        const fulfilledFilters = computed(() => {
+            return store.getters['advancedFilters/fulfilledFilters'];
         })
 
-        async function handleSearch() {
-            let data = Object.fromEntries(Object.entries(queryParamFilters.value).filter(([k, v]) => v !== ""))
-            await router.push({name: 'offers.showcase', query: data});
+        function handleSearch() {
+            router.push({name: 'offers.showcase', query: fulfilledFilters.value})
+                .catch(e => console.log(e));
         }
 
         return {

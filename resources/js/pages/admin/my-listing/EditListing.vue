@@ -44,7 +44,6 @@
                 />
             </FormKit>
             <hr>
-            {{editedOfferData.hasPrice}}
             <router-link :to="{name: 'my.listing'}"
                          class="text-link-blue">
                 <i class="fa-solid fa-xmark pe-1"></i>

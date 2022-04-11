@@ -1,4 +1,7 @@
 <template>
+<!--    <div>-->
+<!--        {{ $store.getters['advancedFilters/getPreserver'] }}-->
+<!--    </div>-->
     <FormKit
         type="select"
         id="fuels"
@@ -19,7 +22,7 @@ export default {
     name: "FuelFilter",
     setup() {
         const store = useStore();
-        const {fetch: fuels} = useFetcher('get.fuels');
+        const {fetch: fuels} = useFetcher('get.fuels')
 
         const fuel = computed({
             get() {

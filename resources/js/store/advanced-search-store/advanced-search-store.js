@@ -2,6 +2,12 @@ export default {
     namespaced: true,
     state() {
         return {
+            // the ideas with this preserver is to fetch only once some data from db
+            // and keep it here, so that reduece amount of request to the db
+            preserver: [
+                {'get.fuels': ''},
+                {'get.transmissions': ''}
+            ],
             filters: {
                 category: "1",// by default load cars
                 type: '',
@@ -44,11 +50,24 @@ export default {
             state.filters.kmMax = '';
             state.filters.sortBy = '';
             state.filters.uploadedBy = '';
-        }
+        },
+        // setPreserver(state, {options, value}) {
+        //     state.preserver.forEach((elem) => {
+        //         if (Object.keys(elem)[0] === options) {
+        //             console.log(elem)
+        //         }
+        //     })
+        // }
     },
     getters: {
         getFilters(state) {
             return state.filters;
+        },
+        // getPreserver(state) {
+        //     return state.preserver;
+        // },
+        fulfilledFilters(state) {
+            return Object.fromEntries(Object.entries(state.filters).filter(([k, v]) => v !== ""))
         }
     },
     actions: {},
