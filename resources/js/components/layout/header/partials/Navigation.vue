@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="d-flex flex-row flex-nowrap align-items-center"
+        class="flex-row flex-nowrap align-items-center d-none d-sm-flex"
     >
         <div
             @mouseover="showSubMenuVisibility('old-cars')"

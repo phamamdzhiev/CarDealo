@@ -13,7 +13,7 @@
                 >
             </router-link>
         </div>
-        <add-favorites :offer="offer"/>
+<!--        <add-favorites :offer="offer"/>-->
 
         <div class="vehicle-details">
             <router-link :to="{ name: 'single-listing', params: {uid: offer.uid}}">

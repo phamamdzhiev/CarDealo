@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     <nav id="nav" class="main__nav d-flex flex-nowrap align-items-center">
-                        <div v-if="getUser" class="me-3">
+                        <div v-if="getUser" class="me-3 d-sm-block d-none ">
                             Здравейте, {{ getUser.name }}!
                             <router-link :to="{name:'Profile'}" class="d-flex flex-nowrap align-items-center">
                                 <i class="bi bi-person-circle fs-6"></i>

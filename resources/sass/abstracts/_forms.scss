@@ -19,6 +19,12 @@
     background-color: $white;
 }
 
+@media screen and (max-width: 767px) {
+    [data-type="button"] .formkit-input {
+        width: 100% !important;
+    }
+}
+
 .formkit-label {
     font-size: 0.9rem;
 }
@@ -39,6 +45,9 @@
 ul.formkit-options {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    @include media-breakpoint-down(sm) {
+        grid-template-columns: 1fr;
+    }
 }
 
 button.formkit-input[type='submit'] {

@@ -5,9 +5,9 @@
                 <i class="bi bi-eye fs-6 pe-1"></i>
                 {{ offer.visits }}
             </li>
-            <li>
-                <add-favorites :offer="offer"/>
-            </li>
+<!--            <li>-->
+<!--                <add-favorites :offer="offer"/>-->
+<!--            </li>-->
             <li @click="shareOffer">
                 <sharerer/>
             </li>

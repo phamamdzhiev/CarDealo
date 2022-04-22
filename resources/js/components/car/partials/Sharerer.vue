@@ -11,12 +11,12 @@
                     <i class="bi bi-facebook fs-5 pe-2"></i>Сподели във Facebook
                 </a>
             </li>
-            <li>
-                <a target="_blank" :href="$route.fullPath">
-                    <i class="fa-solid fa-clipboard fs-5 pe-1"></i>
-                    Копирай линк
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a target="_blank" :href="$route.fullPath">-->
+<!--                    <i class="fa-solid fa-clipboard fs-5 pe-1"></i>-->
+<!--                    Копирай линк-->
+<!--                </a>-->
+<!--            </li>-->
         </ul>
     </base-modal>
 </template>

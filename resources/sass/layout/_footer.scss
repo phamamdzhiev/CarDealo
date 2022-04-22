@@ -1,26 +1,39 @@
 footer {
     background-color: white;
+
     .d-grid.valuables {
         grid-template-columns: repeat(3, 1fr);
         padding: 1rem 0;
         place-items: center;
+        @media screen and (max-width: 767px) {
+            grid-template-columns: 1fr;
+            place-items: unset;
+        }
+
         .item {
             display: flex;
             align-items: center;
             @include media-breakpoint-down(md) {
                 margin-bottom: 1rem;
             }
+
             > span {
                 margin-right: 8px;
             }
+
             h5, p {
                 margin-bottom: 0;
             }
         }
     }
+
     .d-grid.footer-link-sections {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
+        @media screen and (max-width: 767px) {
+            grid-template-columns: 1fr;
+        }
+
         .item {
             padding: 0.5rem;
 
@@ -28,6 +41,7 @@ footer {
                 font-weight: normal;
                 color: $normal-gray;
                 font-size: 14px;
+
                 &:hover {
                     color: $primary-color-dark;
                 }
@@ -50,6 +64,7 @@ footer {
 
     .copyright {
         padding: 0.5rem;
+
         p {
             font-size: 11px;
         }

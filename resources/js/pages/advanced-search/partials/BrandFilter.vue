@@ -30,7 +30,7 @@ export default {
             }
         });
 
-        watch(() => store.getters['advancedFilters/getFilters']['type'], (val) => {
+        watch(() => store.getters['advancedFilters/getFilters']['category'], (val) => {
             if (val !== '') {
                 fetchBrands(val)
             }
@@ -42,8 +42,8 @@ export default {
         }
 
         onMounted(() => {
-            if (store.getters['advancedFilters/getFilters']['type'] !== '') {
-                fetchBrands(store.getters['advancedFilters/getFilters']['type'])
+            if (store.getters['advancedFilters/getFilters']['category'] !== '') {
+                fetchBrands(store.getters['advancedFilters/getFilters']['category'])
             }
         })
 

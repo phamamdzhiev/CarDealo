@@ -72,6 +72,7 @@ import {onMounted, ref, inject} from "vue";
 import BaseCard from "../../../components/ui/base/BaseCard";
 import assetMixin from '../../../composables/asset';
 import PageHeading from "../../../components/layout/PageHeading";
+
 export default {
     name: "MyListing",
     components: {
@@ -137,12 +138,30 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .details {
     margin-left: 1rem;
+    @media screen and (max-width: 767px) {
+        margin: 0.5rem;
+        max-width: 100%;
+        overflow: hidden;
+    }
 }
+
+.base-card {
+    @media screen and (max-width: 767px) {
+        padding-bottom: 30px !important;
+    }
+}
+
 
 .img-wrapper img:hover {
     transform: rotate(3deg);
+}
+
+.listing {
+    @media screen and (max-width: 767px) {
+        flex-flow: column wrap;
+    }
 }
 </style>

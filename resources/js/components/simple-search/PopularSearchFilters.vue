@@ -1,5 +1,5 @@
 <template>
-    <vehicle-category-filter/>
+    <!-- <vehicle-category-filter/> -->
     <brand-filter/>
     <model-filter/>
     <year-filter/>

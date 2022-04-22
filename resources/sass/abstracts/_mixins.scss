@@ -38,6 +38,9 @@
         color: white;
         background-color: $primary-color-dark;
     }
+    @media screen and (max-width: 767px) {
+        padding: 0.5rem 0.75rem;
+    }
 }
 
 @mixin secondary-button() {

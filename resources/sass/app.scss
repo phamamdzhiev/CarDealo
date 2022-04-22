@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap");
 //bs 5
 @import "bootstrap/scss/bootstrap.scss";
 
 @import "abstracts/variables";
 //@import "abstracts/fonts";
 @import "abstracts/mixins";
-@import 'abstracts/global';
+@import "abstracts/global";
 @import "abstracts/forms";
 //utils
 @import "abstracts/utils";
@@ -15,7 +15,7 @@
 @import "layout/header";
 @import "layout/footer";
 //pages
-@import 'pages/_home';
+@import "pages/_home";
 @import "pages/used-cars";
 @import "pages/upload-offer/upload-offer";
 @import "pages/advanced-search/advanced-search";
@@ -27,18 +27,19 @@
 :root {
     //Formkit vars
     --fk-max-width-input: 100% !important;
-    --fk-bg-submit: #FF4739 !important;
+    --fk-bg-submit: #ff4739 !important;
     --fk-bg-submit-hover: #ec3529 !important;
     --fk-font-size-button: 15px !important;
     --fk-border-radius: 5px !important;
-    --fk-color-border-focus: #FF4739 !important;
-    --fk-bg-button: #FF4739 !important;
+    --fk-color-border-focus: #ff4739 !important;
+    --fk-color-checked: #ff4739 !important;
+    --fk-bg-button: #ff4739 !important;
     //Swiper
-    --swiper-theme-color: #FF4739 !important;
+    --swiper-theme-color: #ff4739 !important;
 }
 
 html {
-    @include scrollbar
+    @include scrollbar;
 }
 
 body {
@@ -54,7 +55,16 @@ footer {
     background-position: top center;
 }
 
-a, p, h1, h2, h3, h4, h5, h6, li, button {
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+button {
     color: $secondary-color;
 }
 
@@ -69,7 +79,6 @@ a {
     &:focus,
     &:hover {
         text-transform: none;
-
     }
 }
 

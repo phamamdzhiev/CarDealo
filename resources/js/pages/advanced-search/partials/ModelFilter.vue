@@ -38,7 +38,7 @@ export default {
 
         function fetchModel(val) {
             const {fetch} = useFetcher('get.brand.models',
-                [val, store.getters['advancedFilters/getFilters']['type']]
+                [val, store.getters['advancedFilters/getFilters']['category']]
             );
             models.value = fetch.value
         }
